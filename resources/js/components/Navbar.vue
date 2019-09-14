@@ -4,7 +4,7 @@
 
 <template>
     <div class="navbar-layout">
-        <nav class="main-header navbar navbar-expand navbar-dark" :class="{'navbar-info': $gate.isAdmin(), 'navbar-primary': $gate.isAdminCompany()}">
+        <nav class="main-header navbar navbar-expand navbar-dark navbar-info">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -15,26 +15,14 @@
                 </li>
             </ul>
 
-            <!-- SEARCH FORM -->
-            <!-- <form class="form-inline ml-3">
-                <div class="input-group input-group-sm">
-                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                <div class="input-group-append">
-                    <button class="btn btn-navbar" type="submit">
-                    <i class="fas fa-search"></i>
-                    </button>
-                </div>
-                </div>
-            </!-->
-
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto nav-links-right">
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <div class="btn-group langs-btns-group" role="group">
                         <button type="button" class="btn btn-sm btn-dark" @click="setLocale('en')" :class="$i18n.locale == 'en' ? 'disabled' : ''">EN</button>
                         <button type="button" class="btn btn-sm btn-dark" @click="setLocale('ar')" :class="$i18n.locale == 'ar' ? 'disabled' : ''">AR</button>
                     </div>
-                </li>
+                </li> -->
                 <li class="nav-item">
                     <a class="nav-link" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" :href="$domain_admin + '/logout'">
                         {{ $t('global.logout') }}

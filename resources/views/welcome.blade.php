@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="{{ url('/') }}/images/logo.ico" type="image/x-icon">
 
-        <title>Xorpin</title>
+        <title>Horreya Travel</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
@@ -88,14 +88,9 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Xorpin
+                    <b>ELHORREYA</b>TRAVEL
                 </div>
             </div>
         </div>
-
-        <script>
-            let query = location.search.indexOf('?') === 0 ? location.search.slice(1) : location.search
-            console.log(query.split('&'))
-        </script>
     </body>
 </html>

@@ -1,101 +1,122 @@
 <?php
+use App\Http\Controllers\HomeController;
+
 // here all routes control panel
-Route::get('{path?}', 'HomeController@index')->where('path', '.*');
-
-Route::post('/get-tables-count', 'HomeController@getCounts');
-
-// Route::post('/cities', 'HomeController@cities'); // return all governorates and cities
-Route::post('/governorates', 'HomeController@governorates'); // return all governorates and cities
+Route::get(env('CP_PREFIX') . '/{path?}', 'HomeController@index')->where('path', '.*');
 
 
-//////////////////////// users routes //////////////////////////////
-Route::post('/users', 'UserController@index');
-Route::post('/user/update', 'UserController@update');
-Route::post('/user/edit', 'UserController@edit');
+Route::group(['middleware' => ['api'], 'prefix' => env('CP_PREFIX_API')], function () {
 
-Route::group(['middleware' => ['isSuperAdmin']], function () {
-    Route::post('/user/store', 'UserController@store');
-    Route::post('/user/destroy', 'UserController@destroy');
-    Route::post('/user/restore', 'UserController@restoreUser');
-    Route::post('/users-id', 'UserController@users_id');
-});
+    /**************** Global *****************/
+
+    Route::get('/models-counts', 'HomeController@modelsCounts');
+
+    /*********************************************************************************/
 
 
 
+    /**************** Users *****************/
 
-/////////////////// companies routes //////////////////////////////
-Route::post('/company/profile', 'CompanyController@show');
-Route::post('/company/update', 'CompanyController@update');
+    Route::apiResource('users', 'UserController')->parameters(['users' => 'id']);
+    Route::patch('users/restore/{id}', 'UserController@restoreUser');
 
-Route::group(['middleware' => ['isSuperAdmin']], function () {
-    Route::post('/companies', 'CompanyController@index');
-    Route::post('/company/store', 'CompanyController@store');
-    Route::post('/company/destroy', 'CompanyController@destroy');
-    Route::post('/company/restore', 'CompanyController@restoreCompany');
-    Route::post('/companies-id', 'CompanyController@companies_id');
-});
+    /*********************************************************************************/
 
 
 
+    /**************** Hotels *****************/
 
-/////////////////// products routes //////////////////////////////
-Route::post('/products', 'ProductController@index');
-Route::post('/product/store', 'ProductController@store');
-Route::post('/product/update', 'ProductController@update');
-Route::post('/product/profile', 'ProductController@show');
-Route::post('/product/destroy', 'ProductController@destroy');
-Route::post('/product/restore', 'ProductController@restoreProduct');
-Route::post('/product/sell', 'ProductController@sell');
+    Route::apiResource('hotels', 'HotelController')->parameters(['hotels' => 'id']);
+    Route::post('hotels/restore/{id}', 'HotelController@restoreHotel');
 
-Route::post('/products-id', 'ProductController@products_id');
-
-
-//////////////////////// products types routes //////////////////////////////
-Route::post('/pro-types', 'ProductTypeController@index');
-Route::post('/pro-types-data', 'ProductTypeController@allTypesUseInSelectBox');
-
-Route::group(['middleware' => ['isSuperAdmin']], function () {
-    Route::post('/pro-type/store', 'ProductTypeController@store');
-    Route::post('/pro-type/update', 'ProductTypeController@update');
-    Route::post('/pro-type/edit', 'ProductTypeController@edit');
-    Route::post('/pro-type/destroy', 'ProductTypeController@destroy');
-    Route::post('/pro-type/restore', 'ProductTypeController@restoreType');
-});
+    /*********************************************************************************/
 
 
 
+    /**************** Rooms *****************/
 
-//////////////////////// winners routes //////////////////////////////
-Route::post('/winners', 'WinnerController@index');
+    Route::apiResource('rooms', 'RoomController')->parameters(['rooms' => 'id']);
+    Route::post('rooms/restore/{id}', 'RoomController@restoreRoom');
 
-Route::group(['middleware' => ['isSuperAdmin']], function () {
-    Route::post('/winner/store', 'WinnerController@store');
-    Route::post('/winner/update', 'WinnerController@update');
-    Route::post('/winner/edit', 'WinnerController@edit');
-    Route::post('/winner/destroy', 'WinnerController@destroy');
-});
+    /*********************************************************************************/
 
 
 
-//////////////////////// comments routes //////////////////////////////
-Route::post('/comments', 'CommentController@index');
+    /**************** Travel Programs *****************/
 
-Route::group(['middleware' => ['isSuperAdmin']], function () {
-    Route::post('/comment/update', 'CommentController@update');
-    Route::post('/comment/edit', 'CommentController@edit');
-    Route::post('/comment/destroy', 'CommentController@destroy');
-});
+    Route::apiResource('travel_programs', 'TravelProgramController')->parameters(['travel_programs' => 'id']);
+    Route::post('travel_programs/restore/{id}', 'TravelProgramController@restoreTravelProgram');
+
+    /*********************************************************************************/
 
 
 
-//////////////////////// settings routes //////////////////////////////
-Route::group(['middleware' => ['isSuperAdmin']], function () {
-    Route::post('/settings', 'SettingController@index');
-    Route::post('/setting/store', 'SettingController@store');
-    Route::post('/setting/update', 'SettingController@update');
-    Route::post('/setting/edit', 'SettingController@edit');
-    Route::post('/setting/destroy', 'SettingController@destroy');
+    /**************** Travel Types *****************/
 
-    Route::post('/setting/edit/carousel', 'SettingController@editCarousel');
-    Route::post('/setting/update/carousel', 'SettingController@updateCarousel');
+    Route::apiResource('travel_types', 'TravelTypeController')->parameters(['travel_types' => 'id']);
+    Route::post('travel_types/restore/{id}', 'TravelTypeController@restoreTravelType');
+
+    /*********************************************************************************/
+
+
+
+    /**************** Travels *****************/
+
+    Route::apiResource('travels', 'TravelController')->parameters(['travels' => 'id']);
+    Route::post('travels/restore/{id}', 'TravelController@restoreTravel');
+
+    /*********************************************************************************/
+
+
+
+    /**************** Travel Details *****************/
+
+    Route::apiResource('travel_details', 'TravelDetailController')->parameters(['travel_details' => 'id']);
+
+    /*********************************************************************************/
+
+
+
+    /**************** Mailing List *****************/
+
+    Route::apiResource('mailing_list', 'MailingListController')->only(['index', 'destroy'])->parameters(['mailing_list' => 'id']);
+
+    /*********************************************************************************/
+
+
+
+    /**************** Bookings *****************/
+
+    Route::apiResource('bookings', 'BookingController')->only(['index', 'destroy'])->parameters(['bookings' => 'id']);
+    Route::post('bookings/restore/{id}', 'BookingController@restoreBooking');
+
+    /*********************************************************************************/
+
+
+
+    /**************** Images *****************/
+
+    Route::apiResource('images', 'ImageController')->parameters(['images' => 'id']);
+    Route::post('images/restore/{id}', 'ImageController@restoreImage');
+
+    /*********************************************************************************/
+
+
+
+    /**************** Blogs *****************/
+
+    Route::apiResource('blogs', 'BlogController')->parameters(['blogs' => 'id']);
+    Route::post('blogs/restore/{id}', 'BlogController@restoreBlog');
+
+    /*********************************************************************************/
+
+
+
+    /**************** Settings *****************/
+
+    Route::apiResource('settings', 'SettingController')->parameters(['settings' => 'id']);
+
+    /*********************************************************************************/
+
+
 });

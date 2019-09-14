@@ -18,14 +18,10 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('email')->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password')->nullable();
-            $table->string('phone')->unique()->nullable();
-            $table->unsignedInteger('address')->nullable()->default(0);
-            $table->string('photo')->nullable();
+            $table->string('password');
+            $table->string('image')->nullable();
             $table->boolean('active')->default(1); // 1 = access login, 0 = not access login
-            $table->boolean('rule')->default(0); // 0 normal user, 1 administrator, 2 company users
-            $table->string('lang', 10)->default('ar');
-            $table->unsignedInteger('company_id')->nullable();
+            $table->boolean('rule')->default(1); // 0 normal user, 1 administrator
             $table->rememberToken();
             $table->softDeletes();
             $table->timestamps();

@@ -10,11 +10,9 @@ Vue.config.productionTip = false
 
 Vue.prototype.$domain = window.url
 Vue.prototype.$auth = window.auth
-Vue.prototype.$authCompany = window.authCompany
 Vue.prototype.$settings = window.settings
 Vue.prototype.$domain_admin = window.url + '/' + window.cp_prefix
-import Gate from './Gate'
-Vue.prototype.$gate = new Gate()
+
 
 /**************************************************************************************/
 

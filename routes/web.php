@@ -1,15 +1,12 @@
 <?php
 
+
 Route::group(['prefix' => env('CP_PREFIX')], function () {
+    Route::redirect('/', url(env('CP_PREFIX') . '/dashboard'));
     Auth::routes(['register' => false]);
 });
 
-// route login social media
-Route::namespace('Auth')->group(function () {
-    Route::get('auth/{provider}', 'LoginController@redirectToProvider');
-    Route::get('auth/{provider}/callback', 'LoginController@handleProviderCallback');
-});
-
+Route::get('/home', 'HomeController@index')->name('home');
 
 
 
@@ -25,15 +22,6 @@ Route::namespace('Auth')->group(function () {
 // use App\Winner;
 // use App\City;
 
-Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/get_token_socialite', function () {
-    if (!session()->has('status_active')) {
-        return redirect('/');
-    }
-});
-
-Route::get('/verify-email', 'API\UserController@activeEmail');
 
 Route::get('/', function () {
     return view('welcome');

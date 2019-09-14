@@ -19,7 +19,7 @@
             <!-- Main content -->
             <!-- :exclude="['company-profile']" -->
             <!-- :include="['create-user', 'create-company']" -->
-            <keep-alive :include="['create-user', 'create-company']">
+            <keep-alive :include="['create-user', 'create-hotel']">
                 <router-view/>
             </keep-alive>
             <!-- /.content -->

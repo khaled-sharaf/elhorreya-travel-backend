@@ -2,8 +2,8 @@
     "global": {
         "home": "الرئيسية",
         "dashboard": "الرئيسية",
-        "user": "مستخدم",
-        "company": "شركة",
+        "user": "مدير",
+        "hotel": "فندق",
         "product": "منتج",
         "products_type": "قسم",
         "type": "نوع",
@@ -12,19 +12,19 @@
         "setting": "إعداد",
 
         "no_products": "لا يوجد منتجات",
-        "no_users": "لا يوجد مستخدمين",
+        "no_users": "لا يوجد مديرين",
         "no_comments": "لا يوجد تعليقات",
         "no_winners": "لا يوجد فائزين",
         "no_product_details": "لا يوجد تفاصيل للمنتج",
 
         "profile": "بروفايل",
         "the_profile": "البروفايل",
-        "user_commented": "تعليق المستخدم",
+        "user_commented": "تعليق المدير",
         "goto_product_profile": "صفحة المنتج",
-        "goto_company_profile": "صفحة الشركة",
+        "goto_hotel_profile": "صفحة الفندق",
 
-        "company_is_deleted": "الشركة محذوفة",
-        "user_is_deleted": "المستخدم محذوف",
+        "hotel_is_deleted": "الفندق محذوفة",
+        "user_is_deleted": "المدير محذوف",
         "type_is_deleted": "القسم محذوف",
         "product_is_deleted": "المنتج محذوف",
 
@@ -76,18 +76,18 @@
 
 
     "sidebar": {
-        "company_profile": "صفحة الشركة",
+        "hotel_profile": "صفحة الفندق",
         "product_profile": "صفحة المنتج",
 
-        "users": "المستخدمين",
-        "all_users": "جميع المستخدمين",
-        "new_user": "مستخدم جديد",
-        "edit_user": "تعديل مستخدم",
+        "users": "المديرين",
+        "all_users": "جميع المديرين",
+        "new_user": "مدير جديد",
+        "edit_user": "تعديل مدير",
 
-        "companies": "الشركات",
-        "all_companies": "جميع الشركات",
-        "new_company": "شركة جديدة",
-        "edit_company": "تعديل شركة",
+        "hotels": "الفنادق",
+        "all_hotels": "جميع الفنادق",
+        "new_hotel": "فندق جديدة",
+        "edit_hotel": "تعديل فندق",
 
         "products": "المنتجات",
         "all_products": "جميع المنتجات",
@@ -152,55 +152,55 @@
         "repeat_password": "أعد كلمة السر",
         "phone": "الموبايل",
         "address": "العنوان",
-        "photo": "الصورة",
+        "image": "الصورة",
         "rule": "الصلاحيات",
         "active": "التفعيل",
-        "company": "الشركة",
+        "hotel": "الفندق",
         "created_at": "تاريخ الإنشاء",
         "actions": "الإجراءات",
 
         "rules": {
-            "user": "مستخدم عادى",
+            "user": "مدير عادى",
             "admin": "مدير",
-            "company": "مدير شركة"
+            "hotel": "مدير فندق"
         },
         "rules_filter": {
-            "user": "مستخدم",
+            "user": "مدير",
             "admin": "مدير",
-            "company": "شركة"
+            "hotel": "فندق"
         },
 
-        "delete_msg": "هل أنت متأكد من حذف هذا المستخدم ؟",
-        "delete_success_msg": "تم حذف المستخدم.",
-        "delete_failed_msg": "لم يتم حذف المستخدم.",
+        "delete_msg": "هل أنت متأكد من حذف هذا المدير ؟",
+        "delete_success_msg": "تم حذف المدير.",
+        "delete_failed_msg": "لم يتم حذف المدير.",
 
-        "force_delete_msg": "هل أنت متأكد من إزالة هذا المستخدم بشكل نهائى ؟",
-        "force_delete_success_msg": "تم إزالة المستخدم بشكل نهائى.",
-        "force_delete_failed_msg": "لم يتم إزالة المستخدم.",
+        "force_delete_msg": "هل أنت متأكد من إزالة هذا المدير بشكل نهائى ؟",
+        "force_delete_success_msg": "تم إزالة المدير بشكل نهائى.",
+        "force_delete_failed_msg": "لم يتم إزالة المدير.",
 
-        "restore_msg": "هل أنت متأكد من استرجاع هذا المستخدم ؟",
-        "restore_success_msg": "تم استرجاع المستخدم.",
-        "restore_failed_msg": "لم يتم استرجاع المستخدم.",
+        "restore_msg": "هل أنت متأكد من استرجاع هذا المدير ؟",
+        "restore_success_msg": "تم استرجاع المدير.",
+        "restore_failed_msg": "لم يتم استرجاع المدير.",
 
         "p_create": {
-            "success_msg": "تم إنشاء مستخدم جديد.",
-            "failed_msg": "لم يتم إنشاء المستخدم الجديد."
+            "success_msg": "تم إنشاء مدير جديد.",
+            "failed_msg": "لم يتم إنشاء المدير الجديد."
         },
         "p_edit": {
-            "success_msg": "تم تحديث المستخدم.",
-            "failed_msg": "لم يتم تحديث هذا المستخدم."
+            "success_msg": "تم تحديث المدير.",
+            "failed_msg": "لم يتم تحديث هذا المدير."
         }
     },
 
 
 
 
-    "companies_table": {
+    "hotels_table": {
         "id": "المعرف",
         "name": "الإسم",
         "email": "البريد الإلكترونى",
         "phone": "الموبايل",
-        "logo": "شعار الشركة",
+        "logo": "شعار الفندق",
         "description": "الوصف",
         "website": "موقع الويب",
         "address": "العنوان",
@@ -212,45 +212,45 @@
         "active": "التفعيل",
         "count_rates": "التقيمات",
         "visits": "الزيارات",
-        "user_id": "المستخدم",
+        "user_id": "المدير",
         "created_at": "تاريخ الإنشاء",
         "actions": "الإجراءات",
 
         "products_count": "عدد المنتجات",
-        "users_count": "عدد المستخدمين",
-        "company_info": "معلومات عن الشركة",
+        "users_count": "عدد المديرين",
+        "hotel_info": "معلومات عن الفندق",
         "location": "الموقع",
         "location_map": "خريطة الموقع",
         "show_map": "اعرض الخريطة",
-        "msg_location_map": "ابحث عن مكان الشركة ثم انقل العلامة الحمراء إلى مكان الشركة بدقة.",
+        "msg_location_map": "ابحث عن مكان الفندق ثم انقل العلامة الحمراء إلى مكان الفندق بدقة.",
         "error_location": "لم يتم العثور على المكان ، ابحث بكلمات أخرى.",
         "remove_location": "إزالة الموقع",
 
-        "delete_company": "حذف الشركة",
-        "edit_company": "تعديل الشركة",
+        "delete_hotel": "حذف الفندق",
+        "edit_hotel": "تعديل الفندق",
 
-        "empty_products_msg": "هذه الشركة ليس لديها منتجات.",
-        "empty_users_msg": "هذه الشركة ليس لديها مستخدمين.",
+        "empty_products_msg": "هذه الفندق ليس لديها منتجات.",
+        "empty_users_msg": "هذه الفندق ليس لديها مديرين.",
 
-        "delete_msg": "هل أنت متأكد من حذف هذه الشركة ؟",
-        "delete_success_msg": "تم حذف الشركة.",
-        "delete_failed_msg": "لم يتم حذف الشركة.",
+        "delete_msg": "هل أنت متأكد من حذف هذه الفندق ؟",
+        "delete_success_msg": "تم حذف الفندق.",
+        "delete_failed_msg": "لم يتم حذف الفندق.",
 
-        "force_delete_msg": "هل أنت متأكد من إزالة هذه الشركة بشكل نهائى ؟",
-        "force_delete_success_msg": "تم إزالة الشركة بشكل نهائى.",
-        "force_delete_failed_msg": "لم يتم إزالة الشركة.",
+        "force_delete_msg": "هل أنت متأكد من إزالة هذه الفندق بشكل نهائى ؟",
+        "force_delete_success_msg": "تم إزالة الفندق بشكل نهائى.",
+        "force_delete_failed_msg": "لم يتم إزالة الفندق.",
 
-        "restore_msg": "هل أنت متأكد من استرجاع هذه الشركة ؟",
-        "restore_success_msg": "تم استرجاع الشركة.",
-        "restore_failed_msg": "لم يتم استرجاع الشركة.",
+        "restore_msg": "هل أنت متأكد من استرجاع هذه الفندق ؟",
+        "restore_success_msg": "تم استرجاع الفندق.",
+        "restore_failed_msg": "لم يتم استرجاع الفندق.",
 
         "p_create": {
-            "success_msg": "تم إنشاء شركة جديدة.",
-            "failed_msg": "لم يتم إنشاء الشركة الجديدة."
+            "success_msg": "تم إنشاء فندق جديدة.",
+            "failed_msg": "لم يتم إنشاء الفندق الجديدة."
         },
         "p_edit": {
-            "success_msg": "تم تحديث الشركة.",
-            "failed_msg": "لم يتم تحديث هذه الشركة."
+            "success_msg": "تم تحديث الفندق.",
+            "failed_msg": "لم يتم تحديث هذه الفندق."
         }
     },
 
@@ -260,10 +260,10 @@
     "products_table": {
         "id": "المعرف",
         "name": "الإسم",
-        "photo": "الصورة",
+        "image": "الصورة",
         "price": "السعر",
         "description": "الوصف",
-        "manufacture_company": "الشركة المصنعة",
+        "manufacture_hotel": "الفندق المصنعة",
         "count_rates": "التقيمات",
         "product_count": "العدد",
         "count_selling": "عدد المبيعات",
@@ -271,7 +271,7 @@
         "display": "الظهور",
         "type": "القسم",
         "user": "أضيف بواسطة",
-        "company": "الشركة",
+        "hotel": "الفندق",
         "updated_at": "أخر تعديل",
         "created_at": "تاريخ الإنشاء",
         "actions": "الإجراءات",
@@ -279,7 +279,7 @@
         "discount": "الخصم",
         "percent": "النسبة المئوية",
         "new_price": "السعر الجديد",
-        "photos": "الصور",
+        "images": "الصور",
         "value": "القيمة",
         "plus": "للمزيد",
 
@@ -368,7 +368,7 @@
 
     "winners_table": {
         "id": "المعرف",
-        "user_id": "اسم المستخدم",
+        "user_id": "اسم المدير",
         "product_id": "اسم المنتج",
         "created_at": "تاريخ الإنشاء",
         "actions": "الإجراءات",
@@ -403,7 +403,7 @@
         "text_comment": "التعليق",
         "positive_product": "إيجابيات المنتج",
         "negative_product": "سلبيات المنتج",
-        "user_id": "اسم المستخدم",
+        "user_id": "اسم المدير",
         "product_id": "اسم المنتج",
         "display": "الظهور",
         "created_at": "تاريخ الإنشاء",

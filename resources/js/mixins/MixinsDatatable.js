@@ -121,9 +121,10 @@ export default {
             loadReq(this.$Progress);
             this.successResponse = false
             this.tableData.draw++;
-            axios.post(url, this.tableData).then(response => {
+            axios.get(url, {params: this.tableData}).then(response => {
                 let data = response.data,
                     self = this;
+                    // console.log(data)
                 if (this.tableData.draw == data.draw) {
                     if (response.status === 200) {
                         this.dataTable = data.data.data;
@@ -335,7 +336,7 @@ export default {
             }).then(result => {
                 if (result.value) {
                     loadReq(this.$Progress);
-                    axios.post(this.urlDeleteRow, {id: id}).then(response => {
+                    axios.delete(this.urlGetDataTable + '/' + id).then(response => {
                         if (response.status === 200) {
                             ToastReq.fire({
                                 text: this.force_delete_success_msg
@@ -366,7 +367,7 @@ export default {
             }).then(result => {
                 if (result.value) {
                     loadReq(this.$Progress);
-                    axios.post(this.urlRestoreRow, {id: id}).then(response => {
+                    axios.patch(this.urlGetDataTable + '/restore/' + id).then(response => {
                         if (response.status === 200) {
                             ToastReq.fire({
                                 text: this.restore_success_msg

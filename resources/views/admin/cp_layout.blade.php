@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-  <link rel="shortcut icon" href="{{ url('/') }}/images/logo.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="{{ url('/') }}/logo.ico" type="image/x-icon">
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
   {{-- <title></title> --}}
@@ -60,13 +60,13 @@
 
 <script>
     // set auth user in object global in all file js
-    window.auth = @json(auth()->user());
-    window.authCompany = @json(auth()->user()->company);
-    window.settings = @json(\App\Setting::getSettingKeys());
     window.csrf_token = '{{csrf_token()}}';
     window.url = '{{url("/")}}';
     window.cp_prefix = '{{ env("CP_PREFIX") }}';
+    window.cp_prefix_api = '{{ env("CP_PREFIX_API") }}';
     window.admin_prefix = '{{ url("/") . "/" . env("CP_PREFIX") }}';
+    window.auth = @json(auth()->user());
+    window.settings = @json(\App\Setting::getSettingKeys());
 
 
     function initMap() {

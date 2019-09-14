@@ -36,51 +36,13 @@
             ><a :href="'mailto:' + user.email">{{user.email}}</a></td>
 
 
-            <td v-show="tableData.filter.columns.indexOf('phone') != -1" class="phone"
-            >{{user.phone}}</td>
-
-
-            <td v-show="tableData.filter.columns.indexOf('address') != -1" class="address"
-            >{{user.governorate !== null ? user.governorate.governorate_name : ''}}</td>
-
-
-            <td v-show="tableData.filter.columns.indexOf('photo') != -1" class="photo">
-                <img class="avatar-table" :src="user.photo.indexOf('http') === 0 ? user.photo : $domain + '/' + user.photo">
-            </td>
-
-
-            <td v-show="tableData.filter.columns.indexOf('rule') != -1" class="rule">
-                <span class="badge badge-success" v-if="user.rule == 1"> {{ $t('users_table.rules.admin') }} </span>
-                <span class="badge badge-danger" v-if="user.rule == 2"> {{ $t('users_table.rules.company') }} </span>
-                <span class="badge badge-primary" v-if="user.rule == 0"> {{ $t('users_table.rules.user') }} </span>
-            </td>
-
-
-            <td v-show="tableData.filter.columns.indexOf('active') != -1" class="active">
-                <span class="icon-success" v-if="user.active == 1">
-                    <i class="far fa-check-circle"></i>
-                </span>
-                <span class="icon-danger" v-if="user.active == 0">
-                    <i class="far fa-times-circle"></i>
-                </span>
+            <td v-show="tableData.filter.columns.indexOf('image') != -1" class="image">
+                <img class="avatar-table" :src="user.image.indexOf('http') === 0 ? user.image : $domain + '/' + user.image">
             </td>
 
 
             <td v-show="tableData.filter.columns.indexOf('created_at') != -1" class="created_at">
                 <relative-date :date="user.created_at"></relative-date>
-            </td>
-
-            <td v-show="tableData.filter.columns.indexOf('company') != -1" class="company">
-                <router-link
-                    v-if="user.company !== null"
-                    :href="$domain_admin + '/company/profile/' + user.company_id"
-                    :to="{name: 'company-profile', params: {id: user.company_id, company: user.company}}"
-                    class="link-router-in-table"
-                    data-name="company-profile"
-                    :data-params='"{\"company\":" + JSON.stringify(user.company) + ", \"id\":" + user.company_id + "}"'
-                >
-                    {{user.company.name}}
-                </router-link>
             </td>
 
 
@@ -90,7 +52,6 @@
                 <!-- btn edit row -->
                 <router-link
                     v-show="user.deleted_at == null"
-                    v-if="($gate.isAdminCompany() && $auth.id == user.id) || $gate.isAdmin()"
                     :to="{name: 'edit-user', params: {user: user, id: user.id}}"
                     :href="$domain_admin + '/user/' + user.id + '/edit'"
                     class="btn btn-success btn-edit-row btn-table-actions btn-sm link-router-in-table"
@@ -103,9 +64,8 @@
 
                 <!-- btn delete row -->
                 <a
-                    v-if="$gate.isAdmin()"
                     v-show="user.deleted_at == null && user.id != 1"
-                    :href="$domain_admin + '/user/destroy'"
+                    :href="$domain_admin + '/users/destroy'"
                     class="btn btn-danger btn-delete-row btn-table-actions btn-sm"
                     @click.prevent="$emit('destroyRow', user.id)"
                 >
@@ -116,9 +76,8 @@
 
                 <!-- btn restore row -->
                 <a
-                    v-if="$gate.isAdmin()"
                     v-show="user.deleted_at != null && user.id != 1"
-                    :href="$domain_admin + '/user/restore'"
+                    :href="$domain_admin + '/users/restore'"
                     class="btn btn-info btn-restore-row btn-table-actions btn-sm"
                     @click.prevent="$emit('restoreRow', user.id)"
                 >
@@ -126,11 +85,10 @@
                 </a>
                 <!-- ./ btn restore row -->
 
-                <!-- btn delete row -->
+                <!-- btn force delete row -->
                 <a
-                    v-if="$gate.isAdmin()"
                     v-show="user.deleted_at != null && user.id != 1"
-                    :href="$domain_admin + '/user/force-delete'"
+                    :href="$domain_admin + '/users/force-delete'"
                     class="btn btn-danger btn-delete-row force-delete btn-table-actions btn-sm"
                     @click.prevent="$emit('forceDeleteRow', user.id)"
                 >

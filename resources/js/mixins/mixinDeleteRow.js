@@ -13,7 +13,7 @@ export default {
             }).then(result => {
                 if (result.value) {
                     loadReq(this.$Progress);
-                    axios.post(this.urlDeleteRow, {id: id}).then(response => {
+                    axios.delete(this.urlGetDataTable + '/' + id).then(response => {
                         if (response.status === 200) {
                             ToastReq.fire({
                                 text: this.delete_success_msg

@@ -1,56 +1,37 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Gate from './Gate'
-const gate = new Gate()
 
 // default layout and dashboard
 import DefaultLayout from './layouts/DefaultLayout'
 import Dashboard from './views/Dashboard'
-import DashboardTest from './views/DashboardTest'
+// import DashboardTest from './views/DashboardTest'
 
 
 // users components
 import Users from './views/users/Index'
-import CreateUser from './views/users/CreateUser'
-import EditUser from './views/users/EditUser'
+import CreateUser from './views/users/Create'
+import EditUser from './views/users/Edit'
+
+
+// hotels components
+// import Hotels from './views/hotels/Index'
+// import CreateHotel from './views/hotels/Create'
+// import EditHotel from './views/hotels/Edit'
+// import HotelProfile from './views/hotels/Profile'
 
 
 // companies components
-import Companies from './views/companies/Index'
-import CreateCompany from './views/companies/CreateCompany'
-import EditCompany from './views/companies/EditCompany'
-import CompanyProfile from './views/companies/CompanyProfile'
+// import Companies from './views/companies/Index'
+// import CreateCompany from './views/companies/CreateCompany'
+// import EditCompany from './views/companies/EditCompany'
+// import CompanyProfile from './views/companies/CompanyProfile'
 
-
-// products components
-import Products from './views/products/Index'
-import CreateProduct from './views/products/CreateProduct'
-import EditProduct from './views/products/EditProduct'
-import ProductProfile from './views/products/ProductProfile'
-
-
-// products types components
-import ProductsTypes from './views/products-types/Index'
-import CreateProductsType from './views/products-types/CreateProductsType'
-import EditProductsType from './views/products-types/EditProductsType'
-
-
-// winners components
-import Winners from './views/winners/Index'
-import CreateWinner from './views/winners/CreateWinner'
-import EditWinner from './views/winners/EditWinner'
-
-
-// comments components
-import Comments from './views/comments/Index'
-import EditComment from './views/comments/EditComment'
 
 
 // settings components
 import Settings from './views/settings/Index'
 import CreateSetting from './views/settings/CreateSetting'
 import EditSetting from './views/settings/EditSetting'
-import Carousel from './views/settings/Carousel'
 
 
 Vue.use(Router)
@@ -60,7 +41,7 @@ var pathRoute = ''
 if (process.env.NODE_ENV === 'production') {
     pathRoute = '/' + window.cp_prefix
 } else {
-    pathRoute = '/Belal/xorpin/xorpin-backend/public/' + window.cp_prefix
+    pathRoute = '/Belal/horreya/horreya_backend/public/' + window.cp_prefix
 }
 const vueRouter = new Router({
     mode: 'history',
@@ -76,13 +57,10 @@ const vueRouter = new Router({
                 {
                     path: '/dashboard',
                     name: 'home',
-                    component: Dashboard,
-                    meta: {
-                        authCompany: true
-                    }
+                    component: Dashboard
                 },
 
-                ////////////////// user routes ///////////////////
+                ////////////////// users routes ///////////////////
                 {
                     path: 'users',
                     name: 'users',
@@ -97,142 +75,58 @@ const vueRouter = new Router({
                     path: 'user/:id/edit',
                     name: 'edit-user',
                     component: EditUser,
-                    props: true,
-                    meta: {
-                        authCompany: true
-                    }
+                    props: true
                 },
+
+
+                ////////////////// hotels routes ///////////////////
+                // {
+                //     path: 'hotels',
+                //     name: 'hotels',
+                //     component: Hotels
+                // },
+                // {
+                //     path: 'hotel/create',
+                //     name: 'create-hotel',
+                //     component: CreateHotel
+                // },
+                // {
+                //     path: 'hotel/:id/edit',
+                //     name: 'edit-hotel',
+                //     component: EditHotel,
+                //     props: true
+                // },
+                // {
+                //     path: 'hotel/profile/:id',
+                //     name: 'hotel-profile',
+                //     component: HotelProfile,
+                //     props: true
+                // },
 
 
                 ////////////////// company routes ///////////////////
-                {
-                    path: 'companies',
-                    name: 'companies',
-                    component: Companies
-                },
-                {
-                    path: 'company/create',
-                    name: 'create-company',
-                    component: CreateCompany
-                },
-                {
-                    path: 'company/:id/edit',
-                    name: 'edit-company',
-                    component: EditCompany,
-                    props: true,
-                    meta: {
-                        authCompany: true
-                    }
-                },
-                {
-                    path: 'company/profile/:id',
-                    name: 'company-profile',
-                    component: CompanyProfile,
-                    props: true,
-                    meta: {
-                        authCompany: true
-                    }
-                },
-
-
-
-                ////////////////// products routes ///////////////////
-                {
-                    path: 'products',
-                    name: 'products',
-                    component: Products,
-                    meta: {
-                        authCompany: true
-                    }
-                },
-                {
-                    path: 'product/create',
-                    name: 'create-product',
-                    component: CreateProduct,
-                    meta: {
-                        authCompany: true
-                    }
-                },
-                {
-                    path: 'product/:id/edit',
-                    name: 'edit-product',
-                    component: EditProduct,
-                    props: true,
-                    meta: {
-                        authCompany: true
-                    }
-                },
-                {
-                    path: 'product/profile/:id',
-                    name: 'product-profile',
-                    component: ProductProfile,
-                    props: true,
-                    meta: {
-                        authCompany: true
-                    }
-                },
-
-
-
-
-                ////////////////// products  types routes ///////////////////
-                {
-                    path: 'products-types',
-                    name: 'pro-types',
-                    component: ProductsTypes,
-                    meta: {
-                        authCompany: true
-                    }
-                },
-                {
-                    path: 'products-type/create',
-                    name: 'create-pro-type',
-                    component: CreateProductsType
-                },
-                {
-                    path: 'products-type/:id/edit',
-                    name: 'edit-pro-type',
-                    component: EditProductsType,
-                    props: true
-                },
-
-
-                ////////////////// winners routes ///////////////////
-                {
-                    path: 'winners',
-                    name: 'winners',
-                    component: Winners,
-                    meta: {
-                        authCompany: true
-                    }
-                },
-                {
-                    path: 'winner/create',
-                    name: 'create-winner',
-                    component: CreateWinner
-                },
-                {
-                    path: 'winner/:id/edit',
-                    name: 'edit-winner',
-                    component: EditWinner,
-                    props: true
-                },
-
-
-                ////////////////// comments routes ///////////////////
-                {
-                    path: 'comments',
-                    name: 'comments',
-                    component: Comments
-                },
-                {
-                    path: 'comment/:id/edit',
-                    name: 'edit-comment',
-                    component: EditComment,
-                    props: true
-                },
-
-
+                // {
+                //     path: 'companies',
+                //     name: 'companies',
+                //     component: Companies
+                // },
+                // {
+                //     path: 'company/create',
+                //     name: 'create-company',
+                //     component: CreateCompany
+                // },
+                // {
+                //     path: 'company/:id/edit',
+                //     name: 'edit-company',
+                //     component: EditCompany,
+                //     props: true
+                // },
+                // {
+                //     path: 'company/profile/:id',
+                //     name: 'company-profile',
+                //     component: CompanyProfile,
+                //     props: true
+                // },
 
 
                 ////////////////// settings routes ///////////////////
@@ -251,14 +145,7 @@ const vueRouter = new Router({
                     name: 'edit-setting',
                     component: EditSetting,
                     props: true
-                },
-                {
-                    path: 'setting/carousel',
-                    name: 'setting-carousel',
-                    component: Carousel,
-                    props: true
-                },
-
+                }
             ]
         },
         {
@@ -274,14 +161,6 @@ vueRouter.beforeEach((to, from, next) => {
         // If a route with a title was found, set the document (page) title to that value.
         if(nearestWithTitle) document.title = nearestWithTitle.meta.title;
     })
-
-  if (!to.meta.authCompany) {
-      if (gate.isAdminCompany()) {
-          setTimeout(() => {
-            next({name: 'home'})
-          }, 100)
-      }
-  }
   next();
 });
 

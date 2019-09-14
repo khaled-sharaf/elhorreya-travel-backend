@@ -17,8 +17,8 @@
         <label class="dataTables_columns custom-select" v-selectcolumnopen>
             <select
                 class="custom-select view-columns-filter"
-                v-model="tableData.filter.columns"
-                v-selectcolumn="tableData.filter.columns"
+                v-model="tableData.columns"
+                v-selectcolumn="tableData.columns"
                 multiple="multiple"
             >
                 <option
