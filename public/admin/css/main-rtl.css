@@ -178,15 +178,15 @@ body {
   float: left !important;
 }
 
-#modal_location_company .modal-header button.close {
+#modal_location_hotel .modal-header button.close {
   margin-left: 0 !important;
   margin-right: 0 !important;
 }
 
 .proudct-profile-wrapper .btn-delete-row,
 .proudct-profile-wrapper .btn-sell-product,
-.company-profile-wrapper .btn-delete-row,
-.company-profile-wrapper .btn-sell-product {
+.hotel-profile-wrapper .btn-delete-row,
+.hotel-profile-wrapper .btn-sell-product {
   margin-right: 0 !important;
   margin-left: 0.5rem !important;
 }

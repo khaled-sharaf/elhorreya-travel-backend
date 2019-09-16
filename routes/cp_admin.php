@@ -27,7 +27,7 @@ Route::group(['middleware' => ['api'], 'prefix' => env('CP_PREFIX_API')], functi
     /**************** Hotels *****************/
 
     Route::apiResource('hotels', 'HotelController')->parameters(['hotels' => 'id']);
-    Route::post('hotels/restore/{id}', 'HotelController@restoreHotel');
+    Route::patch('hotels/restore/{id}', 'HotelController@restoreHotel');
 
     /*********************************************************************************/
 

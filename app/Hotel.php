@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-use App\Scopes\RoomsWithHotel;
+use App\Scopes\CountsWithHotel;
 
 class Hotel extends Model
 {
@@ -20,6 +20,38 @@ class Hotel extends Model
     public function scopeDisplay($query)
     {
         return $query->where('display', 1);
+    }
+
+    public function scopePaginateConvert($query, $length)
+    {
+        $hotels_paginate = $query->paginate($length);
+        $hotels_data =  $hotels_paginate->toArray()['data'];
+        if (count($hotels_data) > 0) {
+            $hotels_data = convert_column_to_array($hotels_data, 'features');
+            $hotels_data = convert_column_to_array($hotels_data, 'gallery');
+        }
+        $hotels = paginate_collection($hotels_data, $length);
+        return $hotels;
+    }
+
+    public function scopeGetConvert($query)
+    {
+        $hotels = $query->get();
+        if ($hotels->count() > 0) {
+            $hotels = convert_column_to_array($hotels, 'features');
+            $hotels = convert_column_to_array($hotels, 'gallery');
+        }
+        return $hotels;
+    }
+
+    public function scopeFindConvert($query, $id)
+    {
+        $hotel = $query->find($id);
+        if ($hotel != null) {
+            $hotel = convert_column_to_array($hotel, 'features');
+            $hotel = convert_column_to_array($hotel, 'gallery');
+        }
+        return $hotel;
     }
 
 
@@ -41,7 +73,7 @@ class Hotel extends Model
     protected static function boot() {
         parent::boot();
 
-        static::addGlobalScope(new RoomsWithHotel);
+        static::addGlobalScope(new CountsWithHotel);
     }
 
 }

@@ -66,7 +66,7 @@
                                                     :successResponse="successResponse"
                                                     :dataTable="dataTable"
                                                     :columns="columns"
-                                                    :columnsView="tableData.filter.columns"
+                                                    :columnsView="tableData.columns"
                                                     :columnsExcepted="tableData.filter.columnsExcept"
                                                     :viewtableclasses="tableData.filter.viewTable"
                                                     :sortKey="sortKey"
@@ -137,8 +137,6 @@ export default {
     return {
       idPage: 'settings',
       urlGetDataTable: '/settings',
-      urlDeleteRow: '/setting/destroy',
-
       columns: columns,
       sortOrders: sortOrders,
       tableData: {
@@ -146,18 +144,18 @@ export default {
         length: 10,
         search: "",
         column: 0,
+        dir: "",
+        columns: [
+        "id",
+        "user_id",
+        "product_id",
+        "created_at",
+        "actions"
+        ],
         filter: {
-          columns: [
-            "id",
-            "user_id",
-            "product_id",
-            "created_at",
-            "actions"
-          ],
           columnsExcept: ['show_plus', 'index', 'created_at'],
           viewTable: ["bordered", 'hover']
         },
-        dir: ""
       },
       // viewFilterColumns
       viewColumnsResponsive: {

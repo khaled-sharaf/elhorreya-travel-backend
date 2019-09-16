@@ -23,9 +23,7 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $columns = $request->columns;
-        $column = $request->column; // Index
-        $columnSorting = $columns[$column];
+        $sortBy = $request->sortBy;
         $length = $request->length;
         $dir = $request->dir;
         $draw = $request->draw;
@@ -33,7 +31,7 @@ class UserController extends Controller
         $trashed = $request->trashed;
         $from_date = $request->from_date;
         $to_date = $request->to_date;
-        $query = User::select('*')->orderBy($columnSorting, $dir);
+        $query = User::select('*')->orderBy($sortBy, $dir);
 
         // handel users trashed and not trashed
         if ($trashed == 0) {
@@ -67,7 +65,7 @@ class UserController extends Controller
             }
         }
         $users = $query->paginate($length);
-        return response(['data' => $users, 'draw' => $draw, 'columnSorting' => $columnSorting, 'dir' => $dir]);
+        return response(['data' => $users, 'draw' => $draw, 'sortBy' => $sortBy, 'dir' => $dir]);
     }
 
 

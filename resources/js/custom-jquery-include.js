@@ -76,6 +76,66 @@ $(function () {
     });
 
     /*000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000*/
+    $('.read-more').each(function () {
+        const loopGetHtml =  setInterval(() => {
+            const text = $(this).html().trim().replace(/ {1, }/g, '');
+            if (text != '') {
+                clearInterval(loopGetHtml);
+                let len = window.parseInt($(this).attr('limit-char')),
+                    text = $(this).html().trim().replace(/ {1, }/g, '');
+                if ((text.length - len) == len) {
+                    let newText = text.slice(0, len),
+                        contentText = $(this).find('span.content-text').first(),
+                        afterText = $(this).attr('next-text');
+                    $(this).html('');
+                    if (!contentText.length) {
+                        contentText = $('<span class="content-text"></span>');
+                        $(this).prepend(contentText);
+                    }
+                    if ($(this).attr('next-text')) {
+                        contentText.html(newText + afterText);
+                    } else {
+                        if ($(this).attr('event-type')) {
+                            let event = $(this).attr('event-type'),
+                                textBtnRead = $(this).attr('text-btn-read'),
+                                textBtnUnread = $(this).attr('text-btn-unread'),
+                                btn = $(this).find('.btn-read').first();
+                            if (!btn.length) {
+                                btn = $('<button class="btn btn-link has-limit">' + textBtnRead + '</button>');
+                                contentText.html(newText);
+                                $(this).append(btn);
+                            }
+                        $(this).on('click', '.btn-more', function () {
+                            if (event === 'toggle') {
+                                if ($(this).hasClass('has-limit')) {
+                                    $(this).removeClass('has-limit');
+                                    $(this).html(textBtnUnread);
+                                    $(this).parent('.read-more').find('.content-text').html(text);
+                                } else {
+                                    $(this).addClass('has-limit');
+                                    $(this).html(textBtnRead);
+                                    $(this).parent('.read-more').find('.content-text').html(newText);
+
+                                }
+                            } else if (event === 'show') {
+                                if ($(this).hasClass('has-limit')) {
+                                    $(this).removeClass('has-limit');
+                                    $(this).hide();
+                                    $(this).parent('.read-more').find('.content-text').html(text);
+                                }
+                            }
+                        });
+                        } else {
+                            contentText.html(newText + '...');
+                        }
+                    }
+                }
+            }
+        }, 1000)
+
+    });
+
+    /*000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000*/
 
 
 });

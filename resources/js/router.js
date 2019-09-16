@@ -14,10 +14,10 @@ import EditUser from './views/users/Edit'
 
 
 // hotels components
-// import Hotels from './views/hotels/Index'
-// import CreateHotel from './views/hotels/Create'
-// import EditHotel from './views/hotels/Edit'
-// import HotelProfile from './views/hotels/Profile'
+import Hotels from './views/hotels/Index'
+import CreateHotel from './views/hotels/Create'
+import EditHotel from './views/hotels/Edit'
+import HotelProfile from './views/hotels/Profile'
 
 
 // companies components
@@ -30,8 +30,8 @@ import EditUser from './views/users/Edit'
 
 // settings components
 import Settings from './views/settings/Index'
-import CreateSetting from './views/settings/CreateSetting'
-import EditSetting from './views/settings/EditSetting'
+import CreateSetting from './views/settings/Create'
+import EditSetting from './views/settings/Edit'
 
 
 Vue.use(Router)
@@ -80,28 +80,28 @@ const vueRouter = new Router({
 
 
                 ////////////////// hotels routes ///////////////////
-                // {
-                //     path: 'hotels',
-                //     name: 'hotels',
-                //     component: Hotels
-                // },
-                // {
-                //     path: 'hotel/create',
-                //     name: 'create-hotel',
-                //     component: CreateHotel
-                // },
-                // {
-                //     path: 'hotel/:id/edit',
-                //     name: 'edit-hotel',
-                //     component: EditHotel,
-                //     props: true
-                // },
-                // {
-                //     path: 'hotel/profile/:id',
-                //     name: 'hotel-profile',
-                //     component: HotelProfile,
-                //     props: true
-                // },
+                {
+                    path: 'hotels',
+                    name: 'hotels',
+                    component: Hotels
+                },
+                {
+                    path: 'hotel/create',
+                    name: 'create-hotel',
+                    component: CreateHotel
+                },
+                {
+                    path: 'hotel/:id/edit',
+                    name: 'edit-hotel',
+                    component: EditHotel,
+                    props: true
+                },
+                {
+                    path: 'hotel/profile/:id',
+                    name: 'hotel-profile',
+                    component: HotelProfile,
+                    props: true
+                },
 
 
                 ////////////////// company routes ///////////////////

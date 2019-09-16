@@ -6,7 +6,7 @@
 <template>
     <div>
         <!-- Content Header (Page header) -->
-        <header-page :title=" $t('global.create') + ' ' + $t('sidebar.new_company') "></header-page>
+        <header-page :title=" $t('global.create') + ' ' + $t('sidebar.new_hotel') "></header-page>
         <!-- /.content-header -->
         <section class="content">
             <div class="container-fluid">
@@ -16,16 +16,16 @@
                         <div class="card">
                             <!-- card-header -->
                             <div class="card-header">
-                                <router-link class="btn btn-primary btn-sm" :to="{name: 'companies'}">{{ $t('global.show') + ' ' + $t('sidebar.all_companies') }}</router-link>
+                                <router-link class="btn btn-primary btn-sm" :to="{name: 'hotels'}">{{ $t('global.show') + ' ' + $t('sidebar.all_hotels') }}</router-link>
                             </div>
                             <!-- ./card-header -->
 
 
                             <!-- form -->
-                            <form @submit.prevent="createCompany()">
+                            <form @submit.prevent="createHotel()" class="form-product">
                                 <!-- card-body -->
                                 <div class="card-body">
-                                    <form-company typeForm="create" :form="form"></form-company>
+                                    <form-hotel typeForm="create" :form="form"></form-hotel>
                                 </div>
                                 <!-- ./card-body -->
 
@@ -51,60 +51,61 @@
 
 
 <script>
-import FormCompany from './FormCompany'
+import FormHotel from './Form'
 import HeaderPage from './../../components/HeaderPage'
 import MixinChangeLocaleMessages from "./../../mixins/MixinChangeLocaleMessages"
 
 export default {
     mixins: [MixinChangeLocaleMessages],
-    name: 'create-company',
+    name: 'create-hotel',
     components: {
-        FormCompany,
+        FormHotel,
         HeaderPage
     },
     data() {
       return {
-        urlCreateCompany: '/company/store',
+        urlCreateHotel: '/hotels',
         form: new Form({
-          name: "",
-          logo: "",
-          email: "",
-          phone: "",
-          address: "",
-          website: "",
-          description: "",
-          latitude: "",
-          longitude: "",
-          face_link: "",
-          tw_link: "",
-          display: 1,
-          active: 1,
+            name: "",
+            address: "",
+            rating: 0,
+            stars: 5,
+            info: "",
+            latitude: "",
+            longitude: "",
+            image: "",
+            gallery: [],
+            features: [
+                {value: ''}
+            ],
+            display: 1,
         }),
-        idPage: 'companies',
+        idPage: 'hotels',
         typePage: 'create'
       }
     },
     methods: {
-        createCompany() {
-            this.form.latitude = window.parseFloat($('#company_latitude').val())
-            this.form.longitude = window.parseFloat($('#company_longitude').val())
+        createHotel() {
+            this.form.latitude = window.parseFloat($('#hotel_latitude').val())
+            this.form.longitude = window.parseFloat($('#hotel_longitude').val())
             loadReq(this.$Progress);
-            this.form.post(this.urlCreateCompany).then(response => {
+            this.form.post(this.urlCreateHotel).then(response => {
+                console.log(response.data)
                 if (response.status === 200) {
                     // reset form
                     this.form.reset();
-                    $('#remove-location-company').click()
+                    $('#remove-location-hotel').click()
                     ToastReq.fire({
                         text: this.success_msg
                     });
                     setTimeout(() => {
-                        this.$router.push({name: 'company-profile', params: {id: response.data.data.id, company: response.data.data}})
+                        this.$router.push({name: 'hotel-profile', params: {id: response.data.data.id, hotel: response.data.data}})
                         setTimeout(() => {
                             $('html, body, .wrapper, .content-wrapper').scrollTop(0);
                         });
                     }, 2000);
                 }
-            }).catch(response => {
+            }).catch(errors => {
                 ToastFailed.fire({
                     title: this.failed_title + "!",
                     text: this.failed_msg,
@@ -115,7 +116,7 @@ export default {
     },
     beforeRouteEnter (to, from, next) {
         next(vm => {
-            to.meta.title = vm.$t('global.create') + ' ' + vm.$t('sidebar.new_company')
+            to.meta.title = vm.$t('global.create') + ' ' + vm.$t('sidebar.new_hotel')
         })
     }
 }

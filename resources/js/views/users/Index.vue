@@ -158,15 +158,13 @@ export default {
     return {
         idPage: 'users',
         urlGetDataTable: '/users',
-
         columns: columns,
         sortOrders: sortOrders,
-
         tableData: {
             draw: 0,
             length: 10,
             search: "",
-            column: 0,
+            sortBy: 'id',
             trashed: 1,
             from_date: "",
             to_date: "",

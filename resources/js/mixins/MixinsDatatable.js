@@ -93,7 +93,7 @@ export default {
         "tableData.to_date"(val) {
             this.getData();
         },
-        "tableData.filter.columns.length"(val) {
+        "tableData.columns.length"(val) {
             let self = this;
             $(".tr-table-data").children("td").attr("colspan", val + 1);
             $(".table tbody tr.tr-general").each(function() {
@@ -107,7 +107,7 @@ export default {
             let arr = [];
             for (let col in this.columns) {
                 let name = this.columns[col].name;
-                if (this.tableData.filter.columns.indexOf(name) == -1 &&
+                if (this.tableData.columns.indexOf(name) == -1 &&
                     name != "show_plus" &&
                     name != "index") {
                     arr.push(name);
@@ -121,10 +121,11 @@ export default {
             loadReq(this.$Progress);
             this.successResponse = false
             this.tableData.draw++;
+            this.tableData.sortBy = this.sortKey;
             axios.get(url, {params: this.tableData}).then(response => {
                 let data = response.data,
                     self = this;
-                    // console.log(data)
+                console.log(data)
                 if (this.tableData.draw == data.draw) {
                     if (response.status === 200) {
                         this.dataTable = data.data.data;
@@ -162,7 +163,6 @@ export default {
         sortBy(key) {
             this.sortKey = key;
             this.sortOrders[key] = this.sortOrders[key] * -1;
-            this.tableData.column = this.getIndex(this.columns, "name", key) - 1;
             this.tableData.dir = this.sortOrders[key] == 1 ? "asc" : "desc";
             this.getData();
         },
@@ -238,21 +238,21 @@ export default {
                     : minMedia;
                 for (let typeArr in obj[currentScreen]) {
                     if (typeArr == "show") {
-                    this.tableData.filter.columns = obj[currentScreen][typeArr];
+                    this.tableData.columns = obj[currentScreen][typeArr];
                     } else if (typeArr == "hide") {
                     for (let colRemove in obj[currentScreen][typeArr]) {
-                        this.tableData.filter.columns = allColumns;
-                        let index = this.tableData.filter.columns.indexOf(
+                        this.tableData.columns = allColumns;
+                        let index = this.tableData.columns.indexOf(
                             obj[currentScreen][typeArr][colRemove]
                         );
                         if (index != -1) {
-                        this.tableData.filter.columns.splice(index, 1);
+                        this.tableData.columns.splice(index, 1);
                         }
                     }
                     }
                 }
                 } else if (bigSizeMedia.matches) {
-                    this.tableData.filter.columns = defaultColumns;
+                    this.tableData.columns = defaultColumns;
                 }
             }
         },
@@ -285,8 +285,7 @@ export default {
                 $(".table tbody tr.tr-general").each(function(i) {
                 let id = $(this).attr("data-id");
                 $(this).after(
-                    `<tr class="tr-table-data"><td colspan="${self.tableData
-                        .filter.columns.length + 1}">
+                    `<tr class="tr-table-data"><td colspan="${self.tableData.columns.length + 1}">
                         ${self.viewDataExcepted(id)}
                     </td></tr>`);
                 });

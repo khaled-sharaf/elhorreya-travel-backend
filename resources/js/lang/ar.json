@@ -4,18 +4,17 @@
         "dashboard": "الرئيسية",
         "user": "مدير",
         "hotel": "فندق",
-        "product": "منتج",
-        "products_type": "قسم",
+        "room": "غرفة",
         "type": "نوع",
         "comment": "تعليق",
         "winner": "فائز",
         "setting": "إعداد",
 
-        "no_products": "لا يوجد منتجات",
-        "no_users": "لا يوجد مديرين",
-        "no_comments": "لا يوجد تعليقات",
-        "no_winners": "لا يوجد فائزين",
-        "no_product_details": "لا يوجد تفاصيل للمنتج",
+        "no_rooms": "لا يوجد غرف",
+        "no_travels": "لا يوجد رحلات",
+        "no_hotel_features": "لا توجد مميزات للفندق",
+        "no_gallery": "لا توجد صور",
+        "no_location": "لا توجد خريطة",
 
         "profile": "بروفايل",
         "the_profile": "البروفايل",
@@ -86,18 +85,18 @@
 
         "hotels": "الفنادق",
         "all_hotels": "جميع الفنادق",
-        "new_hotel": "فندق جديدة",
+        "new_hotel": "فندق جديد",
         "edit_hotel": "تعديل فندق",
 
-        "products": "المنتجات",
-        "all_products": "جميع المنتجات",
-        "new_product": "منتج جديد",
-        "edit_product": "تعديل منتج",
+        "rooms": "الغرف",
+        "all_rooms": "جميع الغرف",
+        "new_room": "غرفة جديد",
+        "edit_room": "تعديل غرفة",
 
-        "products_types": "الأقسام",
-        "all_products_types": "جميع الأقسام",
-        "new_products_type": "قسم جديد",
-        "edit_products_type": "تعديل قسم",
+        "travels": "الرحلات",
+        "all_travels": "جميع الرحلات",
+        "new_travel": "رحلة جديد",
+        "edit_travel": "تعديل رحلة",
 
         "winners": "الفائزين",
         "all_winners": "جميع الفائزين",
@@ -135,7 +134,7 @@
         "rules": "الصلاحيات",
         "sold_out": "نفاذ الكمية",
         "discount": "الخصم",
-        "products_type": "القسم",
+        "category": "القسم",
         "created_between": "تم إنشائه فى تاريخ",
         "search": "بحث"
     },
@@ -150,25 +149,10 @@
         "email": "البريد الإلكترونى",
         "password": "كلمة السر",
         "repeat_password": "أعد كلمة السر",
-        "phone": "الموبايل",
-        "address": "العنوان",
         "image": "الصورة",
-        "rule": "الصلاحيات",
-        "active": "التفعيل",
-        "hotel": "الفندق",
         "created_at": "تاريخ الإنشاء",
         "actions": "الإجراءات",
 
-        "rules": {
-            "user": "مدير عادى",
-            "admin": "مدير",
-            "hotel": "مدير فندق"
-        },
-        "rules_filter": {
-            "user": "مدير",
-            "admin": "مدير",
-            "hotel": "فندق"
-        },
 
         "delete_msg": "هل أنت متأكد من حذف هذا المدير ؟",
         "delete_success_msg": "تم حذف المدير.",
@@ -198,26 +182,26 @@
     "hotels_table": {
         "id": "المعرف",
         "name": "الإسم",
-        "email": "البريد الإلكترونى",
-        "phone": "الموبايل",
-        "logo": "شعار الفندق",
-        "description": "الوصف",
-        "website": "موقع الويب",
         "address": "العنوان",
+        "rating": "التقيم",
+        "stars": "عدد النجوم",
+        "info": "الوصف",
         "longitude": "خط الطول",
         "latitude": "خط العرض",
-        "face_link": "فيسبوك",
-        "tw_link": "تويتر",
+        "image": "الصورة",
+        "features": "المميزات",
         "display": "الظهور",
-        "active": "التفعيل",
-        "count_rates": "التقيمات",
-        "visits": "الزيارات",
-        "user_id": "المدير",
+        "user_id": "أضيف بواسطة",
+        "updated_at": "أخر تعديل",
         "created_at": "تاريخ الإنشاء",
         "actions": "الإجراءات",
 
-        "products_count": "عدد المنتجات",
-        "users_count": "عدد المديرين",
+        "gallery": "صور الفندق",
+        "feature_name": "اسم الميزة",
+        "plus": "للمزيد",
+
+        "rooms_count": "عدد الغرف",
+        "travels_count": "عدد الرحلات",
         "hotel_info": "معلومات عن الفندق",
         "location": "الموقع",
         "location_map": "خريطة الموقع",
@@ -229,28 +213,30 @@
         "delete_hotel": "حذف الفندق",
         "edit_hotel": "تعديل الفندق",
 
-        "empty_products_msg": "هذه الفندق ليس لديها منتجات.",
-        "empty_users_msg": "هذه الفندق ليس لديها مديرين.",
+        "empty_rooms_msg": "هذا الفندق ليس لديه غرف مضافة.",
+        "empty_travels_msg": "هذا الفندق ليس لديه رحلات مضافة.",
+        "empty_features_msg": "هذا الفندق ليس لديه مميزات.",
+        "empty_gallery_msg": "هذا الفندق ليس لديه صور مرفوعة.",
 
-        "delete_msg": "هل أنت متأكد من حذف هذه الفندق ؟",
+        "delete_msg": "هل أنت متأكد من حذف هذا الفندق ؟",
         "delete_success_msg": "تم حذف الفندق.",
         "delete_failed_msg": "لم يتم حذف الفندق.",
 
-        "force_delete_msg": "هل أنت متأكد من إزالة هذه الفندق بشكل نهائى ؟",
+        "force_delete_msg": "هل أنت متأكد من إزالة هذا الفندق بشكل نهائى ؟",
         "force_delete_success_msg": "تم إزالة الفندق بشكل نهائى.",
         "force_delete_failed_msg": "لم يتم إزالة الفندق.",
 
-        "restore_msg": "هل أنت متأكد من استرجاع هذه الفندق ؟",
+        "restore_msg": "هل أنت متأكد من استرجاع هذا الفندق ؟",
         "restore_success_msg": "تم استرجاع الفندق.",
         "restore_failed_msg": "لم يتم استرجاع الفندق.",
 
         "p_create": {
-            "success_msg": "تم إنشاء فندق جديدة.",
-            "failed_msg": "لم يتم إنشاء الفندق الجديدة."
+            "success_msg": "تم إنشاء فندق جديد.",
+            "failed_msg": "لم يتم إنشاء الفندق الجديد."
         },
         "p_edit": {
             "success_msg": "تم تحديث الفندق.",
-            "failed_msg": "لم يتم تحديث هذه الفندق."
+            "failed_msg": "لم يتم تحديث هذا الفندق."
         }
     },
 

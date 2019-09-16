@@ -71,7 +71,7 @@
 
     function initMap() {
         var my_map_modal = document.getElementById('my_map_modal'),
-            elMap = document.getElementById('location_map_company'),
+            elMap = document.getElementById('location_map_hotel'),
             latitude = window.parseFloat(my_map_modal.getAttribute('data-lat')),
             longitude = window.parseFloat(my_map_modal.getAttribute('data-long'));
 
@@ -86,12 +86,12 @@
         });
     }
 
-    function initMapCompany() {
+    function initMapHotel() {
         var wrapperMap = document.querySelector('.myMap'),
             mapCanvas = document.querySelector(".myMap #map"),
             inputAddress = document.querySelector('.myMap #address'),
             eleErrorLocation = document.querySelector('.myMap .error-location'),
-            btnRemoveLocation = document.getElementById('remove-location-company'),
+            btnRemoveLocation = document.getElementById('remove-location-hotel'),
             lat = window.parseFloat(wrapperMap.getAttribute('data-lat')),
             long = window.parseFloat(wrapperMap.getAttribute('data-long')),
             myCenter = new google.maps.LatLng(lat, long),
@@ -102,8 +102,8 @@
                 draggable: true,
             });
         var geocoder = new google.maps.Geocoder();
-        var eleLat = document.getElementById('company_latitude'),
-            eleLong = document.getElementById('company_longitude');
+        var eleLat = document.getElementById('hotel_latitude'),
+            eleLong = document.getElementById('hotel_longitude');
         inputAddress.addEventListener('keyup', function(e) {
             geocodeAddress(geocoder, map);
         });

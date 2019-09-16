@@ -22,7 +22,7 @@
 
 
                             <!-- form -->
-                            <form @submit.prevent="editUser()">
+                            <form @submit.prevent="updateUser()">
                                 <!-- card-body -->
                                 <div class="card-body">
                                     <form-user typeForm="edit" :form="form"></form-user>
@@ -79,7 +79,7 @@ export default {
       }
     },
     methods: {
-        editUser() {
+        updateUser() {
             loadReq(this.$Progress);
             this.form.put(this.urlModel + '/' + this.form.id).then(response => {
                 if (response.status === 200) {
@@ -96,7 +96,7 @@ export default {
             });
         },
         getUserEdit(route) {
-            axios.get(this.urlEditUser + '/' + route.params.id).then(response => {
+            axios.get(this.urlModel + '/' + route.params.id).then(response => {
                 if (response.status === 200) {
                     const user = response.data.user
                     if (user != null) {

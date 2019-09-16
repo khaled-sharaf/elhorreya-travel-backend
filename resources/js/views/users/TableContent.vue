@@ -14,39 +14,39 @@
         >
 
             <td class="td-show-plus show_plus">
-            <span class="btn btn-secondary btn-show-more-row">
-                <i class="fa fa-plus"></i>
-            </span>
+                <span class="btn btn-secondary btn-show-more-row">
+                    <i class="fa fa-plus"></i>
+                </span>
             </td>
 
 
-            <td v-show="tableData.filter.columns.indexOf('index') != -1" class="index"
+            <td v-show="tableData.columns.indexOf('index') != -1" class="index"
             >{{index + 1}}</td>
 
 
-            <td v-show="tableData.filter.columns.indexOf('id') != -1" class="id"
+            <td v-show="tableData.columns.indexOf('id') != -1" class="id"
             >{{user.id}}</td>
 
 
-            <td v-show="tableData.filter.columns.indexOf('name') != -1" class="name"
+            <td v-show="tableData.columns.indexOf('name') != -1" class="name"
             >{{user.name | capitalize }}</td>
 
 
-            <td v-show="tableData.filter.columns.indexOf('email') != -1" class="email"
+            <td v-show="tableData.columns.indexOf('email') != -1" class="email"
             ><a :href="'mailto:' + user.email">{{user.email}}</a></td>
 
 
-            <td v-show="tableData.filter.columns.indexOf('image') != -1" class="image">
+            <td v-show="tableData.columns.indexOf('image') != -1" class="image">
                 <img class="avatar-table" :src="user.image.indexOf('http') === 0 ? user.image : $domain + '/' + user.image">
             </td>
 
 
-            <td v-show="tableData.filter.columns.indexOf('created_at') != -1" class="created_at">
+            <td v-show="tableData.columns.indexOf('created_at') != -1" class="created_at">
                 <relative-date :date="user.created_at"></relative-date>
             </td>
 
 
-            <td v-show="tableData.filter.columns.indexOf('actions') != -1"
+            <td v-show="tableData.columns.indexOf('actions') != -1"
                 class="actions"
                 >
                 <!-- btn edit row -->

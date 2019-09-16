@@ -1,5 +1,5 @@
 <?php
-
+use function PHPSTORM_META\type;
 
 /***********************************************************************************/
 // get every rate
@@ -23,45 +23,66 @@ if (!function_exists('every_rate')) {
     }
 }
 
+
 /***********************************************************************************/
-// add Prefix in url admin [control panel]
-if (!function_exists('convert_gallery_to_array')) {
-    function convert_gallery_to_array($products) {
-        if ($products[0] != null) {
-            foreach ($products as $product) {
-                $gallery = $product->gallery;
-                $gallery_arr = [];
-                if ($gallery != null) {
-                    $gallery = explode(',', $gallery);
-                    $i = 1;
-                    foreach ($gallery as $image) {
-                        $gallery_arr[] = ['id' => $i, 'image' => $image];
-                        $i++;
-                    }
-                } else {
-                    $gallery = $gallery_arr;
-                }
-                $product->gallery = $gallery_arr;
+if (!function_exists('convert_str_to_array')) {
+    function convert_str_to_array($arr, $column) {
+        $column_str = $arr[$column];
+        $column_arr = [];
+        if ($column_str != null && trim($column_str) != '') {
+            $column_str = explode(',', $column_str);
+            $i = 1;
+            foreach ($column_str as $columnValue) {
+                $column_arr[] = ['id' => $i, 'value' => $columnValue];
+                $i++;
             }
-        } else {
-            $gallery = $products->gallery;
-            $gallery_arr = [];
-            if ($gallery != null) {
-                $gallery = explode(',', $gallery);
-                $i = 1;
-                foreach ($gallery as $image) {
-                    $gallery_arr[] = ['id' => $i, 'image' => $image];
-                    $i++;
-                }
-            } else {
-                $gallery = $gallery_arr;
-            }
-            $products->gallery = $gallery_arr;
         }
-        return $products;
+        $arr[$column] = $column_arr;
+        return $arr;
     }
 }
 
+/***********************************************************************************/
+// convert features from string to array
+if (!function_exists('convert_column_to_array')) {
+    function convert_column_to_array($items_arr, $column) {
+        $items_arr = is_array($items_arr) ?  $items_arr : $items_arr->toArray();
+        $items_result = [];
+        if (array_key_exists(0, $items_arr)) {
+            foreach ($items_arr as $item) {
+                $items_result[] = convert_str_to_array($item, $column);
+            }
+        } else {
+            $items_result = convert_str_to_array($items_arr, $column);
+        }
+        return collect($items_result);
+    }
+}
+
+/***********************************************************************************/
+if (!function_exists('paginate_collection')) {
+    function paginate_collection($collection, $perPage, $pageName = 'page', $fragment = null)
+    {
+        $currentPage = \Illuminate\Pagination\LengthAwarePaginator::resolveCurrentPage($pageName);
+        $currentPageItems = count($collection) > 0 ? $collection->slice(($currentPage - 1) * $perPage, $perPage) : collect($collection);
+        parse_str(request()->getQueryString(), $query);
+        unset($query[$pageName]);
+        $paginator = new \Illuminate\Pagination\LengthAwarePaginator(
+            $currentPageItems,
+            count($collection),
+            $perPage,
+            $currentPage,
+            [
+                'pageName' => $pageName,
+                'path' => \Illuminate\Pagination\LengthAwarePaginator::resolveCurrentPath(),
+                'query' => $query,
+                'fragment' => $fragment
+            ]
+        );
+
+        return $paginator;
+    }
+}
 
 /***********************************************************************************/
 // add Prefix in url admin [control panel]

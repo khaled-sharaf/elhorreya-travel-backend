@@ -20,19 +20,19 @@
             </td>
 
 
-            <td v-show="tableData.filter.columns.indexOf('id') != -1" class="id">
+            <td v-show="tableData.columns.indexOf('id') != -1" class="id">
                 {{setting.id}}
             </td>
 
-            <td v-show="tableData.filter.columns.indexOf('slug') != -1" class="slug">
+            <td v-show="tableData.columns.indexOf('slug') != -1" class="slug">
                 {{setting.slug}}
             </td>
 
-            <td v-show="tableData.filter.columns.indexOf('name') != -1" class="name">
+            <td v-show="tableData.columns.indexOf('name') != -1" class="name">
                 {{setting.name}}
             </td>
 
-            <td v-show="tableData.filter.columns.indexOf('value') != -1" class="value">
+            <td v-show="tableData.columns.indexOf('value') != -1" class="value">
                 <img class="avatar-table" v-if="setting.value.indexOf('images/settings/') === 0" :src="$domain + '/' + setting.value">
 
                 <span v-else>
@@ -40,11 +40,11 @@
                 </span>
             </td>
 
-            <td v-show="tableData.filter.columns.indexOf('created_at') != -1" class="created_at">
+            <td v-show="tableData.columns.indexOf('created_at') != -1" class="created_at">
                 <relative-date :date="setting.created_at"></relative-date>
             </td>
 
-            <td v-show="tableData.filter.columns.indexOf('actions') != -1"
+            <td v-show="tableData.columns.indexOf('actions') != -1"
                 class="actions"
                 >
 

@@ -8,11 +8,11 @@ Vue.directive('selectcolumn', {
             dropdownAutoWidth: true
         })
         .on("select2:select", () => {
-            vnode.context.tableData.filter.columns = $(el).val();
+            vnode.context.tableData.columns = $(el).val();
             // vnode.context.$emit('getData');
         })
         .on("select2:unselect", () => {
-            vnode.context.tableData.filter.columns = $(el).val();
+            vnode.context.tableData.columns = $(el).val();
         })
         .bind(this);
     },

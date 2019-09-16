@@ -158,46 +158,46 @@
 
                         <!-- About Me Box -->
                         <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="m-0 card-title"> {{ $t('products_table.product_details') }}</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-
-                            <!-- show product details in table product_details -->
-
-                            <table class="table table-striped table-bordered table-show-details" v-if="productProfile.details.length > 0">
-                                <thead>
-                                    <tr>
-                                        <th> {{ $t('products_table.name') }}</th>
-                                        <th> {{ $t('products_table.value') }}</th>
-                                        <th class="th-display"> {{ $t('datatable.display') }}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="det in productProfile.details" :key="det.id">
-                                        <td>{{ det.name }}</td>
-                                        <td>{{ det.value }}</td>
-                                        <td class="td-display">
-                                            <span class="icon-success" v-if="det.display === 1">
-                                                <i class="far fa-check-circle"></i>
-                                            </span>
-                                            <span class="icon-danger" v-else>
-                                                <i class="far fa-times-circle"></i>
-                                            </span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <div v-else class="alert alert-info alert-dismissible">
-                                <h5><i class="icon fas fa-info"></i> {{ $t('global.no_product_details') }} !</h5>
-                                {{ $t('products_table.empty_details_msg') }}
+                            <div class="card-header">
+                                <h3 class="m-0 card-title"> {{ $t('products_table.product_details') }}</h3>
                             </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+
+                                <!-- show product details in table product_details -->
+
+                                <table class="table table-striped table-bordered table-show-details" v-if="productProfile.details.length > 0">
+                                    <thead>
+                                        <tr>
+                                            <th> {{ $t('products_table.name') }}</th>
+                                            <th> {{ $t('products_table.value') }}</th>
+                                            <th class="th-display"> {{ $t('datatable.display') }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="det in productProfile.details" :key="det.id">
+                                            <td>{{ det.name }}</td>
+                                            <td>{{ det.value }}</td>
+                                            <td class="td-display">
+                                                <span class="icon-success" v-if="det.display === 1">
+                                                    <i class="far fa-check-circle"></i>
+                                                </span>
+                                                <span class="icon-danger" v-else>
+                                                    <i class="far fa-times-circle"></i>
+                                                </span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <div v-else class="alert alert-info alert-dismissible">
+                                    <h5><i class="icon fas fa-info"></i> {{ $t('global.no_product_details') }} !</h5>
+                                    {{ $t('products_table.empty_details_msg') }}
+                                </div>
 
 
-                        </div>
-                        <!-- /.card-body -->
+                            </div>
+                            <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
                     </div>

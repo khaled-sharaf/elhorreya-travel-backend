@@ -6,11 +6,11 @@
 <template>
     <div>
         <!-- Content Header (Page header) -->
-        <header-page :title="$t('global.show') + ' ' + $t('sidebar.all_companies')"></header-page>
+        <header-page :title="$t('global.show') + ' ' + $t('sidebar.all_hotels')"></header-page>
         <!-- /.content-header -->
         <section class="content">
             <div class="container-fluid">
-                <div class="dataTable" id="companies">
+                <div class="dataTable" id="hotels">
                     <div class="row mt-3">
                         <div class="col-12">
                             <div class="dataTables_wrapper">
@@ -23,15 +23,9 @@
                                         <div class="dataTables_filters">
 
                                             <trashed
-                                                v-if="$gate.isAdmin()"
                                                 @getData="getData"
                                                 :tableData="tableData"
                                             ></trashed>
-
-                                            <activation
-                                                @getData="getData"
-                                                :tableData="tableData"
-                                            ></activation>
 
                                             <display
                                                 @getData="getData"
@@ -65,7 +59,7 @@
 
                                             <!-- dataTables_buttons -->
                                             <div class="dataTables_buttons">
-                                                <router-link :to="{name: 'create-company'}" tag="button"
+                                                <router-link :to="{name: 'create-hotel'}" tag="button"
                                                     type="button"
                                                     class="btn btn-outline-secondary"
                                                 >
@@ -87,7 +81,7 @@
                                                     :successResponse="successResponse"
                                                     :dataTable="dataTable"
                                                     :columns="columns"
-                                                    :columnsView="tableData.filter.columns"
+                                                    :columnsView="tableData.columns"
                                                     :columnsExcepted="tableData.filter.columnsExcept"
                                                     :viewtableclasses="tableData.filter.viewTable"
                                                     :sortKey="sortKey"
@@ -126,11 +120,11 @@
                 </div> <!-- /.dataTable -->
             </div><!--/. container-fluid -->
 
-            <!-- modal location company -->
+            <!-- modal location hotel -->
 
             <modal-location></modal-location>
 
-            <!-- ./modal location company -->
+            <!-- ./modal location hotel -->
         </section>
     </div>
 </template>
@@ -138,7 +132,6 @@
 
 <script>
 import Trashed from "./../../components/dataTables/filters/Trashed";
-import Activation from "./../../components/dataTables/filters/Activation";
 import Display from "./../../components/dataTables/filters/Display";
 import CreatedBetween from "./../../components/dataTables/filters/CreatedBetween";
 import Search from "./../../components/dataTables/filters/Search";
@@ -151,7 +144,6 @@ export default {
     mixins: [MixinsDatatable],
         components: {
         Trashed,
-        Activation,
         Display,
         CreatedBetween,
         Search,
@@ -166,19 +158,14 @@ export default {
       { label: "#", name: "index" },
       { label: "ID", name: "id" },
       { label: "Name", name: "name" },
-      { label: "Email", name: "email" },
-      { label: "Mobile", name: "phone" },
       { label: "Address", name: "address" },
-      { label: "Website", name: "website" },
-      { label: "Description", name: "description" },
-      { label: "Logo", name: "logo" },
-      { label: "Rates", name: "count_rates" },
-      { label: "Visits", name: "visits" },
+      { label: "Rating", name: "rating" },
+      { label: "Stars", name: "stars" },
+      { label: "Info", name: "info" },
       { label: "Location", name: "location" },
-      { label: "Facebook", name: "face_link" },
-      { label: "Twitter", name: "tw_link" },
+      { label: "Image", name: "image" },
       { label: "Display", name: "display" },
-      { label: "Active", name: "active" },
+      { label: "Created by", name: "user_id" },
       { label: "Created at", name: "created_at" },
       { label: "Actions", name: "actions" }
     ];
@@ -186,67 +173,57 @@ export default {
       sortOrders[column.name] = -1;
     });
     return {
-      idPage: 'companies',
-      urlGetDataTable: '/companies',
-      urlDeleteRow: '/company/destroy',
-      urlRestoreRow: '/company/restore',
-
+      idPage: 'hotels',
+      urlGetDataTable: '/hotels',
       columns: columns,
       sortOrders: sortOrders,
-
       tableData: {
         draw: 0,
         length: 10,
         search: "",
-        column: 0,
+        sortBy: 'id',
         display: "",
         active: "",
         trashed: 1,
         from_date: "",
         to_date: "",
-        filter: {
-          columns: [
+        dir: "",
+        columns: [
             "index",
             "id",
             "name",
-            "email",
-            "phone",
             "addresss",
-            "website",
-            "description",
-            "logo",
-            "count_rates",
-            "visits",
+            "rating",
+            "stars",
+            "info",
             "location",
-            "face_link",
-            "tw_link",
+            "image",
             "display",
-            "active",
+            "user_id",
             "created_at",
             "actions"
-          ],
-          columnsExcept: ['show_plus', 'index', 'actions', 'location', 'logo'],
+        ],
+        filter: {
+          columnsExcept: ['show_plus', 'index', 'actions', 'location', 'image'],
           viewTable: ["bordered", 'hover']
         },
-        dir: ""
       },
       // viewFilterColumns
       viewColumnsResponsive: {
         default: {
-        //   show: "all",// or ['id', 'index']
-          show: ['name', 'phone', 'address', 'logo', 'count_rates', 'actions']
+          show: ['name', 'address', 'image', 'stars', 'location', 'actions']
         },
         1200: {
-          show: ['name', 'phone', 'logo', 'count_rates', 'actions']
+          show: ['name', 'address', 'image', 'stars', 'actions']
         },
         1000: {
-          show: ['name', 'logo', 'count_rates', 'actions']
+          show: ['name', 'address', 'image', 'stars']
         },
         800: {
-          show: ['name', 'logo', 'actions']
+          show: ['name', 'address', 'image']
         },
         600: {
-          show: ["name", "actions"]
+          show: ["name", "address"]
         },
         400: {
           show: ["name"]
@@ -257,11 +234,12 @@ export default {
   methods: {
     showMap(lat, long) {
         if (lat != null && long != null) {
-            var my_map_modal = $('#my_map_modal');
+            const my_map_modal = $('#my_map_modal');
             my_map_modal.attr('data-lat', lat).attr('data-long', long);
-            var scriptMap = document.createElement('script');
+            let scriptMap = document.createElement('script');
+            const idMap = 'myScriptMap';
             document.body.appendChild(scriptMap);
-            scriptMap.id = 'myScriptMap';
+            scriptMap.id = idMap;
             scriptMap.setAttribute('async', true);
             scriptMap.setAttribute('defer', true);
             scriptMap.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyADsFcbM6g-A_nUwh41pFn9EgDdlRC6lGY&language=ar&region=EG&callback=initMap');
@@ -280,14 +258,14 @@ export default {
                 $('#locationTitle').html('Location: ' + title);
                 $('#myScriptMap').remove();
                 self.showMap(lat, long);
-                $('#modal_location_company').modal('show');
+                $('#modal_location_hotel').modal('show');
             }
         });
     },
   },
     beforeRouteEnter(to, from, next) {
         next(vm => {
-            to.meta.title = vm.$t('sidebar.companies')
+            to.meta.title = vm.$t('sidebar.hotels')
             vm.setLocaleMessages()
             vm.sortOrders[vm.sortKey] = 1; // 1 = desc , -1 = asc
             vm.sortBy(vm.sortKey);

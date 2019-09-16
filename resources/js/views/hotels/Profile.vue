@@ -13,201 +13,248 @@
 <template>
     <div>
         <!-- Content Header (Page header) -->
-        <header-page :title="$t('sidebar.company_profile')"></header-page>
+        <header-page :title="$t('sidebar.hotel_profile')"></header-page>
         <!-- /.content-header -->
         <section class="content">
-            <div class="container-fluid company-profile-wrapper">
-                <div class="row mt-3">
-                    <div :class="maximizeTable == true ? 'col-sidebar col-12' : 'col-md-12 col-xl-4'">
+            <div class="container-fluid profile-wrapper">
+                <div class="row mt-3 justify-content-lg-center">
+                    <div :class="maximizeTable == true ? 'col-sidebar col-lg-8' : 'col-md-12 col-xl-4'">
 
                         <!-- Profile Image -->
                         <div class="card card-primary card-outline">
-                        <div class="card-body box-profile">
-                            <div class="text-center">
-                            <img class="profile-user-img img-fluid img-circle"
-                                :src="$domain + '/' + companyProfile.logo"
-                                alt="User profile picture">
+                            <div class="card-body box-profile">
+                                <div class="text-center">
+                                <img class="profile-user-img full-image-profile"
+                                    :src="$domain + '/' + hotelProfile.image"
+                                    alt="Hotel profile picture">
+                                </div>
+
+                                <h3 class="profile-username text-center">{{ hotelProfile.name }}</h3>
+
+                                <p class="text-muted text-center">{{ hotelProfile.address }}</p>
+
+                                <ul class="list-group list-group-unbordered mb-3">
+                                    <li class="list-group-item">
+                                        <b> {{ $t('hotels_table.rooms_count') }} </b> <a class="float-right">{{ hotelProfile.rooms_count == null ? 0 : hotelProfile.rooms_count }}</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b> {{ $t('hotels_table.travels_count') }} </b> <a class="float-right">{{ hotelProfile.travels_count == null ? 0 : hotelProfile.travels_count }}</a>
+                                    </li>
+                                    <li class="list-group-item">
+                                        <b> {{ $t('hotels_table.rating') }} </b> <a class="float-right"> {{ hotelProfile.rating }}% <rates-stars :rates-count="hotelProfile.rating"></rates-stars> </a>
+                                    </li>
+                                </ul>
+
+                                <!-- delete hotel -->
+                                <a
+                                    :href="$domain_admin + '/hotel/destroy'"
+                                    class="btn btn-danger btn-delete-row btn-table-actions btn-sm mr-3 mt-1"
+                                    @click.prevent="destroyRow(hotelProfile.id)"
+                                > {{ $t('hotels_table.delete_hotel') }}
+                                    <i class="fa fa-trash"></i>
+                                </a>
+
+                                <!-- edit hotel -->
+                                <router-link
+                                    :to="{name: 'edit-hotel', params: {hotel: hotelProfile, id: hotelProfile.id}}"
+                                    :href="$domain_admin + '/hotel/' + hotelProfile.id + '/edit'"
+                                    class="btn btn-success btn-edit-row btn-table-actions btn-sm mt-1"
+                                > {{ $t('hotels_table.edit_hotel') }}
+                                    <i class="fa fa-edit"></i>
+                                </router-link>
                             </div>
-
-                            <h3 class="profile-username text-center">{{ companyProfile.name }}</h3>
-
-                            <p class="text-muted text-center">{{ companyProfile.description }}</p>
-
-                            <ul class="list-group list-group-unbordered mb-3">
-                            <li class="list-group-item">
-                                <b> {{ $t('companies_table.products_count') }} </b> <a class="float-right">{{ companyProfile.products_count == null ? 0 : companyProfile.products_count }}</a>
-                            </li>
-                            <li class="list-group-item">
-                                <b> {{ $t('companies_table.users_count') }} </b> <a class="float-right">{{ companyProfile.users_count == null ? 0 : companyProfile.users_count }}</a>
-                            </li>
-                            <li class="list-group-item">
-                                <b> {{ $t('companies_table.count_rates') }} </b> <a class="float-right"> <rates-stars :rates-count="companyProfile.count_rates"></rates-stars> </a>
-                            </li>
-                            </ul>
-
-                            <!-- delete company -->
-                            <a
-                                v-if="$gate.isAdmin()"
-                                :href="$domain_admin + '/company/destroy'"
-                                class="btn btn-danger btn-delete-row btn-table-actions btn-sm mr-3 mt-1"
-                                @click.prevent="destroyRow(companyProfile.id)"
-                            > {{ $t('companies_table.delete_company') }}
-                                <i class="fa fa-trash"></i>
-                            </a>
-
-                            <!-- edit company -->
-                            <router-link
-                                :to="{name: 'edit-company', params: {company: companyProfile, id: companyProfile.id}}"
-                                :href="$domain_admin + '/company/' + companyProfile.id + '/edit'"
-                                class="btn btn-success btn-edit-row btn-table-actions btn-sm mt-1"
-                            > {{ $t('companies_table.edit_company') }}
-                                <i class="fa fa-edit"></i>
-                            </router-link>
-
-                        </div>
-                        <!-- /.card-body -->
+                            <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
 
                         <!-- About Me Box -->
                         <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="m-0 card-title"> {{ $t('companies_table.company_info') }} </h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <!-- email -->
-                            <strong> {{ $t('companies_table.email') }} </strong>
-
-                            <p class="text-muted">
-                                <a :href="'mailto:' + companyProfile.email">{{companyProfile.email}}</a>
-                            </p>
-
-                            <hr>
-
-
-                            <!-- mobile -->
-                            <strong> {{ $t('companies_table.phone') }} </strong>
-
-                            <p class="text-muted">
-                                {{companyProfile.phone}}
-                            </p>
-
-                            <hr>
-
-                            <!-- Address -->
-                            <strong> {{ $t('companies_table.address') }} </strong>
-
-                            <p class="text-muted">
-                                {{companyProfile.address}}
-                            </p>
-
-                            <hr>
-
-                            <!-- Website -->
-                            <strong> {{ $t('companies_table.website') }} </strong>
-
-                            <p class="text-muted">
-                                <a target="_blank" :href="companyProfile.website">{{companyProfile.website}}</a>
-                            </p>
-
-                            <hr>
-
-                            <!-- Location -->
-                            <strong> {{ $t('companies_table.location_map') }} </strong>
-
-                            <p class="text-muted">
-                                <button
-                                    v-if="companyProfile.longitude != null && companyProfile.latitude != null"
-                                    class="btn btn-outline-secondary btn-sm"
-                                    id="show_map_location"
-                                    :data-long="companyProfile.longitude"
-                                    :data-lat="companyProfile.latitude"
-                                    :data-location-title="companyProfile.name"
-                                > {{ $t('companies_table.show_map') }} </button>
-                            </p>
-
-                            <hr>
-
-                            <!-- face link -->
-                            <strong> {{ $t('companies_table.face_link') }} </strong>
-
-                            <p class="text-muted">
-                                <a target="_blank" :href="companyProfile.face_link">{{companyProfile.face_link}}</a>
-                            </p>
-
-                            <hr>
-
-                            <!-- tw link -->
-                            <strong> {{ $t('companies_table.tw_link') }} </strong>
-
-                            <p class="text-muted">
-                                <a target="_blank" :href="companyProfile.tw_link">{{companyProfile.tw_link}}</a>
-                            </p>
-
-                            <hr>
-
-                            <!-- Address -->
-                            <strong> {{ $t('datatable.display') }} </strong>
-
-                            <p class="text-muted">
-                                {{companyProfile.display == 1 ? $t('global.visible') : $t('global.hidden')}}
-                            </p>
-
-                            <hr>
-
-                            <!-- active -->
-                            <div v-if="$gate.isAdmin()">
-
-                                <strong> {{ $t('datatable.activation') }} </strong>
-
-                                <p class="text-muted">
-                                    {{companyProfile.active == 1 ? $t('global.active') : $t('global.disactive')}}
-                                </p>
-
-                                <hr>
+                            <div class="card-header">
+                                <h3 class="m-0 card-title"> {{ $t('hotels_table.hotel_info') }} </h3>
                             </div>
+                            <!-- /.card-header -->
 
-                            <!-- create at -->
-                            <strong> {{ $t('companies_table.created_at') }} </strong>
+                            <div class="card-body box-profile">
 
-                            <p class="text-muted">
-                                <relative-date :date="companyProfile.created_at"></relative-date>
-                            </p>
-                        </div>
-                        <!-- /.card-body -->
+                                <!-- show hotel details in table hotel -->
+                                <ul class="list-group list-group-unbordered mb-3">
+
+                                    <!-- stars -->
+                                    <li class="list-group-item">
+                                        <b>
+                                            {{ $t('hotels_table.stars') }}
+                                        </b>
+                                        <a class="float-right">
+                                            {{hotelProfile.stars}}
+                                        </a>
+                                    </li>
+                                    <!-- =========================================== -->
+
+
+                                    <!-- Location -->
+                                    <li class="list-group-item">
+                                        <b>
+                                            {{ $t('hotels_table.location_map') }}
+                                        </b>
+                                        <a class="float-right">
+                                            <button
+                                                v-if="hotelProfile.longitude != null && hotelProfile.latitude != null"
+                                                class="btn btn-outline-secondary btn-sm"
+                                                id="show_map_location"
+                                                :data-long="hotelProfile.longitude"
+                                                :data-lat="hotelProfile.latitude"
+                                                :data-location-title="hotelProfile.name">
+
+                                            {{ $t('hotels_table.show_map') }}
+                                            </button>
+                                            <span v-else>{{ $t('global.no_location') }}</span>
+                                        </a>
+                                    </li>
+                                    <!-- =========================================== -->
+
+
+                                    <!-- info -->
+                                    <li class="list-group-item">
+                                        <b>
+                                            {{ $t('hotels_table.info') }}
+                                        </b>
+                                        <a class="float-right">
+                                            <div class="read-more" limit-char="100" event-type="toggle" text-btn-read="إقرأ المزيد" text-btn-unread="إقرأ أقل">
+                                                {{hotelProfile.info}}
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <!-- =========================================== -->
+
+                                    <!-- display -->
+                                    <li class="list-group-item">
+                                        <b>
+                                            {{ $t('datatable.display') }}
+                                        </b>
+                                        <a class="float-right">
+                                            {{hotelProfile.display == 1 ? $t('global.visible') : $t('global.hidden')}}
+                                        </a>
+                                    </li>
+                                    <!-- =========================================== -->
+
+
+                                    <!-- Created by -->
+                                    <li class="list-group-item">
+                                        <b>
+                                            {{ $t('hotels_table.user_id') }}
+                                        </b>
+                                        <a class="float-right">
+                                            <router-link
+                                                v-if="hotelProfile.user !== null"
+                                                :href="$domain_admin + '/user/' + hotelProfile.user_id + '/edit'"
+                                                :to="{name: 'edit-user', params: {id: hotelProfile.user_id, user: hotelProfile.user}}"
+                                            >
+                                                {{ hotelProfile.user.name }}
+                                            </router-link>
+                                            <span class="badge badge-danger" v-else> {{ $t('global.user_is_deleted') }} - id:{{hotelProfile.user_id}}</span>
+                                        </a>
+                                    </li>
+                                    <!-- =========================================== -->
+
+
+                                    <!-- Last modified -->
+                                    <li class="list-group-item">
+                                        <b>
+                                            {{ $t('hotels_table.updated_at') }}
+                                        </b>
+                                        <a class="float-right">
+                                            <relative-date :date="hotelProfile.updated_at"></relative-date>
+                                        </a>
+                                    </li>
+                                    <!-- =========================================== -->
+
+                                    <!-- Created at -->
+                                    <li class="list-group-item">
+                                        <b> {{ $t('hotels_table.created_at') }}</b> <a class="float-right">
+                                            <relative-date :date="hotelProfile.created_at"></relative-date>
+                                        </a>
+                                    </li>
+                                    <!-- =========================================== -->
+
+                                </ul> <!-- ./ list-group hotel details -->
+
+                            </div>
+                            <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
+
+                         <!-- About Me Box -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="m-0 card-title"> {{ $t('hotels_table.features') }}</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+
+                                <!-- show hotel features -->
+
+                                <table class="table table-striped table-bordered table-show-details" v-if="hotelProfile.features.length > 0">
+                                    <tbody>
+                                        <tr v-for="feature in hotelProfile.features" :key="feature.id">
+                                            <td>{{ feature.value }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                <div v-else class="alert alert-info alert-dismissible">
+                                    <h5><i class="icon fas fa-info"></i> {{ $t('global.no_hotel_features') }} !</h5>
+                                    {{ $t('hotels_table.empty_features_msg') }}
+                                </div>
+
+
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+
                     </div>
                     <!-- /.col -->
                     <div :class="maximizeTable == true ? 'col-table-maximize col-12' : 'col-md-12 col-xl-8'">
                         <div class="card">
                         <div class="card-header p-2">
                             <ul class="nav nav-pills" style="display: inline-flex;">
-                                <li class="nav-item" v-if="$gate.isAdmin()"><a @click="showUserTable = false" class="nav-link active" href="#products" data-toggle="tab"> {{ $t('sidebar.products') }} </a></li>
-                                <li class="nav-item"><a @click="showUserTable = true" class="nav-link" :class="{active: $gate.isAdminCompany()}" href="#users" data-toggle="tab"> {{ $t('sidebar.users') }} </a></li>
+                                <li class="nav-item"><a @click="currentChildTable = 'gallery'" class="nav-link active" href="#gallery" data-toggle="tab"> {{ $t('hotels_table.gallery') }} </a></li>
+                                <li class="nav-item"><a @click="currentChildTable = 'rooms'" class="nav-link" href="#rooms" data-toggle="tab"> {{ $t('sidebar.rooms') }} </a></li>
+                                <li class="nav-item"><a @click="currentChildTable = 'travels'" class="nav-link" href="#travels" data-toggle="tab"> {{ $t('sidebar.travels') }} </a></li>
 
                             </ul>
-                            <button class="btn btn-outline-secondary maximize-table" @click="maximizeTable = !maximizeTable"><i class="fas" :class="maximizeTable == true ? 'fa-compress-arrows-alt' : 'fa-compress'"></i></button>
+                            <button class="btn btn-outline-secondary maximize-table d-none d-xl-block" @click="maximizeTable = !maximizeTable"><i class="fas" :class="maximizeTable == true ? 'fa-compress-arrows-alt' : 'fa-compress'"></i></button>
                         </div><!-- /.card-header -->
                         <div class="card-body">
                             <div class="tab-content">
-                            <div class="tab-pane active" id="products" v-if="$gate.isAdmin()">
-                               <products v-if="(companyProfile.products_count != null && companyProfile.products_count != 0) && showUserTable === false"></products>
-
+                            <div class="tab-pane active" id="gallery">
+                                <div class="gallery-in-profile" v-if="(hotelProfile.gallery.length > 0) && currentChildTable === 'gallery'">
+                                    <div class="image" v-for="image in hotelProfile.gallery" :key="image.id">
+                                        <img :src="$domain + '/' + image.value">
+                                    </div>
+                                </div>
                                 <div v-else class="alert alert-info alert-dismissible">
-                                    <h5><i class="icon fas fa-info"></i>  {{ $t('global.no_products') }} !</h5>
-                                     {{ $t('companies_table.empty_products_msg') }}
+                                    <h5><i class="icon fas fa-info"></i>  {{ $t('global.no_gallery') }} !</h5>
+                                     {{ $t('hotels_table.empty_gallery_msg') }}
                                 </div>
                             </div>
                             <!-- /.tab-pane -->
-                            <div class="tab-pane" :class="{active: $gate.isAdminCompany()}" id="users">
-                                <users-comp v-if="(companyProfile.users_count != null && companyProfile.users_count != 0) && showUserTable === true"></users-comp>
+                            <div class="tab-pane" id="rooms">
+                               <!-- <rooms v-if="(hotelProfile.rooms_count != null && hotelProfile.rooms_count != 0) && currentChildTable === 'rooms'"></rooms>
 
                                 <div v-else class="alert alert-info alert-dismissible">
-                                    <h5><i class="icon fas fa-info"></i>  {{ $t('global.no_users') }} !</h5>
-                                    {{ $t('companies_table.empty_users_msg') }}
-                                </div>
+                                    <h5><i class="icon fas fa-info"></i>  {{ $t('global.no_rooms') }} !</h5>
+                                     {{ $t('hotels_table.empty_rooms_msg') }}
+                                </div> -->
+                            </div>
+                            <!-- /.tab-pane -->
+                            <div class="tab-pane" id="travels">
+                                <!-- <travels v-if="(hotelProfile.travels_count != null && hotelProfile.travels_count != 0) && currentChildTable === 'travels'"></travels>
+
+                                <div v-else class="alert alert-info alert-dismissible">
+                                    <h5><i class="icon fas fa-info"></i>  {{ $t('global.no_travels') }} !</h5>
+                                    {{ $t('hotels_table.empty_travels_msg') }}
+                                </div> -->
 
                             </div>
                             <!-- /.tab-pane -->
@@ -230,8 +277,8 @@
 
 <script>
 
-import UsersComp from './../users/Index'
-import products from './../products/Index'
+// import Rooms from './../rooms/Index'
+// import Travels from './../travels/Index'
 import ModalLocation from './ModalLocation'
 import HeaderPage from './../../components/HeaderPage'
 import MixinChangeLocaleMessagesProfiles from "./../../mixins/MixinChangeLocaleMessagesProfiles"
@@ -244,39 +291,38 @@ export default {
     ],
     components: {
         HeaderPage,
-        UsersComp,
-        products,
+        // Rooms,
+        // Travels,
         ModalLocation
     },
-    name: 'company-profile',
+    name: 'hotel-profile',
     data() {
       return {
-          urlCompanyProfile: '/company/profile',
-          urlDeleteRow: '/company/destroy',
-          idPage: 'companies',
+          urlGetDataTable: '/hotels',
+          idPage: 'hotels',
           maximizeTable: false,
-          showUserTable: false,
-          companyProfile: {
+          currentChildTable: 'gallery',
+          hotelProfile: {
             id: 0,
             name: "",
-            active: 1,
             address: "",
-            count_rates: 0,
-            created_at: "",
-            description: "",
-            display: 1,
-            email: "",
-            face_link: "",
+            rating: 0,
+            stars: 0,
+            info: "",
             latitude: "",
             longitude: "",
-            logo: "images/companies-logo/company-default-avatar.jpg",
-            phone: "",
-            products_count: 0,
-            tw_link: "",
-            updated_at: null,
+            image: "images/hotels/hotel-default-avatar.jpg",
+            gallery: [],
+            features: [
+                {value: ''}
+            ],
+            display: 1,
             user_id: 1,
-            users_count: 0,
-            website: "",
+            updated_at: null,
+            created_at: null,
+            user: {
+                name: ''
+            }
           }
       }
     },
@@ -307,24 +353,24 @@ export default {
                     $('#locationTitle').html(oldText + ' ' + `<span style="color: #3498db">${title}</span>`);
                     $('#myScriptMap').remove();
                     self.showMap(lat, long);
-                    $('#modal_location_company').modal('show');
+                    $('#modal_location_hotel').modal('show');
                 }
             });
         },
-        getCompanyProfile(route) {
-            axios.post(this.urlCompanyProfile, {id: route.params.id}).then(response => {
+        getHotelProfile(route) {
+            axios.get(this.urlGetDataTable + '/' + route.params.id).then(response => {
                 if (response.status === 200) {
-                    const company = response.data.company
-                    if (company != null) {
-                        this.companyProfile = company
+                    const hotel = response.data.hotel
+                    if (hotel != null) {
+                        this.hotelProfile = hotel
                     } else {
-                        this.$router.push({name: 'companies'})
+                        this.$router.push({name: 'hotels'})
                     }
                 }
             })
             .catch(errors => {
                 setTimeout(() => {
-                    this.getCompanyProfile(this.$route)
+                    this.getHotelProfile(this.$route)
                 }, 1000)
             })
         }
@@ -332,24 +378,16 @@ export default {
 
     mounted() {
         this.eventBtnsClick()
-        if (this.$gate.isAdminCompany()) {
-            this.showUserTable = true
-        }
     },
 
     beforeRouteEnter(to, from, next) {
         next(vm => {
-            to.meta.title = vm.$t('sidebar.company_profile')
-            if (to.params.id && vm.$gate.isAdminCompany() && to.params.id != vm.$gate.authCompanyData().id) {
-                setTimeout(() => {
-                    next({name: 'home'})
-                }, 100)
+            to.meta.title = vm.$t('sidebar.hotel_profile')
+            if (to.params.hotel) {
+                let hotel = to.params.hotel
+                vm.hotelProfile = hotel
             } else {
-                if (to.params.company) {
-                    vm.companyProfile = to.params.company
-                } else {
-                    vm.getCompanyProfile(to)
-                }
+                vm.getHotelProfile(to)
             }
         })
     }
