@@ -12095,6 +12095,13 @@ a.text-dark:focus {
   height: 35px !important;
 }
 
+.btn-loader {
+  display: inline-block;
+  margin: 0 5px;
+  position: relative;
+  top: -1px;
+}
+
 .langs-btns-group {
   position: relative;
   top: 5px;
@@ -12169,8 +12176,8 @@ a.text-dark:focus {
 }
 
 .profile-wrapper .full-image-profile {
-  width: auto;
   max-width: 100%;
+  width: auto;
   height: auto;
   max-height: 500px;
   margin-bottom: 10px !important;

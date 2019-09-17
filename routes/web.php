@@ -15,9 +15,8 @@ Route::get('/home', 'HomeController@index')->name('home');
 // Route::get('lang/{lang}', 'LangController@lang')->name('lang');
 /**********************************************************************************/
 
-// use App\Product as pro;
 // use App\User;
-// use App\Company;
+// use App\Hotel;
 // use App\ProductType;
 // use App\Winner;
 // use App\City;
@@ -25,6 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', function () {
     return view('welcome');
+
 
     // $pro = Pro::find(3)->comments()->with('user')->get();
     // $pro = Pro::find(3)->with('rates')->get();

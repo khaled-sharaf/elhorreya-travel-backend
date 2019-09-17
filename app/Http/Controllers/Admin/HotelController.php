@@ -137,11 +137,9 @@ class HotelController extends Controller
 
     public function show($id)
     {
-        $hotel = Hotel::find($id);
-        if ($hotel != null) {
-            $hotel = convert_column_to_array($hotel, 'features');
-            $hotel = convert_column_to_array($hotel, 'gallery');
-        }
+        $hotel = Hotel::findConvert($id);
+        $hotel_arr = collect($hotel)->toArray();
+        $hotel = key_exists('id', $hotel_arr) ? $hotel : null;
         return response(['hotel' => $hotel]);
     }
 
