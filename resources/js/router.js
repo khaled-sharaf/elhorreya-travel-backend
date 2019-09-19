@@ -20,6 +20,12 @@ import EditHotel from './views/hotels/Edit'
 import HotelProfile from './views/hotels/Profile'
 
 
+// rooms components
+import Rooms from './views/rooms/Index'
+import CreateRoom from './views/rooms/Create'
+import EditRoom from './views/rooms/Edit'
+
+
 // companies components
 // import Companies from './views/companies/Index'
 // import CreateCompany from './views/companies/CreateCompany'
@@ -100,6 +106,25 @@ const vueRouter = new Router({
                     path: 'hotel/profile/:id',
                     name: 'hotel-profile',
                     component: HotelProfile,
+                    props: true
+                },
+
+
+                ////////////////// rooms routes ///////////////////
+                {
+                    path: 'rooms',
+                    name: 'rooms',
+                    component: Rooms
+                },
+                {
+                    path: 'room/create',
+                    name: 'create-room',
+                    component: CreateRoom
+                },
+                {
+                    path: 'room/:id/edit',
+                    name: 'edit-room',
+                    component: EditRoom,
                     props: true
                 },
 

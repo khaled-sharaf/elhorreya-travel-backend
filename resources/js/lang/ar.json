@@ -4,6 +4,7 @@
         "dashboard": "الرئيسية",
         "user": "مدير",
         "hotel": "فندق",
+        "the_hotel": "الفندق",
         "room": "غرفة",
         "type": "نوع",
         "comment": "تعليق",
@@ -18,14 +19,12 @@
 
         "profile": "بروفايل",
         "the_profile": "البروفايل",
-        "user_commented": "تعليق المدير",
-        "goto_product_profile": "صفحة المنتج",
+        "goto_travel_profile": "صفحة الرحلة",
         "goto_hotel_profile": "صفحة الفندق",
 
-        "hotel_is_deleted": "الفندق محذوفة",
+        "hotel_is_deleted": "الفندق محذوف",
         "user_is_deleted": "المدير محذوف",
-        "type_is_deleted": "القسم محذوف",
-        "product_is_deleted": "المنتج محذوف",
+        "travel_is_deleted": "الرحلة محذوفة",
 
 
         "logout": "تسجيل الخروج",
@@ -54,6 +53,8 @@
         "display": "إظهار",
         "from": "من",
         "to": "إلى",
+        "in": "فى",
+        "on": "على",
 
         "delete": "حذف",
         "deleted": "تم الحذف",
@@ -76,7 +77,7 @@
 
     "sidebar": {
         "hotel_profile": "صفحة الفندق",
-        "product_profile": "صفحة المنتج",
+        "travel_profile": "صفحة الرحلة",
 
         "users": "المديرين",
         "all_users": "جميع المديرين",
@@ -134,7 +135,6 @@
         "rules": "الصلاحيات",
         "sold_out": "نفاذ الكمية",
         "discount": "الخصم",
-        "category": "القسم",
         "created_between": "تم إنشائه فى تاريخ",
         "search": "بحث"
     },
@@ -150,6 +150,7 @@
         "password": "كلمة السر",
         "repeat_password": "أعد كلمة السر",
         "image": "الصورة",
+        "updated_at": "أخر تعديل",
         "created_at": "تاريخ الإنشاء",
         "actions": "الإجراءات",
 
@@ -243,77 +244,46 @@
 
 
 
-    "products_table": {
+    "rooms_table": {
         "id": "المعرف",
-        "name": "الإسم",
-        "image": "الصورة",
-        "price": "السعر",
-        "description": "الوصف",
-        "manufacture_hotel": "الفندق المصنعة",
-        "count_rates": "التقيمات",
-        "product_count": "العدد",
-        "count_selling": "عدد المبيعات",
-        "execute": "نفاذ الكمية",
+        "info": "معلومات الغرفة",
+        "options": "الخيارات",
+        "price_night": "سعر الليلة",
+        "offer_price": "سعر العرض",
+        "offer_days": "عدد أيام العرض",
         "display": "الظهور",
-        "type": "القسم",
-        "user": "أضيف بواسطة",
-        "hotel": "الفندق",
+        "user_id": "أضيف بواسطة",
+        "hotel_id": "الفندق",
         "updated_at": "أخر تعديل",
         "created_at": "تاريخ الإنشاء",
         "actions": "الإجراءات",
 
-        "discount": "الخصم",
-        "percent": "النسبة المئوية",
-        "new_price": "السعر الجديد",
-        "images": "الصور",
-        "value": "القيمة",
-        "plus": "للمزيد",
+        "offer": "العرض",
+        "night": "ليلة",
+        "nights": "ليالى",
 
-        "delete_product": "حذف المنتج",
-        "edit_product": "تعديل المنتج",
+        "delete_product": "حذف الغرفة",
+        "edit_product": "تعديل الغرفة",
 
-        "empty_comments_msg": "هذا المنتج ليس به تعليقات.",
-        "empty_winners_msg": "هذا المنتج ليس لديه فائزين.",
-        "empty_details_msg": "هذا المنتج ليس لديه تفاصيل.",
+        "delete_msg": "هل أنت متأكد من حذف هذه الغرفة ؟",
+        "delete_success_msg": "تم حذف الغرفة.",
+        "delete_failed_msg": "لم يتم حذف الغرفة.",
 
-        "product_details": "تفاصيل المنتج",
+        "force_delete_msg": "هل أنت متأكد من إزالة هذه الغرفة بشكل نهائى ؟",
+        "force_delete_success_msg": "تم إزالة الغرفة بشكل نهائى.",
+        "force_delete_failed_msg": "لم يتم إزالة الغرفة.",
 
-        "sell_product_title": "بيع أو استرجاع المنتج",
-        "sell_product_msg": "عدد المبيعات القديم هو: .",
-
-        "sold_product_title": "تم البيع",
-        "sell_product_success_msg": "تمت تغيير عدد المبيعات بنجاح.",
-
-        "sell_product_failed_msg": "لم يتم تغيير عدد المبيعات.",
-        "add_salse_product_title": "إضافة",
-        "msg_empty_count_selling": "يجب ان يكون عدد المبيعات 1 او اكثر.",
-        "msg_error_product_count_less_than_count_sales": "يجب ان يكون عدد المبيعات اصغر من او يساوى عدد المنتجات الحالية فى حالة تفعيل خاصية تأثر المنتجات بالزيادة أو النقصان.",
-        "msg_error_current_count_sales_less_than_count_sales_input": "يجب ان يكون عدد المبيعات المدخلة اصغر من او يساوى عدد المبيعات الحالية.",
-        "increase_sales": "تغيير عدد المبيعات",
-        "title_label_affected_products_count_in_selling": "تأثر عدد المنتجات الحالية بالزيادة والنقصان.",
-        "add_sales": "بيع",
-        "restore_sales": "استرجاع",
-        "placeholder_input_sales_count": "عدد المبيعات",
-
-        "delete_msg": "هل أنت متأكد من حذف هذا المنتج ؟",
-        "delete_success_msg": "تم حذف المنتج.",
-        "delete_failed_msg": "لم يتم حذف المنتج.",
-
-        "force_delete_msg": "هل أنت متأكد من إزالة هذا المنتج بشكل نهائى ؟",
-        "force_delete_success_msg": "تم إزالة المنتج بشكل نهائى.",
-        "force_delete_failed_msg": "لم يتم إزالة المنتج.",
-
-        "restore_msg": "هل أنت متأكد من استرجاع هذا المنتج ؟",
-        "restore_success_msg": "تم استرجاع المنتج.",
-        "restore_failed_msg": "لم يتم استرجاع المنتج.",
+        "restore_msg": "هل أنت متأكد من استرجاع هذه الغرفة ؟",
+        "restore_success_msg": "تم استرجاع الغرفة.",
+        "restore_failed_msg": "لم يتم استرجاع الغرفة.",
 
         "p_create": {
-            "success_msg": "تم إنشاء منتج جديد.",
-            "failed_msg": "لم يتم إنشاء المنتج الجديد."
+            "success_msg": "تم إنشاء غرغة جديدة.",
+            "failed_msg": "لم يتم إنشاء الغرفة الجديدة."
         },
         "p_edit": {
-            "success_msg": "تم تحديث المنتج.",
-            "failed_msg": "لم يتم تحديث هذا المنتج."
+            "success_msg": "تم تحديث الغرفة.",
+            "failed_msg": "لم يتم تحديث هذه الغرفة."
         }
     },
 
@@ -426,6 +396,8 @@
         "name": "اسم الإعداد",
         "value": "القيمة",
         "type": "النوع",
+        "user_id": "أضيف بواسطة",
+        "updated_at": "أخر تعديل",
         "created_at": "تاريخ الإنشاء",
         "actions": "الإجراءات",
 

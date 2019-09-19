@@ -20,7 +20,7 @@ class SettingController extends Controller
         $dir = $request->dir;
         $draw = $request->draw;
         $searchValue = $request->search;
-        $query = Setting::select('*')->orderBy($columnSorting, $dir);
+        $query = Setting::select('*')->orderBy($columnSorting, $dir)->with('user');
 
         if ($searchValue) {
             $query->where(function($query) use ($searchValue) {

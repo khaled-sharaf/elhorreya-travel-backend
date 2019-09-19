@@ -119,7 +119,7 @@
                                             {{ $t('hotels_table.info') }}
                                         </b>
                                         <a class="float-right">
-                                            <div class="read-more" limit-char="100" event-type="toggle" text-btn-read="إقرأ المزيد" text-btn-unread="إقرأ أقل">
+                                            <div v-read-more:toggle="{limit: 100, textBtnRead: 'إقرأ المزيد', textBtnUnread: 'إقرأ أقل'}">
                                                 {{hotelProfile.info}}
                                             </div>
                                         </a>
@@ -240,15 +240,16 @@
                             </div>
                             <!-- /.tab-pane -->
                             <div class="tab-pane" id="rooms">
-                               <!-- <rooms v-if="(hotelProfile.rooms_count != null && hotelProfile.rooms_count != 0) && currentChildTable === 'rooms'"></rooms>
+                               <rooms v-if="(hotelProfile.rooms_count != null && hotelProfile.rooms_count != 0) && currentChildTable === 'rooms'"></rooms>
 
                                 <div v-else class="alert alert-info alert-dismissible">
                                     <h5><i class="icon fas fa-info"></i>  {{ $t('global.no_rooms') }} !</h5>
                                      {{ $t('hotels_table.empty_rooms_msg') }}
-                                </div> -->
+                                </div>
                             </div>
                             <!-- /.tab-pane -->
                             <div class="tab-pane" id="travels">
+                                travels
                                 <!-- <travels v-if="(hotelProfile.travels_count != null && hotelProfile.travels_count != 0) && currentChildTable === 'travels'"></travels>
 
                                 <div v-else class="alert alert-info alert-dismissible">
@@ -277,7 +278,7 @@
 
 <script>
 
-// import Rooms from './../rooms/Index'
+import Rooms from './../rooms/Index'
 // import Travels from './../travels/Index'
 import ModalLocation from './ModalLocation'
 import HeaderPage from './../../components/HeaderPage'
@@ -291,7 +292,7 @@ export default {
     ],
     components: {
         HeaderPage,
-        // Rooms,
+        Rooms,
         // Travels,
         ModalLocation
     },
@@ -385,6 +386,32 @@ export default {
             to.meta.title = vm.$t('sidebar.hotel_profile')
             if (to.params.hotel) {
                 let hotel = to.params.hotel
+                if (typeof hotel.gallery == 'string') {
+                    if (hotel.gallery !== null && hotel.gallery != '') {
+                        let gallery = hotel.gallery.split(',')
+                        let galleryArr = []
+                        gallery.forEach(image => {
+                            galleryArr.push({id:  Math.floor(Math.random() * 10000), value: image})
+                        })
+                        hotel.gallery = galleryArr
+                    } else {
+                        hotel.gallery = []
+                    }
+                }
+
+                if (typeof hotel.features == 'string') {
+                    if (hotel.features !== null && hotel.features != '') {
+                        let features = hotel.features.split(',')
+                        let featuresArr = []
+                        features.forEach(feature => {
+                            featuresArr.push({id:  Math.floor(Math.random() * 10000), value: feature})
+                        })
+                        hotel.features = featuresArr
+                    } else {
+                        hotel.features = []
+                    }
+                }
+
                 vm.hotelProfile = hotel
             } else {
                 vm.getHotelProfile(to)

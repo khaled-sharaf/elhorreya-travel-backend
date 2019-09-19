@@ -28,6 +28,7 @@ Route::group(['middleware' => ['api'], 'prefix' => env('CP_PREFIX_API')], functi
 
     Route::apiResource('hotels', 'HotelController')->parameters(['hotels' => 'id']);
     Route::patch('hotels/restore/{id}', 'HotelController@restoreHotel');
+    Route::get('hotels/select', 'HotelController@hotelsSelect');
 
     /*********************************************************************************/
 
@@ -36,7 +37,7 @@ Route::group(['middleware' => ['api'], 'prefix' => env('CP_PREFIX_API')], functi
     /**************** Rooms *****************/
 
     Route::apiResource('rooms', 'RoomController')->parameters(['rooms' => 'id']);
-    Route::post('rooms/restore/{id}', 'RoomController@restoreRoom');
+    Route::patch('rooms/restore/{id}', 'RoomController@restoreRoom');
 
     /*********************************************************************************/
 
@@ -45,7 +46,7 @@ Route::group(['middleware' => ['api'], 'prefix' => env('CP_PREFIX_API')], functi
     /**************** Travel Programs *****************/
 
     Route::apiResource('travel_programs', 'TravelProgramController')->parameters(['travel_programs' => 'id']);
-    Route::post('travel_programs/restore/{id}', 'TravelProgramController@restoreTravelProgram');
+    Route::patch('travel_programs/restore/{id}', 'TravelProgramController@restoreTravelProgram');
 
     /*********************************************************************************/
 
@@ -54,7 +55,7 @@ Route::group(['middleware' => ['api'], 'prefix' => env('CP_PREFIX_API')], functi
     /**************** Travel Types *****************/
 
     Route::apiResource('travel_types', 'TravelTypeController')->parameters(['travel_types' => 'id']);
-    Route::post('travel_types/restore/{id}', 'TravelTypeController@restoreTravelType');
+    Route::patch('travel_types/restore/{id}', 'TravelTypeController@restoreTravelType');
 
     /*********************************************************************************/
 
@@ -63,7 +64,7 @@ Route::group(['middleware' => ['api'], 'prefix' => env('CP_PREFIX_API')], functi
     /**************** Travels *****************/
 
     Route::apiResource('travels', 'TravelController')->parameters(['travels' => 'id']);
-    Route::post('travels/restore/{id}', 'TravelController@restoreTravel');
+    Route::patch('travels/restore/{id}', 'TravelController@restoreTravel');
 
     /*********************************************************************************/
 
@@ -88,7 +89,7 @@ Route::group(['middleware' => ['api'], 'prefix' => env('CP_PREFIX_API')], functi
     /**************** Bookings *****************/
 
     Route::apiResource('bookings', 'BookingController')->only(['index', 'destroy'])->parameters(['bookings' => 'id']);
-    Route::post('bookings/restore/{id}', 'BookingController@restoreBooking');
+    Route::patch('bookings/restore/{id}', 'BookingController@restoreBooking');
 
     /*********************************************************************************/
 
@@ -97,7 +98,7 @@ Route::group(['middleware' => ['api'], 'prefix' => env('CP_PREFIX_API')], functi
     /**************** Images *****************/
 
     Route::apiResource('images', 'ImageController')->parameters(['images' => 'id']);
-    Route::post('images/restore/{id}', 'ImageController@restoreImage');
+    Route::patch('images/restore/{id}', 'ImageController@restoreImage');
 
     /*********************************************************************************/
 
@@ -106,7 +107,7 @@ Route::group(['middleware' => ['api'], 'prefix' => env('CP_PREFIX_API')], functi
     /**************** Blogs *****************/
 
     Route::apiResource('blogs', 'BlogController')->parameters(['blogs' => 'id']);
-    Route::post('blogs/restore/{id}', 'BlogController@restoreBlog');
+    Route::patch('blogs/restore/{id}', 'BlogController@restoreBlog');
 
     /*********************************************************************************/
 

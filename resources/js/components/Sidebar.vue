@@ -44,7 +44,7 @@
                     </li>
 
 
-                    <!-- =============================== Users ================================== -->
+                    <!-- =============================== users ================================== -->
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-users"></i>
@@ -71,7 +71,7 @@
                     </li>
 
 
-                    <!-- =============================== Companies ================================== -->
+                    <!-- =============================== hotels ================================== -->
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-building"></i>
@@ -91,6 +91,33 @@
                                 <router-link :to="{name: 'create-hotel'}" class="nav-link">
                                     <i class="fas fa-plus nav-icon"></i>
                                     <p> {{ $t('global.create') + ' ' + $t('sidebar.new_hotel') }} </p>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <!-- =============================== romms ================================== -->
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-cubes"></i>
+                            <p>
+                                {{ $t('sidebar.rooms') }}
+                                <i class="fas right" :class="$i18n.locale == 'ar' ? 'fa-angle-right' : 'fa-angle-left'"></i>
+                                <!-- <span class="badge badge-info right">130</span> -->
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <router-link :to="{name: 'rooms'}" class="nav-link">
+                                    <i class="far fa-eye nav-icon"></i>
+                                    <p> {{ $t('global.show') + ' ' + $t('sidebar.all_rooms') }} </p>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="{name: 'create-room'}" class="nav-link">
+                                    <i class="fas fa-plus nav-icon"></i>
+                                    <p> {{ $t('global.create') + ' ' + $t('sidebar.new_room') }} </p>
                                 </router-link>
                             </li>
                         </ul>

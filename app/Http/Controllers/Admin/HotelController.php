@@ -12,6 +12,14 @@ use File;
 class HotelController extends Controller
 {
 
+    public function hotelsSelect()
+    {
+        $hotels = Hotel::select(['id', 'name'])->get();
+        return response(['hotels' => $hotels]);
+    }
+
+
+
     public function index(Request $request)
     {
         $length = $request->length;

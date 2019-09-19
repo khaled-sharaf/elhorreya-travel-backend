@@ -166,6 +166,7 @@ export default {
       { label: "Image", name: "image" },
       { label: "Display", name: "display" },
       { label: "Created by", name: "user_id" },
+      { label: "Updated at", name: "updated_at" },
       { label: "Created at", name: "created_at" },
       { label: "Actions", name: "actions" }
     ];
@@ -200,30 +201,31 @@ export default {
             "image",
             "display",
             "user_id",
+            "updated_at",
             "created_at",
             "actions"
         ],
         filter: {
-          columnsExcept: ['show_plus', 'index', 'actions', 'location', 'image'],
+          columnsExcept: ['show_plus', 'index', 'actions', 'location', 'image', 'user_id'],
           viewTable: ["bordered", 'hover']
         },
       },
       // viewFilterColumns
       viewColumnsResponsive: {
         default: {
-          show: ['name', 'address', 'image', 'stars', 'location', 'actions']
+          show: ['name', 'address', 'image', 'stars', 'location', 'created_at', 'actions']
         },
         1200: {
-          show: ['name', 'address', 'image', 'stars', 'actions']
+          show: ['name', 'address', 'image', 'stars', 'created_at', 'actions']
         },
         1000: {
-          show: ['name', 'address', 'image', 'stars']
+          show: ['name', 'address', 'image', 'stars', 'created_at']
         },
         800: {
-          show: ['name', 'address', 'image']
+          show: ['name', 'address', 'image', 'created_at']
         },
         600: {
-          show: ["name", "address"]
+          show: ["name", "address", 'created_at']
         },
         400: {
           show: ["name"]
@@ -266,9 +268,9 @@ export default {
     beforeRouteEnter(to, from, next) {
         next(vm => {
             to.meta.title = vm.$t('sidebar.hotels')
-            vm.setLocaleMessages()
             vm.sortOrders[vm.sortKey] = 1; // 1 = desc , -1 = asc
             vm.sortBy(vm.sortKey);
+            vm.setLocaleMessages()
             vm.eventBtnsClick();
             vm.eventBtnsClickLocale();
             vm.viewFilterColumns();

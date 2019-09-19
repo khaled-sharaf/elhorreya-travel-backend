@@ -6,7 +6,7 @@
 <template>
     <div>
         <!-- Content Header (Page header) -->
-        <header-page :title="$t('sidebar.edit_winner')"></header-page>
+        <header-page :title="$t('global.edit') + ' ' + $t('global.room')"></header-page>
         <!-- /.content-header -->
         <section class="content">
             <div class="container-fluid">
@@ -16,34 +16,23 @@
                         <div class="card">
                             <!-- card-header -->
                             <div class="card-header">
-                                <h3 class="m-0 mb-2 text-dark">
-                                    <h3 class="m-0 mb-2 text-dark">
-                                        {{ $t('global.winner') | capitalize }}:
-                                        <span class="badge badge-danger" v-if="winnerEdit.user == null">
-                                            {{ $t('global.user_is_deleted') }} -- id:{{winnerEdit.user_id}}
-                                        </span>
-                                        <span v-else style="color: #3498db"> {{ winnerEdit.user.name }}</span></h3>
-                                </h3>
+                                <router-link class="btn btn-primary btn-sm" :to="{name: 'rooms'}">{{ $t('global.show') + ' ' + $t('sidebar.all_rooms') }}</router-link>
                             </div>
                             <!-- ./card-header -->
 
 
                             <!-- form -->
-                            <form @submit.prevent="editWinner()">
+                            <form @submit.prevent="updateRoom()">
                                 <!-- card-body -->
                                 <div class="card-body">
-                                    <form-winner typeForm="edit" :form="form"></form-winner>
+                                    <form-room typeForm="edit" :form="form"></form-room>
                                 </div>
                                 <!-- ./card-body -->
 
 
                                 <!-- card-footer -->
                                 <div class="card-footer">
-                                    <button
-                                        type="submit"
-                                        :disabled="form.busy"
-                                        class="btn btn-success float-right"
-                                    > {{ $t('global.update') }} </button>
+                                    <btn-update :form="form"></btn-update>
                                 </div> <!-- ./card-footer -->
 
                             </form><!-- form -->
@@ -58,36 +47,42 @@
 
 
 <script>
-import FormWinner from './FormWinner'
+import FormRoom from './Form'
+import BtnUpdate from './../../components/form/BtnUpdate'
 import HeaderPage from './../../components/HeaderPage'
+
 import MixinChangeLocaleMessages from "./../../mixins/MixinChangeLocaleMessages"
 
 export default {
     mixins: [MixinChangeLocaleMessages],
     components: {
         HeaderPage,
-        FormWinner
+        FormRoom,
+        BtnUpdate
     },
     data() {
       return {
-        urlEditWinner: '/winner/edit',
-        urlUpdateWinner: '/winner/update',
+        urlModel: '/rooms',
         form: new Form({
-          id: 0,
-          user_id: "",
-          product_id: "",
+            id: '',
+            info: '',
+            options: '',
+            price_night: '',
+            offer_days: '',
+            offer_price: '',
+            hotel_id: '',
+            display: 1,
         }),
-        winnerEdit: {},
-        idPage: 'winners',
+        roomEdit: {},
+        idPage: 'rooms',
         typePage: 'edit'
       }
     },
     methods: {
-        editWinner() {
+        updateRoom() {
             loadReq(this.$Progress);
-            this.form.post(this.urlUpdateWinner).then(response => {
+            this.form.put(this.urlModel + '/' + this.form.id).then(response => {
                 if (response.status === 200) {
-                    this.companyEdit = response.data.data;
                     ToastReq.fire({
                         text: this.success_msg
                     });
@@ -100,36 +95,38 @@ export default {
                 this.$Progress.fail();
             });
         },
-        getWinnerEdit(route) {
-            axios.post(this.urlEditWinner, {id: route.params.id}).then(response => {
+        getRoomEdit(route) {
+            axios.get(this.urlModel + '/' + route.params.id).then(response => {
                 if (response.status === 200) {
-                    const winner = response.data.winner
-                    if (winner != null) {
-                        this.winnerEdit = winner
-
+                    const room = response.data.room
+                    if (room != null) {
+                        this.roomEdit = room
                         this.form.reset()
-                        this.form.fill(this.winnerEdit)
+                        this.form.fill(this.roomEdit)
                     } else {
-                        this.$router.push({name: 'winners'})
+                        this.$router.push({name: 'rooms'})
                     }
                 }
             })
             .catch(errors => {
                 setTimeout(() => {
-                    this.getWinnerEdit(this.$route)
+                    this.getRoomEdit(this.$route)
                 }, 1000)
             })
         }
     },
+    watch: {
+
+    },
     beforeRouteEnter(to, from, next) {
         next(vm => {
-            to.meta.title = vm.$t('sidebar.edit_winner')
-            if (to.params.winner) {
-                vm.winnerEdit = to.params.winner
+            to.meta.title = vm.$t('sidebar.edit_room')
+            if (to.params.room) {
+                vm.roomEdit = to.params.room
                 vm.form.reset()
-                vm.form.fill(vm.winnerEdit)
+                vm.form.fill(vm.roomEdit)
             } else {
-                vm.getWinnerEdit(to)
+                vm.getRoomEdit(to)
             }
         })
     }

@@ -40,6 +40,26 @@
                 </span>
             </td>
 
+            <td v-show="tableData.columns.indexOf('user_id') != -1" class="user_id">
+                <router-link
+                    class="link-router-in-table"
+                    v-if="setting.user !== null"
+                    :href="$domain_admin + '/user/' + setting.user_id + '/edit'"
+                    :to="{name: 'edit-user', params: {id: setting.user_id, user: setting.user}}"
+                    data-name="edit-user"
+                    :data-params='"{\"user\":" + JSON.stringify(setting.user) + ", \"id\":" + setting.user_id + "}"'
+                >
+                    {{ setting.user.name }}
+                </router-link>
+                <span class="badge badge-danger" v-else> {{ $t('global.user_is_deleted') }} - id:{{setting.user_id}}</span>
+            </td>
+
+
+            <td v-show="tableData.columns.indexOf('updated_at') != -1" class="updated_at">
+                <relative-date :date="setting.updated_at"></relative-date>
+            </td>
+
+
             <td v-show="tableData.columns.indexOf('created_at') != -1" class="created_at">
                 <relative-date :date="setting.created_at"></relative-date>
             </td>

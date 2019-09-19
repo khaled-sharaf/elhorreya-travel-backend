@@ -99,7 +99,9 @@
                 <span class="badge badge-danger" v-else> {{ $t('global.user_is_deleted') }} - id:{{hotel.user_id}}</span>
             </td>
 
-
+            <td v-show="tableData.columns.indexOf('updated_at') != -1" class="updated_at">
+                <relative-date :date="hotel.updated_at"></relative-date>
+            </td>
 
             <td v-show="tableData.columns.indexOf('created_at') != -1" class="created_at">
                 <relative-date :date="hotel.created_at"></relative-date>

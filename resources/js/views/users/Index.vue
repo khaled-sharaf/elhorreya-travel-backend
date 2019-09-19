@@ -149,6 +149,7 @@ export default {
         { label: "Name", name: "name" },
         { label: "Email", name: "email" },
         { label: "Avatar", name: "image" },
+        { label: "Updated at", name: "updated_at" },
         { label: "Registered", name: "created_at" },
         { label: "Actions", name: "actions" }
     ];
@@ -176,6 +177,7 @@ export default {
                 "name",
                 "email",
                 "image",
+                "updated_at",
                 "created_at",
                 "actions"
             ],
@@ -215,9 +217,9 @@ export default {
         next(vm => {
             if (to.name == 'users') {
                 to.meta.title = vm.$t('sidebar.users')
-                vm.setLocaleMessages()
                 vm.sortOrders[vm.sortKey] = 1; // 1 = desc , -1 = asc
                 vm.sortBy(vm.sortKey);
+                vm.setLocaleMessages()
                 vm.eventBtnsClick();
                 vm.viewFilterColumns();
                 window.onresize = () => {
@@ -225,20 +227,7 @@ export default {
                 };
             }
         })
-    },
-    mounted() {
-        if (this.$route.name != 'users') {
-            this.setLocaleMessages()
-            this.sortOrders[this.sortKey] = 1; // 1 = desc , -1 = asc
-            this.sortBy(this.sortKey);
-            this.eventBtnsClick();
-            this.viewFilterColumns();
-            window.onresize = () => {
-                this.viewFilterColumns();
-            };
-        }
-    },
-
+    }
 };
 </script>
 

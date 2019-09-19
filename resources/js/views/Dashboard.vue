@@ -48,6 +48,26 @@
                         </div>
                     </div>
                     <!-- ./col -->
+
+
+
+                    <div class="col-lg-3 col-6">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>{{ counts.rooms }}</h3>
+
+                            <p>{{ $t('sidebar.rooms') }}</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <router-link :to="{name: 'rooms'}" class="small-box-footer">
+                            {{ $t('global.more_info') }} <i class="fas" :class="$i18n.locale == 'ar' ? 'fa-arrow-circle-left' : 'fa-arrow-circle-right'"></i>
+                        </router-link>
+                        </div>
+                    </div>
+                    <!-- ./col -->
                 </div>
                 <!-- /.row -->
 
@@ -67,7 +87,8 @@
             return {
                 counts: {
                     users: 0,
-                    hotels: 0
+                    hotels: 0,
+                    rooms: 0
                 },
                 urlGetCounts: '/models-counts'
             }

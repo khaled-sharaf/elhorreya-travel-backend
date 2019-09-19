@@ -128,6 +128,8 @@ export default {
       { label: "Slug", name: "slug" },
       { label: "Name", name: "name" },
       { label: "Value", name: "value" },
+      { label: "created by", name: "user_id" },
+      { label: "Updated at", name: "updated_at" },
       { label: "Created at", name: "created_at" },
       { label: "Actions", name: "actions" }
     ];
@@ -146,14 +148,18 @@ export default {
         column: 0,
         dir: "",
         columns: [
-        "id",
-        "user_id",
-        "product_id",
-        "created_at",
-        "actions"
+            "index",
+            "id",
+            "slug",
+            "name",
+            "value",
+            "user_id",
+            "updated_at",
+            "created_at",
+            "actions"
         ],
         filter: {
-          columnsExcept: ['show_plus', 'index', 'created_at'],
+          columnsExcept: ['show_plus', 'index', 'user_id', 'value', 'actions'],
           viewTable: ["bordered", 'hover']
         },
       },
@@ -183,9 +189,9 @@ export default {
     beforeRouteEnter(to, from, next) {
         next(vm => {
             to.meta.title = vm.$t('sidebar.settings')
-            vm.setLocaleMessages()
             vm.sortOrders[vm.sortKey] = 1; // 1 = desc , -1 = asc
             vm.sortBy(vm.sortKey);
+            vm.setLocaleMessages()
             vm.eventBtnsClick();
             vm.viewFilterColumns();
             window.onresize = () => {

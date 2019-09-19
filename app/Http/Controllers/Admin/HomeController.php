@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\User;
 use App\Hotel;
+use App\Room;
 
 class HomeController extends Controller
 {
@@ -22,6 +23,8 @@ class HomeController extends Controller
             'users' => User::count(),
 
             'hotels' => Hotel::count(),
+
+            'rooms' => Room::count(),
         ];
 
 

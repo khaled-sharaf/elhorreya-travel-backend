@@ -40,6 +40,9 @@
                 <img class="avatar-table" :src="user.image.indexOf('http') === 0 ? user.image : $domain + '/' + user.image">
             </td>
 
+            <td v-show="tableData.columns.indexOf('updated_at') != -1" class="updated_at">
+                <relative-date :date="user.updated_at"></relative-date>
+            </td>
 
             <td v-show="tableData.columns.indexOf('created_at') != -1" class="created_at">
                 <relative-date :date="user.created_at"></relative-date>

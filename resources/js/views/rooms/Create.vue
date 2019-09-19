@@ -6,7 +6,7 @@
 <template>
     <div>
         <!-- Content Header (Page header) -->
-        <header-page :title="$t('global.create') + ' ' + $t('sidebar.new_product')"></header-page>
+        <header-page :title=" $t('global.create') + ' ' + $t('sidebar.new_room') "></header-page>
         <!-- /.content-header -->
         <section class="content">
             <div class="container-fluid">
@@ -16,27 +16,23 @@
                         <div class="card">
                             <!-- card-header -->
                             <div class="card-header">
-                                <router-link class="btn btn-primary btn-sm" :to="{name: 'products'}">{{ $t('global.show') + ' ' + $t('sidebar.all_products') }}</router-link>
+                                <router-link class="btn btn-primary btn-sm" :to="{name: 'rooms'}">{{ $t('global.show') + ' ' + $t('sidebar.all_rooms') }}</router-link>
                             </div>
                             <!-- ./card-header -->
 
 
                             <!-- form -->
-                            <form @submit.prevent="createProduct()" class="form-product">
+                            <form @submit.prevent="createRoom()">
                                 <!-- card-body -->
                                 <div class="card-body">
-                                    <form-product typeForm="create" :form="form"></form-product>
+                                    <form-room typeForm="create" :form="form"></form-room>
                                 </div>
                                 <!-- ./card-body -->
 
 
                                 <!-- card-footer -->
                                 <div class="card-footer">
-                                    <button
-                                        type="submit"
-                                        :disabled="form.busy"
-                                        class="btn btn-primary float-right"
-                                    >{{ $t('global.create') }}</button>
+                                    <btn-create :form="form"></btn-create>
                                 </div> <!-- ./card-footer -->
 
                             </form><!-- form -->
@@ -51,58 +47,45 @@
 
 
 <script>
-import FormProduct from './FormProduct'
+import FormRoom from './Form'
+import BtnCreate from './../../components/form/BtnCreate'
 import HeaderPage from './../../components/HeaderPage'
+
 import MixinChangeLocaleMessages from "./../../mixins/MixinChangeLocaleMessages"
 
 export default {
     mixins: [MixinChangeLocaleMessages],
-    name: 'create-product',
+    name: 'create-room',
     components: {
-        FormProduct,
-        HeaderPage
+        HeaderPage,
+        FormRoom,
+        BtnCreate
     },
     data() {
       return {
-        urlCreateProduct: '/product/store',
+        urlModel: '/rooms',
         form: new Form({
-          name: "",
-          price: "",
-          discount: "",
-          percent: true,
-          product_count: "",
-          manufacture_company: "",
-          description: "",
-          display: 1,
-          execute: 0,
-          type_id: "",
-          company_id: "",
-          photo: "",
-          gallery: [],
-          details: [
-              {name: '', value: '', display: true}
-          ]
+            info: '',
+            options: 'بدون إفطار',
+            price_night: '',
+            offer_days: '',
+            offer_price: '',
+            hotel_id: '',
+            display: 1,
         }),
-        idPage: 'products',
+        idPage: 'rooms',
         typePage: 'create'
       }
     },
     methods: {
-        createProduct() {
+        createRoom() {
             loadReq(this.$Progress);
-            this.form.post(this.urlCreateProduct).then(response => {
+            this.form.post(this.urlModel).then(response => {
                 if (response.status === 200) {
-                    // reset form
                     this.form.reset();
                     ToastReq.fire({
                         text: this.success_msg
                     });
-                    setTimeout(() => {
-                        this.$router.push({name: 'product-profile', params: {id: response.data.data.id, product: response.data.data}})
-                        setTimeout(() => {
-                            $('html, body, .wrapper, .content-wrapper').scrollTop(0);
-                        });
-                    }, 2000);
                 }
             }).catch(response => {
                 ToastFailed.fire({
@@ -115,7 +98,7 @@ export default {
     },
     beforeRouteEnter (to, from, next) {
         next(vm => {
-            to.meta.title = vm.$t('global.create') + ' ' + vm.$t('sidebar.new_product')
+            to.meta.title = vm.$t('global.create') + ' ' + vm.$t('sidebar.new_room')
         })
     }
 }
