@@ -101,7 +101,6 @@ export default {
             this.form.longitude = window.parseFloat($('#hotel_longitude').val())
             loadReq(this.$Progress);
             this.form.put(this.urlModel + '/' + this.form.id).then(response => {
-                console.log(response.data)
                 if (response.status === 200) {
                     this.hotelEdit = response.data.data;
                     ToastReq.fire({
@@ -149,23 +148,25 @@ export default {
     beforeRouteEnter(to, from, next) {
         next(vm => {
             to.meta.title = vm.$t('sidebar.edit_hotel')
-            if (to.params.hotel) {
-                vm.hotelEdit = to.params.hotel
-                vm.hotelEdit.deletedGallery = []
-                vm.hotelEdit.deletedFeatures = []
+            vm.$nextTick(() => {
+                if (to.params.hotel) {
+                    vm.hotelEdit = to.params.hotel
+                    vm.hotelEdit.deletedGallery = []
+                    vm.hotelEdit.deletedFeatures = []
 
-                vm.form.reset()
-                $('#remove-location-hotel').click()
+                    vm.form.reset()
+                    $('#remove-location-hotel').click()
 
-                vm.form.fill(vm.hotelEdit)
-                if (vm.form.latitude != null && vm.form.longitude != null) {
-                    $('.myMap #address').val('')
+                    vm.form.fill(vm.hotelEdit)
+                    if (vm.form.latitude != null && vm.form.longitude != null) {
+                        $('.myMap #address').val('')
+                    }
+                    $('#hotel_latitude').val(vm.form.latitude)
+                    $('#hotel_longitude').val(vm.form.longitude)
+                } else {
+                    vm.getHotelEdit(to)
                 }
-                $('#hotel_latitude').val(vm.form.latitude)
-                $('#hotel_longitude').val(vm.form.longitude)
-            } else {
-                vm.getHotelEdit(to)
-            }
+            })
         })
     }
 }

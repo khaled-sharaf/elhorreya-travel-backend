@@ -7,34 +7,38 @@ import Dashboard from './views/Dashboard'
 // import DashboardTest from './views/DashboardTest'
 
 
-// users components
+// users
 import Users from './views/users/Index'
 import CreateUser from './views/users/Create'
 import EditUser from './views/users/Edit'
 
 
-// hotels components
+// hotels
 import Hotels from './views/hotels/Index'
 import CreateHotel from './views/hotels/Create'
 import EditHotel from './views/hotels/Edit'
 import HotelProfile from './views/hotels/Profile'
 
 
-// rooms components
+// rooms
 import Rooms from './views/rooms/Index'
 import CreateRoom from './views/rooms/Create'
 import EditRoom from './views/rooms/Edit'
 
 
-// companies components
-// import Companies from './views/companies/Index'
-// import CreateCompany from './views/companies/CreateCompany'
-// import EditCompany from './views/companies/EditCompany'
-// import CompanyProfile from './views/companies/CompanyProfile'
+// travel programs
+import travelPrograms from './views/travel_programs/Index'
+import CreateTravelProgram from './views/travel_programs/Create'
+import EditTravelProgram from './views/travel_programs/Edit'
 
 
+// travel categories
+import travelCategories from './views/travel_categories/Index'
+import CreateTravelCategory from './views/travel_categories/Create'
+import EditTravelCategory from './views/travel_categories/Edit'
 
-// settings components
+
+// settings
 import Settings from './views/settings/Index'
 import CreateSetting from './views/settings/Create'
 import EditSetting from './views/settings/Edit'
@@ -129,29 +133,42 @@ const vueRouter = new Router({
                 },
 
 
-                ////////////////// company routes ///////////////////
-                // {
-                //     path: 'companies',
-                //     name: 'companies',
-                //     component: Companies
-                // },
-                // {
-                //     path: 'company/create',
-                //     name: 'create-company',
-                //     component: CreateCompany
-                // },
-                // {
-                //     path: 'company/:id/edit',
-                //     name: 'edit-company',
-                //     component: EditCompany,
-                //     props: true
-                // },
-                // {
-                //     path: 'company/profile/:id',
-                //     name: 'company-profile',
-                //     component: CompanyProfile,
-                //     props: true
-                // },
+                ////////////////// travel programs routes ///////////////////
+                {
+                    path: 'travel_programs',
+                    name: 'travel_programs',
+                    component: travelPrograms
+                },
+                {
+                    path: 'travel_program/create',
+                    name: 'create-travel_program',
+                    component: CreateTravelProgram
+                },
+                {
+                    path: 'travel_program/:id/edit',
+                    name: 'edit-travel_program',
+                    component: EditTravelProgram,
+                    props: true
+                },
+
+
+                ////////////////// travel categories routes ///////////////////
+                {
+                    path: 'travel_categories',
+                    name: 'travel_categories',
+                    component: travelCategories
+                },
+                {
+                    path: 'travel_category/create',
+                    name: 'create-travel_category',
+                    component: CreateTravelCategory
+                },
+                {
+                    path: 'travel_category/:id/edit',
+                    name: 'edit-travel_category',
+                    component: EditTravelCategory,
+                    props: true
+                },
 
 
                 ////////////////// settings routes ///////////////////

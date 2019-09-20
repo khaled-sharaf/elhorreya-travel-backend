@@ -26,14 +26,10 @@ class CreateTravelsTable extends Migration
             $table->boolean('favorite_company')->default(0);
             $table->boolean('display')->default(1);
             $table->unsignedInteger('hotel_id');
-            $table->unsignedInteger('travel_type_id');
+            $table->unsignedInteger('travel_category_id');
             $table->unsignedInteger('user_id');
             $table->softDeletes();
             $table->timestamps();
-
-            $table->foreign('hotel_id')->references('id')->on('hotels')->onDelete('cascade');
-            $table->foreign('travel_type_id')->references('id')->on('travel_types')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

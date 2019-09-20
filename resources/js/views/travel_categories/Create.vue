@@ -6,7 +6,7 @@
 <template>
     <div>
         <!-- Content Header (Page header) -->
-        <header-page :title=" $t('global.create') + ' ' + $t('sidebar.new_hotel') "></header-page>
+        <header-page :title=" $t('global.create') + ' ' + $t('sidebar.new_travel_category') "></header-page>
         <!-- /.content-header -->
         <section class="content">
             <div class="container-fluid">
@@ -16,16 +16,16 @@
                         <div class="card">
                             <!-- card-header -->
                             <div class="card-header">
-                                <router-link class="btn btn-primary btn-sm" :to="{name: 'hotels'}">{{ $t('global.show') + ' ' + $t('sidebar.all_hotels') }}</router-link>
+                                <router-link class="btn btn-primary btn-sm" :to="{name: 'travel_categories'}">{{ $t('global.show') + ' ' + $t('sidebar.all_travel_categories') }}</router-link>
                             </div>
                             <!-- ./card-header -->
 
 
                             <!-- form -->
-                            <form @submit.prevent="createHotel()" class="form-product">
+                            <form @submit.prevent="createTravelCategory()" class="form-product">
                                 <!-- card-body -->
                                 <div class="card-body">
-                                    <form-hotel typeForm="create" :form="form"></form-hotel>
+                                    <form-travel-category typeForm="create" :form="form"></form-travel-category>
                                 </div>
                                 <!-- ./card-body -->
 
@@ -47,60 +47,42 @@
 
 
 <script>
-import FormHotel from './Form'
+import FormTravelCategory from './Form'
 import BtnCreate from './../../components/form/BtnCreate'
 import HeaderPage from './../../components/HeaderPage'
 import MixinChangeLocaleMessages from "./../../mixins/MixinChangeLocaleMessages"
 
 export default {
     mixins: [MixinChangeLocaleMessages],
-    name: 'create-hotel',
+    name: 'create-travel_category',
     components: {
-        FormHotel,
+        FormTravelCategory,
         HeaderPage,
         BtnCreate
     },
     data() {
       return {
-        urlCreateHotel: '/hotels',
+        urlCreateTravelCategory: '/travel_categories',
         form: new Form({
-            name: "",
-            address: "",
-            rating: 0,
-            stars: 5,
-            info: "",
-            latitude: "",
-            longitude: "",
-            image: "",
-            gallery: [],
-            features: [
-                {value: ''}
-            ],
-            display: 1,
+            name: '',
+            image: '',
+            travel_program_id: '',
+            order: '',
         }),
-        idPage: 'hotels',
+        idPage: 'travel_categories',
         typePage: 'create'
       }
     },
     methods: {
-        createHotel() {
-            this.form.latitude = window.parseFloat($('#hotel_latitude').val())
-            this.form.longitude = window.parseFloat($('#hotel_longitude').val())
+        createTravelCategory() {
             loadReq(this.$Progress);
-            this.form.post(this.urlCreateHotel).then(response => {
+            this.form.post(this.urlCreateTravelCategory).then(response => {
                 if (response.status === 200) {
                     // reset form
                     this.form.reset();
-                    $('#remove-location-hotel').click()
                     ToastReq.fire({
                         text: this.success_msg
                     });
-                    setTimeout(() => {
-                        this.$router.push({name: 'hotel-profile', params: {id: response.data.data.id, hotel: response.data.data}})
-                        setTimeout(() => {
-                            $('html, body, .wrapper, .content-wrapper').scrollTop(0);
-                        });
-                    }, 2000);
                 }
             }).catch(errors => {
                 ToastFailed.fire({
@@ -113,7 +95,7 @@ export default {
     },
     beforeRouteEnter (to, from, next) {
         next(vm => {
-            to.meta.title = vm.$t('global.create') + ' ' + vm.$t('sidebar.new_hotel')
+            to.meta.title = vm.$t('global.create') + ' ' + vm.$t('sidebar.new_travel_category')
         })
     }
 }

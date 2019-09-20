@@ -30,9 +30,9 @@ class Travel extends Model
         return $this->belongsTo('App\Hotel');
     }
 
-    public function travel_type()
+    public function travel_category()
     {
-        return $this->belongsTo('App\TravelType');
+        return $this->belongsTo('App\TravelCategory');
     }
 
     public function travel_details()

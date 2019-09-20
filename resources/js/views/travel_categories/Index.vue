@@ -6,11 +6,11 @@
 <template>
     <div>
         <!-- Content Header (Page header) -->
-        <header-page v-if="this.$route.name == 'users'" :title="$t('global.show') + ' ' + $t('sidebar.all_users')"></header-page>
+        <header-page :title="$t('global.show') + ' ' + $t('sidebar.all_travel_categories')"></header-page>
         <!-- /.content-header -->
         <section class="content">
             <div class="container-fluid">
-                <div class="dataTable" id="users">
+                <div class="dataTable" id="travel_categories">
                     <div class="row mt-3">
                         <div class="col-12">
                             <div class="dataTables_wrapper">
@@ -21,6 +21,12 @@
 
                                         <!-- dataTables_filters -->
                                         <div class="dataTables_filters">
+
+                                            <travel-programs-select
+                                                @getData="getData"
+                                                :tableData="tableData"
+                                                :travelPrograms="travelProgramsSelect"
+                                            ></travel-programs-select>
 
                                             <trashed
                                                 @getData="getData"
@@ -54,12 +60,9 @@
 
                                             <!-- dataTables_buttons -->
                                             <div class="dataTables_buttons">
-                                                <router-link
-                                                    tag="button"
-                                                    :to="{name: 'create-user'}"
+                                                <router-link :to="{name: 'create-travel_category'}" tag="button"
                                                     type="button"
                                                     class="btn btn-outline-secondary"
-                                                    v-if="this.$route.name == 'users'"
                                                 >
                                                     {{ $t('global.create') }}
                                                     <i class="fa fa-plus fa-fw"></i>
@@ -117,15 +120,16 @@
                     </div> <!-- /.row -->
                 </div> <!-- /.dataTable -->
             </div><!--/. container-fluid -->
+
         </section>
     </div>
 </template>
 
 
-
 <script>
 import Trashed from "./../../components/dataTables/filters/Trashed";
 import CreatedBetween from "./../../components/dataTables/filters/CreatedBetween";
+import travelProgramsSelect from "./../../components/dataTables/filters/travelProgramsSelect";
 import Search from "./../../components/dataTables/filters/Search";
 import TableContent from "./TableContent";
 
@@ -137,99 +141,114 @@ export default {
         Trashed,
         CreatedBetween,
         Search,
-        TableContent
+        TableContent,
+        travelProgramsSelect
     },
   data() {
     let self = this;
     let sortOrders = {};
     let columns = [
-        { label: "<i class='fa fa-plus'></i>", name: "show_plus" },
-        { label: "#", name: "index" },
-        { label: "ID", name: "id" },
-        { label: "Name", name: "name" },
-        { label: "Email", name: "email" },
-        { label: "Avatar", name: "image" },
-        { label: "Updated at", name: "updated_at" },
-        { label: "Registered", name: "created_at" },
-        { label: "Actions", name: "actions" }
+      { label: "<i class='fa fa-plus'></i>", name: "show_plus" },
+      { label: "#", name: "index" },
+      { label: "ID", name: "id" },
+      { label: "Name", name: "name" },
+      { label: "Image", name: "image" },
+      { label: "Order", name: "order" },
+      { label: "Travel program", name: "travel_program_id" },
+      { label: "Created by", name: "user_id" },
+      { label: "Updated at", name: "updated_at" },
+      { label: "Created at", name: "created_at" },
+      { label: "Actions", name: "actions" }
     ];
     columns.forEach(column => {
-        sortOrders[column.name] = -1;
+      sortOrders[column.name] = -1;
     });
     return {
-        idPage: 'users',
-        urlGetDataTable: '/users',
-        columns: columns,
-        sortOrders: sortOrders,
-        tableData: {
-            draw: 0,
-            length: 10,
-            search: "",
-            sortBy: 'id',
-            trashed: 1,
-            from_date: "",
-            to_date: "",
-            dir: "",
-            // columns of filter sorting [in select menu]
-            columns: [
-                "index",
-                "id",
-                "name",
-                "email",
-                "image",
-                "updated_at",
-                "created_at",
-                "actions"
-            ],
-            filter: {
-                // columns excepted sorting
-                columnsExcept: ["index", "actions", "show_plus", 'image'],
-                viewTable: ["bordered", 'hover']
-            }
+      idPage: 'travel_categories',
+      urlGetDataTable: '/travel_categories',
+      urlGetTravelPrograms: '/travel_programs/select',
+      travelProgramsSelect: [],
+      columns: columns,
+      sortOrders: sortOrders,
+      tableData: {
+        draw: 0,
+        length: 10,
+        search: '',
+        sortBy: 'id',
+        trashed: 1,
+        travel_program_id: '',
+        from_date: '',
+        to_date: '',
+        dir: '',
+        columns: [
+            "index",
+            "id",
+            "name",
+            "image",
+            "order",
+            "travel_program_id",
+            "user_id",
+            "updated_at",
+            "created_at",
+            "actions"
+        ],
+        filter: {
+          columnsExcept: ['show_plus', 'index', 'actions', 'travel_program_id', 'image', 'user_id'],
+          viewTable: ["bordered", 'hover']
         },
+      },
       // viewFilterColumns
-        viewColumnsResponsive: {
-            default: {
-                show: "all",// or ['id', 'index']
-            },
-            // 1200: {
-
-            // },
-            1000: {
-                show: ['id', "name", "email", 'actions']
-            },
-            800: {
-                show: ["name", "email", "actions"]
-            },
-            600: {
-                show: ["name", "actions"]
-            },
-            400: {
-                show: ["name"]
-            }
+      viewColumnsResponsive: {
+        default: {
+          show: ['id', 'name', 'image', 'travel_program_id', 'updated_at', 'actions']
         },
+        1000: {
+          show: ['id', 'name', 'image', 'travel_program_id', 'updated_at', 'actions']
+        },
+        800: {
+          show: ['id', 'name', 'travel_program_id', 'actions']
+        },
+        600: {
+          show: ['name', 'travel_program_id', 'actions']
+        },
+        400: {
+          show: ["name"]
+        }
+      },
     };
   },
-  methods: {
-
-  },
+    methods: {
+        getTravelProgramsSelect() {
+            axios.get(this.urlGetTravelPrograms).then(response => {
+                if (response.status === 200) {
+                    this.travelProgramsSelect = response.data.travel_programs
+                }
+            })
+            .catch(errors => {
+                setTimeout(() => {
+                    this.getTravelProgramsSelect()
+                }, 1000)
+            });
+        },
+    },
     beforeRouteEnter(to, from, next) {
         next(vm => {
-            if (to.name == 'users') {
-                to.meta.title = vm.$t('sidebar.users')
-                vm.sortOrders[vm.sortKey] = 1; // 1 = desc , -1 = asc
-                vm.$nextTick(() => {
-                    vm.sortBy(vm.sortKey);
-                })
-                vm.setLocaleMessages()
-                vm.eventBtnsClick();
+            to.meta.title = vm.$t('sidebar.travel_categories')
+            vm.sortOrders[vm.sortKey] = 1; // 1 = desc , -1 = asc
+            vm.$nextTick(() => {
+                vm.sortBy(vm.sortKey);
+                vm.getTravelProgramsSelect()
+            })
+            vm.setLocaleMessages()
+            vm.eventBtnsClick();
+            vm.viewFilterColumns();
+            window.onresize = () => {
                 vm.viewFilterColumns();
-                window.onresize = () => {
-                    vm.viewFilterColumns();
-                };
-            }
+            };
         })
-    }
+    },
 };
 </script>
+<style scoped lang="scss">
 
+</style>

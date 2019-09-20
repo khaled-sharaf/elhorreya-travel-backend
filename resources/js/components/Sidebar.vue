@@ -97,14 +97,13 @@
                     </li>
 
 
-                    <!-- =============================== romms ================================== -->
+                    <!-- =============================== rooms ================================== -->
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-cubes"></i>
                             <p>
                                 {{ $t('sidebar.rooms') }}
                                 <i class="fas right" :class="$i18n.locale == 'ar' ? 'fa-angle-right' : 'fa-angle-left'"></i>
-                                <!-- <span class="badge badge-info right">130</span> -->
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
@@ -118,6 +117,180 @@
                                 <router-link :to="{name: 'create-room'}" class="nav-link">
                                     <i class="fas fa-plus nav-icon"></i>
                                     <p> {{ $t('global.create') + ' ' + $t('sidebar.new_room') }} </p>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+                    <!-- =============================== travel programs ================================== -->
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-server"></i>
+                            <p>
+                                {{ $t('sidebar.travel_programs') }}
+                                <i class="fas right" :class="$i18n.locale == 'ar' ? 'fa-angle-right' : 'fa-angle-left'"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <router-link :to="{name: 'travel_programs'}" class="nav-link">
+                                    <i class="far fa-eye nav-icon"></i>
+                                    <p> {{ $t('global.show') + ' ' + $t('sidebar.all_travel_programs') }} </p>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="{name: 'create-travel_program'}" class="nav-link">
+                                    <i class="fas fa-plus nav-icon"></i>
+                                    <p> {{ $t('global.create') + ' ' + $t('sidebar.new_travel_program') }} </p>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+                    <!-- =============================== travel categories ================================== -->
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-project-diagram"></i>
+                            <p>
+                                {{ $t('sidebar.travel_categories') }}
+                                <i class="fas right" :class="$i18n.locale == 'ar' ? 'fa-angle-right' : 'fa-angle-left'"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <router-link :to="{name: 'travel_categories'}" class="nav-link">
+                                    <i class="far fa-eye nav-icon"></i>
+                                    <p> {{ $t('global.show') + ' ' + $t('sidebar.travel_categories') }} </p>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="{name: 'create-travel_category'}" class="nav-link">
+                                    <i class="fas fa-plus nav-icon"></i>
+                                    <p> {{ $t('global.create') + ' ' + $t('sidebar.new_travel_category') }} </p>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+                    <!-- =============================== travels ================================== -->
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-fighter-jet"></i>
+                            <p>
+                                {{ $t('sidebar.travels') }}
+                                <i class="fas right" :class="$i18n.locale == 'ar' ? 'fa-angle-right' : 'fa-angle-left'"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <router-link :to="{name: 'travels'}" class="nav-link">
+                                    <i class="far fa-eye nav-icon"></i>
+                                    <p> {{ $t('global.show') + ' ' + $t('sidebar.all_travels') }} </p>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="{name: 'create-travel'}" class="nav-link">
+                                    <i class="fas fa-plus nav-icon"></i>
+                                    <p> {{ $t('global.create') + ' ' + $t('sidebar.new_travel') }} </p>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <!-- =============================== bookings ================================== -->
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-shopping-cart"></i>
+                            <p>
+                                {{ $t('sidebar.bookings') }}
+                                <i class="fas right" :class="$i18n.locale == 'ar' ? 'fa-angle-right' : 'fa-angle-left'"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <router-link :to="{name: 'bookings'}" class="nav-link">
+                                    <i class="far fa-eye nav-icon"></i>
+                                    <p> {{ $t('global.show') + ' ' + $t('sidebar.all_bookings') }} </p>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
+
+
+
+                    <!-- =============================== mailing_list ================================== -->
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-mail-bulk"></i>
+                            <p>
+                                {{ $t('sidebar.mailing_list') }}
+                                <i class="fas right" :class="$i18n.locale == 'ar' ? 'fa-angle-right' : 'fa-angle-left'"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <router-link :to="{name: 'mailing_list'}" class="nav-link">
+                                    <i class="far fa-eye nav-icon"></i>
+                                    <p> {{ $t('global.show') + ' ' + $t('sidebar.all_mailing_list') }} </p>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <!-- =============================== blogs ================================== -->
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-newspaper"></i>
+                            <p>
+                                {{ $t('sidebar.blogs') }}
+                                <i class="fas right" :class="$i18n.locale == 'ar' ? 'fa-angle-right' : 'fa-angle-left'"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <router-link :to="{name: 'blogs'}" class="nav-link">
+                                    <i class="far fa-eye nav-icon"></i>
+                                    <p> {{ $t('global.show') + ' ' + $t('sidebar.all_blogs') }} </p>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="{name: 'create-blog'}" class="nav-link">
+                                    <i class="fas fa-plus nav-icon"></i>
+                                    <p> {{ $t('global.create') + ' ' + $t('sidebar.new_blog') }} </p>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
+
+
+                    <!-- =============================== images ================================== -->
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-images"></i>
+                            <p>
+                                {{ $t('sidebar.images') }}
+                                <i class="fas right" :class="$i18n.locale == 'ar' ? 'fa-angle-right' : 'fa-angle-left'"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <router-link :to="{name: 'images'}" class="nav-link">
+                                    <i class="far fa-eye nav-icon"></i>
+                                    <p> {{ $t('global.show') + ' ' + $t('sidebar.all_images') }} </p>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="{name: 'create-image'}" class="nav-link">
+                                    <i class="fas fa-plus nav-icon"></i>
+                                    <p> {{ $t('global.create') + ' ' + $t('sidebar.new_image') }} </p>
                                 </router-link>
                             </li>
                         </ul>
@@ -146,12 +319,6 @@
                                     <p> {{ $t('global.create') + ' ' + $t('sidebar.new_setting') }} </p>
                                 </router-link>
                             </li>
-                            <!-- <li class="nav-item">
-                                <router-link :to="{name: 'setting-carousel'}" class="nav-link">
-                                    <i class="fas fa-images nav-icon"></i>
-                                    <p> {{ $t('settings_table.carousel') }} </p>
-                                </router-link>
-                            </li> -->
                         </ul>
                     </li>
 

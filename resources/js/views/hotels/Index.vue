@@ -184,7 +184,6 @@ export default {
         search: "",
         sortBy: 'id',
         display: "",
-        active: "",
         trashed: 1,
         from_date: "",
         to_date: "",
@@ -213,19 +212,19 @@ export default {
       // viewFilterColumns
       viewColumnsResponsive: {
         default: {
-          show: ['name', 'address', 'image', 'stars', 'location', 'created_at', 'actions']
+          show: ['name', 'address', 'image', 'stars', 'location', 'updated_at', 'actions']
         },
         1200: {
-          show: ['name', 'address', 'image', 'stars', 'created_at', 'actions']
+          show: ['name', 'address', 'image', 'stars', 'updated_at', 'actions']
         },
         1000: {
-          show: ['name', 'address', 'image', 'stars', 'created_at']
+          show: ['name', 'address', 'image', 'stars', 'updated_at']
         },
         800: {
-          show: ['name', 'address', 'image', 'created_at']
+          show: ['name', 'address', 'image', 'updated_at']
         },
         600: {
-          show: ["name", "address", 'created_at']
+          show: ["name", "address", 'updated_at']
         },
         400: {
           show: ["name"]
@@ -269,7 +268,9 @@ export default {
         next(vm => {
             to.meta.title = vm.$t('sidebar.hotels')
             vm.sortOrders[vm.sortKey] = 1; // 1 = desc , -1 = asc
-            vm.sortBy(vm.sortKey);
+            vm.$nextTick(() => {
+                vm.sortBy(vm.sortKey);
+            })
             vm.setLocaleMessages()
             vm.eventBtnsClick();
             vm.eventBtnsClickLocale();

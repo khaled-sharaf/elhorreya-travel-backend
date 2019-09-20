@@ -384,38 +384,40 @@ export default {
     beforeRouteEnter(to, from, next) {
         next(vm => {
             to.meta.title = vm.$t('sidebar.hotel_profile')
-            if (to.params.hotel) {
-                let hotel = to.params.hotel
-                if (typeof hotel.gallery == 'string') {
-                    if (hotel.gallery !== null && hotel.gallery != '') {
-                        let gallery = hotel.gallery.split(',')
-                        let galleryArr = []
-                        gallery.forEach(image => {
-                            galleryArr.push({id:  Math.floor(Math.random() * 10000), value: image})
-                        })
-                        hotel.gallery = galleryArr
-                    } else {
-                        hotel.gallery = []
+            vm.$nextTick(() => {
+                if (to.params.hotel) {
+                    let hotel = to.params.hotel
+                    if (typeof hotel.gallery == 'string') {
+                        if (hotel.gallery !== null && hotel.gallery != '') {
+                            let gallery = hotel.gallery.split(',')
+                            let galleryArr = []
+                            gallery.forEach(image => {
+                                galleryArr.push({id:  Math.floor(Math.random() * 10000), value: image})
+                            })
+                            hotel.gallery = galleryArr
+                        } else {
+                            hotel.gallery = []
+                        }
                     }
-                }
 
-                if (typeof hotel.features == 'string') {
-                    if (hotel.features !== null && hotel.features != '') {
-                        let features = hotel.features.split(',')
-                        let featuresArr = []
-                        features.forEach(feature => {
-                            featuresArr.push({id:  Math.floor(Math.random() * 10000), value: feature})
-                        })
-                        hotel.features = featuresArr
-                    } else {
-                        hotel.features = []
+                    if (typeof hotel.features == 'string') {
+                        if (hotel.features !== null && hotel.features != '') {
+                            let features = hotel.features.split(',')
+                            let featuresArr = []
+                            features.forEach(feature => {
+                                featuresArr.push({id:  Math.floor(Math.random() * 10000), value: feature})
+                            })
+                            hotel.features = featuresArr
+                        } else {
+                            hotel.features = []
+                        }
                     }
-                }
 
-                vm.hotelProfile = hotel
-            } else {
-                vm.getHotelProfile(to)
-            }
+                    vm.hotelProfile = hotel
+                } else {
+                    vm.getHotelProfile(to)
+                }
+            })
         })
     }
 }

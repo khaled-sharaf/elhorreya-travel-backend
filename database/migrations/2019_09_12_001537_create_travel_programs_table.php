@@ -23,8 +23,6 @@ class CreateTravelProgramsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->softDeletes();
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

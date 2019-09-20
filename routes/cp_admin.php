@@ -47,15 +47,17 @@ Route::group(['middleware' => ['api'], 'prefix' => env('CP_PREFIX_API')], functi
 
     Route::apiResource('travel_programs', 'TravelProgramController')->parameters(['travel_programs' => 'id']);
     Route::patch('travel_programs/restore/{id}', 'TravelProgramController@restoreTravelProgram');
+    Route::get('travel_programs/select', 'TravelProgramController@travelProgramsSelect');
 
     /*********************************************************************************/
 
 
 
-    /**************** Travel Types *****************/
+    /**************** Travel categories *****************/
 
-    Route::apiResource('travel_types', 'TravelTypeController')->parameters(['travel_types' => 'id']);
-    Route::patch('travel_types/restore/{id}', 'TravelTypeController@restoreTravelType');
+    Route::apiResource('travel_categories', 'TravelCategoryController')->parameters(['travel_categories' => 'id']);
+    Route::patch('travel_categories/restore/{id}', 'TravelCategoryController@restoreTravelCategory');
+    Route::get('travel_categories/select', 'TravelCategoryController@travelCategoriesSelect');
 
     /*********************************************************************************/
 

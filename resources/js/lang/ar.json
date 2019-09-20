@@ -6,6 +6,7 @@
         "hotel": "فندق",
         "the_hotel": "الفندق",
         "room": "غرفة",
+        "the_travel_program": "برنامج الرحلة",
         "type": "نوع",
         "comment": "تعليق",
         "winner": "فائز",
@@ -24,6 +25,8 @@
 
         "hotel_is_deleted": "الفندق محذوف",
         "user_is_deleted": "المدير محذوف",
+        "travel_program_is_deleted": "برنامج الرحلة محذوف",
+        "travel_category_is_deleted": "قسم الرحلة محذوف",
         "travel_is_deleted": "الرحلة محذوفة",
 
 
@@ -94,20 +97,40 @@
         "new_room": "غرفة جديد",
         "edit_room": "تعديل غرفة",
 
+        "travel_programs": "برامج الرحلات",
+        "all_travel_programs": "جميع برامج الرحلات",
+        "new_travel_program": "برنامج رحلة جديد",
+        "edit_travel_program": "تعديل برنامج رحلة",
+
+        "travel_categories": "أقسام الرحلات",
+        "all_travel_categories": "جميع أقسام الرحلات",
+        "new_travel_category": "قسم رحلات جديد",
+        "edit_travel_category": "تعديل قسم رحلات",
+
         "travels": "الرحلات",
         "all_travels": "جميع الرحلات",
-        "new_travel": "رحلة جديد",
+        "new_travel": "رحلة جديدة",
         "edit_travel": "تعديل رحلة",
 
-        "winners": "الفائزين",
-        "all_winners": "جميع الفائزين",
-        "new_winner": "فائز جديد",
-        "edit_winner": "تعديل فائز",
+        "bookings": "الحجوزات",
+        "all_bookings": "جميع الحجوزات",
+        "new_booking": "حجز جديد",
+        "edit_booking": "تعديل حجز",
 
-        "comments": "التعليقات",
-        "all_comments": "جميع التعليقات",
-        "new_comment": "تعليق جديد",
-        "edit_comment": "تعديل تعليق",
+        "mailing_list": "القائمة البريدية",
+        "all_mailing_list": "جميع البريدات الإليكترونية",
+        "new_mailing_list": "بريد جديد",
+        "edit_mailing_list": "تعديل بريد",
+
+        "blogs": "المدونات",
+        "all_blogs": "جميع المدونات",
+        "new_blog": "مدونة جديدة",
+        "edit_blog": "تعديل مدونة",
+
+        "images": "الصور",
+        "all_images": "جميع الصور",
+        "new_image": "صورة جديدة",
+        "edit_image": "تعديل صورة",
 
         "settings": "الإعدادات",
         "all_settings": "جميع الإعدادات",
@@ -262,8 +285,8 @@
         "night": "ليلة",
         "nights": "ليالى",
 
-        "delete_product": "حذف الغرفة",
-        "edit_product": "تعديل الغرفة",
+        "delete_room": "حذف الغرفة",
+        "edit_room": "تعديل الغرفة",
 
         "delete_msg": "هل أنت متأكد من حذف هذه الغرفة ؟",
         "delete_success_msg": "تم حذف الغرفة.",
@@ -288,14 +311,59 @@
     },
 
 
-
-
-    "products_types_table": {
+    "travel_programs_table": {
         "id": "المعرف",
-        "name": "اسم القسم",
-        "display": "الظهور",
+        "name": "اسم البرنامج",
+        "image": "الخلفية",
+        "small_info": "معلومات قليلة",
+        "big_info": "معلومات كثيرة",
+        "order": "الترتيب",
+        "user_id": "أضيف بواسطة",
+        "updated_at": "أخر تعديل",
         "created_at": "تاريخ الإنشاء",
         "actions": "الإجراءات",
+
+
+        "delete_travel_program": "حذف البرنامج",
+        "edit_travel_program": "تعديل البرنامج",
+
+        "delete_msg": "هل أنت متأكد من حذف هذا البرنامج ؟",
+        "delete_success_msg": "تم حذف البرنامج.",
+        "delete_failed_msg": "لم يتم حذف البرنامج.",
+
+        "force_delete_msg": "هل أنت متأكد من إزالة هذا البرنامج بشكل نهائى ؟",
+        "force_delete_success_msg": "تم إزالة البرنامج بشكل نهائى.",
+        "force_delete_failed_msg": "لم يتم إزالة البرنامج.",
+
+        "restore_msg": "هل أنت متأكد من استرجاع هذا البرنامج ؟",
+        "restore_success_msg": "تم استرجاع البرنامج.",
+        "restore_failed_msg": "لم يتم استرجاع البرنامج.",
+
+        "p_create": {
+            "success_msg": "تم إنشاء برنامج جديد.",
+            "failed_msg": "لم يتم إنشاء البرنامج الجديد."
+        },
+        "p_edit": {
+            "success_msg": "تم تحديث البرنامج.",
+            "failed_msg": "لم يتم تحديث هذه البرنامج."
+        }
+    },
+
+
+    "travel_categories_table": {
+        "id": "المعرف",
+        "name": "اسم القسم",
+        "image": "الخلفية",
+        "travel_program_id": "برنامج الرحلات",
+        "order": "الترتيب",
+        "user_id": "أضيف بواسطة",
+        "updated_at": "أخر تعديل",
+        "created_at": "تاريخ الإنشاء",
+        "actions": "الإجراءات",
+
+
+        "delete_travel_category": "حذف القسم",
+        "edit_travel_category": "تعديل القسم",
 
         "delete_msg": "هل أنت متأكد من حذف هذا القسم ؟",
         "delete_success_msg": "تم حذف القسم.",
@@ -315,78 +383,9 @@
         },
         "p_edit": {
             "success_msg": "تم تحديث القسم.",
-            "failed_msg": "لم يتم تحديث هذا القسم."
+            "failed_msg": "لم يتم تحديث هذه القسم."
         }
     },
-
-
-
-
-    "winners_table": {
-        "id": "المعرف",
-        "user_id": "اسم المدير",
-        "product_id": "اسم المنتج",
-        "created_at": "تاريخ الإنشاء",
-        "actions": "الإجراءات",
-
-        "delete_msg": "هل أنت متأكد من حذف هذا الفائز ؟",
-        "delete_success_msg": "تم حذف الفائز.",
-        "delete_failed_msg": "لم يتم حذف الفائز.",
-
-        "force_delete_msg": "هل أنت متأكد من إزالة هذا الفائز بشكل نهائى ؟",
-        "force_delete_success_msg": "تم إزالة الفائز بشكل نهائى.",
-        "force_delete_failed_msg": "لم يتم إزالة الفائز.",
-
-        "restore_msg": "هل أنت متأكد من استرجاع هذا الفائز ؟",
-        "restore_success_msg": "تم استرجاع الفائز.",
-        "restore_failed_msg": "لم يتم استرجاع الفائز.",
-
-        "p_create": {
-            "success_msg": "تم إنشاء فائز جديد.",
-            "failed_msg": "لم يتم إنشاء الفائز الجديد."
-        },
-        "p_edit": {
-            "success_msg": "تم تحديث الفائز.",
-            "failed_msg": "لم يتم تحديث هذا الفائز."
-        }
-    },
-
-
-
-
-    "comments_table": {
-        "id": "المعرف",
-        "text_comment": "التعليق",
-        "positive_product": "إيجابيات المنتج",
-        "negative_product": "سلبيات المنتج",
-        "user_id": "اسم المدير",
-        "product_id": "اسم المنتج",
-        "display": "الظهور",
-        "created_at": "تاريخ الإنشاء",
-        "actions": "الإجراءات",
-
-        "delete_msg": "هل أنت متأكد من حذف هذا التعليق ؟",
-        "delete_success_msg": "تم حذف التعليق.",
-        "delete_failed_msg": "لم يتم حذف التعليق.",
-
-        "force_delete_msg": "هل أنت متأكد من إزالة هذا التعليق بشكل نهائى ؟",
-        "force_delete_success_msg": "تم إزالة التعليق بشكل نهائى.",
-        "force_delete_failed_msg": "لم يتم إزالة التعليق.",
-
-        "restore_msg": "هل أنت متأكد من استرجاع هذا التعليق ؟",
-        "restore_success_msg": "تم استرجاع التعليق.",
-        "restore_failed_msg": "لم يتم استرجاع التعليق.",
-
-        "p_create": {
-            "success_msg": "تم إنشاء تعليق جديد.",
-            "failed_msg": "لم يتم إنشاء التعليق الجديد."
-        },
-        "p_edit": {
-            "success_msg": "تم تحديث التعليق.",
-            "failed_msg": "لم يتم تحديث هذا التعليق."
-        }
-    },
-
 
 
 

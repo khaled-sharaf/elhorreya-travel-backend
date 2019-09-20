@@ -180,9 +180,9 @@ export default {
         idPage: 'rooms',
         urlGetDataTable: '/rooms',
         urlGetHotels: '/hotels/select',
+        hotelsSelect: [],
         columns: columns,
         sortOrders: sortOrders,
-        hotelsSelect: [],
         tableData: {
             draw: 0,
             length: 10,
@@ -190,7 +190,7 @@ export default {
             sortBy: 'id',
             trashed: 1,
             display: "",
-            hotel_id: null,
+            hotel_id: '',
             from_date: "",
             to_date: "",
             dir: "",
@@ -264,11 +264,13 @@ export default {
             if (to.name == 'rooms') {
                 to.meta.title = vm.$t('sidebar.rooms')
                 vm.sortOrders[vm.sortKey] = 1; // 1 = desc , -1 = asc
-                vm.sortBy(vm.sortKey);
-                vm.setLocaleMessages()
-                vm.getHotelsSelect()
+                vm.$nextTick(() => {
+                    vm.sortBy(vm.sortKey);
+                    vm.getHotelsSelect()
+                })
                 vm.eventBtnsClick();
                 vm.viewFilterColumns();
+                vm.setLocaleMessages()
                 window.onresize = () => {
                     vm.viewFilterColumns();
                 };
@@ -281,7 +283,9 @@ export default {
         }
         if (this.$route.name != 'rooms') {
             this.sortOrders[this.sortKey] = 1; // 1 = desc , -1 = asc
-            this.sortBy(this.sortKey);
+            this.$nextTick(() => {
+                this.sortBy(this.sortKey);
+            })
             this.setLocaleMessages()
             this.eventBtnsClick();
             this.viewFilterColumns();

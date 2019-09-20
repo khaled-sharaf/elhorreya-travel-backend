@@ -4,22 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
-use App\TravelProgram;
+use App\TravelCategory;
 use Illuminate\Http\Request;
 use Image;
 use File;
 
-class TravelProgramController extends Controller
+class TravelCategoryController extends Controller
 {
 
-    private $directory = 'images/travel_programs';
+    private $directory = 'images/travel_categories';
 
-    public function travelProgramsSelect()
+    public function TravelCategoriesSelect()
     {
-        $travel_programs = TravelProgram::select(['id', 'name'])->get();
-        return response(['travel_programs' => $travel_programs]);
+        $travel_categories = TravelCategory::select(['id', 'name'])->get();
+        return response(['travel_categories' => $travel_categories]);
     }
-
 
     public function index(Request $request)
     {
@@ -29,14 +28,19 @@ class TravelProgramController extends Controller
         $draw = $request->draw;
         $searchValue = $request->search;
         $trashed = $request->trashed;
+        $travel_program_id = $request->travel_program_id;
         $from_date = $request->from_date;
         $to_date = $request->to_date;
-        $query = TravelProgram::select('*')->orderBy($sortBy, $dir)->with('user');
+        $query = TravelCategory::select('*')->orderBy($sortBy, $dir)->with(['user', 'travel_program']);
 
         if ($trashed == 0) {
             $query->onlyTrashed();
         } else if ($trashed == 2) {
             $query->withTrashed();
+        }
+
+        if ($travel_program_id != '' && $travel_program_id != null) {
+            $query->where('travel_program_id', $travel_program_id);
         }
 
         if ($from_date != '') {
@@ -64,8 +68,8 @@ class TravelProgramController extends Controller
             }
         }
 
-        $travel_programs = $query->paginate($length);
-        return response(['data' => $travel_programs, 'draw' => $draw, 'sortBy' => $sortBy, 'dir' => $dir]);
+        $travel_categories = $query->paginate($length);
+        return response(['data' => $travel_categories, 'draw' => $draw, 'sortBy' => $sortBy, 'dir' => $dir]);
     }
 
 
@@ -73,10 +77,9 @@ class TravelProgramController extends Controller
     {
         $this->validate(request(), [
             'name' => 'required|string|between:2,180',
-            'small_info' => 'nullable|string|min:3',
-            'big_info' => 'nullable|string|min:3',
             'image' => 'required|string',
             'order' => 'nullable|integer|min:1',
+            'travel_program_id' => 'required|exists:travel_programs,id',
         ]);
 
         $data = $request->toArray();
@@ -86,7 +89,7 @@ class TravelProgramController extends Controller
         if (strpos($data['image'], 'data:image/') === 0) {
             $get_ext = explode(';', explode('/', $data['image'])[1])[0];
             $ext = $get_ext == 'jpeg' ? 'jpg' : $get_ext;
-            $imageNewName =  uniqid('travel-program-image-') . '.' . $ext;
+            $imageNewName =  uniqid('travel-category-image-') . '.' . $ext;
             $imagePath = $directory . '/' . $imageNewName;
             if (!is_dir(public_path($directory))) {
                 File::makeDirectory(public_path($directory), 0777, true);
@@ -99,16 +102,16 @@ class TravelProgramController extends Controller
         // add to DB
 
         $data['user_id'] = auth()->id();
-        $travel_program = TravelProgram::create($data);
-        $createdTravelProgram = TravelProgram::find($travel_program->id);
-        return response(['message' => 'Travel program has been created.', 'data' => $createdTravelProgram]);
+        $travel_category = TravelCategory::create($data);
+        $createdTravelCategory = TravelCategory::find($travel_category->id);
+        return response(['message' => 'Travel category has been created.', 'data' => $createdTravelCategory]);
     }
 
 
     public function show($id)
     {
-        $travel_program = TravelProgram::find($id);
-        return response(['travel_program' => $travel_program]);
+        $travel_category = TravelCategory::find($id);
+        return response(['travel_category' => $travel_category]);
     }
 
 
@@ -116,28 +119,26 @@ class TravelProgramController extends Controller
     {
         $this->validate(request(), [
             'name' => 'required|string|between:2,180',
-            'small_info' => 'nullable|string|min:3',
-            'big_info' => 'nullable|string|min:3',
             'image' => 'required|string',
             'order' => 'nullable|integer|min:1',
+            'travel_program_id' => 'required|exists:travel_programs,id',
         ]);
 
-        $travel_program = TravelProgram::find($id);
+        $travel_category = TravelCategory::find($id);
         $data = $request->toArray();
-
 
         // save image is exists
         $directory = $this->directory;
         if (strpos($data['image'], 'data:image/') === 0) {
             $get_ext = explode(';', explode('/', $data['image'])[1])[0];
             $ext = $get_ext == 'jpeg' ? 'jpg' : $get_ext;
-            $imageNewName =  uniqid('travel-program-image-') . '.' . $ext;
+            $imageNewName =  uniqid('travel-category-image-') . '.' . $ext;
             $imagePath = $directory . '/' . $imageNewName;
 
             // delete old image if exists
-            if ($travel_program->image !== null) {
-                if (file_exists(public_path($travel_program->image))) {
-                    unlink(public_path($travel_program->image));
+            if ($travel_category->image !== null) {
+                if (file_exists(public_path($travel_category->image))) {
+                    unlink(public_path($travel_category->image));
                 }
             }
             /*================================================*/
@@ -146,32 +147,32 @@ class TravelProgramController extends Controller
         }
         /****************************************************************************/
 
-        $travel_program->update($data);
-        $updatedTravelProgram = TravelProgram::find($id);
-        return response(['message' => $data['name'] . ' Travel program has been updated.', 'data' => $updatedTravelProgram]);
+        $travel_category->update($data);
+        $updatedTravelCategory = TravelCategory::find($id);
+        return response(['message' => $data['name'] . ' Travel category has been updated.', 'data' => $updatedTravelCategory]);
     }
 
 
     public function destroy($id)
     {
-        $travel_program = TravelProgram::withTrashed()->where('id', $id)->first();
-        if ($travel_program->trashed()) {
+        $travel_category = TravelCategory::withTrashed()->where('id', $id)->first();
+        if ($travel_category->trashed()) {
             // delete image
-            if (file_exists(public_path($travel_program->image))) {
-                unlink(public_path($travel_program->image));
+            if (file_exists(public_path($travel_category->image))) {
+                unlink(public_path($travel_category->image));
             }
-            $travel_program->forceDelete();
+            $travel_category->forceDelete();
         } else {
-            $travel_program->delete();
+            $travel_category->delete();
         }
         return response(['status' => true]);
     }
 
 
-    public function restoreTravelProgram($id)
+    public function restoreTravelCategory($id)
     {
-        $travel_program_deleted = TravelProgram::onlyTrashed()->where('id', $id)->first();
-        $travel_program_deleted->restore();
+        $travel_category_deleted = TravelCategory::onlyTrashed()->where('id', $id)->first();
+        $travel_category_deleted->restore();
         return response(['status' => true]);
     }
 }

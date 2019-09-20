@@ -25,8 +25,8 @@ class Image extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function travel_type()
+    public function travel_category()
     {
-        return $this->belongsTo('App\TravelType');
+        return $this->belongsTo('App\TravelCategory');
     }
 }

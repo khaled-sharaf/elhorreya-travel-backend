@@ -25,9 +25,6 @@ class CreateRoomsTable extends Migration
             $table->unsignedInteger('user_id');
             $table->softDeletes();
             $table->timestamps();
-
-            $table->foreign('hotel_id')->references('id')->on('hotels')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

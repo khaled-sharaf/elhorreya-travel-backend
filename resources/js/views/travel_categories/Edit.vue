@@ -6,7 +6,7 @@
 <template>
     <div>
         <!-- Content Header (Page header) -->
-        <header-page :title="$t('global.edit') + ' ' + $t('global.room')"></header-page>
+        <header-page :title="$t('sidebar.edit_travel_category')"></header-page>
         <!-- /.content-header -->
         <section class="content">
             <div class="container-fluid">
@@ -16,16 +16,18 @@
                         <div class="card">
                             <!-- card-header -->
                             <div class="card-header">
-                                <router-link class="btn btn-primary btn-sm" :to="{name: 'rooms'}">{{ $t('global.show') + ' ' + $t('sidebar.all_rooms') }}</router-link>
+                                <h3 class="m-0 mb-2 text-dark">
+                                    <router-link class="btn btn-primary btn-sm" :to="{name: 'travel_categories'}">{{ $t('global.show') + ' ' + $t('sidebar.all_travel_categories') }}</router-link>
+                                </h3>
                             </div>
                             <!-- ./card-header -->
 
 
                             <!-- form -->
-                            <form @submit.prevent="updateRoom()">
+                            <form @submit.prevent="updateTravelCategory()" class="form-product">
                                 <!-- card-body -->
                                 <div class="card-body">
-                                    <form-room typeForm="edit" :form="form"></form-room>
+                                    <form-travel-category typeForm="edit" :form="form"></form-travel-category>
                                 </div>
                                 <!-- ./card-body -->
 
@@ -47,42 +49,39 @@
 
 
 <script>
-import FormRoom from './Form'
+import FormTravelCategory from './Form'
 import BtnUpdate from './../../components/form/BtnUpdate'
 import HeaderPage from './../../components/HeaderPage'
-
 import MixinChangeLocaleMessages from "./../../mixins/MixinChangeLocaleMessages"
 
 export default {
     mixins: [MixinChangeLocaleMessages],
     components: {
         HeaderPage,
-        FormRoom,
+        FormTravelCategory,
         BtnUpdate
     },
     data() {
       return {
-        urlModel: '/rooms',
+        urlModel: '/travel_categories',
         form: new Form({
-            id: '',
-            info: '',
-            options: '',
-            price_night: '',
-            offer_days: '',
-            offer_price: '',
-            hotel_id: '',
-            display: 1,
+            id: 0,
+            name: '',
+            image: '',
+            travel_program_id: '',
+            order: '',
         }),
-        roomEdit: {},
-        idPage: 'rooms',
+        TravelCategoryEdit: {},
+        idPage: 'travel_categories',
         typePage: 'edit'
       }
     },
     methods: {
-        updateRoom() {
+        updateTravelCategory() {
             loadReq(this.$Progress);
             this.form.put(this.urlModel + '/' + this.form.id).then(response => {
                 if (response.status === 200) {
+                    this.TravelCategoryEdit = response.data.data;
                     ToastReq.fire({
                         text: this.success_msg
                     });
@@ -95,39 +94,34 @@ export default {
                 this.$Progress.fail();
             });
         },
-        getRoomEdit(route) {
-            axios.get(this.urlModel + '/' + route.params.id).then(response => {
+        getTravelCategoryEdit(route) {
+            axios.get(this.urlModel + '/' +  route.params.id).then(response => {
                 if (response.status === 200) {
-                    const room = response.data.room
-                    if (room != null) {
-                        this.roomEdit = room
-                        this.form.reset()
-                        this.form.fill(this.roomEdit)
+                    const travel_category = response.data.travel_category
+                    if (travel_category != null) {
+                        this.TravelCategoryEdit = travel_category
+                        this.form.fill(this.TravelCategoryEdit)
                     } else {
-                        this.$router.push({name: 'rooms'})
+                        this.$router.push({name: 'travel_categories'})
                     }
                 }
             })
             .catch(errors => {
                 setTimeout(() => {
-                    this.getRoomEdit(this.$route)
+                    this.getTravelCategoryEdit(this.$route)
                 }, 1000)
             })
         }
     },
-    watch: {
-
-    },
     beforeRouteEnter(to, from, next) {
         next(vm => {
-            to.meta.title = vm.$t('sidebar.edit_room')
+            to.meta.title = vm.$t('sidebar.edit_travel_category')
             vm.$nextTick(() => {
-                if (to.params.room) {
-                    vm.roomEdit = to.params.room
-                    vm.form.reset()
-                    vm.form.fill(vm.roomEdit)
+                if (to.params.travel_category) {
+                    vm.TravelCategoryEdit = to.params.travel_category
+                    vm.form.fill(vm.TravelCategoryEdit)
                 } else {
-                    vm.getRoomEdit(to)
+                    vm.getTravelCategoryEdit(to)
                 }
             })
         })

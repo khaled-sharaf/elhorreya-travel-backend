@@ -108,7 +108,7 @@ class HotelController extends Controller
             $imageNewName =  uniqid('hotel-default-image-') . '.' . $ext;
             $imagePath = $directory . '/' . $imageNewName;
             if (!is_dir(public_path($directory))) {
-                File::makeDirectory(public_path($directory));
+                File::makeDirectory(public_path($directory), 0777, true);
             }
             Image::make($data['image'])->save(public_path($imagePath));
             $data['image'] = $imagePath;

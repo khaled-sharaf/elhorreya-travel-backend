@@ -190,7 +190,9 @@ export default {
         next(vm => {
             to.meta.title = vm.$t('sidebar.settings')
             vm.sortOrders[vm.sortKey] = 1; // 1 = desc , -1 = asc
-            vm.sortBy(vm.sortKey);
+            vm.$nextTick(() => {
+                vm.sortBy(vm.sortKey);
+            })
             vm.setLocaleMessages()
             vm.eventBtnsClick();
             vm.viewFilterColumns();

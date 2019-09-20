@@ -127,13 +127,15 @@ export default {
     beforeRouteEnter(to, from, next) {
         next(vm => {
             to.meta.title = vm.$t('sidebar.edit_user')
-            if (to.params.user) {
-                vm.userEdit = to.params.user
-                vm.form.reset()
-                vm.form.fill(vm.userEdit)
-            } else {
-                vm.getUserEdit(to)
-            }
+            vm.$nextTick(() => {
+                if (to.params.user) {
+                    vm.userEdit = to.params.user
+                    vm.form.reset()
+                    vm.form.fill(vm.userEdit)
+                } else {
+                    vm.getUserEdit(to)
+                }
+            })
         })
     }
 }

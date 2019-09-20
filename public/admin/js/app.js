@@ -2046,6 +2046,173 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'sidebar',
   data: function data() {
@@ -2593,6 +2760,43 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dataTables/filters/travelProgramsSelect.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dataTables/filters/travelProgramsSelect.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["tableData", "travelPrograms"]
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/form/BtnCreate.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/form/BtnCreate.vue?vue&type=script&lang=js& ***!
@@ -2795,6 +2999,120 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -2805,7 +3123,14 @@ __webpack_require__.r(__webpack_exports__);
       counts: {
         users: 0,
         hotels: 0,
-        rooms: 0
+        rooms: 0,
+        travel_programs: 0,
+        travel_categories: 0,
+        travels: 0,
+        bookings: 0,
+        mailing_list: 0,
+        blogs: 0,
+        images: 0
       },
       urlGetCounts: '/models-counts'
     };
@@ -2826,7 +3151,11 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
-    this.getCountsAllModels();
+    var _this2 = this;
+
+    this.$nextTick(function () {
+      _this2.getCountsAllModels();
+    });
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
     next(function (vm) {
@@ -2940,8 +3269,6 @@ __webpack_require__.r(__webpack_exports__);
       this.form.longitude = window.parseFloat($('#hotel_longitude').val());
       loadReq(this.$Progress);
       this.form.post(this.urlCreateHotel).then(function (response) {
-        console.log(response.data);
-
         if (response.status === 200) {
           // reset form
           _this.form.reset();
@@ -3099,8 +3426,6 @@ __webpack_require__.r(__webpack_exports__);
       this.form.longitude = window.parseFloat($('#hotel_longitude').val());
       loadReq(this.$Progress);
       this.form.put(this.urlModel + '/' + this.form.id).then(function (response) {
-        console.log(response.data);
-
         if (response.status === 200) {
           _this.hotelEdit = response.data.data;
           ToastReq.fire({
@@ -3156,24 +3481,25 @@ __webpack_require__.r(__webpack_exports__);
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
     next(function (vm) {
       to.meta.title = vm.$t('sidebar.edit_hotel');
+      vm.$nextTick(function () {
+        if (to.params.hotel) {
+          vm.hotelEdit = to.params.hotel;
+          vm.hotelEdit.deletedGallery = [];
+          vm.hotelEdit.deletedFeatures = [];
+          vm.form.reset();
+          $('#remove-location-hotel').click();
+          vm.form.fill(vm.hotelEdit);
 
-      if (to.params.hotel) {
-        vm.hotelEdit = to.params.hotel;
-        vm.hotelEdit.deletedGallery = [];
-        vm.hotelEdit.deletedFeatures = [];
-        vm.form.reset();
-        $('#remove-location-hotel').click();
-        vm.form.fill(vm.hotelEdit);
+          if (vm.form.latitude != null && vm.form.longitude != null) {
+            $('.myMap #address').val('');
+          }
 
-        if (vm.form.latitude != null && vm.form.longitude != null) {
-          $('.myMap #address').val('');
+          $('#hotel_latitude').val(vm.form.latitude);
+          $('#hotel_longitude').val(vm.form.longitude);
+        } else {
+          vm.getHotelEdit(to);
         }
-
-        $('#hotel_latitude').val(vm.form.latitude);
-        $('#hotel_longitude').val(vm.form.longitude);
-      } else {
-        vm.getHotelEdit(to);
-      }
+      });
     });
   }
 });
@@ -3865,7 +4191,6 @@ __webpack_require__.r(__webpack_exports__);
         search: "",
         sortBy: 'id',
         display: "",
-        active: "",
         trashed: 1,
         from_date: "",
         to_date: "",
@@ -3879,19 +4204,19 @@ __webpack_require__.r(__webpack_exports__);
       // viewFilterColumns
       viewColumnsResponsive: {
         "default": {
-          show: ['name', 'address', 'image', 'stars', 'location', 'created_at', 'actions']
+          show: ['name', 'address', 'image', 'stars', 'location', 'updated_at', 'actions']
         },
         1200: {
-          show: ['name', 'address', 'image', 'stars', 'created_at', 'actions']
+          show: ['name', 'address', 'image', 'stars', 'updated_at', 'actions']
         },
         1000: {
-          show: ['name', 'address', 'image', 'stars', 'created_at']
+          show: ['name', 'address', 'image', 'stars', 'updated_at']
         },
         800: {
-          show: ['name', 'address', 'image', 'created_at']
+          show: ['name', 'address', 'image', 'updated_at']
         },
         600: {
-          show: ["name", "address", 'created_at']
+          show: ["name", "address", 'updated_at']
         },
         400: {
           show: ["name"]
@@ -3937,7 +4262,9 @@ __webpack_require__.r(__webpack_exports__);
       to.meta.title = vm.$t('sidebar.hotels');
       vm.sortOrders[vm.sortKey] = 1; // 1 = desc , -1 = asc
 
-      vm.sortBy(vm.sortKey);
+      vm.$nextTick(function () {
+        vm.sortBy(vm.sortKey);
+      });
       vm.setLocaleMessages();
       vm.eventBtnsClick();
       vm.eventBtnsClickLocale();
@@ -4398,46 +4725,47 @@ __webpack_require__.r(__webpack_exports__);
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
     next(function (vm) {
       to.meta.title = vm.$t('sidebar.hotel_profile');
+      vm.$nextTick(function () {
+        if (to.params.hotel) {
+          var hotel = to.params.hotel;
 
-      if (to.params.hotel) {
-        var hotel = to.params.hotel;
-
-        if (typeof hotel.gallery == 'string') {
-          if (hotel.gallery !== null && hotel.gallery != '') {
-            var gallery = hotel.gallery.split(',');
-            var galleryArr = [];
-            gallery.forEach(function (image) {
-              galleryArr.push({
-                id: Math.floor(Math.random() * 10000),
-                value: image
+          if (typeof hotel.gallery == 'string') {
+            if (hotel.gallery !== null && hotel.gallery != '') {
+              var gallery = hotel.gallery.split(',');
+              var galleryArr = [];
+              gallery.forEach(function (image) {
+                galleryArr.push({
+                  id: Math.floor(Math.random() * 10000),
+                  value: image
+                });
               });
-            });
-            hotel.gallery = galleryArr;
-          } else {
-            hotel.gallery = [];
+              hotel.gallery = galleryArr;
+            } else {
+              hotel.gallery = [];
+            }
           }
-        }
 
-        if (typeof hotel.features == 'string') {
-          if (hotel.features !== null && hotel.features != '') {
-            var features = hotel.features.split(',');
-            var featuresArr = [];
-            features.forEach(function (feature) {
-              featuresArr.push({
-                id: Math.floor(Math.random() * 10000),
-                value: feature
+          if (typeof hotel.features == 'string') {
+            if (hotel.features !== null && hotel.features != '') {
+              var features = hotel.features.split(',');
+              var featuresArr = [];
+              features.forEach(function (feature) {
+                featuresArr.push({
+                  id: Math.floor(Math.random() * 10000),
+                  value: feature
+                });
               });
-            });
-            hotel.features = featuresArr;
-          } else {
-            hotel.features = [];
+              hotel.features = featuresArr;
+            } else {
+              hotel.features = [];
+            }
           }
-        }
 
-        vm.hotelProfile = hotel;
-      } else {
-        vm.getHotelProfile(to);
-      }
+          vm.hotelProfile = hotel;
+        } else {
+          vm.getHotelProfile(to);
+        }
+      });
     });
   }
 });
@@ -4898,14 +5226,15 @@ __webpack_require__.r(__webpack_exports__);
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
     next(function (vm) {
       to.meta.title = vm.$t('sidebar.edit_room');
-
-      if (to.params.room) {
-        vm.roomEdit = to.params.room;
-        vm.form.reset();
-        vm.form.fill(vm.roomEdit);
-      } else {
-        vm.getRoomEdit(to);
-      }
+      vm.$nextTick(function () {
+        if (to.params.room) {
+          vm.roomEdit = to.params.room;
+          vm.form.reset();
+          vm.form.fill(vm.roomEdit);
+        } else {
+          vm.getRoomEdit(to);
+        }
+      });
     });
   }
 });
@@ -5291,9 +5620,9 @@ __webpack_require__.r(__webpack_exports__);
       idPage: 'rooms',
       urlGetDataTable: '/rooms',
       urlGetHotels: '/hotels/select',
+      hotelsSelect: [],
       columns: columns,
       sortOrders: sortOrders,
-      hotelsSelect: [],
       tableData: {
         draw: 0,
         length: 10,
@@ -5301,7 +5630,7 @@ __webpack_require__.r(__webpack_exports__);
         sortBy: 'id',
         trashed: 1,
         display: "",
-        hotel_id: null,
+        hotel_id: '',
         from_date: "",
         to_date: "",
         dir: "",
@@ -5365,11 +5694,13 @@ __webpack_require__.r(__webpack_exports__);
         to.meta.title = vm.$t('sidebar.rooms');
         vm.sortOrders[vm.sortKey] = 1; // 1 = desc , -1 = asc
 
-        vm.sortBy(vm.sortKey);
-        vm.setLocaleMessages();
-        vm.getHotelsSelect();
+        vm.$nextTick(function () {
+          vm.sortBy(vm.sortKey);
+          vm.getHotelsSelect();
+        });
         vm.eventBtnsClick();
         vm.viewFilterColumns();
+        vm.setLocaleMessages();
 
         window.onresize = function () {
           vm.viewFilterColumns();
@@ -5387,7 +5718,9 @@ __webpack_require__.r(__webpack_exports__);
     if (this.$route.name != 'rooms') {
       this.sortOrders[this.sortKey] = 1; // 1 = desc , -1 = asc
 
-      this.sortBy(this.sortKey);
+      this.$nextTick(function () {
+        _this2.sortBy(_this2.sortKey);
+      });
       this.setLocaleMessages();
       this.eventBtnsClick();
       this.viewFilterColumns();
@@ -5844,14 +6177,15 @@ __webpack_require__.r(__webpack_exports__);
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
     next(function (vm) {
       to.meta.title = vm.$t('sidebar.edit_setting');
-
-      if (to.params.setting) {
-        vm.settingEdit = to.params.setting;
-        vm.form.reset();
-        vm.form.fill(vm.settingEdit);
-      } else {
-        vm.getSettingEdit(to);
-      }
+      vm.$nextTick(function () {
+        if (to.params.setting) {
+          vm.settingEdit = to.params.setting;
+          vm.form.reset();
+          vm.form.fill(vm.settingEdit);
+        } else {
+          vm.getSettingEdit(to);
+        }
+      });
     });
   }
 });
@@ -6237,7 +6571,9 @@ __webpack_require__.r(__webpack_exports__);
       to.meta.title = vm.$t('sidebar.settings');
       vm.sortOrders[vm.sortKey] = 1; // 1 = desc , -1 = asc
 
-      vm.sortBy(vm.sortKey);
+      vm.$nextTick(function () {
+        vm.sortBy(vm.sortKey);
+      });
       vm.setLocaleMessages();
       vm.eventBtnsClick();
       vm.viewFilterColumns();
@@ -6260,6 +6596,1846 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['dataTable', 'tableData']
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_categories/Create.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/travel_categories/Create.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Form */ "./resources/js/views/travel_categories/Form.vue");
+/* harmony import */ var _components_form_BtnCreate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../components/form/BtnCreate */ "./resources/js/components/form/BtnCreate.vue");
+/* harmony import */ var _components_HeaderPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../components/HeaderPage */ "./resources/js/components/HeaderPage.vue");
+/* harmony import */ var _mixins_MixinChangeLocaleMessages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../mixins/MixinChangeLocaleMessages */ "./resources/js/mixins/MixinChangeLocaleMessages.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_MixinChangeLocaleMessages__WEBPACK_IMPORTED_MODULE_3__["default"]],
+  name: 'create-travel_category',
+  components: {
+    FormTravelCategory: _Form__WEBPACK_IMPORTED_MODULE_0__["default"],
+    HeaderPage: _components_HeaderPage__WEBPACK_IMPORTED_MODULE_2__["default"],
+    BtnCreate: _components_form_BtnCreate__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      urlCreateTravelCategory: '/travel_categories',
+      form: new Form({
+        name: '',
+        image: '',
+        travel_program_id: '',
+        order: ''
+      }),
+      idPage: 'travel_categories',
+      typePage: 'create'
+    };
+  },
+  methods: {
+    createTravelCategory: function createTravelCategory() {
+      var _this = this;
+
+      loadReq(this.$Progress);
+      this.form.post(this.urlCreateTravelCategory).then(function (response) {
+        if (response.status === 200) {
+          // reset form
+          _this.form.reset();
+
+          ToastReq.fire({
+            text: _this.success_msg
+          });
+        }
+      })["catch"](function (errors) {
+        ToastFailed.fire({
+          title: _this.failed_title + "!",
+          text: _this.failed_msg
+        });
+
+        _this.$Progress.fail();
+      });
+    }
+  },
+  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+    next(function (vm) {
+      to.meta.title = vm.$t('global.create') + ' ' + vm.$t('sidebar.new_travel_category');
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_categories/Edit.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/travel_categories/Edit.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Form */ "./resources/js/views/travel_categories/Form.vue");
+/* harmony import */ var _components_form_BtnUpdate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../components/form/BtnUpdate */ "./resources/js/components/form/BtnUpdate.vue");
+/* harmony import */ var _components_HeaderPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../components/HeaderPage */ "./resources/js/components/HeaderPage.vue");
+/* harmony import */ var _mixins_MixinChangeLocaleMessages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../mixins/MixinChangeLocaleMessages */ "./resources/js/mixins/MixinChangeLocaleMessages.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_MixinChangeLocaleMessages__WEBPACK_IMPORTED_MODULE_3__["default"]],
+  components: {
+    HeaderPage: _components_HeaderPage__WEBPACK_IMPORTED_MODULE_2__["default"],
+    FormTravelCategory: _Form__WEBPACK_IMPORTED_MODULE_0__["default"],
+    BtnUpdate: _components_form_BtnUpdate__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      urlModel: '/travel_categories',
+      form: new Form({
+        id: 0,
+        name: '',
+        image: '',
+        travel_program_id: '',
+        order: ''
+      }),
+      TravelCategoryEdit: {},
+      idPage: 'travel_categories',
+      typePage: 'edit'
+    };
+  },
+  methods: {
+    updateTravelCategory: function updateTravelCategory() {
+      var _this = this;
+
+      loadReq(this.$Progress);
+      this.form.put(this.urlModel + '/' + this.form.id).then(function (response) {
+        if (response.status === 200) {
+          _this.TravelCategoryEdit = response.data.data;
+          ToastReq.fire({
+            text: _this.success_msg
+          });
+        }
+      })["catch"](function (response) {
+        ToastFailed.fire({
+          title: _this.failed_title + "!",
+          text: _this.failed_msg
+        });
+
+        _this.$Progress.fail();
+      });
+    },
+    getTravelCategoryEdit: function getTravelCategoryEdit(route) {
+      var _this2 = this;
+
+      axios.get(this.urlModel + '/' + route.params.id).then(function (response) {
+        if (response.status === 200) {
+          var travel_category = response.data.travel_category;
+
+          if (travel_category != null) {
+            _this2.TravelCategoryEdit = travel_category;
+
+            _this2.form.fill(_this2.TravelCategoryEdit);
+          } else {
+            _this2.$router.push({
+              name: 'travel_categories'
+            });
+          }
+        }
+      })["catch"](function (errors) {
+        setTimeout(function () {
+          _this2.getTravelCategoryEdit(_this2.$route);
+        }, 1000);
+      });
+    }
+  },
+  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+    next(function (vm) {
+      to.meta.title = vm.$t('sidebar.edit_travel_category');
+      vm.$nextTick(function () {
+        if (to.params.travel_category) {
+          vm.TravelCategoryEdit = to.params.travel_category;
+          vm.form.fill(vm.TravelCategoryEdit);
+        } else {
+          vm.getTravelCategoryEdit(to);
+        }
+      });
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_categories/Form.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/travel_categories/Form.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['form', 'typeForm'],
+  data: function data() {
+    return {
+      travelCategoryImage: "",
+      droppedFiles: false,
+      urlGetTravelPrograms: '/travel_programs/select',
+      travelProgramsSelect: []
+    };
+  },
+  methods: {
+    getIndex: function getIndex(array, key, value) {
+      return array.findIndex(function (i) {
+        return i[key] == value;
+      });
+    },
+    encodeFileAsURL: function encodeFileAsURL(files) {
+      var self = this;
+
+      if (!files.length) {
+        var file = files;
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+          self.form.image = reader.result;
+        };
+
+        if (file) {
+          if (file["size"] > 4000000) {
+            if (this.$i18n.locale == 'ar') {
+              Swal.fire("خطأ...", "الحجم المسموح به للصورة هو 4 ميجا بايت.", "error");
+            } else {
+              Swal.fire("Oops...", "You are uploading a large file 4MB last.", "error");
+            }
+          } else if (file['type'] != 'image/jpeg' && file['type'] != 'image/png' && file['type'] != 'image/gif') {
+            if (this.$i18n.locale == 'ar') {
+              Swal.fire("خطأ...", "يجب أن تكون الصورة لها امتداد من هذه الإمتدادات [jpg, png, gif].", "error");
+            } else {
+              Swal.fire("Oops...", "You must be image have extension between [jpg, png, gif].", "error");
+            }
+          } else {
+            reader.readAsDataURL(file);
+          }
+        }
+      }
+    },
+    showFiles: function showFiles(files, input) {
+      if (typeof input === 'string') {
+        input = $('#' + input);
+      }
+
+      var lengthFiles = files.length;
+
+      if (input.attr('multiple')) {
+        if (lengthFiles > 0) {
+          this.encodeFileAsURL(files);
+        }
+      } else {
+        if (lengthFiles > 0) {
+          this.encodeFileAsURL(files[0]);
+        }
+      }
+    },
+    handelDropImages: function handelDropImages() {
+      var self = this; // view-images
+
+      $('.wrapper-drop-image').on('drag dragstart dragend dragover dragenter dragleave drop', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }).on('dragover dragenter', function (e) {
+        $(this).addClass('is-dragover');
+      }).on('dragleave dragend drop', function () {
+        $(this).removeClass('is-dragover');
+      }).on('drop', function (e) {
+        this.droppedFiles = e.originalEvent.dataTransfer.files;
+        var lengthFiles = e.originalEvent.dataTransfer.files.length;
+        var input = $(this).find('.custom-file-drop');
+        self.showFiles(this.droppedFiles, input);
+      });
+    },
+    addDomainToImage: function addDomainToImage(url) {
+      // return url
+      var resultUrl = '';
+
+      if (url.indexOf("data:image/") === 0) {
+        resultUrl = url;
+      } else {
+        resultUrl = this.$domain + '/' + url;
+      }
+
+      return resultUrl;
+    },
+    getTravelProgramsSelect: function getTravelProgramsSelect() {
+      var _this = this;
+
+      axios.get(this.urlGetTravelPrograms).then(function (response) {
+        if (response.status === 200) {
+          _this.travelProgramsSelect = response.data.travel_programs;
+        }
+      })["catch"](function (errors) {
+        setTimeout(function () {
+          _this.getTravelProgramsSelect();
+        }, 1000);
+      });
+    }
+  },
+  watch: {
+    "form.image": function formImage(val) {
+      this.travelCategoryImage = this.addDomainToImage(val);
+    }
+  },
+  mounted: function mounted() {
+    var _this2 = this;
+
+    if (this.typeForm == 'edit') {
+      var getImage = setInterval(function () {
+        if (_this2.form.image != '') {
+          _this2.travelCategoryImage = _this2.$domain + '/' + _this2.form.image;
+          clearInterval(getImage);
+        }
+      }, 500);
+    }
+
+    this.handelDropImages();
+    this.getTravelProgramsSelect();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_categories/Index.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/travel_categories/Index.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_dataTables_filters_Trashed__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../components/dataTables/filters/Trashed */ "./resources/js/components/dataTables/filters/Trashed.vue");
+/* harmony import */ var _components_dataTables_filters_CreatedBetween__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../components/dataTables/filters/CreatedBetween */ "./resources/js/components/dataTables/filters/CreatedBetween.vue");
+/* harmony import */ var _components_dataTables_filters_travelProgramsSelect__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../components/dataTables/filters/travelProgramsSelect */ "./resources/js/components/dataTables/filters/travelProgramsSelect.vue");
+/* harmony import */ var _components_dataTables_filters_Search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../components/dataTables/filters/Search */ "./resources/js/components/dataTables/filters/Search.vue");
+/* harmony import */ var _TableContent__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./TableContent */ "./resources/js/views/travel_categories/TableContent.vue");
+/* harmony import */ var _mixins_MixinsDatatable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../mixins/MixinsDatatable */ "./resources/js/mixins/MixinsDatatable.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_MixinsDatatable__WEBPACK_IMPORTED_MODULE_5__["default"]],
+  components: {
+    Trashed: _components_dataTables_filters_Trashed__WEBPACK_IMPORTED_MODULE_0__["default"],
+    CreatedBetween: _components_dataTables_filters_CreatedBetween__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Search: _components_dataTables_filters_Search__WEBPACK_IMPORTED_MODULE_3__["default"],
+    TableContent: _TableContent__WEBPACK_IMPORTED_MODULE_4__["default"],
+    travelProgramsSelect: _components_dataTables_filters_travelProgramsSelect__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  data: function data() {
+    var self = this;
+    var sortOrders = {};
+    var columns = [{
+      label: "<i class='fa fa-plus'></i>",
+      name: "show_plus"
+    }, {
+      label: "#",
+      name: "index"
+    }, {
+      label: "ID",
+      name: "id"
+    }, {
+      label: "Name",
+      name: "name"
+    }, {
+      label: "Image",
+      name: "image"
+    }, {
+      label: "Order",
+      name: "order"
+    }, {
+      label: "Travel program",
+      name: "travel_program_id"
+    }, {
+      label: "Created by",
+      name: "user_id"
+    }, {
+      label: "Updated at",
+      name: "updated_at"
+    }, {
+      label: "Created at",
+      name: "created_at"
+    }, {
+      label: "Actions",
+      name: "actions"
+    }];
+    columns.forEach(function (column) {
+      sortOrders[column.name] = -1;
+    });
+    return {
+      idPage: 'travel_categories',
+      urlGetDataTable: '/travel_categories',
+      urlGetTravelPrograms: '/travel_programs/select',
+      travelProgramsSelect: [],
+      columns: columns,
+      sortOrders: sortOrders,
+      tableData: {
+        draw: 0,
+        length: 10,
+        search: '',
+        sortBy: 'id',
+        trashed: 1,
+        travel_program_id: '',
+        from_date: '',
+        to_date: '',
+        dir: '',
+        columns: ["index", "id", "name", "image", "order", "travel_program_id", "user_id", "updated_at", "created_at", "actions"],
+        filter: {
+          columnsExcept: ['show_plus', 'index', 'actions', 'travel_program_id', 'image', 'user_id'],
+          viewTable: ["bordered", 'hover']
+        }
+      },
+      // viewFilterColumns
+      viewColumnsResponsive: {
+        "default": {
+          show: ['id', 'name', 'image', 'travel_program_id', 'updated_at', 'actions']
+        },
+        1000: {
+          show: ['id', 'name', 'image', 'travel_program_id', 'updated_at', 'actions']
+        },
+        800: {
+          show: ['id', 'name', 'travel_program_id', 'actions']
+        },
+        600: {
+          show: ['name', 'travel_program_id', 'actions']
+        },
+        400: {
+          show: ["name"]
+        }
+      }
+    };
+  },
+  methods: {
+    getTravelProgramsSelect: function getTravelProgramsSelect() {
+      var _this = this;
+
+      axios.get(this.urlGetTravelPrograms).then(function (response) {
+        if (response.status === 200) {
+          _this.travelProgramsSelect = response.data.travel_programs;
+        }
+      })["catch"](function (errors) {
+        setTimeout(function () {
+          _this.getTravelProgramsSelect();
+        }, 1000);
+      });
+    }
+  },
+  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+    next(function (vm) {
+      to.meta.title = vm.$t('sidebar.travel_categories');
+      vm.sortOrders[vm.sortKey] = 1; // 1 = desc , -1 = asc
+
+      vm.$nextTick(function () {
+        vm.sortBy(vm.sortKey);
+        vm.getTravelProgramsSelect();
+      });
+      vm.setLocaleMessages();
+      vm.eventBtnsClick();
+      vm.viewFilterColumns();
+
+      window.onresize = function () {
+        vm.viewFilterColumns();
+      };
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_categories/TableContent.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/travel_categories/TableContent.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['dataTable', 'tableData']
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_programs/Create.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/travel_programs/Create.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Form */ "./resources/js/views/travel_programs/Form.vue");
+/* harmony import */ var _components_form_BtnCreate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../components/form/BtnCreate */ "./resources/js/components/form/BtnCreate.vue");
+/* harmony import */ var _components_HeaderPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../components/HeaderPage */ "./resources/js/components/HeaderPage.vue");
+/* harmony import */ var _mixins_MixinChangeLocaleMessages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../mixins/MixinChangeLocaleMessages */ "./resources/js/mixins/MixinChangeLocaleMessages.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_MixinChangeLocaleMessages__WEBPACK_IMPORTED_MODULE_3__["default"]],
+  name: 'create-travel_program',
+  components: {
+    FormTravelProgram: _Form__WEBPACK_IMPORTED_MODULE_0__["default"],
+    HeaderPage: _components_HeaderPage__WEBPACK_IMPORTED_MODULE_2__["default"],
+    BtnCreate: _components_form_BtnCreate__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      urlCreateTravelProgram: '/travel_programs',
+      form: new Form({
+        name: '',
+        image: '',
+        small_info: '',
+        big_info: '',
+        order: ''
+      }),
+      idPage: 'travel_programs',
+      typePage: 'create'
+    };
+  },
+  methods: {
+    createTravelProgram: function createTravelProgram() {
+      var _this = this;
+
+      loadReq(this.$Progress);
+      this.form.post(this.urlCreateTravelProgram).then(function (response) {
+        if (response.status === 200) {
+          // reset form
+          _this.form.reset();
+
+          ToastReq.fire({
+            text: _this.success_msg
+          });
+        }
+      })["catch"](function (errors) {
+        ToastFailed.fire({
+          title: _this.failed_title + "!",
+          text: _this.failed_msg
+        });
+
+        _this.$Progress.fail();
+      });
+    }
+  },
+  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+    next(function (vm) {
+      to.meta.title = vm.$t('global.create') + ' ' + vm.$t('sidebar.new_travel_program');
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_programs/Edit.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/travel_programs/Edit.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Form */ "./resources/js/views/travel_programs/Form.vue");
+/* harmony import */ var _components_form_BtnUpdate__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../components/form/BtnUpdate */ "./resources/js/components/form/BtnUpdate.vue");
+/* harmony import */ var _components_HeaderPage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../components/HeaderPage */ "./resources/js/components/HeaderPage.vue");
+/* harmony import */ var _mixins_MixinChangeLocaleMessages__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./../../mixins/MixinChangeLocaleMessages */ "./resources/js/mixins/MixinChangeLocaleMessages.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_MixinChangeLocaleMessages__WEBPACK_IMPORTED_MODULE_3__["default"]],
+  components: {
+    HeaderPage: _components_HeaderPage__WEBPACK_IMPORTED_MODULE_2__["default"],
+    FormTravelProgram: _Form__WEBPACK_IMPORTED_MODULE_0__["default"],
+    BtnUpdate: _components_form_BtnUpdate__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      urlModel: '/travel_programs',
+      form: new Form({
+        id: 0,
+        name: '',
+        image: '',
+        small_info: '',
+        big_info: '',
+        order: ''
+      }),
+      travelProgramEdit: {},
+      idPage: 'travel_programs',
+      typePage: 'edit'
+    };
+  },
+  methods: {
+    updateTravelProgram: function updateTravelProgram() {
+      var _this = this;
+
+      loadReq(this.$Progress);
+      this.form.put(this.urlModel + '/' + this.form.id).then(function (response) {
+        if (response.status === 200) {
+          _this.travelProgramEdit = response.data.data;
+          ToastReq.fire({
+            text: _this.success_msg
+          });
+        }
+      })["catch"](function (response) {
+        ToastFailed.fire({
+          title: _this.failed_title + "!",
+          text: _this.failed_msg
+        });
+
+        _this.$Progress.fail();
+      });
+    },
+    getTravelProgramEdit: function getTravelProgramEdit(route) {
+      var _this2 = this;
+
+      axios.get(this.urlModel + '/' + route.params.id).then(function (response) {
+        if (response.status === 200) {
+          var travel_program = response.data.travel_program;
+
+          if (travel_program != null) {
+            _this2.travelProgramEdit = travel_program;
+
+            _this2.form.fill(_this2.travelProgramEdit);
+          } else {
+            _this2.$router.push({
+              name: 'travel_programs'
+            });
+          }
+        }
+      })["catch"](function (errors) {
+        setTimeout(function () {
+          _this2.getTravelProgramEdit(_this2.$route);
+        }, 1000);
+      });
+    }
+  },
+  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+    next(function (vm) {
+      to.meta.title = vm.$t('sidebar.edit_travel_program');
+      vm.$nextTick(function () {
+        if (to.params.travel_program) {
+          vm.travelProgramEdit = to.params.travel_program;
+          vm.form.fill(vm.travelProgramEdit);
+        } else {
+          vm.getTravelProgramEdit(to);
+        }
+      });
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_programs/Form.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/travel_programs/Form.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['form', 'typeForm'],
+  data: function data() {
+    return {
+      travelProgramImage: "",
+      droppedFiles: false
+    };
+  },
+  methods: {
+    getIndex: function getIndex(array, key, value) {
+      return array.findIndex(function (i) {
+        return i[key] == value;
+      });
+    },
+    encodeFileAsURL: function encodeFileAsURL(files) {
+      var self = this;
+
+      if (!files.length) {
+        var file = files;
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+          self.form.image = reader.result;
+        };
+
+        if (file) {
+          if (file["size"] > 4000000) {
+            if (this.$i18n.locale == 'ar') {
+              Swal.fire("خطأ...", "الحجم المسموح به للصورة هو 4 ميجا بايت.", "error");
+            } else {
+              Swal.fire("Oops...", "You are uploading a large file 4MB last.", "error");
+            }
+          } else if (file['type'] != 'image/jpeg' && file['type'] != 'image/png' && file['type'] != 'image/gif') {
+            if (this.$i18n.locale == 'ar') {
+              Swal.fire("خطأ...", "يجب أن تكون الصورة لها امتداد من هذه الإمتدادات [jpg, png, gif].", "error");
+            } else {
+              Swal.fire("Oops...", "You must be image have extension between [jpg, png, gif].", "error");
+            }
+          } else {
+            reader.readAsDataURL(file);
+          }
+        }
+      }
+    },
+    showFiles: function showFiles(files, input) {
+      if (typeof input === 'string') {
+        input = $('#' + input);
+      }
+
+      var lengthFiles = files.length;
+
+      if (input.attr('multiple')) {
+        if (lengthFiles > 0) {
+          this.encodeFileAsURL(files);
+        }
+      } else {
+        if (lengthFiles > 0) {
+          this.encodeFileAsURL(files[0]);
+        }
+      }
+    },
+    handelDropImages: function handelDropImages() {
+      var self = this; // view-images
+
+      $('.wrapper-drop-image').on('drag dragstart dragend dragover dragenter dragleave drop', function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }).on('dragover dragenter', function (e) {
+        $(this).addClass('is-dragover');
+      }).on('dragleave dragend drop', function () {
+        $(this).removeClass('is-dragover');
+      }).on('drop', function (e) {
+        this.droppedFiles = e.originalEvent.dataTransfer.files;
+        var lengthFiles = e.originalEvent.dataTransfer.files.length;
+        var input = $(this).find('.custom-file-drop');
+        self.showFiles(this.droppedFiles, input);
+      });
+    },
+    addDomainToImage: function addDomainToImage(url) {
+      // return url
+      var resultUrl = '';
+
+      if (url.indexOf("data:image/") === 0) {
+        resultUrl = url;
+      } else {
+        resultUrl = this.$domain + '/' + url;
+      }
+
+      return resultUrl;
+    }
+  },
+  watch: {
+    "form.image": function formImage(val) {
+      this.travelProgramImage = this.addDomainToImage(val);
+    }
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    if (this.typeForm == 'edit') {
+      var getImage = setInterval(function () {
+        if (_this.form.image != '') {
+          _this.travelProgramImage = _this.$domain + '/' + _this.form.image;
+          clearInterval(getImage);
+        }
+      }, 500);
+    }
+
+    this.handelDropImages();
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_programs/Index.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/travel_programs/Index.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_dataTables_filters_Trashed__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../components/dataTables/filters/Trashed */ "./resources/js/components/dataTables/filters/Trashed.vue");
+/* harmony import */ var _components_dataTables_filters_CreatedBetween__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../components/dataTables/filters/CreatedBetween */ "./resources/js/components/dataTables/filters/CreatedBetween.vue");
+/* harmony import */ var _components_dataTables_filters_Search__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../components/dataTables/filters/Search */ "./resources/js/components/dataTables/filters/Search.vue");
+/* harmony import */ var _TableContent__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./TableContent */ "./resources/js/views/travel_programs/TableContent.vue");
+/* harmony import */ var _mixins_MixinsDatatable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../mixins/MixinsDatatable */ "./resources/js/mixins/MixinsDatatable.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_MixinsDatatable__WEBPACK_IMPORTED_MODULE_4__["default"]],
+  components: {
+    Trashed: _components_dataTables_filters_Trashed__WEBPACK_IMPORTED_MODULE_0__["default"],
+    CreatedBetween: _components_dataTables_filters_CreatedBetween__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Search: _components_dataTables_filters_Search__WEBPACK_IMPORTED_MODULE_2__["default"],
+    TableContent: _TableContent__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
+  data: function data() {
+    var self = this;
+    var sortOrders = {};
+    var columns = [{
+      label: "<i class='fa fa-plus'></i>",
+      name: "show_plus"
+    }, {
+      label: "#",
+      name: "index"
+    }, {
+      label: "ID",
+      name: "id"
+    }, {
+      label: "Name",
+      name: "name"
+    }, {
+      label: "Image",
+      name: "image"
+    }, {
+      label: "Small info",
+      name: "small_info"
+    }, {
+      label: "Big info",
+      name: "big_info"
+    }, {
+      label: "Order",
+      name: "order"
+    }, {
+      label: "Created by",
+      name: "user_id"
+    }, {
+      label: "Updated at",
+      name: "updated_at"
+    }, {
+      label: "Created at",
+      name: "created_at"
+    }, {
+      label: "Actions",
+      name: "actions"
+    }];
+    columns.forEach(function (column) {
+      sortOrders[column.name] = -1;
+    });
+    return {
+      idPage: 'travel_programs',
+      urlGetDataTable: '/travel_programs',
+      columns: columns,
+      sortOrders: sortOrders,
+      tableData: {
+        draw: 0,
+        length: 10,
+        search: "",
+        sortBy: 'id',
+        trashed: 1,
+        from_date: "",
+        to_date: "",
+        dir: "",
+        columns: ["index", "id", "name", "image", "small_info", "big_info", "order", "user_id", "updated_at", "created_at", "actions"],
+        filter: {
+          columnsExcept: ['show_plus', 'index', 'actions', 'small_info', 'big_info', 'image', 'user_id'],
+          viewTable: ["bordered", 'hover']
+        }
+      },
+      // viewFilterColumns
+      viewColumnsResponsive: {
+        "default": {
+          show: ['id', 'name', 'image', 'small_info', 'updated_at', 'actions']
+        },
+        1000: {
+          show: ['id', 'name', 'image', 'updated_at', 'actions']
+        },
+        800: {
+          show: ['name', 'image', 'actions']
+        },
+        600: {
+          show: ['id', 'name', 'actions']
+        },
+        400: {
+          show: ["name"]
+        }
+      }
+    };
+  },
+  methods: {},
+  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+    next(function (vm) {
+      to.meta.title = vm.$t('sidebar.travel_programs');
+      vm.sortOrders[vm.sortKey] = 1; // 1 = desc , -1 = asc
+
+      vm.$nextTick(function () {
+        vm.sortBy(vm.sortKey);
+      });
+      vm.setLocaleMessages();
+      vm.eventBtnsClick();
+      vm.viewFilterColumns();
+
+      window.onresize = function () {
+        vm.viewFilterColumns();
+      };
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_programs/TableContent.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/travel_programs/TableContent.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6634,14 +8810,15 @@ __webpack_require__.r(__webpack_exports__);
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
     next(function (vm) {
       to.meta.title = vm.$t('sidebar.edit_user');
-
-      if (to.params.user) {
-        vm.userEdit = to.params.user;
-        vm.form.reset();
-        vm.form.fill(vm.userEdit);
-      } else {
-        vm.getUserEdit(to);
-      }
+      vm.$nextTick(function () {
+        if (to.params.user) {
+          vm.userEdit = to.params.user;
+          vm.form.reset();
+          vm.form.fill(vm.userEdit);
+        } else {
+          vm.getUserEdit(to);
+        }
+      });
     });
   }
 });
@@ -7071,7 +9248,9 @@ __webpack_require__.r(__webpack_exports__);
         to.meta.title = vm.$t('sidebar.users');
         vm.sortOrders[vm.sortKey] = 1; // 1 = desc , -1 = asc
 
-        vm.sortBy(vm.sortKey);
+        vm.$nextTick(function () {
+          vm.sortBy(vm.sortKey);
+        });
         vm.setLocaleMessages();
         vm.eventBtnsClick();
         vm.viewFilterColumns();
@@ -49969,6 +52148,527 @@ var render = function() {
                 _vm._v(" "),
                 _c("li", { staticClass: "nav-item has-treeview" }, [
                   _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+                    _c("i", { staticClass: "nav-icon fas fa-server" }),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.$t("sidebar.travel_programs")) +
+                          "\n                            "
+                      ),
+                      _c("i", {
+                        staticClass: "fas right",
+                        class:
+                          _vm.$i18n.locale == "ar"
+                            ? "fa-angle-right"
+                            : "fa-angle-left"
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("ul", { staticClass: "nav nav-treeview" }, [
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: { name: "travel_programs" } }
+                          },
+                          [
+                            _c("i", { staticClass: "far fa-eye nav-icon" }),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                " " +
+                                  _vm._s(
+                                    _vm.$t("global.show") +
+                                      " " +
+                                      _vm.$t("sidebar.all_travel_programs")
+                                  ) +
+                                  " "
+                              )
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: { name: "create-travel_program" } }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-plus nav-icon" }),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                " " +
+                                  _vm._s(
+                                    _vm.$t("global.create") +
+                                      " " +
+                                      _vm.$t("sidebar.new_travel_program")
+                                  ) +
+                                  " "
+                              )
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item has-treeview" }, [
+                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+                    _c("i", { staticClass: "nav-icon fas fa-project-diagram" }),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.$t("sidebar.travel_categories")) +
+                          "\n                            "
+                      ),
+                      _c("i", {
+                        staticClass: "fas right",
+                        class:
+                          _vm.$i18n.locale == "ar"
+                            ? "fa-angle-right"
+                            : "fa-angle-left"
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("ul", { staticClass: "nav nav-treeview" }, [
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: { name: "travel_categories" } }
+                          },
+                          [
+                            _c("i", { staticClass: "far fa-eye nav-icon" }),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                " " +
+                                  _vm._s(
+                                    _vm.$t("global.show") +
+                                      " " +
+                                      _vm.$t("sidebar.travel_categories")
+                                  ) +
+                                  " "
+                              )
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: { name: "create-travel_category" } }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-plus nav-icon" }),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                " " +
+                                  _vm._s(
+                                    _vm.$t("global.create") +
+                                      " " +
+                                      _vm.$t("sidebar.new_travel_category")
+                                  ) +
+                                  " "
+                              )
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item has-treeview" }, [
+                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+                    _c("i", { staticClass: "nav-icon fas fa-fighter-jet" }),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.$t("sidebar.travels")) +
+                          "\n                            "
+                      ),
+                      _c("i", {
+                        staticClass: "fas right",
+                        class:
+                          _vm.$i18n.locale == "ar"
+                            ? "fa-angle-right"
+                            : "fa-angle-left"
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("ul", { staticClass: "nav nav-treeview" }, [
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: { name: "travels" } }
+                          },
+                          [
+                            _c("i", { staticClass: "far fa-eye nav-icon" }),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                " " +
+                                  _vm._s(
+                                    _vm.$t("global.show") +
+                                      " " +
+                                      _vm.$t("sidebar.all_travels")
+                                  ) +
+                                  " "
+                              )
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: { name: "create-travel" } }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-plus nav-icon" }),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                " " +
+                                  _vm._s(
+                                    _vm.$t("global.create") +
+                                      " " +
+                                      _vm.$t("sidebar.new_travel")
+                                  ) +
+                                  " "
+                              )
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item has-treeview" }, [
+                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+                    _c("i", { staticClass: "nav-icon fas fa-shopping-cart" }),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.$t("sidebar.bookings")) +
+                          "\n                            "
+                      ),
+                      _c("i", {
+                        staticClass: "fas right",
+                        class:
+                          _vm.$i18n.locale == "ar"
+                            ? "fa-angle-right"
+                            : "fa-angle-left"
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("ul", { staticClass: "nav nav-treeview" }, [
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: { name: "bookings" } }
+                          },
+                          [
+                            _c("i", { staticClass: "far fa-eye nav-icon" }),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                " " +
+                                  _vm._s(
+                                    _vm.$t("global.show") +
+                                      " " +
+                                      _vm.$t("sidebar.all_bookings")
+                                  ) +
+                                  " "
+                              )
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item has-treeview" }, [
+                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+                    _c("i", { staticClass: "nav-icon fas fa-mail-bulk" }),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.$t("sidebar.mailing_list")) +
+                          "\n                            "
+                      ),
+                      _c("i", {
+                        staticClass: "fas right",
+                        class:
+                          _vm.$i18n.locale == "ar"
+                            ? "fa-angle-right"
+                            : "fa-angle-left"
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("ul", { staticClass: "nav nav-treeview" }, [
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: { name: "mailing_list" } }
+                          },
+                          [
+                            _c("i", { staticClass: "far fa-eye nav-icon" }),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                " " +
+                                  _vm._s(
+                                    _vm.$t("global.show") +
+                                      " " +
+                                      _vm.$t("sidebar.all_mailing_list")
+                                  ) +
+                                  " "
+                              )
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item has-treeview" }, [
+                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+                    _c("i", { staticClass: "nav-icon fas fa-newspaper" }),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.$t("sidebar.blogs")) +
+                          "\n                            "
+                      ),
+                      _c("i", {
+                        staticClass: "fas right",
+                        class:
+                          _vm.$i18n.locale == "ar"
+                            ? "fa-angle-right"
+                            : "fa-angle-left"
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("ul", { staticClass: "nav nav-treeview" }, [
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: { name: "blogs" } }
+                          },
+                          [
+                            _c("i", { staticClass: "far fa-eye nav-icon" }),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                " " +
+                                  _vm._s(
+                                    _vm.$t("global.show") +
+                                      " " +
+                                      _vm.$t("sidebar.all_blogs")
+                                  ) +
+                                  " "
+                              )
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: { name: "create-blog" } }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-plus nav-icon" }),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                " " +
+                                  _vm._s(
+                                    _vm.$t("global.create") +
+                                      " " +
+                                      _vm.$t("sidebar.new_blog")
+                                  ) +
+                                  " "
+                              )
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item has-treeview" }, [
+                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+                    _c("i", { staticClass: "nav-icon fas fa-images" }),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.$t("sidebar.images")) +
+                          "\n                            "
+                      ),
+                      _c("i", {
+                        staticClass: "fas right",
+                        class:
+                          _vm.$i18n.locale == "ar"
+                            ? "fa-angle-right"
+                            : "fa-angle-left"
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("ul", { staticClass: "nav nav-treeview" }, [
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: { name: "images" } }
+                          },
+                          [
+                            _c("i", { staticClass: "far fa-eye nav-icon" }),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                " " +
+                                  _vm._s(
+                                    _vm.$t("global.show") +
+                                      " " +
+                                      _vm.$t("sidebar.all_images")
+                                  ) +
+                                  " "
+                              )
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: { name: "create-image" } }
+                          },
+                          [
+                            _c("i", { staticClass: "fas fa-plus nav-icon" }),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                " " +
+                                  _vm._s(
+                                    _vm.$t("global.create") +
+                                      " " +
+                                      _vm.$t("sidebar.new_image")
+                                  ) +
+                                  " "
+                              )
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item has-treeview" }, [
+                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
                     _c("i", { staticClass: "nav-icon fas fa-cogs" }),
                     _vm._v(" "),
                     _c("p", [
@@ -51115,6 +53815,93 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dataTables/filters/travelProgramsSelect.vue?vue&type=template&id=7ffc4004&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/dataTables/filters/travelProgramsSelect.vue?vue&type=template&id=7ffc4004& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "box column_active" }, [
+    _c("div", { staticClass: "filter filter_one" }, [
+      _c("div", { staticClass: "header" }, [
+        _vm._v(" " + _vm._s(_vm.$t("global.the_travel_program")) + " ")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "body" }, [
+        _c("div", { staticClass: "wrapper-select-item" }, [
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.tableData.travel_program_id,
+                  expression: "tableData.travel_program_id"
+                }
+              ],
+              staticClass: "custom-select custom-select-sm",
+              on: {
+                change: [
+                  function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.tableData,
+                      "travel_program_id",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  },
+                  function($event) {
+                    return _vm.$emit("getData")
+                  }
+                ]
+              }
+            },
+            [
+              _c("option", { attrs: { value: "" } }, [
+                _vm._v(_vm._s(_vm.$t("global.all")))
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.travelPrograms, function(travelProgram) {
+                return _c("option", {
+                  key: travelProgram.id,
+                  domProps: {
+                    value: travelProgram.id,
+                    textContent: _vm._s(travelProgram.name)
+                  }
+                })
+              })
+            ],
+            2
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/form/BtnCreate.vue?vue&type=template&id=2291b950&":
 /*!*****************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/form/BtnCreate.vue?vue&type=template&id=2291b950& ***!
@@ -51287,7 +54074,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        " +
+                        "\n                            " +
                           _vm._s(_vm.$t("global.more_info")) +
                           " "
                       ),
@@ -51308,7 +54095,7 @@ var render = function() {
             _c("div", { staticClass: "col-lg-3 col-6" }, [
               _c(
                 "div",
-                { staticClass: "small-box bg-warning" },
+                { staticClass: "small-box bg-light" },
                 [
                   _c("div", { staticClass: "inner" }, [
                     _c("h3", [_vm._v(_vm._s(_vm.counts.hotels))]),
@@ -51326,7 +54113,46 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        " +
+                        "\n                            " +
+                          _vm._s(_vm.$t("global.more_info")) +
+                          " "
+                      ),
+                      _c("i", {
+                        staticClass: "fas",
+                        class:
+                          _vm.$i18n.locale == "ar"
+                            ? "fa-arrow-circle-left"
+                            : "fa-arrow-circle-right"
+                      })
+                    ]
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-3 col-6" }, [
+              _c(
+                "div",
+                { staticClass: "small-box bg-success" },
+                [
+                  _c("div", { staticClass: "inner" }, [
+                    _c("h3", [_vm._v(_vm._s(_vm.counts.rooms))]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v(_vm._s(_vm.$t("sidebar.rooms")))])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "small-box-footer",
+                      attrs: { to: { name: "rooms" } }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            " +
                           _vm._s(_vm.$t("global.more_info")) +
                           " "
                       ),
@@ -51350,22 +54176,258 @@ var render = function() {
                 { staticClass: "small-box bg-danger" },
                 [
                   _c("div", { staticClass: "inner" }, [
-                    _c("h3", [_vm._v(_vm._s(_vm.counts.rooms))]),
+                    _c("h3", [_vm._v(_vm._s(_vm.counts.travel_programs))]),
                     _vm._v(" "),
-                    _c("p", [_vm._v(_vm._s(_vm.$t("sidebar.rooms")))])
+                    _c("p", [_vm._v(_vm._s(_vm.$t("sidebar.travel_programs")))])
                   ]),
                   _vm._v(" "),
-                  _vm._m(2),
+                  _vm._m(3),
                   _vm._v(" "),
                   _c(
                     "router-link",
                     {
                       staticClass: "small-box-footer",
-                      attrs: { to: { name: "rooms" } }
+                      attrs: { to: { name: "travel_programs" } }
                     },
                     [
                       _vm._v(
-                        "\n                        " +
+                        "\n                            " +
+                          _vm._s(_vm.$t("global.more_info")) +
+                          " "
+                      ),
+                      _c("i", {
+                        staticClass: "fas",
+                        class:
+                          _vm.$i18n.locale == "ar"
+                            ? "fa-arrow-circle-left"
+                            : "fa-arrow-circle-right"
+                      })
+                    ]
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-3 col-6" }, [
+              _c(
+                "div",
+                { staticClass: "small-box bg-warning" },
+                [
+                  _c("div", { staticClass: "inner" }, [
+                    _c("h3", [_vm._v(_vm._s(_vm.counts.travel_categories))]),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(_vm._s(_vm.$t("sidebar.travel_categories")))
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "small-box-footer",
+                      attrs: { to: { name: "travel_categories" } }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.$t("global.more_info")) +
+                          " "
+                      ),
+                      _c("i", {
+                        staticClass: "fas",
+                        class:
+                          _vm.$i18n.locale == "ar"
+                            ? "fa-arrow-circle-left"
+                            : "fa-arrow-circle-right"
+                      })
+                    ]
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-3 col-6" }, [
+              _c(
+                "div",
+                { staticClass: "small-box bg-info" },
+                [
+                  _c("div", { staticClass: "inner" }, [
+                    _c("h3", [_vm._v(_vm._s(_vm.counts.travels))]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v(_vm._s(_vm.$t("sidebar.travels")))])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(5),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "small-box-footer",
+                      attrs: { to: { name: "travels" } }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.$t("global.more_info")) +
+                          " "
+                      ),
+                      _c("i", {
+                        staticClass: "fas",
+                        class:
+                          _vm.$i18n.locale == "ar"
+                            ? "fa-arrow-circle-left"
+                            : "fa-arrow-circle-right"
+                      })
+                    ]
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-3 col-6" }, [
+              _c(
+                "div",
+                { staticClass: "small-box bg-dark" },
+                [
+                  _c("div", { staticClass: "inner" }, [
+                    _c("h3", [_vm._v(_vm._s(_vm.counts.bookings))]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v(_vm._s(_vm.$t("sidebar.bookings")))])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(6),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "small-box-footer",
+                      attrs: { to: { name: "bookings" } }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.$t("global.more_info")) +
+                          " "
+                      ),
+                      _c("i", {
+                        staticClass: "fas",
+                        class:
+                          _vm.$i18n.locale == "ar"
+                            ? "fa-arrow-circle-left"
+                            : "fa-arrow-circle-right"
+                      })
+                    ]
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-3 col-6" }, [
+              _c(
+                "div",
+                { staticClass: "small-box bg-light" },
+                [
+                  _c("div", { staticClass: "inner" }, [
+                    _c("h3", [_vm._v(_vm._s(_vm.counts.mailing_list))]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v(_vm._s(_vm.$t("sidebar.mailing_list")))])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(7),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "small-box-footer",
+                      attrs: { to: { name: "mailing_list" } }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.$t("global.more_info")) +
+                          " "
+                      ),
+                      _c("i", {
+                        staticClass: "fas",
+                        class:
+                          _vm.$i18n.locale == "ar"
+                            ? "fa-arrow-circle-left"
+                            : "fa-arrow-circle-right"
+                      })
+                    ]
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-3 col-6" }, [
+              _c(
+                "div",
+                { staticClass: "small-box bg-secondary" },
+                [
+                  _c("div", { staticClass: "inner" }, [
+                    _c("h3", [_vm._v(_vm._s(_vm.counts.blogs))]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v(_vm._s(_vm.$t("sidebar.blogs")))])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(8),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "small-box-footer",
+                      attrs: { to: { name: "blogs" } }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(_vm.$t("global.more_info")) +
+                          " "
+                      ),
+                      _c("i", {
+                        staticClass: "fas",
+                        class:
+                          _vm.$i18n.locale == "ar"
+                            ? "fa-arrow-circle-left"
+                            : "fa-arrow-circle-right"
+                      })
+                    ]
+                  )
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-lg-3 col-6" }, [
+              _c(
+                "div",
+                { staticClass: "small-box bg-primary" },
+                [
+                  _c("div", { staticClass: "inner" }, [
+                    _c("h3", [_vm._v(_vm._s(_vm.counts.images))]),
+                    _vm._v(" "),
+                    _c("p", [_vm._v(_vm._s(_vm.$t("sidebar.images")))])
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(9),
+                  _vm._v(" "),
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "small-box-footer",
+                      attrs: { to: { name: "images" } }
+                    },
+                    [
+                      _vm._v(
+                        "\n                            " +
                           _vm._s(_vm.$t("global.more_info")) +
                           " "
                       ),
@@ -51411,7 +54473,63 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "icon" }, [
-      _c("i", { staticClass: "fas fa-building" })
+      _c("i", { staticClass: "fas fa-cubes" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-server" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-project-diagram" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-fighter-jet" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-shopping-cart" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-mail-bulk" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-newspaper" })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "icon" }, [
+      _c("i", { staticClass: "fas fa-images" })
     ])
   }
 ]
@@ -55978,6 +59096,2204 @@ var render = function() {
                   }
                 },
                 [_c("i", { staticClass: "fa fa-trash" })]
+              )
+            ],
+            1
+          )
+        ]
+      )
+    }),
+    0
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticClass: "td-show-plus show_plus" }, [
+      _c("span", { staticClass: "btn btn-secondary btn-show-more-row" }, [
+        _c("i", { staticClass: "fa fa-plus" })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_categories/Create.vue?vue&type=template&id=210c9389&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/travel_categories/Create.vue?vue&type=template&id=210c9389& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("header-page", {
+        attrs: {
+          title:
+            _vm.$t("global.create") +
+            " " +
+            _vm.$t("sidebar.new_travel_category")
+        }
+      }),
+      _vm._v(" "),
+      _c("section", { staticClass: "content" }, [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c("div", { staticClass: "row mt-3" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "card" }, [
+                _c(
+                  "div",
+                  { staticClass: "card-header" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "btn btn-primary btn-sm",
+                        attrs: { to: { name: "travel_categories" } }
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(
+                            _vm.$t("global.show") +
+                              " " +
+                              _vm.$t("sidebar.all_travel_categories")
+                          )
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    staticClass: "form-product",
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.createTravelCategory()
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "card-body" },
+                      [
+                        _c("form-travel-category", {
+                          attrs: { typeForm: "create", form: _vm.form }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "card-footer" },
+                      [_c("btn-create", { attrs: { form: _vm.form } })],
+                      1
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_categories/Edit.vue?vue&type=template&id=1dd3ba52&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/travel_categories/Edit.vue?vue&type=template&id=1dd3ba52& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("header-page", {
+        attrs: { title: _vm.$t("sidebar.edit_travel_category") }
+      }),
+      _vm._v(" "),
+      _c("section", { staticClass: "content" }, [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c("div", { staticClass: "row mt-3" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _c(
+                    "h3",
+                    { staticClass: "m-0 mb-2 text-dark" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-primary btn-sm",
+                          attrs: { to: { name: "travel_categories" } }
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(
+                              _vm.$t("global.show") +
+                                " " +
+                                _vm.$t("sidebar.all_travel_categories")
+                            )
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    staticClass: "form-product",
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.updateTravelCategory()
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "card-body" },
+                      [
+                        _c("form-travel-category", {
+                          attrs: { typeForm: "edit", form: _vm.form }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "card-footer" },
+                      [_c("btn-update", { attrs: { form: _vm.form } })],
+                      1
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_categories/Form.vue?vue&type=template&id=a45656de&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/travel_categories/Form.vue?vue&type=template&id=a45656de& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-12 col-lg-8" }, [
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", [
+              _vm._v(
+                " " + _vm._s(_vm.$t("travel_categories_table.name")) + " "
+              ),
+              _c("span", { staticClass: "field-required" })
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.name,
+                  expression: "form.name"
+                }
+              ],
+              staticClass: "form-control",
+              class: { "is-invalid": _vm.form.errors.has("name") },
+              attrs: {
+                type: "text",
+                placeholder: _vm.$t("travel_categories_table.name")
+              },
+              domProps: { value: _vm.form.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "name", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("has-error", { attrs: { form: _vm.form, field: "name" } })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", [
+              _vm._v(
+                " " + _vm._s(_vm.$t("travel_categories_table.order")) + " "
+              )
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.order,
+                  expression: "form.order"
+                }
+              ],
+              staticClass: "form-control",
+              class: { "is-invalid": _vm.form.errors.has("order") },
+              attrs: {
+                type: "number",
+                placeholder: _vm.$t("travel_categories_table.order")
+              },
+              domProps: { value: _vm.form.order },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "order", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("has-error", { attrs: { form: _vm.form, field: "order" } })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", [
+              _vm._v(" " + _vm._s(_vm.$t("global.the_travel_program")) + " "),
+              _c("span", { staticClass: "field-required" })
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.travel_program_id,
+                    expression: "form.travel_program_id"
+                  }
+                ],
+                staticClass: "custom-select",
+                class: {
+                  "is-invalid": _vm.form.errors.has("travel_program_id")
+                },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.form,
+                      "travel_program_id",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              _vm._l(_vm.travelProgramsSelect, function(travel_program) {
+                return _c("option", {
+                  key: travel_program.id,
+                  domProps: {
+                    value: travel_program.id,
+                    textContent: _vm._s(travel_program.name)
+                  }
+                })
+              }),
+              0
+            ),
+            _vm._v(" "),
+            _c("has-error", {
+              attrs: { form: _vm.form, field: "travel_program_id" }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [
+            _vm._v(" " + _vm._s(_vm.$t("travel_categories_table.image")) + " "),
+            _c("span", { staticClass: "field-required" })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row justify-content-center" }, [
+            _c("div", { staticClass: "col-md-6" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "wrapper-drop-image",
+                  class: {
+                    "contains-image": _vm.form.image != "",
+                    "is-invalid": _vm.form.errors.has("image")
+                  },
+                  attrs: { id: "travel_category-default-image" }
+                },
+                [
+                  _c("div", { staticClass: "overlay-drop-image" }, [
+                    _c("div", { staticClass: "view-images" }, [
+                      _vm.form.image != ""
+                        ? _c("div", { staticClass: "image elevation-5" }, [
+                            _c("div", { staticClass: "img" }, [
+                              _c("img", {
+                                attrs: { src: _vm.travelCategoryImage }
+                              })
+                            ])
+                          ])
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "view-overlay",
+                        attrs: { for: "travel_category_image" }
+                      },
+                      [
+                        _c("div", { staticClass: "content-overlay" }, [
+                          _c("i", { staticClass: "icon far fa-image" }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "title" }, [
+                            _vm._v(
+                              " " + _vm._s(_vm.$t("global.drag_msg")) + " "
+                            )
+                          ])
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "custom-file-drop custom-file-input",
+                    class: { "is-invalid": _vm.form.errors.has("image") },
+                    attrs: {
+                      type: "file",
+                      id: "travel_category_image",
+                      accept: "image/*"
+                    },
+                    on: {
+                      change: function($event) {
+                        return _vm.showFiles(
+                          $event.target.files,
+                          $event.target.id
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("has-error", { attrs: { form: _vm.form, field: "image" } })
+                ],
+                1
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_categories/Index.vue?vue&type=template&id=7365f1d5&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/travel_categories/Index.vue?vue&type=template&id=7365f1d5&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("header-page", {
+        attrs: {
+          title:
+            _vm.$t("global.show") +
+            " " +
+            _vm.$t("sidebar.all_travel_categories")
+        }
+      }),
+      _vm._v(" "),
+      _c("section", { staticClass: "content" }, [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c(
+            "div",
+            { staticClass: "dataTable", attrs: { id: "travel_categories" } },
+            [
+              _c("div", { staticClass: "row mt-3" }, [
+                _c("div", { staticClass: "col-12" }, [
+                  _c("div", { staticClass: "dataTables_wrapper" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _c("div", { staticClass: "card-header" }, [
+                        _c(
+                          "div",
+                          { staticClass: "dataTables_filters" },
+                          [
+                            _c("travel-programs-select", {
+                              attrs: {
+                                tableData: _vm.tableData,
+                                travelPrograms: _vm.travelProgramsSelect
+                              },
+                              on: { getData: _vm.getData }
+                            }),
+                            _vm._v(" "),
+                            _c("trashed", {
+                              attrs: { tableData: _vm.tableData },
+                              on: { getData: _vm.getData }
+                            }),
+                            _vm._v(" "),
+                            _c("created-between", {
+                              attrs: { tableData: _vm.tableData },
+                              on: { getData: _vm.getData }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "dataTables_header" },
+                          [
+                            _c("search", {
+                              attrs: { tableData: _vm.tableData },
+                              on: { getData: _vm.getData }
+                            }),
+                            _vm._v(" "),
+                            _c("filters-columns", {
+                              attrs: {
+                                columns: _vm.columns,
+                                viewTableClasses: _vm.viewTableClasses,
+                                tableData: _vm.tableData,
+                                perPage: _vm.perPage
+                              },
+                              on: { getData: _vm.getData }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "dataTables_buttons" },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass: "btn btn-outline-secondary",
+                                    attrs: {
+                                      to: { name: "create-travel_category" },
+                                      tag: "button",
+                                      type: "button"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                                " +
+                                        _vm._s(_vm.$t("global.create")) +
+                                        "\n                                                "
+                                    ),
+                                    _c("i", { staticClass: "fa fa-plus fa-fw" })
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body table-responsive" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c(
+                            "div",
+                            { staticClass: "col-sm-12" },
+                            [
+                              _c(
+                                "table-wrapper",
+                                {
+                                  attrs: {
+                                    successResponse: _vm.successResponse,
+                                    dataTable: _vm.dataTable,
+                                    columns: _vm.columns,
+                                    columnsView: _vm.tableData.columns,
+                                    columnsExcepted:
+                                      _vm.tableData.filter.columnsExcept,
+                                    viewtableclasses:
+                                      _vm.tableData.filter.viewTable,
+                                    sortKey: _vm.sortKey,
+                                    sortOrders: _vm.sortOrders
+                                  },
+                                  on: { sort: _vm.sortBy }
+                                },
+                                [
+                                  _c("table-content", {
+                                    attrs: {
+                                      dataTable: _vm.dataTable,
+                                      tableData: _vm.tableData
+                                    },
+                                    on: {
+                                      destroyRow: _vm.destroyRow,
+                                      restoreRow: _vm.restoreRow,
+                                      forceDeleteRow: _vm.forceDeleteRow
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-footer" }, [
+                        _c(
+                          "div",
+                          { staticClass: "row-pagination" },
+                          [
+                            _c("pagination", {
+                              attrs: {
+                                pagination: _vm.pagination,
+                                totalLink: Math.ceil(
+                                  _vm.pagination.total / _vm.tableData.length
+                                )
+                              },
+                              on: {
+                                prev: function($event) {
+                                  return _vm.getData(_vm.pagination.prevPageUrl)
+                                },
+                                next: function($event) {
+                                  return _vm.getData(_vm.pagination.nextPageUrl)
+                                },
+                                gotopage: _vm.gotopage
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            ]
+          )
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_categories/TableContent.vue?vue&type=template&id=651697d0&":
+/*!****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/travel_categories/TableContent.vue?vue&type=template&id=651697d0& ***!
+  \****************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "tbody",
+    _vm._l(_vm.dataTable, function(travel_category, index) {
+      return _c(
+        "tr",
+        {
+          key: travel_category.id,
+          staticClass: "tr-general",
+          class: index % 2 == 0 ? "even" : "odd",
+          attrs: { role: "row", "data-id": travel_category.id }
+        },
+        [
+          _vm._m(0, true),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tableData.columns.indexOf("index") != -1,
+                  expression: "tableData.columns.indexOf('index') != -1"
+                }
+              ],
+              staticClass: "index"
+            },
+            [_vm._v("\n            " + _vm._s(index + 1) + "\n        ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tableData.columns.indexOf("id") != -1,
+                  expression: "tableData.columns.indexOf('id') != -1"
+                }
+              ],
+              staticClass: "id"
+            },
+            [
+              _vm._v(
+                "\n            " + _vm._s(travel_category.id) + "\n        "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tableData.columns.indexOf("name") != -1,
+                  expression: "tableData.columns.indexOf('name') != -1"
+                }
+              ],
+              staticClass: "name"
+            },
+            [
+              _vm._v(
+                "\n            " +
+                  _vm._s(_vm._f("capitalize")(travel_category.name)) +
+                  "\n        "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tableData.columns.indexOf("image") != -1,
+                  expression: "tableData.columns.indexOf('image') != -1"
+                }
+              ],
+              staticClass: "image",
+              staticStyle: { "text-align": "center" }
+            },
+            [
+              _c("img", {
+                staticClass: "avatar-table",
+                attrs: { src: _vm.$domain + "/" + travel_category.image }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tableData.columns.indexOf("order") != -1,
+                  expression: "tableData.columns.indexOf('order') != -1"
+                }
+              ],
+              staticClass: "order"
+            },
+            [
+              _vm._v(
+                "\n            " + _vm._s(travel_category.order) + "\n        "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value:
+                    _vm.tableData.columns.indexOf("travel_program_id") != -1,
+                  expression:
+                    "tableData.columns.indexOf('travel_program_id') != -1"
+                }
+              ],
+              staticClass: "travel_program_id"
+            },
+            [
+              travel_category.travel_program !== null
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass: "link-router-in-table",
+                      attrs: {
+                        href:
+                          _vm.$domain_admin +
+                          "/travel_program/" +
+                          travel_category.travel_program_id +
+                          "/edit",
+                        to: {
+                          name: "edit-travel_program",
+                          params: {
+                            id: travel_category.travel_program_id,
+                            travel_program: travel_category.travel_program
+                          }
+                        },
+                        "data-name": "edit-travel_program",
+                        "data-params":
+                          '{"travel_program":' +
+                          JSON.stringify(travel_category.travel_program) +
+                          ', "id":' +
+                          travel_category.travel_program_id +
+                          "}"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(travel_category.travel_program.name) +
+                          "\n            "
+                      )
+                    ]
+                  )
+                : _c("span", { staticClass: "badge badge-danger" }, [
+                    _vm._v(
+                      " " +
+                        _vm._s(_vm.$t("global.travel_program_is_deleted")) +
+                        " - id:" +
+                        _vm._s(travel_category.travel_program_id)
+                    )
+                  ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tableData.columns.indexOf("user_id") != -1,
+                  expression: "tableData.columns.indexOf('user_id') != -1"
+                }
+              ],
+              staticClass: "user_id"
+            },
+            [
+              travel_category.user !== null
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass: "link-router-in-table",
+                      attrs: {
+                        href:
+                          _vm.$domain_admin +
+                          "/user/" +
+                          travel_category.user_id +
+                          "/edit",
+                        to: {
+                          name: "edit-user",
+                          params: {
+                            id: travel_category.user_id,
+                            user: travel_category.user
+                          }
+                        },
+                        "data-name": "edit-user",
+                        "data-params":
+                          '{"user":' +
+                          JSON.stringify(travel_category.user) +
+                          ', "id":' +
+                          travel_category.user.id +
+                          "}"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(travel_category.user.name) +
+                          "\n            "
+                      )
+                    ]
+                  )
+                : _c("span", { staticClass: "badge badge-danger" }, [
+                    _vm._v(
+                      " " +
+                        _vm._s(_vm.$t("global.user_is_deleted")) +
+                        " - id:" +
+                        _vm._s(travel_category.user_id)
+                    )
+                  ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tableData.columns.indexOf("updated_at") != -1,
+                  expression: "tableData.columns.indexOf('updated_at') != -1"
+                }
+              ],
+              staticClass: "updated_at"
+            },
+            [
+              _c("relative-date", {
+                attrs: { date: travel_category.updated_at }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tableData.columns.indexOf("created_at") != -1,
+                  expression: "tableData.columns.indexOf('created_at') != -1"
+                }
+              ],
+              staticClass: "created_at"
+            },
+            [
+              _c("relative-date", {
+                attrs: { date: travel_category.created_at }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tableData.columns.indexOf("actions") != -1,
+                  expression: "tableData.columns.indexOf('actions') != -1"
+                }
+              ],
+              staticClass: "actions"
+            },
+            [
+              _c(
+                "router-link",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: travel_category.deleted_at == null,
+                      expression: "travel_category.deleted_at == null"
+                    }
+                  ],
+                  staticClass:
+                    "btn btn-success btn-edit-row btn-table-actions btn-sm link-router-in-table",
+                  attrs: {
+                    to: {
+                      name: "edit-travel_category",
+                      params: {
+                        travel_category: travel_category,
+                        id: travel_category.id
+                      }
+                    },
+                    href:
+                      _vm.$domain_admin +
+                      "/travel_category/" +
+                      travel_category.id +
+                      "/edit",
+                    "data-name": "edit-travel_category",
+                    "data-params":
+                      '{"travel_category":' +
+                      JSON.stringify(travel_category) +
+                      ', "id":' +
+                      travel_category.id +
+                      "}"
+                  }
+                },
+                [_c("i", { staticClass: "fa fa-edit" })]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: travel_category.deleted_at == null,
+                      expression: "travel_category.deleted_at == null"
+                    }
+                  ],
+                  staticClass:
+                    "btn btn-danger btn-delete-row btn-table-actions btn-sm",
+                  attrs: {
+                    href: _vm.$domain_admin + "/travel_category/destroy"
+                  },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.$emit("destroyRow", travel_category.id)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fa fa-trash" })]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: travel_category.deleted_at != null,
+                      expression: "travel_category.deleted_at != null"
+                    }
+                  ],
+                  staticClass:
+                    "btn btn-info btn-restore-row btn-table-actions btn-sm",
+                  attrs: {
+                    href: _vm.$domain_admin + "/travel_category/restore"
+                  },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.$emit("restoreRow", travel_category.id)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fas fa-undo-alt" })]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: travel_category.deleted_at != null,
+                      expression: "travel_category.deleted_at != null"
+                    }
+                  ],
+                  staticClass:
+                    "btn btn-danger btn-delete-row force-delete btn-table-actions btn-sm",
+                  attrs: {
+                    href: _vm.$domain_admin + "/travel_category/force-delete"
+                  },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.$emit("forceDeleteRow", travel_category.id)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "far fa-trash-alt" })]
+              )
+            ],
+            1
+          )
+        ]
+      )
+    }),
+    0
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("td", { staticClass: "td-show-plus show_plus" }, [
+      _c("span", { staticClass: "btn btn-secondary btn-show-more-row" }, [
+        _c("i", { staticClass: "fa fa-plus" })
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_programs/Create.vue?vue&type=template&id=638f4454&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/travel_programs/Create.vue?vue&type=template&id=638f4454& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("header-page", {
+        attrs: {
+          title:
+            _vm.$t("global.create") + " " + _vm.$t("sidebar.new_travel_program")
+        }
+      }),
+      _vm._v(" "),
+      _c("section", { staticClass: "content" }, [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c("div", { staticClass: "row mt-3" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "card" }, [
+                _c(
+                  "div",
+                  { staticClass: "card-header" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "btn btn-primary btn-sm",
+                        attrs: { to: { name: "travel_programs" } }
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(
+                            _vm.$t("global.show") +
+                              " " +
+                              _vm.$t("sidebar.all_travel_programs")
+                          )
+                        )
+                      ]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    staticClass: "form-product",
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.createTravelProgram()
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "card-body" },
+                      [
+                        _c("form-travel-program", {
+                          attrs: { typeForm: "create", form: _vm.form }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "card-footer" },
+                      [_c("btn-create", { attrs: { form: _vm.form } })],
+                      1
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_programs/Edit.vue?vue&type=template&id=1f5a1c64&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/travel_programs/Edit.vue?vue&type=template&id=1f5a1c64& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("header-page", {
+        attrs: { title: _vm.$t("sidebar.edit_travel_program") }
+      }),
+      _vm._v(" "),
+      _c("section", { staticClass: "content" }, [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c("div", { staticClass: "row mt-3" }, [
+            _c("div", { staticClass: "col-12" }, [
+              _c("div", { staticClass: "card" }, [
+                _c("div", { staticClass: "card-header" }, [
+                  _c(
+                    "h3",
+                    { staticClass: "m-0 mb-2 text-dark" },
+                    [
+                      _c(
+                        "router-link",
+                        {
+                          staticClass: "btn btn-primary btn-sm",
+                          attrs: { to: { name: "travel_programs" } }
+                        },
+                        [
+                          _vm._v(
+                            _vm._s(
+                              _vm.$t("global.show") +
+                                " " +
+                                _vm.$t("sidebar.all_travel_programs")
+                            )
+                          )
+                        ]
+                      )
+                    ],
+                    1
+                  )
+                ]),
+                _vm._v(" "),
+                _c(
+                  "form",
+                  {
+                    staticClass: "form-product",
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.updateTravelProgram()
+                      }
+                    }
+                  },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "card-body" },
+                      [
+                        _c("form-travel-program", {
+                          attrs: { typeForm: "edit", form: _vm.form }
+                        })
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "card-footer" },
+                      [_c("btn-update", { attrs: { form: _vm.form } })],
+                      1
+                    )
+                  ]
+                )
+              ])
+            ])
+          ])
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_programs/Form.vue?vue&type=template&id=47ce63c4&":
+/*!******************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/travel_programs/Form.vue?vue&type=template&id=47ce63c4& ***!
+  \******************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-12 col-lg-8" }, [
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", [
+              _vm._v(" " + _vm._s(_vm.$t("travel_programs_table.name")) + " "),
+              _c("span", { staticClass: "field-required" })
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.name,
+                  expression: "form.name"
+                }
+              ],
+              staticClass: "form-control",
+              class: { "is-invalid": _vm.form.errors.has("name") },
+              attrs: {
+                type: "text",
+                placeholder: _vm.$t("travel_programs_table.name")
+              },
+              domProps: { value: _vm.form.name },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "name", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("has-error", { attrs: { form: _vm.form, field: "name" } })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", [
+              _vm._v(
+                " " + _vm._s(_vm.$t("travel_programs_table.small_info")) + " "
+              )
+            ]),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.small_info,
+                  expression: "form.small_info"
+                }
+              ],
+              staticClass: "form-control textarea-form",
+              class: { "is-invalid": _vm.form.errors.has("small_info") },
+              attrs: {
+                type: "text",
+                placeholder: _vm.$t("travel_programs_table.small_info")
+              },
+              domProps: { value: _vm.form.small_info },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "small_info", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("has-error", { attrs: { form: _vm.form, field: "small_info" } })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", [
+              _vm._v(
+                " " + _vm._s(_vm.$t("travel_programs_table.big_info")) + " "
+              )
+            ]),
+            _vm._v(" "),
+            _c("textarea", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.big_info,
+                  expression: "form.big_info"
+                }
+              ],
+              staticClass: "form-control textarea-form",
+              class: { "is-invalid": _vm.form.errors.has("big_info") },
+              attrs: {
+                type: "text",
+                placeholder: _vm.$t("travel_programs_table.big_info")
+              },
+              domProps: { value: _vm.form.big_info },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "big_info", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("has-error", { attrs: { form: _vm.form, field: "big_info" } })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", [
+              _vm._v(" " + _vm._s(_vm.$t("travel_programs_table.order")) + " ")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.order,
+                  expression: "form.order"
+                }
+              ],
+              staticClass: "form-control",
+              class: { "is-invalid": _vm.form.errors.has("order") },
+              attrs: {
+                type: "number",
+                placeholder: _vm.$t("travel_programs_table.order")
+              },
+              domProps: { value: _vm.form.order },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "order", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("has-error", { attrs: { form: _vm.form, field: "order" } })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", [
+            _vm._v(" " + _vm._s(_vm.$t("travel_programs_table.image")) + " "),
+            _c("span", { staticClass: "field-required" })
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row justify-content-center" }, [
+            _c("div", { staticClass: "col-md-6" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "wrapper-drop-image",
+                  class: {
+                    "contains-image": _vm.form.image != "",
+                    "is-invalid": _vm.form.errors.has("image")
+                  },
+                  attrs: { id: "travel_program-default-image" }
+                },
+                [
+                  _c("div", { staticClass: "overlay-drop-image" }, [
+                    _c("div", { staticClass: "view-images" }, [
+                      _vm.form.image != ""
+                        ? _c("div", { staticClass: "image elevation-5" }, [
+                            _c("div", { staticClass: "img" }, [
+                              _c("img", {
+                                attrs: { src: _vm.travelProgramImage }
+                              })
+                            ])
+                          ])
+                        : _vm._e()
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "label",
+                      {
+                        staticClass: "view-overlay",
+                        attrs: { for: "travel_program_image" }
+                      },
+                      [
+                        _c("div", { staticClass: "content-overlay" }, [
+                          _c("i", { staticClass: "icon far fa-image" }),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "title" }, [
+                            _vm._v(
+                              " " + _vm._s(_vm.$t("global.drag_msg")) + " "
+                            )
+                          ])
+                        ])
+                      ]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "custom-file-drop custom-file-input",
+                    class: { "is-invalid": _vm.form.errors.has("image") },
+                    attrs: {
+                      type: "file",
+                      id: "travel_program_image",
+                      accept: "image/*"
+                    },
+                    on: {
+                      change: function($event) {
+                        return _vm.showFiles(
+                          $event.target.files,
+                          $event.target.id
+                        )
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("has-error", { attrs: { form: _vm.form, field: "image" } })
+                ],
+                1
+              )
+            ])
+          ])
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_programs/Index.vue?vue&type=template&id=0da129e8&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/travel_programs/Index.vue?vue&type=template&id=0da129e8&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("header-page", {
+        attrs: {
+          title:
+            _vm.$t("global.show") + " " + _vm.$t("sidebar.all_travel_programs")
+        }
+      }),
+      _vm._v(" "),
+      _c("section", { staticClass: "content" }, [
+        _c("div", { staticClass: "container-fluid" }, [
+          _c(
+            "div",
+            { staticClass: "dataTable", attrs: { id: "travel_programs" } },
+            [
+              _c("div", { staticClass: "row mt-3" }, [
+                _c("div", { staticClass: "col-12" }, [
+                  _c("div", { staticClass: "dataTables_wrapper" }, [
+                    _c("div", { staticClass: "card" }, [
+                      _c("div", { staticClass: "card-header" }, [
+                        _c(
+                          "div",
+                          { staticClass: "dataTables_filters" },
+                          [
+                            _c("trashed", {
+                              attrs: { tableData: _vm.tableData },
+                              on: { getData: _vm.getData }
+                            }),
+                            _vm._v(" "),
+                            _c("created-between", {
+                              attrs: { tableData: _vm.tableData },
+                              on: { getData: _vm.getData }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "dataTables_header" },
+                          [
+                            _c("search", {
+                              attrs: { tableData: _vm.tableData },
+                              on: { getData: _vm.getData }
+                            }),
+                            _vm._v(" "),
+                            _c("filters-columns", {
+                              attrs: {
+                                columns: _vm.columns,
+                                viewTableClasses: _vm.viewTableClasses,
+                                tableData: _vm.tableData,
+                                perPage: _vm.perPage
+                              },
+                              on: { getData: _vm.getData }
+                            }),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "dataTables_buttons" },
+                              [
+                                _c(
+                                  "router-link",
+                                  {
+                                    staticClass: "btn btn-outline-secondary",
+                                    attrs: {
+                                      to: { name: "create-travel_program" },
+                                      tag: "button",
+                                      type: "button"
+                                    }
+                                  },
+                                  [
+                                    _vm._v(
+                                      "\n                                                " +
+                                        _vm._s(_vm.$t("global.create")) +
+                                        "\n                                                "
+                                    ),
+                                    _c("i", { staticClass: "fa fa-plus fa-fw" })
+                                  ]
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body table-responsive" }, [
+                        _c("div", { staticClass: "row" }, [
+                          _c(
+                            "div",
+                            { staticClass: "col-sm-12" },
+                            [
+                              _c(
+                                "table-wrapper",
+                                {
+                                  attrs: {
+                                    successResponse: _vm.successResponse,
+                                    dataTable: _vm.dataTable,
+                                    columns: _vm.columns,
+                                    columnsView: _vm.tableData.columns,
+                                    columnsExcepted:
+                                      _vm.tableData.filter.columnsExcept,
+                                    viewtableclasses:
+                                      _vm.tableData.filter.viewTable,
+                                    sortKey: _vm.sortKey,
+                                    sortOrders: _vm.sortOrders
+                                  },
+                                  on: { sort: _vm.sortBy }
+                                },
+                                [
+                                  _c("table-content", {
+                                    attrs: {
+                                      dataTable: _vm.dataTable,
+                                      tableData: _vm.tableData
+                                    },
+                                    on: {
+                                      destroyRow: _vm.destroyRow,
+                                      restoreRow: _vm.restoreRow,
+                                      forceDeleteRow: _vm.forceDeleteRow
+                                    }
+                                  })
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-footer" }, [
+                        _c(
+                          "div",
+                          { staticClass: "row-pagination" },
+                          [
+                            _c("pagination", {
+                              attrs: {
+                                pagination: _vm.pagination,
+                                totalLink: Math.ceil(
+                                  _vm.pagination.total / _vm.tableData.length
+                                )
+                              },
+                              on: {
+                                prev: function($event) {
+                                  return _vm.getData(_vm.pagination.prevPageUrl)
+                                },
+                                next: function($event) {
+                                  return _vm.getData(_vm.pagination.nextPageUrl)
+                                },
+                                gotopage: _vm.gotopage
+                              }
+                            })
+                          ],
+                          1
+                        )
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            ]
+          )
+        ])
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_programs/TableContent.vue?vue&type=template&id=4260d0a5&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/travel_programs/TableContent.vue?vue&type=template&id=4260d0a5& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "tbody",
+    _vm._l(_vm.dataTable, function(travel_program, index) {
+      return _c(
+        "tr",
+        {
+          key: travel_program.id,
+          staticClass: "tr-general",
+          class: index % 2 == 0 ? "even" : "odd",
+          attrs: { role: "row", "data-id": travel_program.id }
+        },
+        [
+          _vm._m(0, true),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tableData.columns.indexOf("index") != -1,
+                  expression: "tableData.columns.indexOf('index') != -1"
+                }
+              ],
+              staticClass: "index"
+            },
+            [_vm._v("\n            " + _vm._s(index + 1) + "\n        ")]
+          ),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tableData.columns.indexOf("id") != -1,
+                  expression: "tableData.columns.indexOf('id') != -1"
+                }
+              ],
+              staticClass: "id"
+            },
+            [
+              _vm._v(
+                "\n            " + _vm._s(travel_program.id) + "\n        "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tableData.columns.indexOf("name") != -1,
+                  expression: "tableData.columns.indexOf('name') != -1"
+                }
+              ],
+              staticClass: "name"
+            },
+            [
+              _vm._v(
+                "\n            " +
+                  _vm._s(_vm._f("capitalize")(travel_program.name)) +
+                  "\n        "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tableData.columns.indexOf("image") != -1,
+                  expression: "tableData.columns.indexOf('image') != -1"
+                }
+              ],
+              staticClass: "image",
+              staticStyle: { "text-align": "center" }
+            },
+            [
+              _c("img", {
+                staticClass: "avatar-table",
+                attrs: { src: _vm.$domain + "/" + travel_program.image }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tableData.columns.indexOf("small_info") != -1,
+                  expression: "tableData.columns.indexOf('small_info') != -1"
+                }
+              ],
+              staticClass: "small_info"
+            },
+            [
+              _vm._v(
+                "\n            " +
+                  _vm._s(travel_program.small_info) +
+                  "\n        "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tableData.columns.indexOf("big_info") != -1,
+                  expression: "tableData.columns.indexOf('big_info') != -1"
+                }
+              ],
+              staticClass: "big_info"
+            },
+            [
+              _vm._v(
+                "\n            " +
+                  _vm._s(travel_program.big_info) +
+                  "\n        "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tableData.columns.indexOf("order") != -1,
+                  expression: "tableData.columns.indexOf('order') != -1"
+                }
+              ],
+              staticClass: "order"
+            },
+            [
+              _vm._v(
+                "\n            " + _vm._s(travel_program.order) + "\n        "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tableData.columns.indexOf("user_id") != -1,
+                  expression: "tableData.columns.indexOf('user_id') != -1"
+                }
+              ],
+              staticClass: "user_id"
+            },
+            [
+              travel_program.user !== null
+                ? _c(
+                    "router-link",
+                    {
+                      staticClass: "link-router-in-table",
+                      attrs: {
+                        href:
+                          _vm.$domain_admin +
+                          "/user/" +
+                          travel_program.user_id +
+                          "/edit",
+                        to: {
+                          name: "edit-user",
+                          params: {
+                            id: travel_program.user_id,
+                            user: travel_program.user
+                          }
+                        },
+                        "data-name": "edit-user",
+                        "data-params":
+                          '{"user":' +
+                          JSON.stringify(travel_program.user) +
+                          ', "id":' +
+                          travel_program.user.id +
+                          "}"
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                " +
+                          _vm._s(travel_program.user.name) +
+                          "\n            "
+                      )
+                    ]
+                  )
+                : _c("span", { staticClass: "badge badge-danger" }, [
+                    _vm._v(
+                      " " +
+                        _vm._s(_vm.$t("global.user_is_deleted")) +
+                        " - id:" +
+                        _vm._s(travel_program.user_id)
+                    )
+                  ])
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tableData.columns.indexOf("updated_at") != -1,
+                  expression: "tableData.columns.indexOf('updated_at') != -1"
+                }
+              ],
+              staticClass: "updated_at"
+            },
+            [
+              _c("relative-date", {
+                attrs: { date: travel_program.updated_at }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tableData.columns.indexOf("created_at") != -1,
+                  expression: "tableData.columns.indexOf('created_at') != -1"
+                }
+              ],
+              staticClass: "created_at"
+            },
+            [
+              _c("relative-date", {
+                attrs: { date: travel_program.created_at }
+              })
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "td",
+            {
+              directives: [
+                {
+                  name: "show",
+                  rawName: "v-show",
+                  value: _vm.tableData.columns.indexOf("actions") != -1,
+                  expression: "tableData.columns.indexOf('actions') != -1"
+                }
+              ],
+              staticClass: "actions"
+            },
+            [
+              _c(
+                "router-link",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: travel_program.deleted_at == null,
+                      expression: "travel_program.deleted_at == null"
+                    }
+                  ],
+                  staticClass:
+                    "btn btn-success btn-edit-row btn-table-actions btn-sm link-router-in-table",
+                  attrs: {
+                    to: {
+                      name: "edit-travel_program",
+                      params: {
+                        travel_program: travel_program,
+                        id: travel_program.id
+                      }
+                    },
+                    href:
+                      _vm.$domain_admin +
+                      "/travel_program/" +
+                      travel_program.id +
+                      "/edit",
+                    "data-name": "edit-travel_program",
+                    "data-params":
+                      '{"travel_program":' +
+                      JSON.stringify(travel_program) +
+                      ', "id":' +
+                      travel_program.id +
+                      "}"
+                  }
+                },
+                [_c("i", { staticClass: "fa fa-edit" })]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: travel_program.deleted_at == null,
+                      expression: "travel_program.deleted_at == null"
+                    }
+                  ],
+                  staticClass:
+                    "btn btn-danger btn-delete-row btn-table-actions btn-sm",
+                  attrs: {
+                    href: _vm.$domain_admin + "/travel_program/destroy"
+                  },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.$emit("destroyRow", travel_program.id)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fa fa-trash" })]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: travel_program.deleted_at != null,
+                      expression: "travel_program.deleted_at != null"
+                    }
+                  ],
+                  staticClass:
+                    "btn btn-info btn-restore-row btn-table-actions btn-sm",
+                  attrs: {
+                    href: _vm.$domain_admin + "/travel_program/restore"
+                  },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.$emit("restoreRow", travel_program.id)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fas fa-undo-alt" })]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: travel_program.deleted_at != null,
+                      expression: "travel_program.deleted_at != null"
+                    }
+                  ],
+                  staticClass:
+                    "btn btn-danger btn-delete-row force-delete btn-table-actions btn-sm",
+                  attrs: {
+                    href: _vm.$domain_admin + "/travel_program/force-delete"
+                  },
+                  on: {
+                    click: function($event) {
+                      $event.preventDefault()
+                      return _vm.$emit("forceDeleteRow", travel_program.id)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "far fa-trash-alt" })]
               )
             ],
             1
@@ -72847,6 +78163,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/dataTables/filters/travelProgramsSelect.vue":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/components/dataTables/filters/travelProgramsSelect.vue ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _travelProgramsSelect_vue_vue_type_template_id_7ffc4004___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./travelProgramsSelect.vue?vue&type=template&id=7ffc4004& */ "./resources/js/components/dataTables/filters/travelProgramsSelect.vue?vue&type=template&id=7ffc4004&");
+/* harmony import */ var _travelProgramsSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./travelProgramsSelect.vue?vue&type=script&lang=js& */ "./resources/js/components/dataTables/filters/travelProgramsSelect.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _travelProgramsSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _travelProgramsSelect_vue_vue_type_template_id_7ffc4004___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _travelProgramsSelect_vue_vue_type_template_id_7ffc4004___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/dataTables/filters/travelProgramsSelect.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/dataTables/filters/travelProgramsSelect.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/components/dataTables/filters/travelProgramsSelect.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_travelProgramsSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./travelProgramsSelect.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dataTables/filters/travelProgramsSelect.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_travelProgramsSelect_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/dataTables/filters/travelProgramsSelect.vue?vue&type=template&id=7ffc4004&":
+/*!************************************************************************************************************!*\
+  !*** ./resources/js/components/dataTables/filters/travelProgramsSelect.vue?vue&type=template&id=7ffc4004& ***!
+  \************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_travelProgramsSelect_vue_vue_type_template_id_7ffc4004___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./travelProgramsSelect.vue?vue&type=template&id=7ffc4004& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/dataTables/filters/travelProgramsSelect.vue?vue&type=template&id=7ffc4004&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_travelProgramsSelect_vue_vue_type_template_id_7ffc4004___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_travelProgramsSelect_vue_vue_type_template_id_7ffc4004___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/form/BtnCreate.vue":
 /*!****************************************************!*\
   !*** ./resources/js/components/form/BtnCreate.vue ***!
@@ -73332,10 +78717,10 @@ webpackContext.id = "./resources/js/lang sync recursive ^\\.\\/.*\\.json$";
 /*!***********************************!*\
   !*** ./resources/js/lang/ar.json ***!
   \***********************************/
-/*! exports provided: global, sidebar, datatable, users_table, hotels_table, rooms_table, products_types_table, winners_table, comments_table, settings_table, default */
+/*! exports provided: global, sidebar, datatable, users_table, hotels_table, rooms_table, travel_programs_table, travel_categories_table, settings_table, default */
 /***/ (function(module) {
 
-module.exports = {"global":{"home":"الرئيسية","dashboard":"الرئيسية","user":"مدير","hotel":"فندق","the_hotel":"الفندق","room":"غرفة","type":"نوع","comment":"تعليق","winner":"فائز","setting":"إعداد","no_rooms":"لا يوجد غرف","no_travels":"لا يوجد رحلات","no_hotel_features":"لا توجد مميزات للفندق","no_gallery":"لا توجد صور","no_location":"لا توجد خريطة","profile":"بروفايل","the_profile":"البروفايل","goto_travel_profile":"صفحة الرحلة","goto_hotel_profile":"صفحة الفندق","hotel_is_deleted":"الفندق محذوف","user_is_deleted":"المدير محذوف","travel_is_deleted":"الرحلة محذوفة","logout":"تسجيل الخروج","create":"إنشاء","edit":"تعديل","update":"تحديث","save":"حفظ","read":"اقرأ","all":"الكل","read_more":"اقرأ المزيد","more_info":"معرفة المزيد","choose_image":"اختر صورة","drag_msg":"اسحب الصورة ثم ضعها هنا","active":"مفعل","disactive":"غير مفعل","available":"متاح","unavailable":"غير متاح","hidden":"مخفى","visible":"ظاهر","show":"عرض","view":"عرض","close":"إغلاق","display":"إظهار","from":"من","to":"إلى","in":"فى","on":"على","delete":"حذف","deleted":"تم الحذف","force_delete":"إزالة نهائيا","remove":"إزالة","removed":"تمت الإزالة","restore":"استرجاع","restored":"تم الإسترجاع","failed":"فشل","cancel":"إلغاء","yes_delete_it":"تأكيد الحذف","yes_remove_it":"تأكيد الإزالة","yes_restore_it":"تأكيد الإسترجاع"},"sidebar":{"hotel_profile":"صفحة الفندق","travel_profile":"صفحة الرحلة","users":"المديرين","all_users":"جميع المديرين","new_user":"مدير جديد","edit_user":"تعديل مدير","hotels":"الفنادق","all_hotels":"جميع الفنادق","new_hotel":"فندق جديد","edit_hotel":"تعديل فندق","rooms":"الغرف","all_rooms":"جميع الغرف","new_room":"غرفة جديد","edit_room":"تعديل غرفة","travels":"الرحلات","all_travels":"جميع الرحلات","new_travel":"رحلة جديد","edit_travel":"تعديل رحلة","winners":"الفائزين","all_winners":"جميع الفائزين","new_winner":"فائز جديد","edit_winner":"تعديل فائز","comments":"التعليقات","all_comments":"جميع التعليقات","new_comment":"تعليق جديد","edit_comment":"تعديل تعليق","settings":"الإعدادات","all_settings":"جميع الإعدادات","new_setting":"إعداد جديد","edit_setting":"تعديل إعداد"},"datatable":{"showing":"إظهار","entries":"سجلات","from":"من","to":"إلى","of":"من","next":"التالى","prev":"السابق","empty_table":"جدول فارغ","no_data_msg":"لا يوجد بيانات فى  هذا الجدول.","trashed":"المهمل","activation":"التفعيل","display":"الظهور","rules":"الصلاحيات","sold_out":"نفاذ الكمية","discount":"الخصم","created_between":"تم إنشائه فى تاريخ","search":"بحث"},"users_table":{"id":"المعرف","name":"الإسم","email":"البريد الإلكترونى","password":"كلمة السر","repeat_password":"أعد كلمة السر","image":"الصورة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا المدير ؟","delete_success_msg":"تم حذف المدير.","delete_failed_msg":"لم يتم حذف المدير.","force_delete_msg":"هل أنت متأكد من إزالة هذا المدير بشكل نهائى ؟","force_delete_success_msg":"تم إزالة المدير بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة المدير.","restore_msg":"هل أنت متأكد من استرجاع هذا المدير ؟","restore_success_msg":"تم استرجاع المدير.","restore_failed_msg":"لم يتم استرجاع المدير.","p_create":{"success_msg":"تم إنشاء مدير جديد.","failed_msg":"لم يتم إنشاء المدير الجديد."},"p_edit":{"success_msg":"تم تحديث المدير.","failed_msg":"لم يتم تحديث هذا المدير."}},"hotels_table":{"id":"المعرف","name":"الإسم","address":"العنوان","rating":"التقيم","stars":"عدد النجوم","info":"الوصف","longitude":"خط الطول","latitude":"خط العرض","image":"الصورة","features":"المميزات","display":"الظهور","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"صور الفندق","feature_name":"اسم الميزة","plus":"للمزيد","rooms_count":"عدد الغرف","travels_count":"عدد الرحلات","hotel_info":"معلومات عن الفندق","location":"الموقع","location_map":"خريطة الموقع","show_map":"اعرض الخريطة","msg_location_map":"ابحث عن مكان الفندق ثم انقل العلامة الحمراء إلى مكان الفندق بدقة.","error_location":"لم يتم العثور على المكان ، ابحث بكلمات أخرى.","remove_location":"إزالة الموقع","delete_hotel":"حذف الفندق","edit_hotel":"تعديل الفندق","empty_rooms_msg":"هذا الفندق ليس لديه غرف مضافة.","empty_travels_msg":"هذا الفندق ليس لديه رحلات مضافة.","empty_features_msg":"هذا الفندق ليس لديه مميزات.","empty_gallery_msg":"هذا الفندق ليس لديه صور مرفوعة.","delete_msg":"هل أنت متأكد من حذف هذا الفندق ؟","delete_success_msg":"تم حذف الفندق.","delete_failed_msg":"لم يتم حذف الفندق.","force_delete_msg":"هل أنت متأكد من إزالة هذا الفندق بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الفندق بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الفندق.","restore_msg":"هل أنت متأكد من استرجاع هذا الفندق ؟","restore_success_msg":"تم استرجاع الفندق.","restore_failed_msg":"لم يتم استرجاع الفندق.","p_create":{"success_msg":"تم إنشاء فندق جديد.","failed_msg":"لم يتم إنشاء الفندق الجديد."},"p_edit":{"success_msg":"تم تحديث الفندق.","failed_msg":"لم يتم تحديث هذا الفندق."}},"rooms_table":{"id":"المعرف","info":"معلومات الغرفة","options":"الخيارات","price_night":"سعر الليلة","offer_price":"سعر العرض","offer_days":"عدد أيام العرض","display":"الظهور","user_id":"أضيف بواسطة","hotel_id":"الفندق","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","offer":"العرض","night":"ليلة","nights":"ليالى","delete_product":"حذف الغرفة","edit_product":"تعديل الغرفة","delete_msg":"هل أنت متأكد من حذف هذه الغرفة ؟","delete_success_msg":"تم حذف الغرفة.","delete_failed_msg":"لم يتم حذف الغرفة.","force_delete_msg":"هل أنت متأكد من إزالة هذه الغرفة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الغرفة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الغرفة.","restore_msg":"هل أنت متأكد من استرجاع هذه الغرفة ؟","restore_success_msg":"تم استرجاع الغرفة.","restore_failed_msg":"لم يتم استرجاع الغرفة.","p_create":{"success_msg":"تم إنشاء غرغة جديدة.","failed_msg":"لم يتم إنشاء الغرفة الجديدة."},"p_edit":{"success_msg":"تم تحديث الغرفة.","failed_msg":"لم يتم تحديث هذه الغرفة."}},"products_types_table":{"id":"المعرف","name":"اسم القسم","display":"الظهور","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا القسم ؟","delete_success_msg":"تم حذف القسم.","delete_failed_msg":"لم يتم حذف القسم.","force_delete_msg":"هل أنت متأكد من إزالة هذا القسم بشكل نهائى ؟","force_delete_success_msg":"تم إزالة القسم بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة القسم.","restore_msg":"هل أنت متأكد من استرجاع هذا القسم ؟","restore_success_msg":"تم استرجاع القسم.","restore_failed_msg":"لم يتم استرجاع القسم.","p_create":{"success_msg":"تم إنشاء قسم جديد.","failed_msg":"لم يتم إنشاء القسم الجديد."},"p_edit":{"success_msg":"تم تحديث القسم.","failed_msg":"لم يتم تحديث هذا القسم."}},"winners_table":{"id":"المعرف","user_id":"اسم المدير","product_id":"اسم المنتج","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا الفائز ؟","delete_success_msg":"تم حذف الفائز.","delete_failed_msg":"لم يتم حذف الفائز.","force_delete_msg":"هل أنت متأكد من إزالة هذا الفائز بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الفائز بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الفائز.","restore_msg":"هل أنت متأكد من استرجاع هذا الفائز ؟","restore_success_msg":"تم استرجاع الفائز.","restore_failed_msg":"لم يتم استرجاع الفائز.","p_create":{"success_msg":"تم إنشاء فائز جديد.","failed_msg":"لم يتم إنشاء الفائز الجديد."},"p_edit":{"success_msg":"تم تحديث الفائز.","failed_msg":"لم يتم تحديث هذا الفائز."}},"comments_table":{"id":"المعرف","text_comment":"التعليق","positive_product":"إيجابيات المنتج","negative_product":"سلبيات المنتج","user_id":"اسم المدير","product_id":"اسم المنتج","display":"الظهور","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا التعليق ؟","delete_success_msg":"تم حذف التعليق.","delete_failed_msg":"لم يتم حذف التعليق.","force_delete_msg":"هل أنت متأكد من إزالة هذا التعليق بشكل نهائى ؟","force_delete_success_msg":"تم إزالة التعليق بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة التعليق.","restore_msg":"هل أنت متأكد من استرجاع هذا التعليق ؟","restore_success_msg":"تم استرجاع التعليق.","restore_failed_msg":"لم يتم استرجاع التعليق.","p_create":{"success_msg":"تم إنشاء تعليق جديد.","failed_msg":"لم يتم إنشاء التعليق الجديد."},"p_edit":{"success_msg":"تم تحديث التعليق.","failed_msg":"لم يتم تحديث هذا التعليق."}},"settings_table":{"id":"المعرف","slug":"الاسم التعبيرى","name":"اسم الإعداد","value":"القيمة","type":"النوع","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","carousel":"صور الصفحة الرئيسية","setting_types":{"string":"نص قصير","text":"نص طويل","image":"صورة"},"delete_msg":"هل أنت متأكد من حذف هذا الإعداد ؟","delete_success_msg":"تم حذف الإعداد.","delete_failed_msg":"لم يتم حذف الإعداد.","force_delete_msg":"هل أنت متأكد من إزالة هذا الإعداد بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الإعداد بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الإعداد.","restore_msg":"هل أنت متأكد من استرجاع هذا الإعداد ؟","restore_success_msg":"تم استرجاع الإعداد.","restore_failed_msg":"لم يتم استرجاع الإعداد.","p_create":{"success_msg":"تم إنشاء إعداد جديد.","failed_msg":"لم يتم إنشاء الإعداد الجديد."},"p_edit":{"success_msg":"تم تحديث الإعداد.","failed_msg":"لم يتم تحديث هذا الإعداد."},"p_edit_carousel":{"success_msg":"تم تحديث صور الصفحة الرئيسية.","failed_msg":"لم يتم تحديث صور الصفحة الرئيسية."}}};
+module.exports = {"global":{"home":"الرئيسية","dashboard":"الرئيسية","user":"مدير","hotel":"فندق","the_hotel":"الفندق","room":"غرفة","the_travel_program":"برنامج الرحلة","type":"نوع","comment":"تعليق","winner":"فائز","setting":"إعداد","no_rooms":"لا يوجد غرف","no_travels":"لا يوجد رحلات","no_hotel_features":"لا توجد مميزات للفندق","no_gallery":"لا توجد صور","no_location":"لا توجد خريطة","profile":"بروفايل","the_profile":"البروفايل","goto_travel_profile":"صفحة الرحلة","goto_hotel_profile":"صفحة الفندق","hotel_is_deleted":"الفندق محذوف","user_is_deleted":"المدير محذوف","travel_program_is_deleted":"برنامج الرحلة محذوف","travel_category_is_deleted":"قسم الرحلة محذوف","travel_is_deleted":"الرحلة محذوفة","logout":"تسجيل الخروج","create":"إنشاء","edit":"تعديل","update":"تحديث","save":"حفظ","read":"اقرأ","all":"الكل","read_more":"اقرأ المزيد","more_info":"معرفة المزيد","choose_image":"اختر صورة","drag_msg":"اسحب الصورة ثم ضعها هنا","active":"مفعل","disactive":"غير مفعل","available":"متاح","unavailable":"غير متاح","hidden":"مخفى","visible":"ظاهر","show":"عرض","view":"عرض","close":"إغلاق","display":"إظهار","from":"من","to":"إلى","in":"فى","on":"على","delete":"حذف","deleted":"تم الحذف","force_delete":"إزالة نهائيا","remove":"إزالة","removed":"تمت الإزالة","restore":"استرجاع","restored":"تم الإسترجاع","failed":"فشل","cancel":"إلغاء","yes_delete_it":"تأكيد الحذف","yes_remove_it":"تأكيد الإزالة","yes_restore_it":"تأكيد الإسترجاع"},"sidebar":{"hotel_profile":"صفحة الفندق","travel_profile":"صفحة الرحلة","users":"المديرين","all_users":"جميع المديرين","new_user":"مدير جديد","edit_user":"تعديل مدير","hotels":"الفنادق","all_hotels":"جميع الفنادق","new_hotel":"فندق جديد","edit_hotel":"تعديل فندق","rooms":"الغرف","all_rooms":"جميع الغرف","new_room":"غرفة جديد","edit_room":"تعديل غرفة","travel_programs":"برامج الرحلات","all_travel_programs":"جميع برامج الرحلات","new_travel_program":"برنامج رحلة جديد","edit_travel_program":"تعديل برنامج رحلة","travel_categories":"أقسام الرحلات","all_travel_categories":"جميع أقسام الرحلات","new_travel_category":"قسم رحلات جديد","edit_travel_category":"تعديل قسم رحلات","travels":"الرحلات","all_travels":"جميع الرحلات","new_travel":"رحلة جديدة","edit_travel":"تعديل رحلة","bookings":"الحجوزات","all_bookings":"جميع الحجوزات","new_booking":"حجز جديد","edit_booking":"تعديل حجز","mailing_list":"القائمة البريدية","all_mailing_list":"جميع البريدات الإليكترونية","new_mailing_list":"بريد جديد","edit_mailing_list":"تعديل بريد","blogs":"المدونات","all_blogs":"جميع المدونات","new_blog":"مدونة جديدة","edit_blog":"تعديل مدونة","images":"الصور","all_images":"جميع الصور","new_image":"صورة جديدة","edit_image":"تعديل صورة","settings":"الإعدادات","all_settings":"جميع الإعدادات","new_setting":"إعداد جديد","edit_setting":"تعديل إعداد"},"datatable":{"showing":"إظهار","entries":"سجلات","from":"من","to":"إلى","of":"من","next":"التالى","prev":"السابق","empty_table":"جدول فارغ","no_data_msg":"لا يوجد بيانات فى  هذا الجدول.","trashed":"المهمل","activation":"التفعيل","display":"الظهور","rules":"الصلاحيات","sold_out":"نفاذ الكمية","discount":"الخصم","created_between":"تم إنشائه فى تاريخ","search":"بحث"},"users_table":{"id":"المعرف","name":"الإسم","email":"البريد الإلكترونى","password":"كلمة السر","repeat_password":"أعد كلمة السر","image":"الصورة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا المدير ؟","delete_success_msg":"تم حذف المدير.","delete_failed_msg":"لم يتم حذف المدير.","force_delete_msg":"هل أنت متأكد من إزالة هذا المدير بشكل نهائى ؟","force_delete_success_msg":"تم إزالة المدير بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة المدير.","restore_msg":"هل أنت متأكد من استرجاع هذا المدير ؟","restore_success_msg":"تم استرجاع المدير.","restore_failed_msg":"لم يتم استرجاع المدير.","p_create":{"success_msg":"تم إنشاء مدير جديد.","failed_msg":"لم يتم إنشاء المدير الجديد."},"p_edit":{"success_msg":"تم تحديث المدير.","failed_msg":"لم يتم تحديث هذا المدير."}},"hotels_table":{"id":"المعرف","name":"الإسم","address":"العنوان","rating":"التقيم","stars":"عدد النجوم","info":"الوصف","longitude":"خط الطول","latitude":"خط العرض","image":"الصورة","features":"المميزات","display":"الظهور","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"صور الفندق","feature_name":"اسم الميزة","plus":"للمزيد","rooms_count":"عدد الغرف","travels_count":"عدد الرحلات","hotel_info":"معلومات عن الفندق","location":"الموقع","location_map":"خريطة الموقع","show_map":"اعرض الخريطة","msg_location_map":"ابحث عن مكان الفندق ثم انقل العلامة الحمراء إلى مكان الفندق بدقة.","error_location":"لم يتم العثور على المكان ، ابحث بكلمات أخرى.","remove_location":"إزالة الموقع","delete_hotel":"حذف الفندق","edit_hotel":"تعديل الفندق","empty_rooms_msg":"هذا الفندق ليس لديه غرف مضافة.","empty_travels_msg":"هذا الفندق ليس لديه رحلات مضافة.","empty_features_msg":"هذا الفندق ليس لديه مميزات.","empty_gallery_msg":"هذا الفندق ليس لديه صور مرفوعة.","delete_msg":"هل أنت متأكد من حذف هذا الفندق ؟","delete_success_msg":"تم حذف الفندق.","delete_failed_msg":"لم يتم حذف الفندق.","force_delete_msg":"هل أنت متأكد من إزالة هذا الفندق بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الفندق بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الفندق.","restore_msg":"هل أنت متأكد من استرجاع هذا الفندق ؟","restore_success_msg":"تم استرجاع الفندق.","restore_failed_msg":"لم يتم استرجاع الفندق.","p_create":{"success_msg":"تم إنشاء فندق جديد.","failed_msg":"لم يتم إنشاء الفندق الجديد."},"p_edit":{"success_msg":"تم تحديث الفندق.","failed_msg":"لم يتم تحديث هذا الفندق."}},"rooms_table":{"id":"المعرف","info":"معلومات الغرفة","options":"الخيارات","price_night":"سعر الليلة","offer_price":"سعر العرض","offer_days":"عدد أيام العرض","display":"الظهور","user_id":"أضيف بواسطة","hotel_id":"الفندق","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","offer":"العرض","night":"ليلة","nights":"ليالى","delete_room":"حذف الغرفة","edit_room":"تعديل الغرفة","delete_msg":"هل أنت متأكد من حذف هذه الغرفة ؟","delete_success_msg":"تم حذف الغرفة.","delete_failed_msg":"لم يتم حذف الغرفة.","force_delete_msg":"هل أنت متأكد من إزالة هذه الغرفة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الغرفة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الغرفة.","restore_msg":"هل أنت متأكد من استرجاع هذه الغرفة ؟","restore_success_msg":"تم استرجاع الغرفة.","restore_failed_msg":"لم يتم استرجاع الغرفة.","p_create":{"success_msg":"تم إنشاء غرغة جديدة.","failed_msg":"لم يتم إنشاء الغرفة الجديدة."},"p_edit":{"success_msg":"تم تحديث الغرفة.","failed_msg":"لم يتم تحديث هذه الغرفة."}},"travel_programs_table":{"id":"المعرف","name":"اسم البرنامج","image":"الخلفية","small_info":"معلومات قليلة","big_info":"معلومات كثيرة","order":"الترتيب","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_travel_program":"حذف البرنامج","edit_travel_program":"تعديل البرنامج","delete_msg":"هل أنت متأكد من حذف هذا البرنامج ؟","delete_success_msg":"تم حذف البرنامج.","delete_failed_msg":"لم يتم حذف البرنامج.","force_delete_msg":"هل أنت متأكد من إزالة هذا البرنامج بشكل نهائى ؟","force_delete_success_msg":"تم إزالة البرنامج بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة البرنامج.","restore_msg":"هل أنت متأكد من استرجاع هذا البرنامج ؟","restore_success_msg":"تم استرجاع البرنامج.","restore_failed_msg":"لم يتم استرجاع البرنامج.","p_create":{"success_msg":"تم إنشاء برنامج جديد.","failed_msg":"لم يتم إنشاء البرنامج الجديد."},"p_edit":{"success_msg":"تم تحديث البرنامج.","failed_msg":"لم يتم تحديث هذه البرنامج."}},"travel_categories_table":{"id":"المعرف","name":"اسم القسم","image":"الخلفية","travel_program_id":"برنامج الرحلات","order":"الترتيب","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_travel_category":"حذف القسم","edit_travel_category":"تعديل القسم","delete_msg":"هل أنت متأكد من حذف هذا القسم ؟","delete_success_msg":"تم حذف القسم.","delete_failed_msg":"لم يتم حذف القسم.","force_delete_msg":"هل أنت متأكد من إزالة هذا القسم بشكل نهائى ؟","force_delete_success_msg":"تم إزالة القسم بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة القسم.","restore_msg":"هل أنت متأكد من استرجاع هذا القسم ؟","restore_success_msg":"تم استرجاع القسم.","restore_failed_msg":"لم يتم استرجاع القسم.","p_create":{"success_msg":"تم إنشاء قسم جديد.","failed_msg":"لم يتم إنشاء القسم الجديد."},"p_edit":{"success_msg":"تم تحديث القسم.","failed_msg":"لم يتم تحديث هذه القسم."}},"settings_table":{"id":"المعرف","slug":"الاسم التعبيرى","name":"اسم الإعداد","value":"القيمة","type":"النوع","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","carousel":"صور الصفحة الرئيسية","setting_types":{"string":"نص قصير","text":"نص طويل","image":"صورة"},"delete_msg":"هل أنت متأكد من حذف هذا الإعداد ؟","delete_success_msg":"تم حذف الإعداد.","delete_failed_msg":"لم يتم حذف الإعداد.","force_delete_msg":"هل أنت متأكد من إزالة هذا الإعداد بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الإعداد بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الإعداد.","restore_msg":"هل أنت متأكد من استرجاع هذا الإعداد ؟","restore_success_msg":"تم استرجاع الإعداد.","restore_failed_msg":"لم يتم استرجاع الإعداد.","p_create":{"success_msg":"تم إنشاء إعداد جديد.","failed_msg":"لم يتم إنشاء الإعداد الجديد."},"p_edit":{"success_msg":"تم تحديث الإعداد.","failed_msg":"لم يتم تحديث هذا الإعداد."},"p_edit_carousel":{"success_msg":"تم تحديث صور الصفحة الرئيسية.","failed_msg":"لم يتم تحديث صور الصفحة الرئيسية."}}};
 
 /***/ }),
 
@@ -76941,33 +82326,42 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_rooms_Index__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./views/rooms/Index */ "./resources/js/views/rooms/Index.vue");
 /* harmony import */ var _views_rooms_Create__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./views/rooms/Create */ "./resources/js/views/rooms/Create.vue");
 /* harmony import */ var _views_rooms_Edit__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./views/rooms/Edit */ "./resources/js/views/rooms/Edit.vue");
-/* harmony import */ var _views_settings_Index__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./views/settings/Index */ "./resources/js/views/settings/Index.vue");
-/* harmony import */ var _views_settings_Create__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./views/settings/Create */ "./resources/js/views/settings/Create.vue");
-/* harmony import */ var _views_settings_Edit__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./views/settings/Edit */ "./resources/js/views/settings/Edit.vue");
+/* harmony import */ var _views_travel_programs_Index__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./views/travel_programs/Index */ "./resources/js/views/travel_programs/Index.vue");
+/* harmony import */ var _views_travel_programs_Create__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./views/travel_programs/Create */ "./resources/js/views/travel_programs/Create.vue");
+/* harmony import */ var _views_travel_programs_Edit__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./views/travel_programs/Edit */ "./resources/js/views/travel_programs/Edit.vue");
+/* harmony import */ var _views_travel_categories_Index__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./views/travel_categories/Index */ "./resources/js/views/travel_categories/Index.vue");
+/* harmony import */ var _views_travel_categories_Create__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./views/travel_categories/Create */ "./resources/js/views/travel_categories/Create.vue");
+/* harmony import */ var _views_travel_categories_Edit__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./views/travel_categories/Edit */ "./resources/js/views/travel_categories/Edit.vue");
+/* harmony import */ var _views_settings_Index__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./views/settings/Index */ "./resources/js/views/settings/Index.vue");
+/* harmony import */ var _views_settings_Create__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./views/settings/Create */ "./resources/js/views/settings/Create.vue");
+/* harmony import */ var _views_settings_Edit__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./views/settings/Edit */ "./resources/js/views/settings/Edit.vue");
 
  // default layout and dashboard
 
 
  // import DashboardTest from './views/DashboardTest'
-// users components
+// users
 
 
 
- // hotels components
+ // hotels
 
 
 
 
- // rooms components
+ // rooms
 
 
 
- // companies components
-// import Companies from './views/companies/Index'
-// import CreateCompany from './views/companies/CreateCompany'
-// import EditCompany from './views/companies/EditCompany'
-// import CompanyProfile from './views/companies/CompanyProfile'
-// settings components
+ // travel programs
+
+
+
+ // travel categories
+
+
+
+ // settings
 
 
 
@@ -77039,42 +82433,47 @@ var vueRouter = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       name: 'edit-room',
       component: _views_rooms_Edit__WEBPACK_IMPORTED_MODULE_13__["default"],
       props: true
-    }, ////////////////// company routes ///////////////////
-    // {
-    //     path: 'companies',
-    //     name: 'companies',
-    //     component: Companies
-    // },
-    // {
-    //     path: 'company/create',
-    //     name: 'create-company',
-    //     component: CreateCompany
-    // },
-    // {
-    //     path: 'company/:id/edit',
-    //     name: 'edit-company',
-    //     component: EditCompany,
-    //     props: true
-    // },
-    // {
-    //     path: 'company/profile/:id',
-    //     name: 'company-profile',
-    //     component: CompanyProfile,
-    //     props: true
-    // },
-    ////////////////// settings routes ///////////////////
+    }, ////////////////// travel programs routes ///////////////////
+    {
+      path: 'travel_programs',
+      name: 'travel_programs',
+      component: _views_travel_programs_Index__WEBPACK_IMPORTED_MODULE_14__["default"]
+    }, {
+      path: 'travel_program/create',
+      name: 'create-travel_program',
+      component: _views_travel_programs_Create__WEBPACK_IMPORTED_MODULE_15__["default"]
+    }, {
+      path: 'travel_program/:id/edit',
+      name: 'edit-travel_program',
+      component: _views_travel_programs_Edit__WEBPACK_IMPORTED_MODULE_16__["default"],
+      props: true
+    }, ////////////////// travel categories routes ///////////////////
+    {
+      path: 'travel_categories',
+      name: 'travel_categories',
+      component: _views_travel_categories_Index__WEBPACK_IMPORTED_MODULE_17__["default"]
+    }, {
+      path: 'travel_category/create',
+      name: 'create-travel_category',
+      component: _views_travel_categories_Create__WEBPACK_IMPORTED_MODULE_18__["default"]
+    }, {
+      path: 'travel_category/:id/edit',
+      name: 'edit-travel_category',
+      component: _views_travel_categories_Edit__WEBPACK_IMPORTED_MODULE_19__["default"],
+      props: true
+    }, ////////////////// settings routes ///////////////////
     {
       path: 'settings',
       name: 'settings',
-      component: _views_settings_Index__WEBPACK_IMPORTED_MODULE_14__["default"]
+      component: _views_settings_Index__WEBPACK_IMPORTED_MODULE_20__["default"]
     }, {
       path: 'setting/create',
       name: 'create-setting',
-      component: _views_settings_Create__WEBPACK_IMPORTED_MODULE_15__["default"]
+      component: _views_settings_Create__WEBPACK_IMPORTED_MODULE_21__["default"]
     }, {
       path: 'setting/:id/edit',
       name: 'edit-setting',
-      component: _views_settings_Edit__WEBPACK_IMPORTED_MODULE_16__["default"],
+      component: _views_settings_Edit__WEBPACK_IMPORTED_MODULE_22__["default"],
       props: true
     }]
   }, {
@@ -78371,6 +83770,696 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableContent_vue_vue_type_template_id_199a9868___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableContent_vue_vue_type_template_id_199a9868___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_categories/Create.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/views/travel_categories/Create.vue ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Create_vue_vue_type_template_id_210c9389___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Create.vue?vue&type=template&id=210c9389& */ "./resources/js/views/travel_categories/Create.vue?vue&type=template&id=210c9389&");
+/* harmony import */ var _Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Create.vue?vue&type=script&lang=js& */ "./resources/js/views/travel_categories/Create.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Create_vue_vue_type_template_id_210c9389___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Create_vue_vue_type_template_id_210c9389___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/travel_categories/Create.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_categories/Create.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/views/travel_categories/Create.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Create.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_categories/Create.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_categories/Create.vue?vue&type=template&id=210c9389&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/views/travel_categories/Create.vue?vue&type=template&id=210c9389& ***!
+  \****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_template_id_210c9389___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Create.vue?vue&type=template&id=210c9389& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_categories/Create.vue?vue&type=template&id=210c9389&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_template_id_210c9389___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_template_id_210c9389___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_categories/Edit.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/views/travel_categories/Edit.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Edit_vue_vue_type_template_id_1dd3ba52___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Edit.vue?vue&type=template&id=1dd3ba52& */ "./resources/js/views/travel_categories/Edit.vue?vue&type=template&id=1dd3ba52&");
+/* harmony import */ var _Edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Edit.vue?vue&type=script&lang=js& */ "./resources/js/views/travel_categories/Edit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Edit_vue_vue_type_template_id_1dd3ba52___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Edit_vue_vue_type_template_id_1dd3ba52___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/travel_categories/Edit.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_categories/Edit.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/views/travel_categories/Edit.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Edit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_categories/Edit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_categories/Edit.vue?vue&type=template&id=1dd3ba52&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/views/travel_categories/Edit.vue?vue&type=template&id=1dd3ba52& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_template_id_1dd3ba52___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Edit.vue?vue&type=template&id=1dd3ba52& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_categories/Edit.vue?vue&type=template&id=1dd3ba52&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_template_id_1dd3ba52___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_template_id_1dd3ba52___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_categories/Form.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/views/travel_categories/Form.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Form_vue_vue_type_template_id_a45656de___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Form.vue?vue&type=template&id=a45656de& */ "./resources/js/views/travel_categories/Form.vue?vue&type=template&id=a45656de&");
+/* harmony import */ var _Form_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Form.vue?vue&type=script&lang=js& */ "./resources/js/views/travel_categories/Form.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Form_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Form_vue_vue_type_template_id_a45656de___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Form_vue_vue_type_template_id_a45656de___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/travel_categories/Form.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_categories/Form.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/views/travel_categories/Form.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Form.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_categories/Form.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_categories/Form.vue?vue&type=template&id=a45656de&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/views/travel_categories/Form.vue?vue&type=template&id=a45656de& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_template_id_a45656de___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Form.vue?vue&type=template&id=a45656de& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_categories/Form.vue?vue&type=template&id=a45656de&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_template_id_a45656de___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_template_id_a45656de___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_categories/Index.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/views/travel_categories/Index.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Index_vue_vue_type_template_id_7365f1d5_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Index.vue?vue&type=template&id=7365f1d5&scoped=true& */ "./resources/js/views/travel_categories/Index.vue?vue&type=template&id=7365f1d5&scoped=true&");
+/* harmony import */ var _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Index.vue?vue&type=script&lang=js& */ "./resources/js/views/travel_categories/Index.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Index_vue_vue_type_template_id_7365f1d5_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Index_vue_vue_type_template_id_7365f1d5_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "7365f1d5",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/travel_categories/Index.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_categories/Index.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/views/travel_categories/Index.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_categories/Index.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_categories/Index.vue?vue&type=template&id=7365f1d5&scoped=true&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/views/travel_categories/Index.vue?vue&type=template&id=7365f1d5&scoped=true& ***!
+  \***************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_7365f1d5_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Index.vue?vue&type=template&id=7365f1d5&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_categories/Index.vue?vue&type=template&id=7365f1d5&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_7365f1d5_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_7365f1d5_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_categories/TableContent.vue":
+/*!***************************************************************!*\
+  !*** ./resources/js/views/travel_categories/TableContent.vue ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TableContent_vue_vue_type_template_id_651697d0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TableContent.vue?vue&type=template&id=651697d0& */ "./resources/js/views/travel_categories/TableContent.vue?vue&type=template&id=651697d0&");
+/* harmony import */ var _TableContent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableContent.vue?vue&type=script&lang=js& */ "./resources/js/views/travel_categories/TableContent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TableContent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TableContent_vue_vue_type_template_id_651697d0___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TableContent_vue_vue_type_template_id_651697d0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/travel_categories/TableContent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_categories/TableContent.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/views/travel_categories/TableContent.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TableContent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./TableContent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_categories/TableContent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TableContent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_categories/TableContent.vue?vue&type=template&id=651697d0&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/views/travel_categories/TableContent.vue?vue&type=template&id=651697d0& ***!
+  \**********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableContent_vue_vue_type_template_id_651697d0___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./TableContent.vue?vue&type=template&id=651697d0& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_categories/TableContent.vue?vue&type=template&id=651697d0&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableContent_vue_vue_type_template_id_651697d0___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableContent_vue_vue_type_template_id_651697d0___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_programs/Create.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/views/travel_programs/Create.vue ***!
+  \*******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Create_vue_vue_type_template_id_638f4454___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Create.vue?vue&type=template&id=638f4454& */ "./resources/js/views/travel_programs/Create.vue?vue&type=template&id=638f4454&");
+/* harmony import */ var _Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Create.vue?vue&type=script&lang=js& */ "./resources/js/views/travel_programs/Create.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Create_vue_vue_type_template_id_638f4454___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Create_vue_vue_type_template_id_638f4454___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/travel_programs/Create.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_programs/Create.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/views/travel_programs/Create.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Create.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_programs/Create.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_programs/Create.vue?vue&type=template&id=638f4454&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/views/travel_programs/Create.vue?vue&type=template&id=638f4454& ***!
+  \**************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_template_id_638f4454___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Create.vue?vue&type=template&id=638f4454& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_programs/Create.vue?vue&type=template&id=638f4454&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_template_id_638f4454___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Create_vue_vue_type_template_id_638f4454___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_programs/Edit.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/views/travel_programs/Edit.vue ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Edit_vue_vue_type_template_id_1f5a1c64___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Edit.vue?vue&type=template&id=1f5a1c64& */ "./resources/js/views/travel_programs/Edit.vue?vue&type=template&id=1f5a1c64&");
+/* harmony import */ var _Edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Edit.vue?vue&type=script&lang=js& */ "./resources/js/views/travel_programs/Edit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Edit_vue_vue_type_template_id_1f5a1c64___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Edit_vue_vue_type_template_id_1f5a1c64___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/travel_programs/Edit.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_programs/Edit.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/views/travel_programs/Edit.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Edit.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_programs/Edit.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_programs/Edit.vue?vue&type=template&id=1f5a1c64&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/views/travel_programs/Edit.vue?vue&type=template&id=1f5a1c64& ***!
+  \************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_template_id_1f5a1c64___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Edit.vue?vue&type=template&id=1f5a1c64& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_programs/Edit.vue?vue&type=template&id=1f5a1c64&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_template_id_1f5a1c64___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Edit_vue_vue_type_template_id_1f5a1c64___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_programs/Form.vue":
+/*!*****************************************************!*\
+  !*** ./resources/js/views/travel_programs/Form.vue ***!
+  \*****************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Form_vue_vue_type_template_id_47ce63c4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Form.vue?vue&type=template&id=47ce63c4& */ "./resources/js/views/travel_programs/Form.vue?vue&type=template&id=47ce63c4&");
+/* harmony import */ var _Form_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Form.vue?vue&type=script&lang=js& */ "./resources/js/views/travel_programs/Form.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Form_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Form_vue_vue_type_template_id_47ce63c4___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Form_vue_vue_type_template_id_47ce63c4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/travel_programs/Form.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_programs/Form.vue?vue&type=script&lang=js&":
+/*!******************************************************************************!*\
+  !*** ./resources/js/views/travel_programs/Form.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Form.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_programs/Form.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_programs/Form.vue?vue&type=template&id=47ce63c4&":
+/*!************************************************************************************!*\
+  !*** ./resources/js/views/travel_programs/Form.vue?vue&type=template&id=47ce63c4& ***!
+  \************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_template_id_47ce63c4___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Form.vue?vue&type=template&id=47ce63c4& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_programs/Form.vue?vue&type=template&id=47ce63c4&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_template_id_47ce63c4___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Form_vue_vue_type_template_id_47ce63c4___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_programs/Index.vue":
+/*!******************************************************!*\
+  !*** ./resources/js/views/travel_programs/Index.vue ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Index_vue_vue_type_template_id_0da129e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Index.vue?vue&type=template&id=0da129e8&scoped=true& */ "./resources/js/views/travel_programs/Index.vue?vue&type=template&id=0da129e8&scoped=true&");
+/* harmony import */ var _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Index.vue?vue&type=script&lang=js& */ "./resources/js/views/travel_programs/Index.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Index_vue_vue_type_template_id_0da129e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Index_vue_vue_type_template_id_0da129e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "0da129e8",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/travel_programs/Index.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_programs/Index.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/views/travel_programs/Index.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_programs/Index.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_programs/Index.vue?vue&type=template&id=0da129e8&scoped=true&":
+/*!*************************************************************************************************!*\
+  !*** ./resources/js/views/travel_programs/Index.vue?vue&type=template&id=0da129e8&scoped=true& ***!
+  \*************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_0da129e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Index.vue?vue&type=template&id=0da129e8&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_programs/Index.vue?vue&type=template&id=0da129e8&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_0da129e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_0da129e8_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_programs/TableContent.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/views/travel_programs/TableContent.vue ***!
+  \*************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _TableContent_vue_vue_type_template_id_4260d0a5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TableContent.vue?vue&type=template&id=4260d0a5& */ "./resources/js/views/travel_programs/TableContent.vue?vue&type=template&id=4260d0a5&");
+/* harmony import */ var _TableContent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableContent.vue?vue&type=script&lang=js& */ "./resources/js/views/travel_programs/TableContent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _TableContent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TableContent_vue_vue_type_template_id_4260d0a5___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TableContent_vue_vue_type_template_id_4260d0a5___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/travel_programs/TableContent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_programs/TableContent.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/views/travel_programs/TableContent.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TableContent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./TableContent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_programs/TableContent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TableContent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/travel_programs/TableContent.vue?vue&type=template&id=4260d0a5&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/views/travel_programs/TableContent.vue?vue&type=template&id=4260d0a5& ***!
+  \********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableContent_vue_vue_type_template_id_4260d0a5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./TableContent.vue?vue&type=template&id=4260d0a5& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/travel_programs/TableContent.vue?vue&type=template&id=4260d0a5&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableContent_vue_vue_type_template_id_4260d0a5___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableContent_vue_vue_type_template_id_4260d0a5___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

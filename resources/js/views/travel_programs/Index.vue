@@ -6,11 +6,11 @@
 <template>
     <div>
         <!-- Content Header (Page header) -->
-        <header-page v-if="this.$route.name == 'users'" :title="$t('global.show') + ' ' + $t('sidebar.all_users')"></header-page>
+        <header-page :title="$t('global.show') + ' ' + $t('sidebar.all_travel_programs')"></header-page>
         <!-- /.content-header -->
         <section class="content">
             <div class="container-fluid">
-                <div class="dataTable" id="users">
+                <div class="dataTable" id="travel_programs">
                     <div class="row mt-3">
                         <div class="col-12">
                             <div class="dataTables_wrapper">
@@ -54,12 +54,9 @@
 
                                             <!-- dataTables_buttons -->
                                             <div class="dataTables_buttons">
-                                                <router-link
-                                                    tag="button"
-                                                    :to="{name: 'create-user'}"
+                                                <router-link :to="{name: 'create-travel_program'}" tag="button"
                                                     type="button"
                                                     class="btn btn-outline-secondary"
-                                                    v-if="this.$route.name == 'users'"
                                                 >
                                                     {{ $t('global.create') }}
                                                     <i class="fa fa-plus fa-fw"></i>
@@ -117,10 +114,10 @@
                     </div> <!-- /.row -->
                 </div> <!-- /.dataTable -->
             </div><!--/. container-fluid -->
+
         </section>
     </div>
 </template>
-
 
 
 <script>
@@ -133,7 +130,7 @@ import MixinsDatatable from "./../../mixins/MixinsDatatable"
 
 export default {
     mixins: [MixinsDatatable],
-    components: {
+        components: {
         Trashed,
         CreatedBetween,
         Search,
@@ -143,93 +140,94 @@ export default {
     let self = this;
     let sortOrders = {};
     let columns = [
-        { label: "<i class='fa fa-plus'></i>", name: "show_plus" },
-        { label: "#", name: "index" },
-        { label: "ID", name: "id" },
-        { label: "Name", name: "name" },
-        { label: "Email", name: "email" },
-        { label: "Avatar", name: "image" },
-        { label: "Updated at", name: "updated_at" },
-        { label: "Registered", name: "created_at" },
-        { label: "Actions", name: "actions" }
+      { label: "<i class='fa fa-plus'></i>", name: "show_plus" },
+      { label: "#", name: "index" },
+      { label: "ID", name: "id" },
+      { label: "Name", name: "name" },
+      { label: "Image", name: "image" },
+      { label: "Small info", name: "small_info" },
+      { label: "Big info", name: "big_info" },
+      { label: "Order", name: "order" },
+      { label: "Created by", name: "user_id" },
+      { label: "Updated at", name: "updated_at" },
+      { label: "Created at", name: "created_at" },
+      { label: "Actions", name: "actions" }
     ];
     columns.forEach(column => {
-        sortOrders[column.name] = -1;
+      sortOrders[column.name] = -1;
     });
     return {
-        idPage: 'users',
-        urlGetDataTable: '/users',
-        columns: columns,
-        sortOrders: sortOrders,
-        tableData: {
-            draw: 0,
-            length: 10,
-            search: "",
-            sortBy: 'id',
-            trashed: 1,
-            from_date: "",
-            to_date: "",
-            dir: "",
-            // columns of filter sorting [in select menu]
-            columns: [
-                "index",
-                "id",
-                "name",
-                "email",
-                "image",
-                "updated_at",
-                "created_at",
-                "actions"
-            ],
-            filter: {
-                // columns excepted sorting
-                columnsExcept: ["index", "actions", "show_plus", 'image'],
-                viewTable: ["bordered", 'hover']
-            }
+      idPage: 'travel_programs',
+      urlGetDataTable: '/travel_programs',
+      columns: columns,
+      sortOrders: sortOrders,
+      tableData: {
+        draw: 0,
+        length: 10,
+        search: "",
+        sortBy: 'id',
+        trashed: 1,
+        from_date: "",
+        to_date: "",
+        dir: "",
+        columns: [
+            "index",
+            "id",
+            "name",
+            "image",
+            "small_info",
+            "big_info",
+            "order",
+            "user_id",
+            "updated_at",
+            "created_at",
+            "actions"
+        ],
+        filter: {
+          columnsExcept: ['show_plus', 'index', 'actions', 'small_info', 'big_info', 'image', 'user_id'],
+          viewTable: ["bordered", 'hover']
         },
+      },
       // viewFilterColumns
-        viewColumnsResponsive: {
-            default: {
-                show: "all",// or ['id', 'index']
-            },
-            // 1200: {
-
-            // },
-            1000: {
-                show: ['id', "name", "email", 'actions']
-            },
-            800: {
-                show: ["name", "email", "actions"]
-            },
-            600: {
-                show: ["name", "actions"]
-            },
-            400: {
-                show: ["name"]
-            }
+      viewColumnsResponsive: {
+        default: {
+          show: ['id', 'name', 'image', 'small_info', 'updated_at', 'actions']
         },
+        1000: {
+          show: ['id', 'name', 'image', 'updated_at', 'actions']
+        },
+        800: {
+          show: ['name', 'image', 'actions']
+        },
+        600: {
+          show: ['id', 'name', 'actions']
+        },
+        400: {
+          show: ["name"]
+        }
+      },
     };
   },
-  methods: {
+    methods: {
 
-  },
+    },
     beforeRouteEnter(to, from, next) {
         next(vm => {
-            if (to.name == 'users') {
-                to.meta.title = vm.$t('sidebar.users')
-                vm.sortOrders[vm.sortKey] = 1; // 1 = desc , -1 = asc
-                vm.$nextTick(() => {
-                    vm.sortBy(vm.sortKey);
-                })
-                vm.setLocaleMessages()
-                vm.eventBtnsClick();
+            to.meta.title = vm.$t('sidebar.travel_programs')
+            vm.sortOrders[vm.sortKey] = 1; // 1 = desc , -1 = asc
+            vm.$nextTick(() => {
+                vm.sortBy(vm.sortKey);
+            })
+            vm.setLocaleMessages()
+            vm.eventBtnsClick();
+            vm.viewFilterColumns();
+            window.onresize = () => {
                 vm.viewFilterColumns();
-                window.onresize = () => {
-                    vm.viewFilterColumns();
-                };
-            }
+            };
         })
-    }
+    },
 };
 </script>
+<style scoped lang="scss">
 
+</style>
