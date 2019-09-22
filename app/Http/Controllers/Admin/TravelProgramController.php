@@ -100,8 +100,7 @@ class TravelProgramController extends Controller
 
         $data['user_id'] = auth()->id();
         $travel_program = TravelProgram::create($data);
-        $createdTravelProgram = TravelProgram::find($travel_program->id);
-        return response(['message' => 'Travel program has been created.', 'data' => $createdTravelProgram]);
+        return response(['message' => 'Travel program has been created.']);
     }
 
 
@@ -148,7 +147,7 @@ class TravelProgramController extends Controller
 
         $travel_program->update($data);
         $updatedTravelProgram = TravelProgram::find($id);
-        return response(['message' => $data['name'] . ' Travel program has been updated.', 'data' => $updatedTravelProgram]);
+        return response(['message' => 'Travel program has been updated.', 'travel_program' => $updatedTravelProgram]);
     }
 
 

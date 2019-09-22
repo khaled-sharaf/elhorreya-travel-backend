@@ -43,14 +43,14 @@
                 v-selectviewtableclass="tableData.filter.viewTable"
                 multiple="multiple"
             >
-            <option
-                v-for="(viewclass, index) in viewTableClasses"
-                :key="index"
-                :value="viewclass"
-            >{{viewclass}}</option>
+                <option
+                    v-for="(viewclass, index) in viewTableClasses"
+                    :key="index"
+                    :value="viewclass"
+                >{{viewclass}}</option>
             </select>
             <span class="icon">
-            <i class="fas fa-table"></i>
+                <i class="fas fa-table"></i>
             </span>
         </label>
         <!-- ./dataTables_viewtable -->
@@ -58,7 +58,7 @@
         <!-- dataTables_refresh -->
         <label class="dataTables_refresh">
             <button class="btn btn-outline-secondary" @click="$emit('getData')">
-            <i class="fas fa-sync-alt"></i>
+                <i class="fas fa-sync-alt"></i>
             </button>
         </label>
         <!-- ./dataTables_refresh -->

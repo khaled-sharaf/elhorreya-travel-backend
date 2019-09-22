@@ -16,14 +16,12 @@ class SettingController extends Controller
 
     public function index(Request $request)
     {
-        $columns = $request->columns;
-        $column = $request->column; // Index
-        $columnSorting = $columns[$column];
+        $sortBy = $request->sortBy;
         $length = $request->length;
         $dir = $request->dir;
         $draw = $request->draw;
         $searchValue = $request->search;
-        $query = Setting::select('*')->orderBy($columnSorting, $dir)->with('user');
+        $query = Setting::select('*')->orderBy($sortBy, $dir)->with('user');
 
         if ($searchValue) {
             $query->where(function($query) use ($searchValue) {
@@ -32,7 +30,7 @@ class SettingController extends Controller
             });
         }
         $settings = $query->paginate($length);
-        return response(['data' => $settings, 'draw' => $draw, 'column' => $columnSorting, 'dir' => $dir]);
+        return response(['data' => $settings, 'draw' => $draw, 'sortBy' => $sortBy, 'dir' => $dir]);
     }
 
 

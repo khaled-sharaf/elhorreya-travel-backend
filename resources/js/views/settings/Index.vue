@@ -120,85 +120,43 @@ export default {
         TableContent
     },
   data() {
-    let self = this;
-    let sortOrders = {};
-    let columns = [
-      { label: "<i class='fa fa-plus'></i>", name: "show_plus" },
-      { label: "ID", name: "id" },
-      { label: "Slug", name: "slug" },
-      { label: "Name", name: "name" },
-      { label: "Value", name: "value" },
-      { label: "created by", name: "user_id" },
-      { label: "Updated at", name: "updated_at" },
-      { label: "Created at", name: "created_at" },
-      { label: "Actions", name: "actions" }
-    ];
-    columns.forEach(column => {
-      sortOrders[column.name] = -1;
-    });
     return {
       idPage: 'settings',
       urlGetDataTable: '/settings',
-      columns: columns,
-      sortOrders: sortOrders,
-      tableData: {
-        draw: 0,
-        length: 10,
-        search: "",
-        column: 0,
-        dir: "",
-        columns: [
-            "index",
-            "id",
-            "slug",
-            "name",
-            "value",
-            "user_id",
-            "updated_at",
-            "created_at",
-            "actions"
-        ],
-        filter: {
-          columnsExcept: ['show_plus', 'index', 'user_id', 'value', 'actions'],
-          viewTable: ["bordered", 'hover']
-        },
-      },
+      columns: [
+        { label: "Slug", name: "slug" },
+        { label: "Name", name: "name" },
+        { label: "Value", name: "value" },
+        { label: "created by", name: "user_id" },
+        { label: "Updated at", name: "updated_at" },
+        { label: "Created at", name: "created_at" }
+      ],
       // viewFilterColumns
       viewColumnsResponsive: {
         default: {
-          show: "all",// or ['id', 'index']
+            show: "all",// or ['id', 'index']
         },
-        // 1200: {
-        //   show: ['name', 'phone', 'logo', 'count_rates', 'actions']
-        // },
-        // 1000: {
-        //   show: ['name', 'logo', 'count_rates', 'actions']
-        // },
         800: {
-          show: ['slug', 'name', 'value']
+            show: ['slug', 'name', 'value']
         },
         600: {
-          show: ["slug", "value"]
+            show: ["slug", "value"]
         },
         400: {
-          show: ["slug"]
+            show: ["slug"]
         }
       }
     };
   },
+    methods: {
+        setTableData() {
+            this.tableData.filter.columnsExcept = ['show_plus', 'index', 'user_id', 'value', 'actions']
+        },
+    },
     beforeRouteEnter(to, from, next) {
         next(vm => {
             to.meta.title = vm.$t('sidebar.settings')
-            vm.sortOrders[vm.sortKey] = 1; // 1 = desc , -1 = asc
-            vm.$nextTick(() => {
-                vm.sortBy(vm.sortKey);
-            })
-            vm.setLocaleMessages()
-            vm.eventBtnsClick();
-            vm.viewFilterColumns();
-            window.onresize = () => {
-                vm.viewFilterColumns();
-            };
+            vm.setTableData()
         })
     },
 };

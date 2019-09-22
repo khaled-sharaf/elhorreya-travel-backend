@@ -83,6 +83,8 @@ export default {
             loadReq(this.$Progress);
             this.form.put(this.urlModel + '/' + this.form.id).then(response => {
                 if (response.status === 200) {
+                    this.roomEdit = response.data.room
+                    this.form.fill(this.roomEdit)
                     ToastReq.fire({
                         text: this.success_msg
                     });
@@ -101,7 +103,6 @@ export default {
                     const room = response.data.room
                     if (room != null) {
                         this.roomEdit = room
-                        this.form.reset()
                         this.form.fill(this.roomEdit)
                     } else {
                         this.$router.push({name: 'rooms'})
@@ -124,7 +125,6 @@ export default {
             vm.$nextTick(() => {
                 if (to.params.room) {
                     vm.roomEdit = to.params.room
-                    vm.form.reset()
                     vm.form.fill(vm.roomEdit)
                 } else {
                     vm.getRoomEdit(to)

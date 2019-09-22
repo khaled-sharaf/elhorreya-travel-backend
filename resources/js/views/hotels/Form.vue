@@ -206,7 +206,7 @@
                             multiple
                         >
                     </div>
-                </div>
+                </div> <!-- ./gallery -->
 
 
                 <!-- features -->

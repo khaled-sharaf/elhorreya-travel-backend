@@ -156,65 +156,23 @@ export default {
         TableContent
     },
   data() {
-    let self = this;
-    let sortOrders = {};
-    let columns = [
-        { label: "<i class='fa fa-plus'></i>", name: "show_plus" },
-        { label: "#", name: "index" },
-        { label: "ID", name: "id" },
-        { label: "Info", name: "info" },
-        { label: "Options", name: "options" },
-        { label: "Price night", name: "price_night" },
-        { label: "Offer", name: "offer" },
-        { label: "Display", name: "display" },
-        { label: "Hotel", name: "hotel_id" },
-        { label: "Created by", name: "user_id" },
-        { label: "Updated at", name: "updated_at" },
-        { label: "Created at", name: "created_at" },
-        { label: "Actions", name: "actions" }
-    ];
-    columns.forEach(column => {
-        sortOrders[column.name] = -1;
-    });
     return {
         idPage: 'rooms',
         urlGetDataTable: '/rooms',
         urlGetHotels: '/hotels/select',
         hotelsSelect: [],
-        columns: columns,
-        sortOrders: sortOrders,
-        tableData: {
-            draw: 0,
-            length: 10,
-            search: "",
-            sortBy: 'id',
-            trashed: 1,
-            display: "",
-            hotel_id: '',
-            from_date: "",
-            to_date: "",
-            dir: "",
-            // columns of filter sorting [in select menu]
-            columns: [
-                "index",
-                "id",
-                "info",
-                "options",
-                "price_night",
-                "offer",
-                "display",
-                "user_id",
-                "hotel_id",
-                "updated_at",
-                "created_at",
-                "actions"
-            ],
-            filter: {
-                // columns excepted sorting
-                columnsExcept: ["index", "actions", "show_plus", 'offer', 'user_id', 'hotel_id'],
-                viewTable: ["bordered", 'hover']
-            }
-        },
+        columns: [
+            { label: "ID", name: "id" },
+            { label: "Info", name: "info" },
+            { label: "Options", name: "options" },
+            { label: "Price night", name: "price_night" },
+            { label: "Offer", name: "offer" },
+            { label: "Display", name: "display" },
+            { label: "Hotel", name: "hotel_id" },
+            { label: "Created by", name: "user_id" },
+            { label: "Updated at", name: "updated_at" },
+            { label: "Created at", name: "created_at" }
+        ],
       // viewFilterColumns
         viewColumnsResponsive: {
             default: {
@@ -239,16 +197,26 @@ export default {
     };
   },
   methods: {
+    setTableData() {
+        this.tableData.hotel_id = ''
+        this.tableData.filter.columnsExcept = ["index", "actions", "show_plus", 'offer', 'user_id', 'hotel_id']
+    },
     getHotelsSelect() {
         axios.get(this.urlGetHotels).then(response => {
             if (response.status === 200) {
-                this.hotelsSelect = response.data.hotels
+                if (typeof response.data === 'object') {
+                    this.hotelsSelect = response.data.hotels
+                } else {
+                    setTimeout(() => {
+                        this.getHotelsSelect()
+                    }, 500)
+                }
             }
         })
         .catch(errors => {
             setTimeout(() => {
                 this.getHotelsSelect()
-            }, 1000)
+            }, 500)
         });
     },
     addHotelIdToRequest() {
@@ -261,37 +229,16 @@ export default {
   },
     beforeRouteEnter(to, from, next) {
         next(vm => {
-            if (to.name == 'rooms') {
-                to.meta.title = vm.$t('sidebar.rooms')
-                vm.sortOrders[vm.sortKey] = 1; // 1 = desc , -1 = asc
-                vm.$nextTick(() => {
-                    vm.sortBy(vm.sortKey);
-                    vm.getHotelsSelect()
-                })
-                vm.eventBtnsClick();
-                vm.viewFilterColumns();
-                vm.setLocaleMessages()
-                window.onresize = () => {
-                    vm.viewFilterColumns();
-                };
-            }
+            to.meta.title = vm.$t('sidebar.rooms')
+            vm.$nextTick(() => {
+                vm.getHotelsSelect()
+            })
         })
     },
-    mounted() {
+    created() {
+        this.setTableData()
         if (this.$route.name == 'hotel-profile') {
             this.addHotelIdToRequest()
-        }
-        if (this.$route.name != 'rooms') {
-            this.sortOrders[this.sortKey] = 1; // 1 = desc , -1 = asc
-            this.$nextTick(() => {
-                this.sortBy(this.sortKey);
-            })
-            this.setLocaleMessages()
-            this.eventBtnsClick();
-            this.viewFilterColumns();
-            window.onresize = () => {
-                this.viewFilterColumns();
-            };
         }
     },
 

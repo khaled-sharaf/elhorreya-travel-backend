@@ -140,11 +140,18 @@ return [
         'time' => 'الوقت',
         'available' => 'مُتاح',
         'size' => 'الحجم',
+        'travel_category_id' => 'قسم الرحلة',
+        'travel_program_id' => 'برنامج الرحلة',
 
 
         'photo' => 'الصورة',
         'photos' => 'الصور',
+        'image' => 'الصورة',
+        'images' => 'الصور',
+        'gallery' => 'الصور',
+
         'logo' => 'صورة الشعار',
+
         'rule' => 'الصلاحية',
         'active' => 'التفعيل',
         'comapany' => 'الشركة',

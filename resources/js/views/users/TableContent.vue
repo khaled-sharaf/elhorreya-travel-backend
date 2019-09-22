@@ -13,27 +13,25 @@
             :class="index % 2 == 0 ? 'even' : 'odd'"
         >
 
-            <td class="td-show-plus show_plus">
-                <span class="btn btn-secondary btn-show-more-row">
-                    <i class="fa fa-plus"></i>
-                </span>
+
+            <td v-show="tableData.columns.indexOf('index') != -1" class="index">
+                {{index + 1}}
             </td>
 
 
-            <td v-show="tableData.columns.indexOf('index') != -1" class="index"
-            >{{index + 1}}</td>
+            <td v-show="tableData.columns.indexOf('id') != -1" class="id">
+                {{user.id}}
+            </td>
 
 
-            <td v-show="tableData.columns.indexOf('id') != -1" class="id"
-            >{{user.id}}</td>
+            <td v-show="tableData.columns.indexOf('name') != -1" class="name">
+                {{user.name | capitalize }}
+            </td>
 
 
-            <td v-show="tableData.columns.indexOf('name') != -1" class="name"
-            >{{user.name | capitalize }}</td>
-
-
-            <td v-show="tableData.columns.indexOf('email') != -1" class="email"
-            ><a :href="'mailto:' + user.email">{{user.email}}</a></td>
+            <td v-show="tableData.columns.indexOf('email') != -1" class="email">
+                <a :href="'mailto:' + user.email">{{user.email}}</a>
+            </td>
 
 
             <td v-show="tableData.columns.indexOf('image') != -1" class="image">

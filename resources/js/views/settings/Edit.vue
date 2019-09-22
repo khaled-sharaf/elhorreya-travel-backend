@@ -99,7 +99,6 @@ export default {
                     const setting = response.data.setting
                     if (setting != null) {
                         this.settingEdit = setting
-                        this.form.reset()
                         this.form.fill(this.settingEdit)
                     } else {
                         this.$router.push({name: 'settings'})
@@ -119,7 +118,6 @@ export default {
             vm.$nextTick(() => {
                 if (to.params.setting) {
                     vm.settingEdit = to.params.setting
-                    vm.form.reset()
                     vm.form.fill(vm.settingEdit)
                 } else {
                     vm.getSettingEdit(to)

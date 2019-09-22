@@ -99,7 +99,6 @@ export default {
                     const user = response.data.user
                     if (user != null) {
                         this.userEdit = user
-                        this.form.reset()
                         this.form.fill(this.userEdit)
                     } else {
                         this.$router.push({name: 'users'})
@@ -117,7 +116,6 @@ export default {
         "$route.params.id"(val) {
             if (this.$route.params.user) {
                 this.userEdit = this.$route.params.user
-                this.form.reset()
                 this.form.fill(this.userEdit)
             } else {
                 this.getUserEdit(this.$route)
@@ -130,7 +128,6 @@ export default {
             vm.$nextTick(() => {
                 if (to.params.user) {
                     vm.userEdit = to.params.user
-                    vm.form.reset()
                     vm.form.fill(vm.userEdit)
                 } else {
                     vm.getUserEdit(to)

@@ -34,7 +34,7 @@ class RoomController extends Controller
             $query->where('display', $display);
         }
 
-        if ($hotel_id != '' && $hotel_id != null) {
+        if ($hotel_id != '') {
             $query->where('hotel_id', $hotel_id);
         }
 

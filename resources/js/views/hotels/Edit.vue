@@ -103,6 +103,7 @@ export default {
             this.form.put(this.urlModel + '/' + this.form.id).then(response => {
                 if (response.status === 200) {
                     this.hotelEdit = response.data.data;
+                    this.form.fill(this.hotelEdit)
                     ToastReq.fire({
                         text: this.success_msg
                     });

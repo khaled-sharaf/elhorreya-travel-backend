@@ -12,6 +12,9 @@ use File;
 class HotelController extends Controller
 {
 
+    private $directory = 'images/hotels';
+
+
     public function hotelsSelect()
     {
         $hotels = Hotel::select(['id', 'name'])->get();
@@ -101,7 +104,7 @@ class HotelController extends Controller
         /****************************************************************************/
 
         // handel image
-        $directory = 'images/hotels/' . uniqid('hotel-');
+        $directory = $this->directory . '/' . uniqid('hotel-');
         if (strpos($data['image'], 'data:image/') === 0) {
             $get_ext = explode(';', explode('/', $data['image'])[1])[0];
             $ext = $get_ext == 'jpeg' ? 'jpg' : $get_ext;
@@ -186,7 +189,7 @@ class HotelController extends Controller
         /****************************************************************************/
 
          // handel image
-        $directory = 'images/hotels/' . explode('/', $hotel->image)[2];
+        $directory = $this->directory . '/' . explode('/', $hotel->image)[2];
         if (strpos($data['image'], 'data:image/') === 0) {
             $get_ext = explode(';', explode('/', $data['image'])[1])[0];
             $ext = $get_ext == 'jpeg' ? 'jpg' : $get_ext;
@@ -267,7 +270,7 @@ class HotelController extends Controller
         $hotel = Hotel::withTrashed()->where('id', $id)->first();
         if ($hotel->trashed()) {
             // delete image
-            $directory = 'images/hotels/' . explode('/', $hotel->image)[2];
+            $directory = $this->directory . '/' . explode('/', $hotel->image)[2];
             \File::deleteDirectory($directory);
             $hotel->forceDelete();
         } else {

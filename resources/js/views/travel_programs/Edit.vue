@@ -82,7 +82,8 @@ export default {
             loadReq(this.$Progress);
             this.form.put(this.urlModel + '/' + this.form.id).then(response => {
                 if (response.status === 200) {
-                    this.travelProgramEdit = response.data.data;
+                    this.travelProgramEdit = response.data.travel_program
+                    this.form.fill(this.travelProgramEdit)
                     ToastReq.fire({
                         text: this.success_msg
                     });

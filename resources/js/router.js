@@ -38,6 +38,18 @@ import CreateTravelCategory from './views/travel_categories/Create'
 import EditTravelCategory from './views/travel_categories/Edit'
 
 
+// blogs
+import Blogs from './views/blogs/Index'
+import CreateBlog from './views/blogs/Create'
+import EditBlog from './views/blogs/Edit'
+
+
+// images
+import Images from './views/images/Index'
+import CreateImage from './views/images/Create'
+import EditImage from './views/images/Edit'
+
+
 // settings
 import Settings from './views/settings/Index'
 import CreateSetting from './views/settings/Create'
@@ -167,6 +179,44 @@ const vueRouter = new Router({
                     path: 'travel_category/:id/edit',
                     name: 'edit-travel_category',
                     component: EditTravelCategory,
+                    props: true
+                },
+
+
+                ////////////////// blogs routes ///////////////////
+                {
+                    path: 'blogs',
+                    name: 'blogs',
+                    component: Blogs
+                },
+                {
+                    path: 'blog/create',
+                    name: 'create-blog',
+                    component: CreateBlog
+                },
+                {
+                    path: 'blog/:id/edit',
+                    name: 'edit-blog',
+                    component: EditBlog,
+                    props: true
+                },
+
+
+                ////////////////// images routes ///////////////////
+                {
+                    path: 'images',
+                    name: 'images',
+                    component: Images
+                },
+                {
+                    path: 'image/create',
+                    name: 'create-image',
+                    component: CreateImage
+                },
+                {
+                    path: 'image/:id/edit',
+                    name: 'edit-image',
+                    component: EditImage,
                     props: true
                 },
 

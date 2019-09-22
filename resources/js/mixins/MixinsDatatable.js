@@ -20,6 +20,7 @@ export default {
             successResponse: false,
             dataTable: [],
             sortKey: "id",
+            sortOrders: {},
 
             viewTableClasses: [
                 "responsive",
@@ -43,6 +44,23 @@ export default {
                 to: ""
             },
 
+            tableData: {
+                draw: 0,
+                length: 10,
+                sortBy: 'id',
+                trashed: 1,
+                display: "",
+                search: "",
+                from_date: "",
+                to_date: "",
+                dir: "desc",
+                columns: [],
+                filter: {
+                    viewTable: ["bordered", 'hover'],
+                    columnsExcept: [],
+                },
+            },
+
             delete_msg: " ",
             delete_success_msg: " ",
             delete_failed_msg: " ",
@@ -53,21 +71,7 @@ export default {
             restore_success_msg: " ",
             restore_failed_msg: " ",
 
-            sell_product_msg: " ",
-            sell_product_success_msg: " ",
-            sell_product_failed_msg: " ",
 
-            sell_product_title: '',
-            sold_product_title: '',
-            add_salse_product_title: '',
-
-            msg_empty_count_selling: '',
-            msg_error_product_count_less_than_count_sales: '',
-            msg_error_current_count_sales_less_than_count_sales_input: '',
-            placeholder_input_sales_count: '',
-            title_label_affected_products_count_in_selling: '',
-            add_sales: '',
-            restore_sales: '',
 
             delete_title: '',
             deleted_title: '',
@@ -94,7 +98,15 @@ export default {
             this.getData();
         },
         "tableData.columns.length"(val) {
-            let self = this;
+            let self = this
+            let btnShowPlus = $(`#${self.idPage}.dataTable .btn-show-more-row`)
+            if (this.columnsExcept.length) {
+                btnShowPlus.removeClass('disabled');
+            } else {
+                $(".tr-table-data").hide();
+                btnShowPlus.removeClass("active").find("i").removeClass("fa-minus").addClass("fa-plus");
+                btnShowPlus.addClass('disabled');
+            }
             $(".tr-table-data").children("td").attr("colspan", val + 1);
             $(".table tbody tr.tr-general").each(function() {
                 let id = $(this).attr("data-id");
@@ -107,9 +119,7 @@ export default {
             let arr = [];
             for (let col in this.columns) {
                 let name = this.columns[col].name;
-                if (this.tableData.columns.indexOf(name) == -1 &&
-                    name != "show_plus" &&
-                    name != "index") {
+                if (this.tableData.columns.indexOf(name) == -1 && name != "show_plus" && name != "index") {
                     arr.push(name);
                 }
             }
@@ -123,18 +133,23 @@ export default {
             this.tableData.draw++;
             this.tableData.sortBy = this.sortKey;
             axios.get(url, {params: this.tableData}).then(response => {
-                let data = response.data,
-                    self = this;
-                console.log(data)
-                if (this.tableData.draw == data.draw) {
-                    if (response.status === 200) {
-                        this.dataTable = data.data.data;
-                        this.successResponse = true
-                        this.configPagination(data.data);
-                        setTimeout(function() {
-                            self.updateRowDataWhenGet();
-                        }, 200);
+                let data = response.data
+                if (typeof data === 'object') {
+                    if (this.tableData.draw == data.draw) {
+                        if (response.status === 200) {
+                            this.dataTable = data.data.data;
+                            this.successResponse = true
+                            this.configPagination(data.data);
+                            setTimeout(() => {
+                                this.updateRowDataWhenGet();
+                            }, 200);
+                        }
                     }
+                } else {
+                    setTimeout(() => {
+                        this.getData()
+                    }, 500)
+                    this.$Progress.fail()
                 }
             })
             .catch(errors => {
@@ -142,7 +157,7 @@ export default {
                     if (errors.response && errors.response.status && errors.response.status != 404) {
                         this.getData()
                     }
-                }, 1000)
+                }, 500)
                 this.$Progress.fail()
             });
         },
@@ -164,7 +179,7 @@ export default {
             this.sortKey = key;
             this.sortOrders[key] = this.sortOrders[key] * -1;
             this.tableData.dir = this.sortOrders[key] == 1 ? "asc" : "desc";
-            this.getData();
+            this.getData()
         },
         getIndex(array, key, value) {
             return array.findIndex(i => i[key] == value);
@@ -282,45 +297,50 @@ export default {
                 $(this).remove();
             });
             setTimeout(() => {
-                $(".table tbody tr.tr-general").each(function(i) {
-                let id = $(this).attr("data-id");
-                $(this).after(
-                    `<tr class="tr-table-data"><td colspan="${self.tableData.columns.length + 1}">
-                        ${self.viewDataExcepted(id)}
-                    </td></tr>`);
+                $(".table tbody tr.tr-general").each(function() {
+                    let id = $(this).attr("data-id")
+                    $(this).prepend(`<td class="td-show-plus show_plus">
+                                        <span class="btn btn-secondary btn-show-more-row">
+                                            <i class="fa fa-plus"></i>
+                                        </span>
+                                    </td>`);
+                    $(this).after(
+                        `<tr class="tr-table-data"><td colspan="${self.tableData.columns.length + 1}">
+                            ${self.viewDataExcepted(id)}
+                        </td></tr>`);
                 });
+                let btnShowPlus = $(`#${this.idPage}.dataTable .btn-show-more-row`)
                 $(".tr-table-data").hide();
-                $(`#${self.idPage}.dataTable .btn-show-more-row`).removeClass("active").find("i").removeClass("fa-minus").addClass("fa-plus");
+                btnShowPlus.removeClass("active").find("i").removeClass("fa-minus").addClass("fa-plus");
 
-
-                $(`#${self.idPage}.dataTable .tr-table-data span[data-old-format]`).each(function () {
+                $(`#${this.idPage}.dataTable .tr-table-data span[data-old-format]`).each(function () {
                     $(this).text($(this).attr('data-old-format'));
                 });
-
+                if (this.columnsExcept.length) {
+                    btnShowPlus.removeClass('disabled');
+                } else {
+                    btnShowPlus.addClass('disabled');
+                }
             }, 200);
         },
         eventBtnsClick() {
             let self = this;
             // delete row from columns excepted
-            $(document).on("click", ".table tbody .tr-table-data td .btn-delete-row",
-                function(e) {
-                    e.preventDefault();
-                    let id = $(this).parents(".tr-table-data").prev("tr").attr("data-id");
-                    if ($(this).hasClass('force-delete')) {
-                        self.forceDeleteRow(id);
-                    } else {
-                        self.destroyRow(id);
-                    }
+            $(document).on("click", ".table tbody .tr-table-data td .btn-delete-row", function(e) {
+                e.preventDefault();
+                let id = $(this).parents(".tr-table-data").prev("tr").attr("data-id");
+                if ($(this).hasClass('force-delete')) {
+                    self.forceDeleteRow(id);
+                } else {
+                    self.destroyRow(id);
                 }
-            );
+            });
             // function => restore row [this btn in table data hide]
-            $(document).on("click", ".table tbody .tr-table-data td .btn-restore-row",
-                function(e) {
-                    e.preventDefault();
-                    let id = $(this).parents(".tr-table-data").prev("tr").attr("data-id");
-                    self.restoreRow(id);
-                }
-            );
+            $(document).on("click", ".table tbody .tr-table-data td .btn-restore-row", function(e) {
+                e.preventDefault();
+                let id = $(this).parents(".tr-table-data").prev("tr").attr("data-id");
+                self.restoreRow(id);
+            });
         },
         forceDeleteRow(id) {
             Swal.fire({
@@ -437,9 +457,14 @@ export default {
             this.cancel_title =         this.$t('global.cancel')
 
             /*********************************************************************/
+        },
 
+        setColumnsAndOrders() {
             let newColumnsAfterChangeLang = []
-            this.columns.forEach((item) => {
+            this.columns.unshift({ label: "#", name: "index" })
+            this.columns.unshift({ label: "<i class='fa fa-plus'></i>", name: "show_plus" })
+            this.columns.push({ label: "Actions", name: "actions" })
+            this.columns.forEach(item => {
                 if (item.name != 'show_plus' && item.name != 'index') {
                     item.label = this.$t(this.idPage + '_table.' + item.name)
                 }
@@ -447,8 +472,19 @@ export default {
             })
             this.columns = newColumnsAfterChangeLang
 
-            this.updateRowDataWhenGet()
-        },
+            this.columns.forEach(column => {
+                this.sortOrders[column.name] = -1;
+            });
+        }
+    },
 
-    }
+    mounted() {
+        this.setColumnsAndOrders()
+        this.setLocaleMessages()
+        this.eventBtnsClick()
+        this.viewFilterColumns()
+        window.onresize = () => { this.viewFilterColumns() }
+        this.$nextTick(() => { this.getData() })
+        this.updateRowDataWhenGet()
+    },
 }

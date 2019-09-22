@@ -102,9 +102,8 @@ class TravelCategoryController extends Controller
         // add to DB
 
         $data['user_id'] = auth()->id();
-        $travel_category = TravelCategory::create($data);
-        $createdTravelCategory = TravelCategory::find($travel_category->id);
-        return response(['message' => 'Travel category has been created.', 'data' => $createdTravelCategory]);
+        TravelCategory::create($data);
+        return response(['message' => 'Travel category has been created.']);
     }
 
 
@@ -149,7 +148,7 @@ class TravelCategoryController extends Controller
 
         $travel_category->update($data);
         $updatedTravelCategory = TravelCategory::find($id);
-        return response(['message' => $data['name'] . ' Travel category has been updated.', 'data' => $updatedTravelCategory]);
+        return response(['message' => 'Travel category has been updated.', 'travel_category' => $updatedTravelCategory]);
     }
 
 

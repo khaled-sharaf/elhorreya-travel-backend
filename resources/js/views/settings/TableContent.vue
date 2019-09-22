@@ -13,12 +13,6 @@
             :class="index % 2 == 0 ? 'even' : 'odd'"
         >
 
-            <td class="td-show-plus show_plus">
-            <span class="btn btn-secondary btn-show-more-row">
-                <i class="fa fa-plus"></i>
-            </span>
-            </td>
-
 
             <td v-show="tableData.columns.indexOf('id') != -1" class="id">
                 {{setting.id}}

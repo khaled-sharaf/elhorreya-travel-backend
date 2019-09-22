@@ -151,64 +151,23 @@ export default {
         ModalLocation
     },
   data() {
-    let self = this;
-    let sortOrders = {};
-    let columns = [
-      { label: "<i class='fa fa-plus'></i>", name: "show_plus" },
-      { label: "#", name: "index" },
-      { label: "ID", name: "id" },
-      { label: "Name", name: "name" },
-      { label: "Address", name: "address" },
-      { label: "Rating", name: "rating" },
-      { label: "Stars", name: "stars" },
-      { label: "Info", name: "info" },
-      { label: "Location", name: "location" },
-      { label: "Image", name: "image" },
-      { label: "Display", name: "display" },
-      { label: "Created by", name: "user_id" },
-      { label: "Updated at", name: "updated_at" },
-      { label: "Created at", name: "created_at" },
-      { label: "Actions", name: "actions" }
-    ];
-    columns.forEach(column => {
-      sortOrders[column.name] = -1;
-    });
     return {
       idPage: 'hotels',
       urlGetDataTable: '/hotels',
-      columns: columns,
-      sortOrders: sortOrders,
-      tableData: {
-        draw: 0,
-        length: 10,
-        search: "",
-        sortBy: 'id',
-        display: "",
-        trashed: 1,
-        from_date: "",
-        to_date: "",
-        dir: "",
-        columns: [
-            "index",
-            "id",
-            "name",
-            "addresss",
-            "rating",
-            "stars",
-            "info",
-            "location",
-            "image",
-            "display",
-            "user_id",
-            "updated_at",
-            "created_at",
-            "actions"
-        ],
-        filter: {
-          columnsExcept: ['show_plus', 'index', 'actions', 'location', 'image', 'user_id'],
-          viewTable: ["bordered", 'hover']
-        },
-      },
+      columns: [
+        { label: "ID", name: "id" },
+        { label: "Name", name: "name" },
+        { label: "Address", name: "address" },
+        { label: "Rating", name: "rating" },
+        { label: "Stars", name: "stars" },
+        { label: "Info", name: "info" },
+        { label: "Location", name: "location" },
+        { label: "Image", name: "image" },
+        { label: "Display", name: "display" },
+        { label: "Created by", name: "user_id" },
+        { label: "Updated at", name: "updated_at" },
+        { label: "Created at", name: "created_at" }
+      ],
       // viewFilterColumns
       viewColumnsResponsive: {
         default: {
@@ -233,6 +192,9 @@ export default {
     };
   },
   methods: {
+    setTableData() {
+        this.tableData.filter.columnsExcept = ['show_plus', 'index', 'actions', 'location', 'image', 'user_id']
+    },
     showMap(lat, long) {
         if (lat != null && long != null) {
             const my_map_modal = $('#my_map_modal');
@@ -267,17 +229,8 @@ export default {
     beforeRouteEnter(to, from, next) {
         next(vm => {
             to.meta.title = vm.$t('sidebar.hotels')
-            vm.sortOrders[vm.sortKey] = 1; // 1 = desc , -1 = asc
-            vm.$nextTick(() => {
-                vm.sortBy(vm.sortKey);
-            })
-            vm.setLocaleMessages()
-            vm.eventBtnsClick();
-            vm.eventBtnsClickLocale();
-            vm.viewFilterColumns();
-            window.onresize = () => {
-                vm.viewFilterColumns();
-            };
+            vm.setTableData()
+            vm.eventBtnsClickLocale()
         })
     },
 };

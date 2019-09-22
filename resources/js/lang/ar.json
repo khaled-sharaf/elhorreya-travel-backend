@@ -7,6 +7,8 @@
         "the_hotel": "الفندق",
         "room": "غرفة",
         "the_travel_program": "برنامج الرحلة",
+        "the_travel_category": "قسم الرحلة",
+        "the_images": "الصور",
         "type": "نوع",
         "comment": "تعليق",
         "winner": "فائز",
@@ -384,6 +386,87 @@
         "p_edit": {
             "success_msg": "تم تحديث القسم.",
             "failed_msg": "لم يتم تحديث هذه القسم."
+        }
+    },
+
+
+
+    "blogs_table": {
+        "id": "المعرف",
+        "title": "عنوان المدونة",
+        "content": "محتوى المدونة",
+        "image": "صورة المدونة",
+        "gallery": "صور المدونة",
+        "display": "الظهور",
+        "user_id": "أضيف بواسطة",
+        "updated_at": "أخر تعديل",
+        "created_at": "تاريخ الإنشاء",
+        "actions": "الإجراءات",
+
+
+        "delete_blog": "حذف المدونة",
+        "edit_blog": "تعديل المدونة",
+
+        "delete_msg": "هل أنت متأكد من حذف هذه المدونة ؟",
+        "delete_success_msg": "تم حذف المدونة.",
+        "delete_failed_msg": "لم يتم حذف المدونة.",
+
+        "force_delete_msg": "هل أنت متأكد من إزالة هذه المدونة بشكل نهائى ؟",
+        "force_delete_success_msg": "تم إزالة المدونة بشكل نهائى.",
+        "force_delete_failed_msg": "لم يتم إزالة المدونة.",
+
+        "restore_msg": "هل أنت متأكد من استرجاع هذه المدونة ؟",
+        "restore_success_msg": "تم استرجاع المدونة.",
+        "restore_failed_msg": "لم يتم استرجاع المدونة.",
+
+        "p_create": {
+            "success_msg": "تم إنشاء مدونة جديدة.",
+            "failed_msg": "لم يتم إنشاء المدونة الجديدة."
+        },
+        "p_edit": {
+            "success_msg": "تم تحديث المدونة.",
+            "failed_msg": "لم يتم تحديث هذه المدونة."
+        }
+    },
+
+
+
+    "images_table": {
+        "id": "المعرف",
+        "name": "الصورة",
+        "display": "الظهور",
+        "travel_category_id": "قسم الرحلات",
+        "user_id": "أضيف بواسطة",
+        "updated_at": "أخر تعديل",
+        "created_at": "تاريخ الإنشاء",
+        "actions": "الإجراءات",
+
+        "gallery": "الصور",
+        "images": "الصور",
+        "image": "الصورة",
+
+        "delete_image": "حذف الصورة",
+        "edit_image": "تعديل الصورة",
+
+        "delete_msg": "هل أنت متأكد من حذف هذه الصورة ؟",
+        "delete_success_msg": "تم حذف الصورة.",
+        "delete_failed_msg": "لم يتم حذف الصورة.",
+
+        "force_delete_msg": "هل أنت متأكد من إزالة هذه الصورة بشكل نهائى ؟",
+        "force_delete_success_msg": "تم إزالة الصورة بشكل نهائى.",
+        "force_delete_failed_msg": "لم يتم إزالة الصورة.",
+
+        "restore_msg": "هل أنت متأكد من استرجاع هذه الصورة ؟",
+        "restore_success_msg": "تم استرجاع الصورة.",
+        "restore_failed_msg": "لم يتم استرجاع الصورة.",
+
+        "p_create": {
+            "success_msg": "تم إنشاء صورة جديدة.",
+            "failed_msg": "لم يتم إنشاء الصورة الجديدة."
+        },
+        "p_edit": {
+            "success_msg": "تم تحديث الصورة.",
+            "failed_msg": "لم يتم تحديث هذه الصورة."
         }
     },
 

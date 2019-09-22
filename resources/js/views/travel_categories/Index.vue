@@ -145,58 +145,21 @@ export default {
         travelProgramsSelect
     },
   data() {
-    let self = this;
-    let sortOrders = {};
-    let columns = [
-      { label: "<i class='fa fa-plus'></i>", name: "show_plus" },
-      { label: "#", name: "index" },
-      { label: "ID", name: "id" },
-      { label: "Name", name: "name" },
-      { label: "Image", name: "image" },
-      { label: "Order", name: "order" },
-      { label: "Travel program", name: "travel_program_id" },
-      { label: "Created by", name: "user_id" },
-      { label: "Updated at", name: "updated_at" },
-      { label: "Created at", name: "created_at" },
-      { label: "Actions", name: "actions" }
-    ];
-    columns.forEach(column => {
-      sortOrders[column.name] = -1;
-    });
     return {
       idPage: 'travel_categories',
       urlGetDataTable: '/travel_categories',
       urlGetTravelPrograms: '/travel_programs/select',
       travelProgramsSelect: [],
-      columns: columns,
-      sortOrders: sortOrders,
-      tableData: {
-        draw: 0,
-        length: 10,
-        search: '',
-        sortBy: 'id',
-        trashed: 1,
-        travel_program_id: '',
-        from_date: '',
-        to_date: '',
-        dir: '',
-        columns: [
-            "index",
-            "id",
-            "name",
-            "image",
-            "order",
-            "travel_program_id",
-            "user_id",
-            "updated_at",
-            "created_at",
-            "actions"
-        ],
-        filter: {
-          columnsExcept: ['show_plus', 'index', 'actions', 'travel_program_id', 'image', 'user_id'],
-          viewTable: ["bordered", 'hover']
-        },
-      },
+      columns: [
+        { label: "ID", name: "id" },
+        { label: "Name", name: "name" },
+        { label: "Image", name: "image" },
+        { label: "Order", name: "order" },
+        { label: "Travel program", name: "travel_program_id" },
+        { label: "Created by", name: "user_id" },
+        { label: "Updated at", name: "updated_at" },
+        { label: "Created at", name: "created_at" }
+      ],
       // viewFilterColumns
       viewColumnsResponsive: {
         default: {
@@ -218,33 +181,36 @@ export default {
     };
   },
     methods: {
+        setTableData() {
+            this.tableData.travel_program_id = ''
+            this.tableData.filter.columnsExcept = ['show_plus', 'index', 'actions', 'travel_program_id', 'image', 'user_id']
+        },
         getTravelProgramsSelect() {
             axios.get(this.urlGetTravelPrograms).then(response => {
                 if (response.status === 200) {
-                    this.travelProgramsSelect = response.data.travel_programs
+                    if (typeof response.data === 'object') {
+                        this.travelProgramsSelect = response.data.travel_programs
+                    } else {
+                        setTimeout(() => {
+                            this.getTravelProgramsSelect()
+                        }, 500)
+                    }
                 }
             })
             .catch(errors => {
                 setTimeout(() => {
                     this.getTravelProgramsSelect()
-                }, 1000)
+                }, 500)
             });
         },
     },
     beforeRouteEnter(to, from, next) {
         next(vm => {
             to.meta.title = vm.$t('sidebar.travel_categories')
-            vm.sortOrders[vm.sortKey] = 1; // 1 = desc , -1 = asc
+            vm.setTableData()
             vm.$nextTick(() => {
-                vm.sortBy(vm.sortKey);
                 vm.getTravelProgramsSelect()
             })
-            vm.setLocaleMessages()
-            vm.eventBtnsClick();
-            vm.viewFilterColumns();
-            window.onresize = () => {
-                vm.viewFilterColumns();
-            };
         })
     },
 };
