@@ -24,7 +24,7 @@ class CreateBookingsTable extends Migration
             $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('travel_id')->references('id')->on('travels')->onDelete('cascade');
+            $table->foreign('travel_detail_id')->references('id')->on('travel_details')->onDelete('cascade');
         });
     }
 

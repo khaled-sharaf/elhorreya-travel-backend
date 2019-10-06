@@ -61,23 +61,15 @@
 
                 <div class="form-group">
                     <label> {{$t('users_table.image')}} </label>
-                    <div class="custom-file">
-                    <input
-                        :lang="$i18n.locale"
-                        type="file"
-                        class="custom-file-input"
-                        id="user_image"
-                        accept="image/*"
-                        @change="encodeUserProfileFileAsURL"
-                        :class="{ 'is-invalid': form.errors.has('image') }"
-                    >
-                    <label class="custom-file-label" for="user_image"> {{$t('global.choose_image')}} </label>
-                    <has-error :form="form" field="image"></has-error>
-                    </div>
-                    <div class="col-sm-12" style="text-align: center;">
-                        <div class="user-avatar">
-                            <span @click="removeAvatar" v-if="showBtnRemoveAvatar" class="remove-avatar"><i class="fas fa-times"></i> </span>
-                            <img :src="userAvatar">
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <upload-image
+                                :form="form"
+                                propertyName="image"
+                                :required="false"
+                                :defaultSrcImage="defaultUserAvatar"
+                                :maxSize="3150000"
+                            ></upload-image>
                         </div>
                     </div>
                 </div>
@@ -89,91 +81,16 @@
 
 
 <script>
-  export default {
+import UploadImage from './../../components/form/UploadImage'
+export default {
     props: ['form', 'typeForm'],
+    components: {
+        UploadImage
+    },
     data() {
       return {
-        userAvatar: "",
-        oldUserAvatar: "images/user-avatar/default-avatar.png",
-        showBtnRemoveAvatar: false
+        defaultUserAvatar: "images/user-avatar/default-avatar.png",
       }
-    },
-    methods: {
-        imageHasHttp(imageUrl) {
-            return imageUrl.indexOf('http') === 0 ? imageUrl : this.$domain + '/' + imageUrl;
-        },
-        encodeUserProfileFileAsURL(e) {
-            let self = this;
-            let file = e.target.files[0];
-            let reader = new FileReader();
-            reader.onloadend = function() {
-                self.form.image = reader.result;
-            };
-            if (file) {
-                if (file["size"] < 8000000) {
-                    reader.readAsDataURL(file);
-                } else {
-                    if (this.$i18n.locale == 'ar') {
-                        Swal.fire(
-                            "خطأ...",
-                            "الحجم المسموح به للصورة هو 8 ميجا بايت.",
-                            "error"
-                        );
-                    } else {
-                        Swal.fire(
-                            "Oops...",
-                            "You are uploading a large file, (8MB) last.",
-                            "error"
-                        );
-                    }
-                    this.form.image = this.oldUserAvatar;
-                }
-            } else {
-                this.form.image = this.oldUserAvatar;
-            }
-            e.target.value = ''
-        },
-        removeAvatar() {
-            this.form.image = this.oldUserAvatar
-            this.userAvatar = this.imageHasHttp(this.oldUserAvatar)
-        }
-    },
-    watch: {
-        "form.image"(val) {
-            if (val.indexOf("data:image/") == 0) {
-                this.userAvatar = val;
-                this.showBtnRemoveAvatar = true
-            } else if (val != this.oldUserAvatar && this.typeForm == 'edit') {
-                this.showBtnRemoveAvatar = true
-            } else if (val == '' || val == null) {
-                this.userAvatar = this.imageHasHttp(this.oldUserAvatar);
-                this.showBtnRemoveAvatar = false
-            } else {
-                this.userAvatar = this.imageHasHttp(val);
-                this.showBtnRemoveAvatar = false
-            }
-
-
-            // if go to profile only
-            if (this.typeForm == 'edit') {
-                if (this.form.image != '' && this.form.image.indexOf('data:image/') !== 0) {
-                    this.userAvatar = this.imageHasHttp(this.form.image)
-                }
-            }
-
-        }
-    },
-    mounted() {
-        if (this.typeForm == 'create') {
-            this.form.image = this.oldUserAvatar;
-        } else {
-            let getPhoto = setInterval(() => {
-                if (this.form.image != '') {
-                    this.userAvatar = this.imageHasHttp(this.form.image)
-                    clearInterval(getPhoto)
-                }
-            }, 500)
-        }
-    },
+    }
   }
 </script>

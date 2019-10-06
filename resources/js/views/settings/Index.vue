@@ -1,166 +1,132 @@
-<style>
-
-
-</style>
-
 <template>
-    <div>
-        <!-- Content Header (Page header) -->
-        <header-page :title="$t('global.show') + ' ' + $t('sidebar.all_settings')"></header-page>
-        <!-- /.content-header -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="dataTable" id="settings">
-                    <div class="row mt-3">
-                        <div class="col-12">
-                            <div class="dataTables_wrapper">
-                                <div class="card">
+    <data-table
+        :routeCreate="routeCreate"
+        :idPage="idPage"
+        :showSettings="showSettings"
+        :columns="columns"
+        :themeTableClasses="viewTableClasses"
+        :dataTable="dataTable"
+        :tableData="tableData"
+        :perPage="perPage"
+        :successResponse="successResponse"
+        :columnsView="tableData.columns"
+        :columnsExcepted="tableData.filter.columnsExcept"
+        :themeTableClassesFilter="tableData.filter.viewTable"
+        :sortOrders="sortOrders"
+        :pagination="pagination"
+        :totalLink="Math.ceil(pagination.total / tableData.length)"
+        :filters="filters"
+        :actionMultiDelete="actionMultiDelete"
 
-                                    <!-- card-header -->
-                                    <div class="card-header">
+        @prev="getData(pagination.prevPageUrl)"
+        @next="getData(pagination.nextPageUrl)"
+        @gotopage="gotopage"
+        @toggleShowSettings="toggleShowSettings"
+        @deleteResotreMulti="deleteResotreMulti"
+        @getData="getData"
+    >
 
-                                        <!-- dataTables_filters -->
-                                        <div class="dataTables_filters">
+        <tbody>
+            <tr
+                role="row"
+                v-for="(setting, index) in dataTable"
+                :key="setting.id"
+                :data-id="setting.id"
+                class="tr-general"
+                :class="index % 2 == 0 ? 'even' : 'odd'"
+            >
 
-                                        </div><!-- ./dataTables_filters -->
+                <td v-show="tableData.columns.indexOf('index') != -1" class="index">
+                    {{index + 1}}
+                </td>
 
-                                        <!-- dataTables_header -->
-                                        <div class="dataTables_header">
+                <td v-show="tableData.columns.indexOf('id') != -1" class="id">
+                    {{setting.id}}
+                </td>
 
-                                            <!-- Search -->
-                                            <search
-                                                @getData="getData"
-                                                :tableData="tableData"
-                                            ></search>
+                <td v-show="tableData.columns.indexOf('slug') != -1" class="slug">
+                    {{setting.slug}}
+                </td>
 
-                                            <!-- Filter columns -->
-                                            <filters-columns
-                                                @getData="getData"
-                                                :columns="columns"
-                                                :viewTableClasses="viewTableClasses"
-                                                :tableData="tableData"
-                                                :perPage="perPage"
-                                            ></filters-columns>
+                <td v-show="tableData.columns.indexOf('name') != -1" class="name">
+                    {{setting.name}}
+                </td>
 
-                                            <!-- dataTables_buttons -->
-                                            <div class="dataTables_buttons">
-                                                <router-link :to="{name: 'create-setting'}" tag="button"
-                                                    type="button"
-                                                    class="btn btn-outline-secondary"
-                                                >
-                                                    {{ $t('global.create') }}
-                                                    <i class="fa fa-plus fa-fw"></i>
-                                                </router-link>
-                                            </div>
-                                            <!-- ./dataTables_buttons -->
+                <td v-show="tableData.columns.indexOf('value') != -1" class="value">
+                    <img class="avatar-table" v-if="setting.value.indexOf('images/settings/') === 0" :src="$domain + '/' + setting.value">
 
-                                        </div><!-- ./dataTables_header -->
+                    <span v-else>
+                        {{setting.value}}
+                    </span>
+                </td>
 
-                                    </div>
-                                    <!-- /.card-header -->
+                <td v-show="tableData.columns.indexOf('user_id') != -1" class="user_id">
+                    <created-by :model="setting"></created-by>
+                </td>
 
-                                    <div class="card-body table-responsive">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <table-wrapper
-                                                    :successResponse="successResponse"
-                                                    :dataTable="dataTable"
-                                                    :columns="columns"
-                                                    :columnsView="tableData.columns"
-                                                    :columnsExcepted="tableData.filter.columnsExcept"
-                                                    :viewtableclasses="tableData.filter.viewTable"
-                                                    :sortKey="sortKey"
-                                                    :sortOrders="sortOrders"
-                                                    @sort="sortBy"
-                                                >
-                                                    <table-content
-                                                        :dataTable="dataTable"
-                                                        :tableData="tableData"
-                                                        @destroyRow="destroyRow"
-                                                    ></table-content>
 
-                                                </table-wrapper>
-                                            </div> <!-- ./ col-sm-12 -->
-                                        </div> <!-- ./ row -->
-                                    </div> <!-- /.card-body -->
+                <td v-show="tableData.columns.indexOf('updated_at') != -1" class="updated_at">
+                    <relative-date :date="setting.updated_at"></relative-date>
+                </td>
 
-                                    <!-- card-footer -->
-                                    <div class="card-footer">
-                                        <div class="row-pagination">
-                                            <pagination
-                                                :pagination="pagination"
-                                                :totalLink="Math.ceil(pagination.total / tableData.length)"
-                                                @prev="getData(pagination.prevPageUrl)"
-                                                @next="getData(pagination.nextPageUrl)"
-                                                @gotopage="gotopage"
-                                            ></pagination>
-                                        </div>
-                                    </div> <!-- /.card-footer -->
-                                </div> <!-- /.card -->
-                            </div> <!-- /.datatables wrapper -->
-                        </div><!-- /.col-12 -->
-                    </div> <!-- /.row -->
-                </div> <!-- /.dataTable -->
-            </div><!--/. container-fluid -->
-        </section>
-    </div>
+
+                <td v-show="tableData.columns.indexOf('created_at') != -1" class="created_at">
+                    <relative-date :date="setting.created_at"></relative-date>
+                </td>
+
+                <td v-show="tableData.columns.indexOf('actions') != -1" class="actions">
+                    <!-- btn edit row -->
+                    <btn-edit :model="setting" modelName="setting"></btn-edit>
+                    <!-- ./btn edit row -->
+
+                    <!-- btn delete row -->
+                    <btn-delete :model="setting" modelName="setting" @destroyRow="destroyRow(setting.id)"></btn-delete>
+                    <!-- ./btn delete row -->
+                </td>
+            </tr>
+        </tbody>
+    </data-table>
 </template>
 
 
 <script>
-import Search from "./../../components/dataTables/filters/Search";
-import TableContent from "./TableContent";
+import CreatedBy from "./../../components/dataTables/buttons/CreatedBy"
+import BtnEdit from "./../../components/dataTables/buttons/EditRow"
+import BtnDelete from "./../../components/dataTables/buttons/DeleteRow"
 
+import dataTable from './../../components/dataTables/Index'
 import MixinsDatatable from "./../../mixins/MixinsDatatable"
 
 export default {
     mixins: [MixinsDatatable],
     components: {
-        Search,
-        TableContent
+        dataTable,
+        CreatedBy,
+        BtnEdit,
+        BtnDelete,
     },
-  data() {
-    return {
-      idPage: 'settings',
-      urlGetDataTable: '/settings',
-      columns: [
-        { label: "Slug", name: "slug" },
-        { label: "Name", name: "name" },
-        { label: "Value", name: "value" },
-        { label: "created by", name: "user_id" },
-        { label: "Updated at", name: "updated_at" },
-        { label: "Created at", name: "created_at" }
-      ],
-      // viewFilterColumns
-      viewColumnsResponsive: {
-        default: {
-            show: "all",// or ['id', 'index']
-        },
-        800: {
-            show: ['slug', 'name', 'value']
-        },
-        600: {
-            show: ["slug", "value"]
-        },
-        400: {
-            show: ["slug"]
-        }
-      }
-    };
-  },
-    methods: {
-        setTableData() {
-            this.tableData.filter.columnsExcept = ['show_plus', 'index', 'user_id', 'value', 'actions']
-        },
+    data() {
+        return {
+            idPage: 'settings',
+            urlGetDataTable: '/settings',
+            routeCreate: 'create-setting',
+            filters: ['search'],
+            columns: [
+                { label: "ID", name: "id" },
+                { label: "Slug", name: "slug" },
+                { label: "Name", name: "name" },
+                { label: "Value", name: "value" },
+                { label: "created by", name: "user_id" },
+                { label: "Updated at", name: "updated_at" },
+                { label: "Created at", name: "created_at" }
+            ],
+            columnsExceptedSorting: ['user_id', 'value']
+        };
     },
     beforeRouteEnter(to, from, next) {
         next(vm => {
             to.meta.title = vm.$t('sidebar.settings')
-            vm.setTableData()
         })
     },
 };
 </script>
-<style scoped lang="scss">
-
-</style>

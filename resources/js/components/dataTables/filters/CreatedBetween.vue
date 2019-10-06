@@ -6,22 +6,20 @@
             <div class="body">
                 <span class="input-date from">
                     <date-picker
-                    v-model="tableData.from_date"
-                    type="datetime"
-                    lang="en"
-                    format="YYYY-MM-DD hh:mm:ss"
-                    :placeholder="$t('global.from')"
-                    confirm
+                        v-model="tableData.from_date"
+                        type="datetime"
+                        format="YYYY-MM-DD hh:mm:ss"
+                        :placeholder="$t('global.from')"
+                        lang="en"
                     ></date-picker>
                 </span>
                 <span class="input-date to">
                     <date-picker
-                    v-model="tableData.to_date"
-                    type="datetime"
-                    lang="en"
-                    format="YYYY-MM-DD hh:mm:ss"
-                    :placeholder="$t('global.to')"
-                    confirm
+                        v-model="tableData.to_date"
+                        type="datetime"
+                        format="YYYY-MM-DD hh:mm:ss"
+                        :placeholder="$t('global.to')"
+                        lang="en"
                     ></date-picker>
                 </span>
             </div>

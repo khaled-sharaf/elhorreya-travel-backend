@@ -38,6 +38,18 @@ import CreateTravelCategory from './views/travel_categories/Create'
 import EditTravelCategory from './views/travel_categories/Edit'
 
 
+// travels
+import Travels from './views/travels/Index'
+import CreateTravel from './views/travels/Create'
+import EditTravel from './views/travels/Edit'
+import TravelProfile from './views/travels/Profile'
+
+// bookings
+import Bookings from './views/bookings/Index'
+
+// mailing_list
+import MailingList from './views/mailing_list/Index'
+
 // blogs
 import Blogs from './views/blogs/Index'
 import CreateBlog from './views/blogs/Create'
@@ -180,6 +192,47 @@ const vueRouter = new Router({
                     name: 'edit-travel_category',
                     component: EditTravelCategory,
                     props: true
+                },
+
+
+                ////////////////// travels routes ///////////////////
+                {
+                    path: 'travels',
+                    name: 'travels',
+                    component: Travels
+                },
+                {
+                    path: 'travel/create',
+                    name: 'create-travel',
+                    component: CreateTravel
+                },
+                {
+                    path: 'travel/:id/edit',
+                    name: 'edit-travel',
+                    component: EditTravel,
+                    props: true
+                },
+                {
+                    path: 'travel/profile/:id',
+                    name: 'travel-profile',
+                    component: TravelProfile,
+                    props: true
+                },
+
+
+                ////////////////// bookings routes ///////////////////
+                {
+                    path: 'bookings',
+                    name: 'bookings',
+                    component: Bookings
+                },
+
+
+                ////////////////// MailingList routes ///////////////////
+                {
+                    path: 'mailing_list',
+                    name: 'mailing_list',
+                    component: MailingList
                 },
 
 

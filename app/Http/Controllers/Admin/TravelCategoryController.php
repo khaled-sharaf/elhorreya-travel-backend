@@ -174,4 +174,29 @@ class TravelCategoryController extends Controller
         $travel_category_deleted->restore();
         return response(['status' => true]);
     }
+
+
+    public function deleteRestoreMulti(Request $request)
+    {
+        $ids = $request->ids;
+        $action = $request->action;
+
+        if ($action == 'delete') {
+            TravelCategory::destroy($ids);
+        } else if ($action == 'force_delete') {
+            $travel_categories = TravelCategory::onlyTrashed()->whereIn('id', $ids)->get();
+            foreach ($travel_categories as $travel_category) {
+                if ($travel_category->image !== null) {
+                    if (file_exists(public_path($travel_category->image))) {
+                        unlink(public_path($travel_category->image));
+                    }
+                }
+            }
+            TravelCategory::onlyTrashed()->whereIn('id', $ids)->forceDelete();
+        } else if ($action == 'restore') {
+            TravelCategory::onlyTrashed()->whereIn('id', $ids)->restore();
+        }
+
+        return response(['status' => true]);
+    }
 }

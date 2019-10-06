@@ -12,6 +12,8 @@ Vue.prototype.$domain = window.url
 Vue.prototype.$auth = window.auth
 Vue.prototype.$settings = window.settings
 Vue.prototype.$domain_admin = window.url + '/' + window.cp_prefix
+Vue.prototype.$nameSettingsInDB = 'data_tabel_settings_view_columns'
+
 
 
 /**************************************************************************************/
@@ -26,6 +28,10 @@ import router from './router'
 // select 2
 import './plugins/select2/select2.min.css'
 import './plugins/select2/select2.min.js'
+
+// overlayScrollbars
+import './plugins/overlayScrollbars/OverlayScrollbars.min.css'
+import './plugins/overlayScrollbars/jquery.overlayScrollbars.min.js'
 
 import './plugins/progressBar.js'
 import './components.js'

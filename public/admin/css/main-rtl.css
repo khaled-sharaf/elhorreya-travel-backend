@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Cairo:400,600,700&display=swap&subset=arabic);@charset "UTF-8";
 
 body {
-  direction: rtl !important;
+  direction: rtl;
   text-align: right !important;
   font-family: "Cairo", sans-serif, "Arial", "Verdana" !important;
 }
@@ -183,12 +183,8 @@ body {
   margin-right: 0 !important;
 }
 
-.proudct-profile-wrapper .btn-delete-row,
-.proudct-profile-wrapper .btn-sell-product,
-.hotel-profile-wrapper .btn-delete-row,
-.hotel-profile-wrapper .btn-sell-product {
-  margin-right: 0 !important;
-  margin-left: 0.5rem !important;
+.profile-wrapper .offers-in-profile .offer .list-group .list-group-item > a {
+  float: left !important;
 }
 
 .custom-control.custom-checkbox {

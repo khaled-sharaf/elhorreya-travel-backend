@@ -5,18 +5,19 @@
             <img :src="$domain + '/admin/images/loader.gif'">
         </div>
     </div>
-    <table class="table dataTable" :class="' table-' + viewtableclasses.join(' table-')" v-if="dataTable.length">
+    <table class="table dataTable" :class="' table-' + themeTableClassesFilter.join(' table-')" v-if="dataTable.length">
         <thead class="thead-light">
             <tr>
-                <th class="actions th-show-plus" v-html="columns[0].label"></th>
+                <th class="actions th-checkbox" v-html="columns[0].label"></th>
+                <th class="actions th-show-plus" v-html="columns[1].label"></th>
                 <th
                     rowspan="1"
                     colspan="1"
                     v-for="column in columns"
                     v-show="columnsView.indexOf(column.name) != -1"
                     :key="column.name"
-                    @click="(columnsExcepted.indexOf(column.name) == -1) ? $emit('sort', column.name) : ''"
-                    :class="(columnsExcepted.indexOf(column.name) == -1) ? (sortKey === column.name ? (sortOrders[column.name] > 0 ? 'sorting_asc' : 'sorting_desc') : 'sorting') : 'actions'"
+                    @click="sortBy(column.name)"
+                    :class="classesTh(column.name)"
                     v-html="column.label"
                 ></th>
             </tr>
@@ -24,15 +25,16 @@
         <slot></slot>
         <tfoot class="thead-light">
             <tr>
-                <th class="actions th-show-plus" v-html="columns[0].label"></th>
+                <th class="actions th-checkbox"></th>
+                <th class="actions th-show-plus" v-html="columns[1].label"></th>
                 <th
                     rowspan="1"
                     colspan="1"
                     v-for="column in columns"
                     v-show="columnsView.indexOf(column.name) != -1"
                     :key="column.name"
-                    @click="(columnsExcepted.indexOf(column.name) == -1) ? $emit('sort', column.name) : ''"
-                    :class="(columnsExcepted.indexOf(column.name) == -1) ? (sortKey === column.name ? (sortOrders[column.name] > 0 ? 'sorting_asc' : 'sorting_desc') : 'sorting') : 'actions'"
+                    @click="sortBy(column.name)"
+                    :class="classesTh(column.name)"
                     v-html="column.label"
                 ></th>
             </tr>
@@ -45,22 +47,47 @@
 </div>
 </template>
 
+
+
 <script>
 export default {
-  props: [
-    "successResponse",
-    "dataTable",
-    "columns",
-    "viewtableclasses",
-    "columnsView",
-    "columnsExcepted",
-    "sortKey",
-    "sortOrders"
-  ]
-};
+    props: [
+        "successResponse",
+        "dataTable",
+        "columns",
+        "themeTableClassesFilter",
+        "columnsView",
+        "columnsExcepted",
+        "sortOrders",
+        "tableData"
+    ],
+    methods: {
+        sortBy(key) {
+            // console.log('a', key)
+            if (this.columnsExcepted.indexOf(key) == -1) {
+                this.tableData.sortBy = key
+                this.sortOrders[key] = this.sortOrders[key] * -1
+                this.tableData.dir = this.sortOrders[key] == 1 ? "asc" : "desc"
+                this.$emit('getData')
+            }
+        },
+        classesTh(columnName) {
+            let classSorting
+            if (this.columnsExcepted.indexOf(columnName) == -1) {
+                if (this.tableData.sortBy === columnName) {
+                    if (this.sortOrders[columnName] > 0) {
+                        classSorting = 'sorting_asc'
+                    } else {
+                        classSorting = 'sorting_desc'
+                    }
+                } else {
+                    classSorting = 'sorting'
+                }
+            } else {
+                classSorting = 'actions'
+            }
+            return classSorting;
+        }
+    },
+}
 </script>
-
-
-<style lang="scss">
-
-</style>

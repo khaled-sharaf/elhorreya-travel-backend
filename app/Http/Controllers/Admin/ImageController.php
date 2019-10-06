@@ -22,12 +22,16 @@ class ImageController extends Controller
         $sortBy = $request->sortBy;
         $dir = $request->dir;
         $draw = $request->draw;
-        $display = $request->display;
         $travel_category_id = $request->travel_category_id;
+        $display = $request->display;
         $trashed = $request->trashed;
         $from_date = $request->from_date;
         $to_date = $request->to_date;
         $query = ImageModel::select('*')->orderBy($sortBy, $dir)->with(['user', 'travel_category']);
+
+        if ($travel_category_id != '') {
+            $query->where('travel_category_id', $travel_category_id);
+        }
 
         if ($trashed == 0) {
             $query->onlyTrashed();
@@ -37,10 +41,6 @@ class ImageController extends Controller
 
         if ($display != '') {
             $query->where('display', $display);
-        }
-
-        if ($travel_category_id != '') {
-            $query->where('travel_category_id', $travel_category_id);
         }
 
         if ($from_date != '') {
@@ -158,4 +158,32 @@ class ImageController extends Controller
         $image_deleted->restore();
         return response(['status' => true]);
     }
+
+
+    public function deleteRestoreMulti(Request $request)
+    {
+        $ids = $request->ids;
+        $action = $request->action;
+
+        if ($action == 'delete') {
+            ImageModel::destroy($ids);
+        } else if ($action == 'force_delete') {
+            $images = ImageModel::onlyTrashed()->whereIn('id', $ids)->get();
+            foreach ($images as $image) {
+                if ($image->name !== null) {
+                    if (file_exists(public_path($image->name))) {
+                        unlink(public_path($image->name));
+                    }
+                }
+            }
+            ImageModel::onlyTrashed()->whereIn('id', $ids)->forceDelete();
+        } else if ($action == 'restore') {
+            ImageModel::onlyTrashed()->whereIn('id', $ids)->restore();
+        }
+
+        return response(['status' => true]);
+    }
+
+
+
 }

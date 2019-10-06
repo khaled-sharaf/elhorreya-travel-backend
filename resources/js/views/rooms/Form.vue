@@ -137,10 +137,10 @@
             });
         },
     },
-    watch: {
-    },
     mounted() {
-        this.getHotelsSelect()
+        this.$nextTick(() => {
+            this.getHotelsSelect()
+        })
     },
   }
 </script>

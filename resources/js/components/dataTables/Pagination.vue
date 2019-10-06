@@ -14,7 +14,7 @@
           <li class="page-item">
             <a
               v-if="pagination.prevPageUrl"
-              @click="$emit('prev');"
+              @click="$emit('prev')"
               tabindex="0"
               class="page-link"
             >{{ $t('datatable.prev') }}</a>
@@ -26,7 +26,7 @@
             :class="pagination.currentPage == 1 ? 'active' : ''"
             v-if="totalLink > 2 && pagination.currentPage > 2"
           >
-            <a @click="$emit('gotopage', 1);" data-dt-idx="1" tabindex="0" class="page-link">1</a>
+            <a @click="$emit('gotopage', 1)" data-dt-idx="1" tabindex="0" class="page-link">1</a>
           </li>
           <li v-if="totalLink > 2 && pagination.currentPage > 3">...</li>
 
@@ -38,7 +38,7 @@
             v-show="(pagination.currentPage - 1) == i"
           >
             <a
-              @click="$emit('gotopage', i);"
+              @click="$emit('gotopage', i)"
               :data-dt-idx="i"
               tabindex="0"
               class="page-link"
@@ -53,7 +53,7 @@
             v-show="pagination.currentPage == i"
           >
             <a
-              @click="$emit('gotopage', i);"
+              @click="$emit('gotopage', i)"
               :data-dt-idx="i"
               tabindex="0"
               class="page-link"
@@ -67,7 +67,7 @@
             v-show="(pagination.currentPage + 1) == i"
           >
             <a
-              @click="$emit('gotopage', i);"
+              @click="$emit('gotopage', i)"
               :data-dt-idx="i"
               tabindex="0"
               class="page-link"
@@ -82,7 +82,7 @@
             v-if="totalLink > 2 && (totalLink - pagination.currentPage) > 1 && pagination.currentPage >= 2"
           >
             <a
-              @click="$emit('gotopage', totalLink);"
+              @click="$emit('gotopage', totalLink)"
               :data-dt-idx="totalLink"
               tabindex="0"
               class="page-link"
@@ -92,7 +92,7 @@
           <li class="page-item">
             <a
               v-if="pagination.nextPageUrl"
-              @click="$emit('next');"
+              @click="$emit('next')"
               tabindex="0"
               class="page-link"
             >{{ $t('datatable.next') }}</a>

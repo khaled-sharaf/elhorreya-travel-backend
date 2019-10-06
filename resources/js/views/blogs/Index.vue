@@ -1,152 +1,135 @@
-<style>
-
-
-</style>
-
 <template>
-    <div>
-        <!-- Content Header (Page header) -->
-        <header-page :title="$t('global.show') + ' ' + $t('sidebar.all_blogs')"></header-page>
-        <!-- /.content-header -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="dataTable" id="blogs">
-                    <div class="row mt-3">
-                        <div class="col-12">
-                            <div class="dataTables_wrapper">
-                                <div class="card">
+    <data-table
+        :routeCreate="routeCreate"
+        :idPage="idPage"
+        :showSettings="showSettings"
+        :columns="columns"
+        :themeTableClasses="viewTableClasses"
+        :dataTable="dataTable"
+        :tableData="tableData"
+        :perPage="perPage"
+        :successResponse="successResponse"
+        :columnsView="tableData.columns"
+        :columnsExcepted="tableData.filter.columnsExcept"
+        :themeTableClassesFilter="tableData.filter.viewTable"
+        :sortOrders="sortOrders"
+        :pagination="pagination"
+        :totalLink="Math.ceil(pagination.total / tableData.length)"
+        :filters="filters"
+        :actionMultiDelete="actionMultiDelete"
 
-                                    <!-- card-header -->
-                                    <div class="card-header">
+        @prev="getData(pagination.prevPageUrl)"
+        @next="getData(pagination.nextPageUrl)"
+        @gotopage="gotopage"
+        @toggleShowSettings="toggleShowSettings"
+        @deleteResotreMulti="deleteResotreMulti"
+        @getData="getData"
+    >
+        <tbody>
+            <tr
+                role="row"
+                v-for="(blog, index) in dataTable"
+                :key="blog.id"
+                :data-id="blog.id"
+                class="tr-general"
+                :class="index % 2 == 0 ? 'even' : 'odd'"
+            >
 
-                                        <!-- dataTables_filters -->
-                                        <div class="dataTables_filters">
 
-                                            <trashed
-                                                @getData="getData"
-                                                :tableData="tableData"
-                                            ></trashed>
+                <td v-show="tableData.columns.indexOf('index') != -1" class="index">
+                    {{index + 1}}
+                </td>
 
-                                            <display
-                                                @getData="getData"
-                                                :tableData="tableData"
-                                            ></display>
 
-                                            <created-between
-                                                @getData="getData"
-                                                :tableData="tableData"
-                                            ></created-between>
+                <td v-show="tableData.columns.indexOf('id') != -1" class="id">
+                    {{blog.id}}
+                </td>
 
-                                        </div><!-- ./dataTables_filters -->
 
-                                        <!-- dataTables_header -->
-                                        <div class="dataTables_header">
+                <td v-show="tableData.columns.indexOf('title') != -1" class="title">
+                    {{blog.title | capitalize }}
+                </td>
 
-                                            <!-- Search -->
-                                            <search
-                                                @getData="getData"
-                                                :tableData="tableData"
-                                            ></search>
 
-                                            <!-- Filter columns -->
-                                            <filters-columns
-                                                @getData="getData"
-                                                :columns="columns"
-                                                :viewTableClasses="viewTableClasses"
-                                                :tableData="tableData"
-                                                :perPage="perPage"
-                                            ></filters-columns>
+                <td v-show="tableData.columns.indexOf('content') != -1" class="content">
+                    {{blog.content}}
+                </td>
 
-                                            <!-- dataTables_buttons -->
-                                            <div class="dataTables_buttons">
-                                                <router-link :to="{name: 'create-blog'}" tag="button"
-                                                    type="button"
-                                                    class="btn btn-outline-secondary"
-                                                >
-                                                    {{ $t('global.create') }}
-                                                    <i class="fa fa-plus fa-fw"></i>
-                                                </router-link>
-                                            </div>
-                                            <!-- ./dataTables_buttons -->
 
-                                        </div><!-- ./dataTables_header -->
+                <td v-show="tableData.columns.indexOf('image') != -1" class="image" style="text-align:center;">
+                    <img class="avatar-table" :src="$domain + '/' + blog.image">
+                </td>
 
-                                    </div>
-                                    <!-- /.card-header -->
 
-                                    <div class="card-body table-responsive">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <table-wrapper
-                                                    :successResponse="successResponse"
-                                                    :dataTable="dataTable"
-                                                    :columns="columns"
-                                                    :columnsView="tableData.columns"
-                                                    :columnsExcepted="tableData.filter.columnsExcept"
-                                                    :viewtableclasses="tableData.filter.viewTable"
-                                                    :sortKey="sortKey"
-                                                    :sortOrders="sortOrders"
-                                                    @sort="sortBy"
-                                                >
-                                                    <table-content
-                                                        :dataTable="dataTable"
-                                                        :tableData="tableData"
-                                                        @destroyRow="destroyRow"
-                                                        @restoreRow="restoreRow"
-                                                        @forceDeleteRow="forceDeleteRow"
-                                                    ></table-content>
+                <td v-show="tableData.columns.indexOf('display') != -1" class="display">
+                    <show-display :model="blog"></show-display>
+                </td>
 
-                                                </table-wrapper>
-                                            </div> <!-- ./ col-sm-12 -->
-                                        </div> <!-- ./ row -->
-                                    </div> <!-- /.card-body -->
 
-                                    <!-- card-footer -->
-                                    <div class="card-footer">
-                                        <div class="row-pagination">
-                                            <pagination
-                                                :pagination="pagination"
-                                                :totalLink="Math.ceil(pagination.total / tableData.length)"
-                                                @prev="getData(pagination.prevPageUrl)"
-                                                @next="getData(pagination.nextPageUrl)"
-                                                @gotopage="gotopage"
-                                            ></pagination>
-                                        </div>
-                                    </div> <!-- /.card-footer -->
-                                </div> <!-- /.card -->
-                            </div> <!-- /.datatables wrapper -->
-                        </div><!-- /.col-12 -->
-                    </div> <!-- /.row -->
-                </div> <!-- /.dataTable -->
-            </div><!--/. container-fluid -->
+                <td v-show="tableData.columns.indexOf('user_id') != -1" class="user_id">
+                    <created-by :model="blog"></created-by>
+                </td>
 
-        </section>
-    </div>
+                <td v-show="tableData.columns.indexOf('updated_at') != -1" class="updated_at">
+                    <relative-date :date="blog.updated_at"></relative-date>
+                </td>
+
+                <td v-show="tableData.columns.indexOf('created_at') != -1" class="created_at">
+                    <relative-date :date="blog.created_at"></relative-date>
+                </td>
+
+
+                <td v-show="tableData.columns.indexOf('actions') != -1" class="actions">
+                    <!-- btn edit row -->
+                    <btn-edit :model="blog" modelName="blog"></btn-edit>
+                    <!-- ./btn edit row -->
+
+                    <!-- btn delete row -->
+                    <btn-delete :model="blog" modelName="blog" @destroyRow="destroyRow(blog.id)"></btn-delete>
+                    <!-- ./btn delete row -->
+
+                    <!-- btn restore row -->
+                    <btn-restore :model="blog" modelName="blog" @restoreRow="restoreRow(blog.id)"></btn-restore>
+                    <!-- ./btn restore row -->
+
+                    <!-- btn force delete row -->
+                    <btn-force-delete :model="blog" modelName="blog" @forceDeleteRow="forceDeleteRow(blog.id)"></btn-force-delete>
+                    <!-- ./btn force delete row -->
+                </td>
+            </tr>
+        </tbody>
+    </data-table>
 </template>
 
 
 <script>
-import Trashed from "./../../components/dataTables/filters/Trashed";
-import Display from "./../../components/dataTables/filters/Display";
-import CreatedBetween from "./../../components/dataTables/filters/CreatedBetween";
-import Search from "./../../components/dataTables/filters/Search";
-import TableContent from "./TableContent";
+import CreatedBy from "./../../components/dataTables/buttons/CreatedBy"
+import BtnEdit from "./../../components/dataTables/buttons/EditRow"
+import BtnDelete from "./../../components/dataTables/buttons/DeleteRow"
+import BtnRestore from "./../../components/dataTables/buttons/RestoreRow"
+import BtnForceDelete from "./../../components/dataTables/buttons/ForceDeleteRow"
+import showDisplay from "./../../components/dataTables/tableContent/showDisplay"
 
+import dataTable from "./../../components/dataTables/Index"
 import MixinsDatatable from "./../../mixins/MixinsDatatable"
 
 export default {
     mixins: [MixinsDatatable],
-        components: {
-        Trashed,
-        Display,
-        CreatedBetween,
-        Search,
-        TableContent
+    components: {
+        dataTable,
+        CreatedBy,
+        showDisplay,
+        BtnEdit,
+        BtnDelete,
+        BtnRestore,
+        BtnForceDelete,
     },
   data() {
     return {
       idPage: 'blogs',
+      routeCreate: 'create-blog',
       urlGetDataTable: '/blogs',
+      filters: ['display', 'trashed', 'created-between', 'search'],
       columns: [
         { label: "ID", name: "id" },
         { label: "Title", name: "title" },
@@ -157,39 +140,16 @@ export default {
         { label: "Updated at", name: "updated_at" },
         { label: "Created at", name: "created_at" }
       ],
-      // viewFilterColumns
-      viewColumnsResponsive: {
-        default: {
-          hide: ['index', 'content', 'user_id', 'created_at']
-        },
-        1000: {
-          show: ['title', 'image', 'updated_at', 'actions']
-        },
-        800: {
-          show: ['title', 'image', 'actions']
-        },
-        600: {
-          show: ['title', 'actions']
-        },
-        400: {
-          show: ['title']
-        }
-      },
+      columnsExceptedSorting: ['content', 'user_id']
     };
   },
     methods: {
-        setTableData() {
-            this.tableData.filter.columnsExcept = ['show_plus', 'index', 'actions', 'content', 'image', 'user_id']
-        },
+
     },
     beforeRouteEnter(to, from, next) {
         next(vm => {
             to.meta.title = vm.$t('sidebar.blogs')
-            vm.setTableData()
         })
     },
 };
 </script>
-<style scoped lang="scss">
-
-</style>

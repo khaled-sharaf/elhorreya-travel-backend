@@ -15,18 +15,19 @@ class CreateTravelDetailsTable extends Migration
     {
         Schema::create('travel_details', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('info');
-            $table->boolean('go_and_back')->default(1); // 1 = go, 2 = go and back
+            $table->string('info_offer')->nullable();
+            $table->boolean('go_and_back')->default(0); // 0 = go, 1 = go and back
             $table->timestamp('date_from')->nullable();
             $table->timestamp('date_to')->nullable();
             $table->tinyInteger('time_period')->nullable(); // count days = ( date from - date to )
             $table->string('stay_type')->nullable(); // إقامة فقط، شامل الإفضطار، نصف إقامة، شامل كليا
             $table->boolean('transport')->default(0); // 0 = بدون انتقالات،  1  = انتقالات
-            $table->tinyInteger('adults')->default(2);
-            $table->tinyInteger('children')->default(0);
+            $table->integer('adults')->default(2);
+            $table->integer('children')->nullable()->default(0);
             $table->double('single_price')->nullable();
             $table->double('twin_price')->nullable();
             $table->double('triple_price')->nullable();
+            $table->boolean('display')->default(1);
             $table->unsignedInteger('travel_id');
             $table->timestamps();
 

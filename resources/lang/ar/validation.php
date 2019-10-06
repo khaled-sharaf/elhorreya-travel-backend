@@ -159,8 +159,8 @@ return [
         'product_id' => 'المنتج',
         'user_id' => 'المستخدم',
         'hotel_id' => 'الفندق',
-        'type_id' => 'القسم',
-        'type' => 'القسم',
+        'type_id' => 'النوع',
+        'type' => 'النوع',
         'category' => 'القسم',
         'options' => 'الخيارات',
         'info' => 'المعلومات',
@@ -187,6 +187,25 @@ return [
         'slug' => 'الاسم التعبيرى',
         'value' => 'ال ',
 
+
+        'address_from' => 'عنوان الإقلاع',
+        'umrah_date' => 'موعد العمرة',
+        'haram_distance' => 'المسافة بين الفندق والحرم',
+        'favorite_company' => 'تفضيل الحرية',
+        'offers' => 'العروض',
+
+        'offers.*.info_offer' => 'وصف العرض',
+        'offers.*.go_and_back' => 'الذهاب والعودة',
+        'offers.*.date_from' => 'تاريخ البداية',
+        'offers.*.date_to' => 'تاريخ الإنتهاء',
+        'offers.*.stay_type' => 'نوع الإقامة',
+        'offers.*.transport' => 'الانتقالات',
+        'offers.*.adults' => 'عدد البالغين',
+        'offers.*.children' => 'عدد الأطفال',
+        'offers.*.single_price' => 'سعر الفرد',
+        'offers.*.twin_price' => 'سعر الفردين',
+        'offers.*.triple_price' => 'سعر ثلاث أفراد',
+        'offers.*.display' => 'ظهور العرض',
 
     ],
 ];

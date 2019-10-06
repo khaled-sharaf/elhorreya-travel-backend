@@ -115,11 +115,11 @@ class RoomController extends Controller
 
     public function destroy($id)
     {
-        $hotel = Room::withTrashed()->where('id', $id)->first();
-        if ($hotel->trashed()) {
-            $hotel->forceDelete();
+        $room = Room::withTrashed()->where('id', $id)->first();
+        if ($room->trashed()) {
+            $room->forceDelete();
         } else {
-            $hotel->delete();
+            $room->delete();
         }
         return response(['status' => true]);
     }
@@ -127,8 +127,25 @@ class RoomController extends Controller
 
     public function restoreRoom($id)
     {
-        $hotel_deleted = Room::onlyTrashed()->where('id', $id)->first();
-        $hotel_deleted->restore();
+        $room_deleted = Room::onlyTrashed()->where('id', $id)->first();
+        $room_deleted->restore();
+        return response(['status' => true]);
+    }
+
+
+    public function deleteRestoreMulti(Request $request)
+    {
+        $ids = $request->ids;
+        $action = $request->action;
+
+        if ($action == 'delete') {
+            Room::destroy($ids);
+        } else if ($action == 'force_delete') {
+            Room::onlyTrashed()->whereIn('id', $ids)->forceDelete();
+        } else if ($action == 'restore') {
+            Room::onlyTrashed()->whereIn('id', $ids)->restore();
+        }
+
         return response(['status' => true]);
     }
 }

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
-use App\Hotel;
 use Illuminate\Http\Request;
+use App\Hotel;
+
 use Image;
 use File;
 
@@ -261,7 +261,7 @@ class HotelController extends Controller
 
         $hotel->update($data);
         $updatedHotel = Hotel::findConvert($id);
-        return response(['message' => $data['name'] . ' Hotel has been updated.', 'data' => $updatedHotel]);
+        return response(['message' => 'Hotel has been updated.', 'data' => $updatedHotel]);
     }
 
 
@@ -271,7 +271,7 @@ class HotelController extends Controller
         if ($hotel->trashed()) {
             // delete image
             $directory = $this->directory . '/' . explode('/', $hotel->image)[2];
-            \File::deleteDirectory($directory);
+            File::deleteDirectory($directory);
             $hotel->forceDelete();
         } else {
             $hotel->delete();
@@ -284,6 +284,27 @@ class HotelController extends Controller
     {
         $hotel_deleted = Hotel::onlyTrashed()->where('id', $id)->first();
         $hotel_deleted->restore();
+        return response(['status' => true]);
+    }
+
+    public function deleteRestoreMulti(Request $request)
+    {
+        $ids = $request->ids;
+        $action = $request->action;
+
+        if ($action == 'delete') {
+            Hotel::destroy($ids);
+        } else if ($action == 'force_delete') {
+            $hotels = Hotel::onlyTrashed()->whereIn('id', $ids)->get();
+            foreach ($hotels as $hotel) {
+                $directory = $this->directory . '/' . explode('/', $hotel->image)[2];
+                File::deleteDirectory($directory);
+            }
+            Hotel::onlyTrashed()->whereIn('id', $ids)->forceDelete();
+        } else if ($action == 'restore') {
+            Hotel::onlyTrashed()->whereIn('id', $ids)->restore();
+        }
+
         return response(['status' => true]);
     }
 }

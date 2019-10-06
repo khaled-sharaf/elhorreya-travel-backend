@@ -33,7 +33,7 @@
 
                                 <p class="text-muted text-center">{{ hotelProfile.address }}</p>
 
-                                <ul class="list-group list-group-unbordered mb-3">
+                                <ul class="list-group mb-3">
                                     <li class="list-group-item">
                                         <b> {{ $t('hotels_table.rooms_count') }} </b> <a class="float-right">{{ hotelProfile.rooms_count == null ? 0 : hotelProfile.rooms_count }}</a>
                                     </li>
@@ -45,23 +45,20 @@
                                     </li>
                                 </ul>
 
-                                <!-- delete hotel -->
-                                <a
-                                    :href="$domain_admin + '/hotel/destroy'"
-                                    class="btn btn-danger btn-delete-row btn-table-actions btn-sm mr-3 mt-1"
-                                    @click.prevent="destroyRow(hotelProfile.id)"
-                                > {{ $t('hotels_table.delete_hotel') }}
-                                    <i class="fa fa-trash"></i>
-                                </a>
+                                <!-- btn delete hotel -->
+                                <btn-delete classes="mt-1" :model="hotelProfile" modelName="hotel" @destroyRow="destroyRow(hotelProfile.id)">
+                                    {{ $t('hotels_table.delete_hotel') }}
+                                </btn-delete>
+                                <!-- ./btn delete hotel -->
 
-                                <!-- edit hotel -->
-                                <router-link
-                                    :to="{name: 'edit-hotel', params: {hotel: hotelProfile, id: hotelProfile.id}}"
-                                    :href="$domain_admin + '/hotel/' + hotelProfile.id + '/edit'"
-                                    class="btn btn-success btn-edit-row btn-table-actions btn-sm mt-1"
-                                > {{ $t('hotels_table.edit_hotel') }}
-                                    <i class="fa fa-edit"></i>
-                                </router-link>
+
+                                <!-- btn edit hotel -->
+                                <btn-edit classes="mr-2 mt-1" :inTable="false" :model="hotelProfile" modelName="hotel">
+                                    {{ $t('hotels_table.edit_hotel') }}
+                                </btn-edit>
+                                <!-- ./btn edit hotel -->
+
+
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -77,7 +74,7 @@
                             <div class="card-body box-profile">
 
                                 <!-- show hotel details in table hotel -->
-                                <ul class="list-group list-group-unbordered mb-3">
+                                <ul class="list-group mb-3">
 
                                     <!-- stars -->
                                     <li class="list-group-item">
@@ -105,7 +102,7 @@
                                                 :data-lat="hotelProfile.latitude"
                                                 :data-location-title="hotelProfile.name">
 
-                                            {{ $t('hotels_table.show_map') }}
+                                            {{ $t('global.show_map') }}
                                             </button>
                                             <span v-else>{{ $t('global.no_location') }}</span>
                                         </a>
@@ -144,14 +141,7 @@
                                             {{ $t('hotels_table.user_id') }}
                                         </b>
                                         <a class="float-right">
-                                            <router-link
-                                                v-if="hotelProfile.user !== null"
-                                                :href="$domain_admin + '/user/' + hotelProfile.user_id + '/edit'"
-                                                :to="{name: 'edit-user', params: {id: hotelProfile.user_id, user: hotelProfile.user}}"
-                                            >
-                                                {{ hotelProfile.user.name }}
-                                            </router-link>
-                                            <span class="badge badge-danger" v-else> {{ $t('global.user_is_deleted') }} - id:{{hotelProfile.user_id}}</span>
+                                            <created-by :model="hotelProfile"></created-by>
                                         </a>
                                     </li>
                                     <!-- =========================================== -->
@@ -249,13 +239,12 @@
                             </div>
                             <!-- /.tab-pane -->
                             <div class="tab-pane" id="travels">
-                                travels
-                                <!-- <travels v-if="(hotelProfile.travels_count != null && hotelProfile.travels_count != 0) && currentChildTable === 'travels'"></travels>
+                                <travels v-if="(hotelProfile.travels_count != null && hotelProfile.travels_count != 0) && currentChildTable === 'travels'"></travels>
 
                                 <div v-else class="alert alert-info alert-dismissible">
                                     <h5><i class="icon fas fa-info"></i>  {{ $t('global.no_travels') }} !</h5>
                                     {{ $t('hotels_table.empty_travels_msg') }}
-                                </div> -->
+                                </div>
 
                             </div>
                             <!-- /.tab-pane -->
@@ -277,9 +266,12 @@
 
 
 <script>
+import CreatedBy from "./../../components/dataTables/buttons/CreatedBy"
+import BtnEdit from "./../../components/dataTables/buttons/EditRow"
+import BtnDelete from "./../../components/dataTables/buttons/DeleteRow"
 
 import Rooms from './../rooms/Index'
-// import Travels from './../travels/Index'
+import Travels from './../travels/Index'
 import ModalLocation from './ModalLocation'
 import HeaderPage from './../../components/HeaderPage'
 import MixinChangeLocaleMessagesProfiles from "./../../mixins/MixinChangeLocaleMessagesProfiles"
@@ -293,8 +285,11 @@ export default {
     components: {
         HeaderPage,
         Rooms,
-        // Travels,
-        ModalLocation
+        Travels,
+        ModalLocation,
+        CreatedBy,
+        BtnEdit,
+        BtnDelete,
     },
     name: 'hotel-profile',
     data() {

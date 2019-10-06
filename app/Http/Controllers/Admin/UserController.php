@@ -97,7 +97,7 @@ class UserController extends Controller
     }
 
 
-    public function show(Request $request, $id)
+    public function show($id)
     {
         $user = User::find($id);
         return response(['user' => $user]);
@@ -153,7 +153,7 @@ class UserController extends Controller
 
 
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
         if ($id != 1) {
             $user = User::withTrashed()->where('id', $id)->first();
@@ -175,10 +175,35 @@ class UserController extends Controller
     }
 
 
-    public function restoreUser(Request $request, $id)
+    public function restoreUser($id)
     {
         $user_deleted = User::onlyTrashed()->where('id', $id)->first();
         $user_deleted->restore();
+        return response(['status' => true]);
+    }
+
+
+    public function deleteRestoreMulti(Request $request)
+    {
+        $ids = $request->ids;
+        $action = $request->action;
+
+        if ($action == 'delete') {
+            User::destroy($ids);
+        } else if ($action == 'force_delete') {
+            $users = User::onlyTrashed()->whereIn('id', $ids)->get();
+            foreach ($users as $user) {
+                if ($user->image != $this->defaultAvatar && $user->image !== null) {
+                    if (file_exists(public_path($user->image))) {
+                        unlink(public_path($user->image));
+                    }
+                }
+            }
+            User::onlyTrashed()->whereIn('id', $ids)->forceDelete();
+        } else if ($action == 'restore') {
+            User::onlyTrashed()->whereIn('id', $ids)->restore();
+        }
+
         return response(['status' => true]);
     }
 

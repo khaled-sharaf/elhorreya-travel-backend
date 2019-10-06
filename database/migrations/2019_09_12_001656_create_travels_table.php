@@ -17,7 +17,7 @@ class CreateTravelsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('address_from')->nullable();
-            $table->mediumText('info');
+            $table->mediumText('info')->nullable();
             $table->string('image');
             $table->mediumText('gallery')->nullable();
             $table->string('type', 20)->default('other'); // pilgrimage, umrah, other

@@ -1,154 +1,154 @@
-<style>
-
-
-</style>
-
 <template>
-    <div>
-        <!-- Content Header (Page header) -->
-        <header-page :title="$t('global.show') + ' ' + $t('sidebar.all_images')"></header-page>
-        <!-- /.content-header -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="dataTable" id="images">
-                    <div class="row mt-3">
-                        <div class="col-12">
-                            <div class="dataTables_wrapper">
-                                <div class="card">
+    <data-table
+        :routeCreate="routeCreate"
+        :idPage="idPage"
+        :showSettings="showSettings"
+        :columns="columns"
+        :themeTableClasses="viewTableClasses"
+        :dataTable="dataTable"
+        :tableData="tableData"
+        :perPage="perPage"
+        :successResponse="successResponse"
+        :columnsView="tableData.columns"
+        :columnsExcepted="tableData.filter.columnsExcept"
+        :themeTableClassesFilter="tableData.filter.viewTable"
+        :sortOrders="sortOrders"
+        :pagination="pagination"
+        :totalLink="Math.ceil(pagination.total / tableData.length)"
+        :filters="filters"
+        :actionMultiDelete="actionMultiDelete"
 
-                                    <!-- card-header -->
-                                    <div class="card-header">
+        @prev="getData(pagination.prevPageUrl)"
+        @next="getData(pagination.nextPageUrl)"
+        @gotopage="gotopage"
+        @toggleShowSettings="toggleShowSettings"
+        @deleteResotreMulti="deleteResotreMulti"
+        @getData="getData"
+    >
 
-                                        <!-- dataTables_filters -->
-                                        <div class="dataTables_filters">
+        <template v-slot:filters>
+            <travel-categories-select
+                @getData="getData"
+                :tableData="tableData"
+                :travelCategories="travelCategoriesSelect"
+            ></travel-categories-select>
+        </template>
 
-                                            <travel-categories-select
-                                                @getData="getData"
-                                                :tableData="tableData"
-                                                :travelCategories="travelCategoriesSelect"
-                                            ></travel-categories-select>
+        <tbody>
+            <tr
+                role="row"
+                v-for="(image, index) in dataTable"
+                :key="image.id"
+                :data-id="image.id"
+                class="tr-general"
+                :class="index % 2 == 0 ? 'even' : 'odd'"
+            >
 
-                                            <trashed
-                                                @getData="getData"
-                                                :tableData="tableData"
-                                            ></trashed>
 
-                                            <display
-                                                @getData="getData"
-                                                :tableData="tableData"
-                                            ></display>
+                <td v-show="tableData.columns.indexOf('index') != -1" class="index">
+                    {{index + 1}}
+                </td>
 
-                                            <created-between
-                                                @getData="getData"
-                                                :tableData="tableData"
-                                            ></created-between>
 
-                                        </div><!-- ./dataTables_filters -->
+                <td v-show="tableData.columns.indexOf('id') != -1" class="id">
+                    {{image.id}}
+                </td>
 
-                                        <!-- dataTables_header -->
-                                        <div class="dataTables_header">
 
-                                            <!-- Filter columns -->
-                                            <filters-columns
-                                                @getData="getData"
-                                                :columns="columns"
-                                                :viewTableClasses="viewTableClasses"
-                                                :tableData="tableData"
-                                                :perPage="perPage"
-                                            ></filters-columns>
+                <td v-show="tableData.columns.indexOf('name') != -1" class="name" style="text-align:center;">
+                    <img class="avatar-table" :src="$domain + '/' + image.name">
+                </td>
 
-                                            <!-- dataTables_buttons -->
-                                            <div class="dataTables_buttons">
-                                                <router-link :to="{name: 'create-image'}" tag="button"
-                                                    type="button"
-                                                    class="btn btn-outline-secondary"
-                                                >
-                                                    {{ $t('global.create') }}
-                                                    <i class="fa fa-plus fa-fw"></i>
-                                                </router-link>
-                                            </div>
-                                            <!-- ./dataTables_buttons -->
 
-                                        </div><!-- ./dataTables_header -->
+                <td v-show="tableData.columns.indexOf('travel_category_id') != -1" class="travel_category_id">
+                    <router-link
+                        class="link-router-in-table"
+                        v-if="image.travel_category !== null"
+                        :href="$domain_admin + '/travel_category/' + image.travel_category_id + '/edit'"
+                        :to="{name: 'edit-travel_category', params: {id: image.travel_category_id, travel_category: image.travel_category}}"
+                        data-name="edit-travel_category"
+                        :data-params='"{\"travel_category\":" + JSON.stringify(image.travel_category) + ", \"id\":" + image.travel_category_id + "}"'
+                    >
+                        {{ image.travel_category.name }}
+                    </router-link>
+                    <span class="badge badge-danger" v-else> {{ $t('global.travel_category_is_deleted') }} - id:{{image.travel_category_id}}</span>
+                </td>
 
-                                    </div>
-                                    <!-- /.card-header -->
 
-                                    <div class="card-body table-responsive">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <table-wrapper
-                                                    :successResponse="successResponse"
-                                                    :dataTable="dataTable"
-                                                    :columns="columns"
-                                                    :columnsView="tableData.columns"
-                                                    :columnsExcepted="tableData.filter.columnsExcept"
-                                                    :viewtableclasses="tableData.filter.viewTable"
-                                                    :sortKey="sortKey"
-                                                    :sortOrders="sortOrders"
-                                                    @sort="sortBy"
-                                                >
-                                                    <table-content
-                                                        :dataTable="dataTable"
-                                                        :tableData="tableData"
-                                                        @destroyRow="destroyRow"
-                                                        @restoreRow="restoreRow"
-                                                        @forceDeleteRow="forceDeleteRow"
-                                                    ></table-content>
+                <td v-show="tableData.columns.indexOf('display') != -1" class="display">
+                    <show-display :model="image"></show-display>
+                </td>
 
-                                                </table-wrapper>
-                                            </div> <!-- ./ col-sm-12 -->
-                                        </div> <!-- ./ row -->
-                                    </div> <!-- /.card-body -->
 
-                                    <!-- card-footer -->
-                                    <div class="card-footer">
-                                        <div class="row-pagination">
-                                            <pagination
-                                                :pagination="pagination"
-                                                :totalLink="Math.ceil(pagination.total / tableData.length)"
-                                                @prev="getData(pagination.prevPageUrl)"
-                                                @next="getData(pagination.nextPageUrl)"
-                                                @gotopage="gotopage"
-                                            ></pagination>
-                                        </div>
-                                    </div> <!-- /.card-footer -->
-                                </div> <!-- /.card -->
-                            </div> <!-- /.datatables wrapper -->
-                        </div><!-- /.col-12 -->
-                    </div> <!-- /.row -->
-                </div> <!-- /.dataTable -->
-            </div><!--/. container-fluid -->
+                <td v-show="tableData.columns.indexOf('user_id') != -1" class="user_id">
+                    <created-by :model="image"></created-by>
+                </td>
 
-        </section>
-    </div>
+                <td v-show="tableData.columns.indexOf('updated_at') != -1" class="updated_at">
+                    <relative-date :date="image.updated_at"></relative-date>
+                </td>
+
+                <td v-show="tableData.columns.indexOf('created_at') != -1" class="created_at">
+                    <relative-date :date="image.created_at"></relative-date>
+                </td>
+
+
+                <td v-show="tableData.columns.indexOf('actions') != -1" class="actions">
+                    <!-- btn edit row -->
+                    <btn-edit :model="image" modelName="image"></btn-edit>
+                    <!-- ./btn edit row -->
+
+                    <!-- btn delete row -->
+                    <btn-delete :model="image" modelName="image" @destroyRow="destroyRow(image.id)"></btn-delete>
+                    <!-- ./btn delete row -->
+
+                    <!-- btn restore row -->
+                    <btn-restore :model="image" modelName="image" @restoreRow="restoreRow(image.id)"></btn-restore>
+                    <!-- ./btn restore row -->
+
+                    <!-- btn force delete row -->
+                    <btn-force-delete :model="image" modelName="image" @forceDeleteRow="forceDeleteRow(image.id)"></btn-force-delete>
+                    <!-- ./btn force delete row -->
+                </td>
+            </tr>
+        </tbody>
+    </data-table>
 </template>
 
 
 <script>
-import Trashed from "./../../components/dataTables/filters/Trashed";
-import Display from "./../../components/dataTables/filters/Display";
-import CreatedBetween from "./../../components/dataTables/filters/CreatedBetween";
-import TravelCategoriesSelect from "./../../components/dataTables/filters/travelCategoriesSelect";
-import TableContent from "./TableContent";
+import CreatedBy from "./../../components/dataTables/buttons/CreatedBy"
+import BtnEdit from "./../../components/dataTables/buttons/EditRow"
+import BtnDelete from "./../../components/dataTables/buttons/DeleteRow"
+import BtnRestore from "./../../components/dataTables/buttons/RestoreRow"
+import BtnForceDelete from "./../../components/dataTables/buttons/ForceDeleteRow"
+import showDisplay from "./../../components/dataTables/tableContent/showDisplay"
 
+import dataTable from "./../../components/dataTables/Index"
 import MixinsDatatable from "./../../mixins/MixinsDatatable"
+
+import TravelCategoriesSelect from "./../../components/dataTables/filters/travelCategoriesSelect"
 
 export default {
     mixins: [MixinsDatatable],
-        components: {
-        Trashed,
-        Display,
-        CreatedBetween,
+    components: {
+        dataTable,
+        CreatedBy,
+        showDisplay,
+        BtnEdit,
+        BtnDelete,
+        BtnRestore,
+        BtnForceDelete,
         TravelCategoriesSelect,
-        TableContent
     },
   data() {
     return {
         idPage: 'images',
         urlGetDataTable: '/images',
+        routeCreate: 'create-image',
         urlGetTravelCategories: '/travel_categories/select',
         travelCategoriesSelect: [],
+        filters: ['display', 'trashed', 'created-between', 'search'],
         columns: [
             { label: "ID", name: "id" },
             { label: "Image", name: "name" },
@@ -158,31 +158,12 @@ export default {
             { label: "Updated at", name: "updated_at" },
             { label: "Created at", name: "created_at" },
         ],
-      // viewFilterColumns
-      viewColumnsResponsive: {
-        default: {
-            show: 'all'
-        //   show: ['id', 'name', 'travel_category_id', 'display', 'updated_at', 'actions']
-        },
-        1000: {
-          show: ['name', 'travel_category_id', 'updated_at', 'actions']
-        },
-        800: {
-          show: ['name', 'travel_category_id', 'actions']
-        },
-        600: {
-          show: ['name', 'actions']
-        },
-        400: {
-          show: ['name']
-        }
-      },
+        columnsExceptedSorting: ['name', 'travel_category_id', 'user_id']
     };
   },
     methods: {
         setTableData() {
             this.tableData.travel_category_id = ''
-            this.tableData.filter.columnsExcept = ['show_plus', 'index', 'actions', 'name', 'travel_category_id', 'user_id']
         },
         getTravelCategoriesSelect() {
             axios.get(this.urlGetTravelCategories).then(response => {
@@ -214,6 +195,3 @@ export default {
     },
 };
 </script>
-<style scoped lang="scss">
-
-</style>

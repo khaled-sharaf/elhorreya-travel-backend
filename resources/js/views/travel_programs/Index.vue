@@ -1,145 +1,139 @@
-<style>
-
-
-</style>
-
 <template>
-    <div>
-        <!-- Content Header (Page header) -->
-        <header-page :title="$t('global.show') + ' ' + $t('sidebar.all_travel_programs')"></header-page>
-        <!-- /.content-header -->
-        <section class="content">
-            <div class="container-fluid">
-                <div class="dataTable" id="travel_programs">
-                    <div class="row mt-3">
-                        <div class="col-12">
-                            <div class="dataTables_wrapper">
-                                <div class="card">
+    <data-table
+        :routeCreate="routeCreate"
+        :idPage="idPage"
+        :showSettings="showSettings"
+        :columns="columns"
+        :themeTableClasses="viewTableClasses"
+        :dataTable="dataTable"
+        :tableData="tableData"
+        :perPage="perPage"
+        :successResponse="successResponse"
+        :columnsView="tableData.columns"
+        :columnsExcepted="tableData.filter.columnsExcept"
+        :themeTableClassesFilter="tableData.filter.viewTable"
+        :sortOrders="sortOrders"
+        :pagination="pagination"
+        :totalLink="Math.ceil(pagination.total / tableData.length)"
+        :filters="filters"
+        :actionMultiDelete="actionMultiDelete"
 
-                                    <!-- card-header -->
-                                    <div class="card-header">
+        @prev="getData(pagination.prevPageUrl)"
+        @next="getData(pagination.nextPageUrl)"
+        @gotopage="gotopage"
+        @toggleShowSettings="toggleShowSettings"
+        @deleteResotreMulti="deleteResotreMulti"
+        @getData="getData"
+    >
 
-                                        <!-- dataTables_filters -->
-                                        <div class="dataTables_filters">
+        <tbody>
+            <tr
+                role="row"
+                v-for="(travel_program, index) in dataTable"
+                :key="travel_program.id"
+                :data-id="travel_program.id"
+                class="tr-general"
+                :class="index % 2 == 0 ? 'even' : 'odd'"
+            >
 
-                                            <trashed
-                                                @getData="getData"
-                                                :tableData="tableData"
-                                            ></trashed>
+                <td v-show="tableData.columns.indexOf('index') != -1" class="index">
+                    {{index + 1}}
+                </td>
 
-                                            <created-between
-                                                @getData="getData"
-                                                :tableData="tableData"
-                                            ></created-between>
 
-                                        </div><!-- ./dataTables_filters -->
+                <td v-show="tableData.columns.indexOf('id') != -1" class="id">
+                    {{travel_program.id}}
+                </td>
 
-                                        <!-- dataTables_header -->
-                                        <div class="dataTables_header">
 
-                                            <!-- Search -->
-                                            <search
-                                                @getData="getData"
-                                                :tableData="tableData"
-                                            ></search>
+                <td v-show="tableData.columns.indexOf('name') != -1" class="name">
+                    {{travel_program.name | capitalize }}
+                </td>
 
-                                            <!-- Filter columns -->
-                                            <filters-columns
-                                                @getData="getData"
-                                                :columns="columns"
-                                                :viewTableClasses="viewTableClasses"
-                                                :tableData="tableData"
-                                                :perPage="perPage"
-                                            ></filters-columns>
 
-                                            <!-- dataTables_buttons -->
-                                            <div class="dataTables_buttons">
-                                                <router-link :to="{name: 'create-travel_program'}" tag="button"
-                                                    type="button"
-                                                    class="btn btn-outline-secondary"
-                                                >
-                                                    {{ $t('global.create') }}
-                                                    <i class="fa fa-plus fa-fw"></i>
-                                                </router-link>
-                                            </div>
-                                            <!-- ./dataTables_buttons -->
+                <td v-show="tableData.columns.indexOf('image') != -1" class="image" style="text-align:center;">
+                    <img class="avatar-table" :src="$domain + '/' + travel_program.image">
+                </td>
 
-                                        </div><!-- ./dataTables_header -->
 
-                                    </div>
-                                    <!-- /.card-header -->
+                <td v-show="tableData.columns.indexOf('small_info') != -1" class="small_info">
+                    {{travel_program.small_info}}
+                </td>
 
-                                    <div class="card-body table-responsive">
-                                        <div class="row">
-                                            <div class="col-sm-12">
-                                                <table-wrapper
-                                                    :successResponse="successResponse"
-                                                    :dataTable="dataTable"
-                                                    :columns="columns"
-                                                    :columnsView="tableData.columns"
-                                                    :columnsExcepted="tableData.filter.columnsExcept"
-                                                    :viewtableclasses="tableData.filter.viewTable"
-                                                    :sortKey="sortKey"
-                                                    :sortOrders="sortOrders"
-                                                    @sort="sortBy"
-                                                >
-                                                    <table-content
-                                                        :dataTable="dataTable"
-                                                        :tableData="tableData"
-                                                        @destroyRow="destroyRow"
-                                                        @restoreRow="restoreRow"
-                                                        @forceDeleteRow="forceDeleteRow"
-                                                    ></table-content>
 
-                                                </table-wrapper>
-                                            </div> <!-- ./ col-sm-12 -->
-                                        </div> <!-- ./ row -->
-                                    </div> <!-- /.card-body -->
+                <td v-show="tableData.columns.indexOf('big_info') != -1" class="big_info">
+                    {{travel_program.big_info}}
+                </td>
 
-                                    <!-- card-footer -->
-                                    <div class="card-footer">
-                                        <div class="row-pagination">
-                                            <pagination
-                                                :pagination="pagination"
-                                                :totalLink="Math.ceil(pagination.total / tableData.length)"
-                                                @prev="getData(pagination.prevPageUrl)"
-                                                @next="getData(pagination.nextPageUrl)"
-                                                @gotopage="gotopage"
-                                            ></pagination>
-                                        </div>
-                                    </div> <!-- /.card-footer -->
-                                </div> <!-- /.card -->
-                            </div> <!-- /.datatables wrapper -->
-                        </div><!-- /.col-12 -->
-                    </div> <!-- /.row -->
-                </div> <!-- /.dataTable -->
-            </div><!--/. container-fluid -->
 
-        </section>
-    </div>
+                <td v-show="tableData.columns.indexOf('order') != -1" class="order">
+                    {{travel_program.order}}
+                </td>
+
+
+                <td v-show="tableData.columns.indexOf('user_id') != -1" class="user_id">
+                    <created-by :model="travel_program"></created-by>
+                </td>
+
+                <td v-show="tableData.columns.indexOf('updated_at') != -1" class="updated_at">
+                    <relative-date :date="travel_program.updated_at"></relative-date>
+                </td>
+
+                <td v-show="tableData.columns.indexOf('created_at') != -1" class="created_at">
+                    <relative-date :date="travel_program.created_at"></relative-date>
+                </td>
+
+
+                <td v-show="tableData.columns.indexOf('actions') != -1" class="actions">
+                    <!-- btn edit row -->
+                    <btn-edit :model="travel_program" modelName="travel_program"></btn-edit>
+                    <!-- ./btn edit row -->
+
+                    <!-- btn delete row -->
+                    <btn-delete :model="travel_program" modelName="travel_program" @destroyRow="destroyRow(travel_program.id)"></btn-delete>
+                    <!-- ./btn delete row -->
+
+                    <!-- btn restore row -->
+                    <btn-restore :model="travel_program" modelName="travel_program" @restoreRow="restoreRow(travel_program.id)"></btn-restore>
+                    <!-- ./btn restore row -->
+
+                    <!-- btn force delete row -->
+                    <btn-force-delete :model="travel_program" modelName="travel_program" @forceDeleteRow="forceDeleteRow(travel_program.id)"></btn-force-delete>
+                    <!-- ./btn force delete row -->
+
+                </td>
+            </tr>
+        </tbody>
+    </data-table>
 </template>
 
 
 <script>
-import Trashed from "./../../components/dataTables/filters/Trashed";
-import CreatedBetween from "./../../components/dataTables/filters/CreatedBetween";
-import Search from "./../../components/dataTables/filters/Search";
-import TableContent from "./TableContent";
+import CreatedBy from "./../../components/dataTables/buttons/CreatedBy"
+import BtnEdit from "./../../components/dataTables/buttons/EditRow"
+import BtnDelete from "./../../components/dataTables/buttons/DeleteRow"
+import BtnRestore from "./../../components/dataTables/buttons/RestoreRow"
+import BtnForceDelete from "./../../components/dataTables/buttons/ForceDeleteRow"
 
+import dataTable from "./../../components/dataTables/Index"
 import MixinsDatatable from "./../../mixins/MixinsDatatable"
 
 export default {
     mixins: [MixinsDatatable],
-        components: {
-        Trashed,
-        CreatedBetween,
-        Search,
-        TableContent
+    components: {
+        dataTable,
+        CreatedBy,
+        BtnEdit,
+        BtnDelete,
+        BtnRestore,
+        BtnForceDelete,
     },
   data() {
     return {
       idPage: 'travel_programs',
       urlGetDataTable: '/travel_programs',
+      routeCreate: 'create-travel_program',
+      filters: ['trashed', 'created-between', 'search'],
       columns: [
         { label: "ID", name: "id" },
         { label: "Name", name: "name" },
@@ -151,39 +145,13 @@ export default {
         { label: "Updated at", name: "updated_at" },
         { label: "Created at", name: "created_at" }
       ],
-      // viewFilterColumns
-      viewColumnsResponsive: {
-        default: {
-          show: ['id', 'name', 'image', 'small_info', 'updated_at', 'actions']
-        },
-        1000: {
-          show: ['id', 'name', 'image', 'updated_at', 'actions']
-        },
-        800: {
-          show: ['name', 'image', 'actions']
-        },
-        600: {
-          show: ['id', 'name', 'actions']
-        },
-        400: {
-          show: ["name"]
-        }
-      },
+      columnsExceptedSorting: ['small_info', 'big_info', 'user_id']
     };
   },
-    methods: {
-        setTableData() {
-            this.tableData.filter.columnsExcept = ['show_plus', 'index', 'actions', 'small_info', 'big_info', 'image', 'user_id']
-        },
-    },
     beforeRouteEnter(to, from, next) {
         next(vm => {
             to.meta.title = vm.$t('sidebar.travel_programs')
-            vm.setTableData()
         })
     },
 };
 </script>
-<style scoped lang="scss">
-
-</style>

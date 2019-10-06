@@ -11,8 +11,6 @@
 
   <!-- Font Awesome Icons -->
   {!! Html::style('adminlte/plugins/fontawesome-free/css/all.min.css') !!}
-  <!-- overlayScrollbars -->
-  {!! Html::style('adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') !!}
   <!-- Theme style -->
   {!! Html::style('adminlte/dist/css/adminlte.css', ['id' => 'style-adminlte']) !!}
   <!-- Google Font: Source Sans Pro -->
@@ -145,24 +143,13 @@
     }
 </script>
 
+
 <!-- REQUIRED SCRIPTS -->
-
 {!! Html::script('admin/js/app.js') !!}
-
-<!-- Bootstrap -->
-{{-- {!! Html::script('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') !!} --}}
-<!-- overlayScrollbars -->
-{!! Html::script('adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') !!}
 <!-- AdminLTE App -->
 {!! Html::script('adminlte/dist/js/adminlte.js') !!}
 
-
-
-
-
-
 @stack('js')
-
 
 </body>
 </html>

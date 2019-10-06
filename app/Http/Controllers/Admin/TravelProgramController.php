@@ -173,4 +173,29 @@ class TravelProgramController extends Controller
         $travel_program_deleted->restore();
         return response(['status' => true]);
     }
+
+
+    public function deleteRestoreMulti(Request $request)
+    {
+        $ids = $request->ids;
+        $action = $request->action;
+
+        if ($action == 'delete') {
+            TravelProgram::destroy($ids);
+        } else if ($action == 'force_delete') {
+            $travel_programs = TravelProgram::onlyTrashed()->whereIn('id', $ids)->get();
+            foreach ($travel_programs as $travel_program) {
+                if ($travel_program->image !== null) {
+                    if (file_exists(public_path($travel_program->image))) {
+                        unlink(public_path($travel_program->image));
+                    }
+                }
+            }
+            TravelProgram::onlyTrashed()->whereIn('id', $ids)->forceDelete();
+        } else if ($action == 'restore') {
+            TravelProgram::onlyTrashed()->whereIn('id', $ids)->restore();
+        }
+
+        return response(['status' => true]);
+    }
 }

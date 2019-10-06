@@ -19,7 +19,7 @@ class Booking extends Model
         return $this->belongsTo('App\Travel');
     }
 
-    public function travel_detail() {
+    public function offer() {
         return $this->belongsTo('App\TravelDetail', 'travel_detail_id');
     }
 }

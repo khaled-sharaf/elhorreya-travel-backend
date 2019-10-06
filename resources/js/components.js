@@ -56,5 +56,6 @@ Vue.component("rates-stars", {
             <i class="regular" :style="{backgroundImage: 'url(' + $domain + '/admin/images/5-stars-regular.png)'}"></i>
             <i class="solid" :style="{width: ratesCount + '%', backgroundImage: 'url(' + $domain + '/admin/images/5-stars-solid.png)'}"></i>
         </i>
+        <slot></slot>
     </div>`, //  v-html="countStarRate"
 })

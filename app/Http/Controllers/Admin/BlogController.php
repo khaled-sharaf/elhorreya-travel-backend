@@ -224,7 +224,7 @@ class BlogController extends Controller
         if ($blog->trashed()) {
             // delete image
             $directory = $this->directory . '/' . explode('/', $blog->image)[2];
-            \File::deleteDirectory($directory);
+            File::deleteDirectory($directory);
             $blog->forceDelete();
         } else {
             $blog->delete();
@@ -237,6 +237,27 @@ class BlogController extends Controller
     {
         $blog_deleted = Blog::onlyTrashed()->where('id', $id)->first();
         $blog_deleted->restore();
+        return response(['status' => true]);
+    }
+
+    public function deleteRestoreMulti(Request $request)
+    {
+        $ids = $request->ids;
+        $action = $request->action;
+
+        if ($action == 'delete') {
+            Blog::destroy($ids);
+        } else if ($action == 'force_delete') {
+            $blogs = Blog::onlyTrashed()->whereIn('id', $ids)->get();
+            foreach ($blogs as $blog) {
+                $directory = $this->directory . '/' . explode('/', $blog->image)[2];
+                File::deleteDirectory($directory);
+            }
+            Blog::onlyTrashed()->whereIn('id', $ids)->forceDelete();
+        } else if ($action == 'restore') {
+            Blog::onlyTrashed()->whereIn('id', $ids)->restore();
+        }
+
         return response(['status' => true]);
     }
 }

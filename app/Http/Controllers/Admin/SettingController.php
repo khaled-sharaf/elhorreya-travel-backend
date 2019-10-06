@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+
 use Image;
 use File;
+use Illuminate\Validation\Rule;
 use Illuminate\Support\Str;
 
 class SettingController extends Controller
@@ -22,6 +24,8 @@ class SettingController extends Controller
         $draw = $request->draw;
         $searchValue = $request->search;
         $query = Setting::select('*')->orderBy($sortBy, $dir)->with('user');
+
+        $query->where('name', '!=', 'data_tabel_settings_view_columns');
 
         if ($searchValue) {
             $query->where(function($query) use ($searchValue) {
@@ -61,12 +65,11 @@ class SettingController extends Controller
     }
 
 
-    public function show(Request $request, $id)
+    public function show($id)
     {
         $setting = Setting::find($id);
         return response(['setting' => $setting]);
     }
-
 
 
     public function update(Request $request, $id)
@@ -74,9 +77,19 @@ class SettingController extends Controller
         $setting = Setting::find($id);
         $this->validate(request(), [
             'slug' => 'required|string|max:191',
-            'name' => 'required|string|alpha_dash|max:191|unique:settings,name,'. $id,
             'value' => 'required|string',
-            'type' => 'required|in:image,string,text'
+            'name' => [
+                'required',
+                Rule::exists('settings')->where(function ($query) use ($id) {
+                    $query->where('id', $id);
+                })
+            ],
+            'type' => [
+                'required',
+                Rule::exists('settings')->where(function ($query) use ($id) {
+                    $query->where('id', $id);
+                })
+            ]
         ]);
 
         // delete old image if exists
@@ -100,7 +113,7 @@ class SettingController extends Controller
     }
 
 
-    public function destroy(Request $request, $id)
+    public function destroy($id)
     {
         $setting = Setting::find($id);
         if (strpos($setting->value, $this->directory . '/') === 0) {
@@ -109,6 +122,39 @@ class SettingController extends Controller
             }
         }
         $setting->delete();
+        return response(['status' => true]);
+    }
+
+
+    public function deleteRestoreMulti(Request $request)
+    {
+        $ids = $request->ids;
+        $settings = Setting::whereIn('id', $ids)->get();
+        foreach ($settings as $setting) {
+            if (strpos($setting->value, $this->directory . '/') === 0) {
+                if (file_exists(public_path($setting->value))) {
+                    unlink(public_path($setting->value));
+                }
+            }
+        }
+        Setting::destroy($ids);
+        return response(['status' => true]);
+    }
+
+
+    public function getByName($name)
+    {
+        $setting = Setting::where('name', $name)->first()->value;
+        return response(['setting' => $setting]);
+    }
+
+
+    public function save(Request $request) {
+        $request->validate([
+            'name' => 'required|string',
+            'value' => 'required|string',
+        ]);
+        Setting::where('name', $request->name)->update($request->all());
         return response(['status' => true]);
     }
 

@@ -122,6 +122,9 @@ export default {
                     const hotel = response.data.hotel
                     if (hotel != null) {
                         this.hotelEdit = hotel
+                        if (!hotel.features.length) {
+                            this.hotelEdit.features.push({value: ''})
+                        }
                         this.hotelEdit.deletedGallery = []
                         this.hotelEdit.deletedFeatures = []
 
@@ -152,6 +155,9 @@ export default {
             vm.$nextTick(() => {
                 if (to.params.hotel) {
                     vm.hotelEdit = to.params.hotel
+                    if (!vm.hotelEdit.features.length) {
+                        vm.hotelEdit.features.push({value: ''})
+                    }
                     vm.hotelEdit.deletedGallery = []
                     vm.hotelEdit.deletedFeatures = []
 

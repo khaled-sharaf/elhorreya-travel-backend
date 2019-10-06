@@ -1,0 +1,311 @@
+<template>
+    <div class="wrapper-upload-image">
+         <!-- image -->
+
+        <div v-if="!type || type !== 'multiple'" class="wrapper-drop-image single-image" :class="{'contains-image': form[propertyName] != '', 'is-invalid': form.errors.has(propertyName), [propertyName]: true}">
+            <div class="overlay-drop-image">
+                <div class="view-images">
+
+                    <div class="image" v-if="form[propertyName] != ''">
+                        <div class="img">
+                            <img :src="addDomainToImage(form[propertyName])">
+                            <div v-if="showBtnRemoveSingleImage" class="remove-image" @click="removeSingleImage()"><i class="fas fa-times"></i></div>
+                        </div>
+                    </div>
+
+                </div>
+                <label class="view-overlay" :for="propertyName">
+                    <div class="content-overlay">
+                        <i class="icon far fa-image"></i>
+                        <span class="title"> {{ $t('global.drag_msg') }} </span>
+                    </div>
+                </label>
+            </div>
+            <input
+                type="file"
+                class="custom-file-drop custom-file-input"
+                :id="propertyName"
+                accept="image/*"
+                @change="showFiles($event.target.files, $event.target.id, propertyName)"
+                :class="{ 'is-invalid': form.errors.has(propertyName) }"
+            >
+            <has-error :form="form" :field="propertyName"></has-error>
+        </div>
+
+        <!-- ./image -->
+
+        <!-- gallery -->
+
+        <div v-if="type && type === 'multiple'" class="wrapper-drop-image multi-image"  :class="{'contains-image': form[propertyName] !== null && form[propertyName].length > 0, 'is-invalid': form.errors.has(propertyName), [propertyName]: true}"> <!-- contains-image -->
+            <div class="overlay-drop-image" :for="propertyName">
+                <div class="view-images">
+                    <div class="image elevation-5" v-for="(image, index) in form[propertyName]" :key="index">
+                        <div class="img">
+                            <img :src="addDomainToImage(image.value)">
+                            <div class="remove-image" @click="removeImage(index)"><i class="fas fa-times"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <label class="view-overlay" :for="propertyName">
+                    <div class="content-overlay">
+                        <i class="icon far fa-image"></i>
+                        <span class="title"> {{ $t('global.drag_msg') }} </span>
+                    </div>
+                </label>
+            </div>
+            <input
+                type="file"
+                class="custom-file-drop custom-file-input"
+                :id="propertyName"
+                accept="image/*"
+                @change="showFiles($event.target.files, $event.target.id, propertyName)"
+                :class="{ 'is-invalid': form.errors.has(propertyName) }"
+                multiple
+            >
+            <has-error :form="form" :field="propertyName"></has-error>
+        </div>
+
+        <!-- ./gallery -->
+
+    </div>
+</template>
+
+
+<script>
+export default {
+    props: {
+        type: String,
+        required: {
+            type: Boolean,
+            default: true
+        },
+        defaultSrcImage: String,
+        propertyName: {
+            type: String,
+            required: true
+        },
+        propertyDeletedName: String,
+        form: {
+            type: Object,
+            required: true
+        },
+        maxCount: Number,
+        maxSize: {
+            type: Number,
+            required: true
+        },
+    },
+    data() {
+      return {
+        printSrcImage: "",
+        error: true,
+        maxSizeMb: (this.maxSize / 1024 / 1024).toFixed(1),
+        showBtnRemoveSingleImage: false
+      }
+    },
+    methods: {
+        encodeFileAsURL(files, propertyName) {
+            let self = this;
+            if (files.length) {
+                if (this.maxCount) {
+                    if ((this.form[propertyName].length + files.length) > this.maxCount) {
+                        this.error = true
+                        if (this.$i18n.locale == 'ar') {
+                            Swal.fire(
+                                "خطأ...",
+                                `يجب عليك تحميل  ${this.maxCount} صور أو أقل.`,
+                                "error"
+                            );
+                        } else {
+                            Swal.fire(
+                                "Oops...",
+                                `You must upload ${this.maxCount} images or less.`,
+                                "error"
+                            );
+                        }
+                    } else {
+                        this.error = false
+                    }
+                } else {
+                    this.error = false
+                }
+                if (!this.error) {
+                    for (let i = 0; i < files.length; i++) {
+                        let file = files[i]
+                        let reader = new FileReader();
+                        reader.onloadend = function() {
+                            if (self.propertyName === propertyName) {
+                                self.form[self.propertyName].push({value: reader.result})
+                            }
+                        };
+                        if (file) {
+                            if (file["size"] > this.maxSize) {
+                                if (this.$i18n.locale == 'ar') {
+                                    Swal.fire(
+                                        "خطأ...",
+                                        `الحجم المسموح به للصورة هو ${this.maxSizeMb} ميجا بايت.`,
+                                        "error"
+                                    );
+                                } else {
+                                    Swal.fire(
+                                        "Oops...",
+                                        `You are uploading a large file ${this.maxSizeMb}MB last.`,
+                                        "error"
+                                    );
+                                }
+                            } else if (file['type'] != 'image/jpeg' && file['type'] != 'image/png' && file['type'] != 'image/gif') {
+                                if (this.$i18n.locale == 'ar') {
+                                    Swal.fire(
+                                        "خطأ...",
+                                        "يجب أن تكون الصورة لها امتداد من هذه الإمتدادات [jpg, png, gif].",
+                                        "error"
+                                    );
+                                } else {
+                                    Swal.fire(
+                                        "Oops...",
+                                        "You must be image have extension between [jpg, png, gif].",
+                                        "error"
+                                    );
+                                }
+                            } else {
+                                reader.readAsDataURL(file);
+                            }
+                        }
+                    }
+                }
+            } else {
+                let file = files;
+                let reader = new FileReader();
+                reader.onloadend = function() {
+                    if (self.propertyName === propertyName) {
+                        self.form[self.propertyName] = reader.result
+                    }
+                };
+                if (file) {
+                    if (file["size"] > this.maxSize) {
+                        if (this.$i18n.locale == 'ar') {
+                            Swal.fire(
+                                "خطأ...",
+                                `الحجم المسموح به للصورة هو ${this.maxSizeMb} ميجا بايت.`,
+                                "error"
+                            );
+                        } else {
+                            Swal.fire(
+                                "Oops...",
+                                `You are uploading a large file ${this.maxSizeMb}MB last.`,
+                                "error"
+                            );
+                        }
+                    } else if (file['type'] != 'image/jpeg' && file['type'] != 'image/png' && file['type'] != 'image/gif') {
+                        if (this.$i18n.locale == 'ar') {
+                            Swal.fire(
+                                "خطأ...",
+                                "يجب أن تكون الصورة لها امتداد من هذه الإمتدادات [jpg, png, gif].",
+                                "error"
+                            );
+                        } else {
+                            Swal.fire(
+                                "Oops...",
+                                "You must be image have extension between [jpg, png, gif].",
+                                "error"
+                            );
+                        }
+                    } else {
+                        reader.readAsDataURL(file);
+                    }
+                }
+            }
+        },
+        showFiles(files, input, propertyName) {
+            if (typeof input === 'string') {
+                input = $('#' + input)
+            }
+            let lengthFiles = files.length;
+            if (input.attr('multiple')) {
+                if (lengthFiles > 0) {
+                    this.encodeFileAsURL(files, propertyName)
+                }
+            } else {
+                if (lengthFiles > 0) {
+                    this.encodeFileAsURL(files[0], propertyName)
+                }
+            }
+        },
+        removeImage(index) {
+            if (this.form[this.propertyName][index].id) {
+                this.form[this.propertyDeletedName].push(this.form[this.propertyName][index])
+            }
+            this.form[this.propertyName].splice(index, 1)
+        },
+        removeSingleImage() {
+            if (this.defaultSrcImage) {
+                this.form[this.propertyName] = this.defaultSrcImage
+            } else {
+                this.form[this.propertyName] = ''
+            }
+        },
+        handelDropImages() {
+            const self = this;
+            // view-images
+            $('.wrapper-drop-image.' + self.propertyName).on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }).on('dragover dragenter', function(e) {
+                $(this).addClass('is-dragover');
+            })
+            .on('dragleave dragend drop', function() {
+                $(this).removeClass('is-dragover');
+            })
+            .on('drop', function(e) {
+                const files = e.originalEvent.dataTransfer.files;
+                const input = $(this).find('.custom-file-drop');
+                self.showFiles(files, input, self.propertyName)
+            });
+        },
+        addDomainToImage(url) { // return url
+            let resultUrl = ''
+            if (url.indexOf('data:image/') === 0 || url.indexOf('http') === 0) {
+                resultUrl = url
+            } else {
+                resultUrl = this.$domain + '/' + url
+            }
+            return resultUrl
+        },
+    },
+
+    watch: {
+        form: {
+            handler(object) {
+                if ( (this.defaultSrcImage && this.form[this.propertyName] != this.defaultSrcImage) && !this.required ) {
+                    this.showBtnRemoveSingleImage = true
+                } else if ( (this.defaultSrcImage && this.form[this.propertyName] == this.defaultSrcImage) && !this.required ) {
+                    this.showBtnRemoveSingleImage = false
+
+                } else if (!this.required && !this.defaultSrcImage) {
+                    this.showBtnRemoveSingleImage = true
+                } else {
+                    this.showBtnRemoveSingleImage = false
+                }
+
+
+                this.$nextTick(() => {
+                    if (this.defaultSrcImage) {
+                        if (object[this.propertyName] == '') {
+                            this.form[this.propertyName] = this.defaultSrcImage
+                        }
+                    }
+                })
+            },
+            deep: true
+        }
+    },
+    mounted() {
+        this.$nextTick(() => {
+            if (this.defaultSrcImage) {
+                this.form[this.propertyName] = this.defaultSrcImage
+            }
+        })
+        this.handelDropImages()
+    }
+}
+</script>

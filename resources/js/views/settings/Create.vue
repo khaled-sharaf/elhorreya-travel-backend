@@ -78,7 +78,6 @@ export default {
             loadReq(this.$Progress);
             this.form.post(this.urlModel).then(response => {
                 if (response.status === 200) {
-                    console.log(response.data)
                     // reset form
                     this.form.reset();
                     ToastReq.fire({

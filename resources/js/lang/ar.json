@@ -5,6 +5,8 @@
         "user": "مدير",
         "hotel": "فندق",
         "the_hotel": "الفندق",
+        "the_price": "السعر",
+        "the_travel": "الرحلة",
         "room": "غرفة",
         "the_travel_program": "برنامج الرحلة",
         "the_travel_category": "قسم الرحلة",
@@ -17,8 +19,13 @@
         "no_rooms": "لا يوجد غرف",
         "no_travels": "لا يوجد رحلات",
         "no_hotel_features": "لا توجد مميزات للفندق",
+        "no_offers": "لا توجد عروض لهذه الرحلة",
+        "no_bookings": "لا توجد حجوزات لهذه الرحلة",
         "no_gallery": "لا توجد صور",
         "no_location": "لا توجد خريطة",
+        "show_map": "اعرض الخريطة",
+        "days": "أيام",
+        "day": "يوم",
 
         "profile": "بروفايل",
         "the_profile": "البروفايل",
@@ -30,6 +37,7 @@
         "travel_program_is_deleted": "برنامج الرحلة محذوف",
         "travel_category_is_deleted": "قسم الرحلة محذوف",
         "travel_is_deleted": "الرحلة محذوفة",
+        "offer_is_deleted": "العرض محذوف",
 
 
         "logout": "تسجيل الخروج",
@@ -73,8 +81,21 @@
 
         "yes_delete_it": "تأكيد الحذف",
         "yes_remove_it": "تأكيد الإزالة",
-        "yes_restore_it": "تأكيد الإسترجاع"
+        "yes_restore_it": "تأكيد الإسترجاع",
 
+        "multi_delete_msg": "هل أنت متأكد من حذف جميع {model} المعلم عليها؟",
+        "multi_delete_success_msg": "تم حذف جميع {model} المعلم عليها.",
+        "multi_delete_failed_msg": "لم يتم حذف جميع {model} المعلم عليها.",
+
+        "multi_force_delete_msg": "هل أنت متأكد من إزالة جميع {model} المعلم عليها بشكل نهائى ؟",
+        "multi_force_delete_success_msg": "تم إزالة جميع {model} المعلم عليها بشكل نهائى.",
+        "multi_force_delete_failed_msg": "لم يتم إزالة جميع {model} المعلم عليها.",
+
+        "multi_restore_msg": "هل أنت متأكد من استرجاع جميع {model} المعلم عليها؟",
+        "multi_restore_success_msg": "تم استرجاع جميع {model} المعلم عليها.",
+        "multi_restore_failed_msg": "لم يتم استرجاع جميع {model} المعلم عليها.",
+
+        "settings_table": "إعدادات عرض جدول {model} فى كل الشاشات"
     },
 
 
@@ -204,7 +225,6 @@
 
 
 
-
     "hotels_table": {
         "id": "المعرف",
         "name": "الإسم",
@@ -228,10 +248,9 @@
 
         "rooms_count": "عدد الغرف",
         "travels_count": "عدد الرحلات",
-        "hotel_info": "معلومات عن الفندق",
+        "hotel_info": "معلومات الفندق",
         "location": "الموقع",
         "location_map": "خريطة الموقع",
-        "show_map": "اعرض الخريطة",
         "msg_location_map": "ابحث عن مكان الفندق ثم انقل العلامة الحمراء إلى مكان الفندق بدقة.",
         "error_location": "لم يتم العثور على المكان ، ابحث بكلمات أخرى.",
         "remove_location": "إزالة الموقع",
@@ -265,7 +284,6 @@
             "failed_msg": "لم يتم تحديث هذا الفندق."
         }
     },
-
 
 
 
@@ -387,6 +405,128 @@
             "success_msg": "تم تحديث القسم.",
             "failed_msg": "لم يتم تحديث هذه القسم."
         }
+    },
+
+
+
+    "travels_table": {
+        "id": "المعرف",
+        "name": "اسم الرحلة",
+        "address_from": "عنوان الإقلاع",
+        "info": "تفاصيل الرحلة",
+        "image": "الصورة",
+        "type": "نوع الرحلة",
+        "umrah_date": "موعد العمرة",
+        "haram_distance": "المسافة بين الفندق والحرم",
+        "favorite_company": "تفضيل الحرية",
+        "favorite_company_yes": "تفضل",
+        "favorite_company_no": "لا تفضل",
+        "display": "الظهور",
+        "hotel_id": "الفندق",
+        "travel_category_id": "قسم الرحلة",
+        "user_id": "أضيف بواسطة",
+        "updated_at": "أخر تعديل",
+        "created_at": "تاريخ الإنشاء",
+        "actions": "الإجراءات",
+
+        "gallery": "صور الرحلة",
+        "offers_count": "عدد العروض",
+        "travel_info": "معلومات الرحلة",
+        "travel_offers" :"عروض الرحلة",
+        "travel_offers_msg_form" :"يجب إضافة عرض واحد للرحلة على الأقل.",
+        "delete_travel": "حذف الرحلة",
+        "edit_travel": "تعديل الرحلة",
+        "empty_gallery_msg": "هذه الرحلة ليس لديها صور مرفوعة.",
+        "empty_offers_msg": "هذه الرحلة ليس لديها عروض مضافة.",
+        "empty_bookings_msg": "هذه الرحلة ليس لديها حجوزات.",
+
+        "offers": {
+            "info_offer": "وصف العرض",
+            "go_and_back": "ذهاب وعودة",
+            "only_go": "ذهاب فقط",
+            "date_from": "من",
+            "date_to": "إلى",
+            "time_period": "الفترة",
+            "stay_type": "نوع الإقامة",
+            "transport": "الإنتقالات",
+            "adults": "عدد البالغين",
+            "children": "عدد الأطفال",
+            "single_price": "فردية",
+            "twin_price": "زوجية",
+            "triple_price": "ثلاثية",
+
+            "title_number": "العرض رقم {number}",
+            "add_new_offer": "إضافة عرض جديد",
+            "delete_offer": "حذف العرض"
+        },
+
+        "delete_msg": "هل أنت متأكد من حذف هذه الرحلة ؟",
+        "delete_success_msg": "تم حذف الرحلة.",
+        "delete_failed_msg": "لم يتم حذف الرحلة.",
+
+        "force_delete_msg": "هل أنت متأكد من إزالة هذه الرحلة بشكل نهائى ؟",
+        "force_delete_success_msg": "تم إزالة الرحلة بشكل نهائى.",
+        "force_delete_failed_msg": "لم يتم إزالة الرحلة.",
+
+        "restore_msg": "هل أنت متأكد من استرجاع هذه الرحلة ؟",
+        "restore_success_msg": "تم استرجاع الرحلة.",
+        "restore_failed_msg": "لم يتم استرجاع الرحلة.",
+
+        "p_create": {
+            "success_msg": "تم إنشاء رحلة جديدة.",
+            "failed_msg": "لم يتم إنشاء الرحلة الجديدة."
+        },
+        "p_edit": {
+            "success_msg": "تم تحديث الرحلة.",
+            "failed_msg": "لم يتم تحديث هذه الرحلة."
+        }
+    },
+
+
+
+    "bookings_table": {
+        "id": "المعرف",
+        "name": "الإسم",
+        "email": "البريد الإليكترونى",
+        "phone": "الموبايل",
+        "message": "الرسالة",
+        "offer": "العرض المحجوز",
+        "updated_at": "أخر تعديل",
+        "created_at": "تاريخ الإنشاء",
+        "actions": "الإجراءات",
+
+        "delete_msg": "هل أنت متأكد من حذف هذا الحجز ؟",
+        "delete_success_msg": "تم حذف الحجز.",
+        "delete_failed_msg": "لم يتم حذف الحجز.",
+
+        "force_delete_msg": "هل أنت متأكد من إزالة هذا الحجز بشكل نهائى ؟",
+        "force_delete_success_msg": "تم إزالة الحجز بشكل نهائى.",
+        "force_delete_failed_msg": "لم يتم إزالة الحجز.",
+
+        "restore_msg": "هل أنت متأكد من استرجاع هذا الحجز ؟",
+        "restore_success_msg": "تم استرجاع الحجز.",
+        "restore_failed_msg": "لم يتم استرجاع الحجز."
+    },
+
+
+
+    "mailing_list_table": {
+        "id": "المعرف",
+        "email": "البريد الإليكترونى",
+        "created_at": "تاريخ الإنشاء",
+        "actions": "الإجراءات",
+
+        "delete_msg": "هل أنت متأكد من حذف هذا البريد ؟",
+        "delete_success_msg": "تم حذف البريد.",
+        "delete_failed_msg": "لم يتم حذف البريد.",
+
+        "force_delete_msg": "",
+        "force_delete_success_msg": "",
+        "force_delete_failed_msg": "",
+
+        "restore_msg": "",
+        "restore_success_msg": "",
+        "restore_failed_msg": ""
     },
 
 
