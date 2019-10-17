@@ -1,28 +1,31 @@
 <?php
-use function PHPSTORM_META\type;
+use App\Setting;
 
 /***********************************************************************************/
-// get every rate
-if (!function_exists('every_rate')) {
-    function every_rate($rates) {
-        $rates = collect($rates);
-        $rate_1 = $rates->filter(function ($rate) { return $rate->rate == 1; });
-        $rate_2 = $rates->filter(function ($rate) { return $rate->rate == 2; });
-        $rate_3 = $rates->filter(function ($rate) { return $rate->rate == 3; });
-        $rate_4 = $rates->filter(function ($rate) { return $rate->rate == 4; });
-        $rate_5 = $rates->filter(function ($rate) { return $rate->rate == 5; });
+// set settings
+// if (!function_exists('setSettingsInCookie')) {
+//     function setSettingsInCookie() {
+//         // $settings = Setting::getSettings();
+//         // if ($settings != null) {
+//         //    setcookie('settings', json_encode($settings), time() + 3600, '/');
+//         // }
+//     }
+// }
 
-        $result = [
-            ['level_rate' => '1', 'rate' => $rate_1->count()],
-            ['level_rate' => '2', 'rate' => $rate_2->count()],
-            ['level_rate' => '3', 'rate' => $rate_3->count()],
-            ['level_rate' => '4', 'rate' => $rate_4->count()],
-            ['level_rate' => '5', 'rate' => $rate_5->count()]
-        ];
-        return $result;
-    }
-}
-
+// get settings
+// if (!function_exists('getSettings')) {
+//     function getSettings($key = null) {
+//         // dd($_COOKIE);
+//         // $cookie = session()->pull('settings', null);
+//         // if ($cookie != null) {
+//         //     $cookie = collect(json_decode($cookie))->toArray();
+//         //     if ($key != null) {
+//         //         $cookie = $cookie[$key];
+//         //     }
+//         // }
+//         // return $cookie;
+//     }
+// }
 
 /***********************************************************************************/
 if (!function_exists('convert_str_to_array')) {
@@ -61,26 +64,19 @@ if (!function_exists('convert_column_to_array')) {
 
 /***********************************************************************************/
 if (!function_exists('paginate_collection')) {
-    function paginate_collection($collection, $perPage, $pageName = 'page', $fragment = null)
+    function paginate_collection($items_paginate, $data)
     {
-        $currentPage = \Illuminate\Pagination\LengthAwarePaginator::resolveCurrentPage($pageName);
-        $currentPageItems = count($collection) > 0 ? $collection->slice(($currentPage - 1) * $perPage, $perPage) : collect($collection);
-        parse_str(request()->getQueryString(), $query);
-        unset($query[$pageName]);
-        $paginator = new \Illuminate\Pagination\LengthAwarePaginator(
-            $currentPageItems,
-            count($collection),
-            $perPage,
-            $currentPage,
-            [
-                'pageName' => $pageName,
-                'path' => \Illuminate\Pagination\LengthAwarePaginator::resolveCurrentPath(),
-                'query' => $query,
-                'fragment' => $fragment
+        return new \Illuminate\Pagination\LengthAwarePaginator(
+            $data,
+            $items_paginate->total(),
+            $items_paginate->perPage(),
+            $items_paginate->currentPage(), [
+                'path' => \Request::url(),
+                'query' => [
+                    'page' => $items_paginate->currentPage()
+                ]
             ]
         );
-
-        return $paginator;
     }
 }
 

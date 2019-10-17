@@ -185,7 +185,7 @@ return [
         'positive_product' => 'إيجابيات المنتج',
         'negative_product' => 'سلبيات المنتج',
         'slug' => 'الاسم التعبيرى',
-        'value' => 'ال ',
+        'value' => 'القيمة',
 
 
         'address_from' => 'عنوان الإقلاع',

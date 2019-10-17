@@ -93,6 +93,11 @@
                 </td>
 
 
+                <td v-show="tableData.columns.indexOf('discount') != -1" class="discount">
+                    <span v-if="travel.discount">{{travel.discount}}%</span>
+                </td>
+
+
                 <td v-show="tableData.columns.indexOf('favorite_company') != -1" class="favorite_company">
                     {{travel.favorite_company}}
                 </td>
@@ -224,6 +229,7 @@ export default {
                 { label: "Type", name: "type" },
                 { label: "Umrah date", name: "umrah_date" },
                 { label: "Haram distance", name: "haram_distance" },
+                { label: "discount", name: "discount" },
                 { label: "Favorite company", name: "favorite_company" },
                 { label: "Hotel", name: "hotel_id" },
                 { label: "Travel category", name: "travel_category_id" },
@@ -234,13 +240,14 @@ export default {
             ],
             columnsExceptedSorting: ['hotel_id', 'travel_category_id', 'user_id'],
             travelTypes: {
+                internal: 'سياحة داخلية',
+                external: 'سياحة خارجية',
                 pilgrimage: 'حج',
                 umrah: 'عمرة',
-                other: 'رحلة سياحية'
             },
             haramDistance: {
-                0: 'الفندق بعيد من الحرم',
-                1: 'الفندق قريب من الحرم',
+                0: 'بعيد',
+                1: 'قريب',
             }
         };
     },

@@ -73,7 +73,7 @@ Vue.directive('select2address', {
 })
 
 Vue.directive('read-more', {
-    update(el, binding) {
+    inserted(el, binding) {
         const loopGetHtml =  setInterval(() => {
             const $this = $(el);
             const text = $this.html().trim().replace(/ {1, }/g, '');

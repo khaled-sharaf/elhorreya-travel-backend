@@ -73,6 +73,7 @@ class TravelProgramController extends Controller
     {
         $this->validate(request(), [
             'name' => 'required|string|between:2,180',
+            'discount' => 'nullable|integer|max:100',
             'small_info' => 'nullable|string|min:3',
             'big_info' => 'nullable|string|min:3',
             'image' => 'required|string',
@@ -115,6 +116,7 @@ class TravelProgramController extends Controller
     {
         $this->validate(request(), [
             'name' => 'required|string|between:2,180',
+            'discount' => 'nullable|integer|max:100',
             'small_info' => 'nullable|string|min:3',
             'big_info' => 'nullable|string|min:3',
             'image' => 'required|string',

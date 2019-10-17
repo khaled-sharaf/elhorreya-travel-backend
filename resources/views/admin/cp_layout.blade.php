@@ -64,7 +64,7 @@
     window.cp_prefix_api = '{{ env("CP_PREFIX_API") }}';
     window.admin_prefix = '{{ url("/") . "/" . env("CP_PREFIX") }}';
     window.auth = @json(auth()->user());
-    window.settings = @json(\App\Setting::getSettingKeys());
+    window.settings = @json(App\Setting::getSettings());
 
 
     function initMap() {

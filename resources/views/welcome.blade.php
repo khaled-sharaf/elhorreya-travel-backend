@@ -5,10 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" href="{{ url('/') }}/images/logo.ico" type="image/x-icon">
 
-        <title>Horreya Travel</title>
+        <title> {{ config('app.name') }} </title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" type="text/css">
+
+        {!! Html::style('admin/css/app.css') !!}
 
         <!-- Styles -->
         <style>
@@ -65,32 +67,12 @@
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        {{-- <a href="{{ url('/home') }}">Home</a> --}}
 
-                        <a class="dropdown-item" href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                                            document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
 
-                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                            @csrf
-                        </form>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                    @endauth
-                </div>
-            @endif
 
-            <div class="content">
-                <div class="title m-b-md">
-                    <b>ELHORREYA</b>TRAVEL
-                </div>
-            </div>
-        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+
+        @include('messages-alert.mailing-list')
     </body>
 </html>

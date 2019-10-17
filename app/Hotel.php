@@ -25,13 +25,14 @@ class Hotel extends Model
     public function scopePaginateConvert($query, $length)
     {
         $hotels_paginate = $query->paginate($length);
-        $hotels_data =  $hotels_paginate->toArray()['data'];
-        if (count($hotels_data) > 0) {
-            $hotels_data = convert_column_to_array($hotels_data, 'features');
-            $hotels_data = convert_column_to_array($hotels_data, 'gallery');
-        }
-        $hotels = paginate_collection($hotels_data, $length);
-        return $hotels;
+        $itemsTransformed = $hotels_paginate
+            ->getCollection()
+            ->map(function($item) {
+                $data = convert_column_to_array($item, 'gallery');
+                $data = convert_column_to_array($data, 'features');
+                return $data;
+        })->toArray();
+        return paginate_collection($hotels_paginate, $itemsTransformed);
     }
 
     public function scopeGetConvert($query)

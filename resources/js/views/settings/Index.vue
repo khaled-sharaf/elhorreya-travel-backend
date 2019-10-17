@@ -53,8 +53,7 @@
                 </td>
 
                 <td v-show="tableData.columns.indexOf('value') != -1" class="value">
-                    <img class="avatar-table" v-if="setting.value.indexOf('images/settings/') === 0" :src="$domain + '/' + setting.value">
-
+                    <img class="avatar-table" v-if="setting.value != null && setting.value.indexOf('images/settings/') === 0" :src="$domain + '/' + setting.value">
                     <span v-else>
                         {{setting.value}}
                     </span>

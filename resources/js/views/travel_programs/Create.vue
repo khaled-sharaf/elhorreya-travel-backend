@@ -65,6 +65,7 @@ export default {
         urlCreateTravelProgram: '/travel_programs',
         form: new Form({
             name: '',
+            discount: '',
             image: '',
             small_info: '',
             big_info: '',

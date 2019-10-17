@@ -44,7 +44,7 @@ class SettingController extends Controller
         $this->validate(request(), [
             'slug' => 'required|string|max:191',
             'name' => 'required|string|alpha_dash|max:191|unique:settings',
-            'value' => 'required|string',
+            'value' => 'nullable|string',
             'type' => 'required|in:image,string,text',
         ]);
         $request->merge(['user_id' => auth()->id()]);
@@ -77,7 +77,7 @@ class SettingController extends Controller
         $setting = Setting::find($id);
         $this->validate(request(), [
             'slug' => 'required|string|max:191',
-            'value' => 'required|string',
+            'value' => 'nullable|string',
             'name' => [
                 'required',
                 Rule::exists('settings')->where(function ($query) use ($id) {
@@ -93,7 +93,7 @@ class SettingController extends Controller
         ]);
 
         // delete old image if exists
-        if ($setting->type == 'image' && $request->value != $setting->value) {
+        if ($setting->value !== null && $setting->value !== '' && $setting->type == 'image' && $request->value != $setting->value) {
             if (file_exists(public_path($setting->value))) {
                 unlink(public_path($setting->value));
             }

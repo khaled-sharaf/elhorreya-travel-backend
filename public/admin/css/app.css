@@ -11677,6 +11677,7 @@ a.text-dark:focus {
 
 .dataTables_wrapper .table tr td {
   vertical-align: middle;
+  max-width: 300px;
 }
 
 .dataTables_wrapper .table tr td .btn-table-actions {
@@ -12486,6 +12487,10 @@ a.text-dark:focus {
   padding-right: 10px;
   font-size: 10px;
   margin: 0 5px;
+}
+
+.list-group .list-group-item > a {
+  word-break: break-word;
 }
 
 .profile-wrapper .gallery-in-profile .image {

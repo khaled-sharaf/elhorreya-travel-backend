@@ -17,7 +17,7 @@ class CreateSettingsTable extends Migration
             $table->increments('id');
             $table->string('slug');
             $table->string('name')->unique();
-            $table->mediumText('value');
+            $table->mediumText('value')->nullable();
             $table->string('type', 10); // image, text, string
             $table->unsignedInteger('user_id');
             $table->timestamps();

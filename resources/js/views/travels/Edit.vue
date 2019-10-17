@@ -15,24 +15,28 @@
                     <div class="col-12">
                         <div class="card">
                             <!-- card-header -->
-                            <div class="card-header">
-                                <h3 class="m-0 mb-2 text-dark">
-                                    <!-- show travel profile  -->
-                                    <router-link
-                                        :to="{name: 'travel-profile', params: {id: travelEdit.id, travel: travelEdit}}"
-                                        :href="$domain_admin + '/travel/profile/' + travelEdit.id"
-                                        class="btn btn-primary btn-sm"
-                                        :class="{ disabled: form.busy }"
-                                    >
-                                        {{ $t('global.goto_travel_profile') }}
-                                    </router-link>
-                                </h3>
-                            </div>
-                            <!-- ./card-header -->
-
-
                             <!-- form -->
                             <form @submit.prevent="updateTravel()" class="form-product">
+
+                                <div class="card-header">
+                                    <h3 class="m-0 mb-2 text-dark float-right">
+                                        <!-- show travel profile  -->
+                                        <router-link
+                                            :to="{name: 'travel-profile', params: {id: travelEdit.id, travel: travelEdit}}"
+                                            :href="$domain_admin + '/travel/profile/' + travelEdit.id"
+                                            class="btn btn-primary btn-sm"
+                                            :class="{ disabled: form.busy }"
+                                        >
+                                            {{ $t('global.goto_travel_profile') }}
+                                        </router-link>
+                                    </h3>
+                                    <div class="float-left">
+                                        <btn-update :form="form"></btn-update>
+                                    </div>
+                                </div>
+                                <!-- ./card-header -->
+
+
                                 <!-- card-body -->
                                 <div class="card-body">
                                     <form-travel typeForm="edit" :form="form"></form-travel>
@@ -80,6 +84,7 @@ export default {
                 type: "other",
                 umrah_date: "",
                 haram_distance: 0,
+                discount: "",
                 favorite_company: 0,
                 image: "",
                 gallery: [],

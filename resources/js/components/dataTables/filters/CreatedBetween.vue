@@ -10,7 +10,7 @@
                         type="datetime"
                         format="YYYY-MM-DD hh:mm:ss"
                         :placeholder="$t('global.from')"
-                        lang="en"
+                        :lang="lang"
                     ></date-picker>
                 </span>
                 <span class="input-date to">
@@ -19,7 +19,7 @@
                         type="datetime"
                         format="YYYY-MM-DD hh:mm:ss"
                         :placeholder="$t('global.to')"
-                        lang="en"
+                        :lang="lang"
                     ></date-picker>
                 </span>
             </div>
@@ -36,8 +36,16 @@
 <script>
 export default {
     props: [
-    "tableData"
-  ],
+        "tableData"
+    ],
+    data() {
+        return {
+            lang: {
+                days: ['حد', 'اثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت'],
+                months: ['يناير', 'فبراير', 'مارس', 'إبريل', 'مايو', 'يوينو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر']
+            },
+        }
+    }
 }
 </script>
 

@@ -62,6 +62,10 @@ import CreateImage from './views/images/Create'
 import EditImage from './views/images/Edit'
 
 
+// contact_us
+import ContactUs from './views/contact_us/Index'
+
+
 // settings
 import Settings from './views/settings/Index'
 import CreateSetting from './views/settings/Create'
@@ -272,6 +276,16 @@ const vueRouter = new Router({
                     component: EditImage,
                     props: true
                 },
+
+
+
+                ////////////////// contact_us routes ///////////////////
+                {
+                    path: 'contact_us',
+                    name: 'contact_us',
+                    component: ContactUs
+                },
+
 
 
                 ////////////////// settings routes ///////////////////

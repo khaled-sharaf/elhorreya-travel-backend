@@ -12,7 +12,7 @@ class TravelProgram extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'name', 'image', 'small_info', 'big_info', 'order', 'user_id'
+        'name', 'image', 'discount', 'small_info', 'big_info', 'order', 'user_id'
     ];
 
     public function user()
@@ -20,8 +20,8 @@ class TravelProgram extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function travel_types()
+    public function categories()
     {
-        return $this->hasMany('App\TravelType');
+        return $this->hasMany('App\TravelCategory');
     }
 }

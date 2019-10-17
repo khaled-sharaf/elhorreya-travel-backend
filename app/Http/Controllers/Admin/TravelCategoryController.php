@@ -77,6 +77,7 @@ class TravelCategoryController extends Controller
     {
         $this->validate(request(), [
             'name' => 'required|string|between:2,180',
+            'discount' => 'nullable|integer|max:100',
             'image' => 'required|string',
             'order' => 'nullable|integer|min:1',
             'travel_program_id' => 'required|exists:travel_programs,id',
@@ -118,6 +119,7 @@ class TravelCategoryController extends Controller
     {
         $this->validate(request(), [
             'name' => 'required|string|between:2,180',
+            'discount' => 'nullable|integer|max:100',
             'image' => 'required|string',
             'order' => 'nullable|integer|min:1',
             'travel_program_id' => 'required|exists:travel_programs,id',

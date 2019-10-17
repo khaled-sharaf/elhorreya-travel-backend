@@ -12,7 +12,7 @@ class TravelCategory extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'name', 'image', 'order', 'travel_program_id', 'user_id'
+        'name', 'image', 'discount', 'order', 'travel_program_id', 'user_id'
     ];
 
     public function user()

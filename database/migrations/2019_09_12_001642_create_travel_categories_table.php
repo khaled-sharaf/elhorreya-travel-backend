@@ -17,6 +17,7 @@ class CreateTravelCategoriesTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('image');
+            $table->string('discount', 3)->nullable();
             $table->integer('order')->nullable();
             $table->unsignedInteger('travel_program_id');
             $table->unsignedInteger('user_id');

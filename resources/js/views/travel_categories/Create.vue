@@ -65,6 +65,7 @@ export default {
         urlCreateTravelCategory: '/travel_categories',
         form: new Form({
             name: '',
+            discount: '',
             image: '',
             travel_program_id: '',
             order: '',

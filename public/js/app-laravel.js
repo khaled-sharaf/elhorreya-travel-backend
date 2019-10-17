@@ -2180,6 +2180,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'sidebar',
   data: function data() {
@@ -3172,7 +3193,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["tableData"]
+  props: ["tableData"],
+  data: function data() {
+    return {
+      lang: {
+        days: ['حد', 'اثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت'],
+        months: ['يناير', 'فبراير', 'مارس', 'إبريل', 'مايو', 'يوينو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر']
+      }
+    };
+  }
 });
 
 /***/ }),
@@ -3803,15 +3832,17 @@ __webpack_require__.r(__webpack_exports__);
       type: Object,
       required: true
     },
-    maxCount: Number,
+    maxCount: {
+      type: Number,
+      "default": 50
+    },
     maxSize: {
       type: Number,
-      required: true
+      "default": 5242880
     }
   },
   data: function data() {
     return {
-      printSrcImage: "",
       error: true,
       maxSizeMb: (this.maxSize / 1024 / 1024).toFixed(1),
       showBtnRemoveSingleImage: false
@@ -3954,7 +3985,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     addDomainToImage: function addDomainToImage(url) {
       // return url
-      var resultUrl = '';
+      var resultUrl;
 
       if (url.indexOf('data:image/') === 0 || url.indexOf('http') === 0) {
         resultUrl = url;
@@ -3963,42 +3994,42 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       return resultUrl;
+    },
+    handelShowBtnRemoveSingleImage: function handelShowBtnRemoveSingleImage() {
+      if (this.defaultSrcImage && this.form[this.propertyName] != this.defaultSrcImage && !this.required) {
+        this.showBtnRemoveSingleImage = true;
+      } else if (this.defaultSrcImage && this.form[this.propertyName] == this.defaultSrcImage && !this.required) {
+        this.showBtnRemoveSingleImage = false;
+      } else if (!this.required && !this.defaultSrcImage) {
+        this.showBtnRemoveSingleImage = true;
+      } else {
+        this.showBtnRemoveSingleImage = false;
+      }
+    },
+    handelShowDefaultSrcImage: function handelShowDefaultSrcImage() {
+      var _this2 = this;
+
+      this.$nextTick(function () {
+        if (_this2.defaultSrcImage) {
+          if (_this2.form[_this2.propertyName] == '') {
+            _this2.form[_this2.propertyName] = _this2.defaultSrcImage;
+          }
+        }
+      });
     }
   },
   watch: {
     form: {
-      handler: function handler(object) {
-        var _this2 = this;
-
-        if (this.defaultSrcImage && this.form[this.propertyName] != this.defaultSrcImage && !this.required) {
-          this.showBtnRemoveSingleImage = true;
-        } else if (this.defaultSrcImage && this.form[this.propertyName] == this.defaultSrcImage && !this.required) {
-          this.showBtnRemoveSingleImage = false;
-        } else if (!this.required && !this.defaultSrcImage) {
-          this.showBtnRemoveSingleImage = true;
-        } else {
-          this.showBtnRemoveSingleImage = false;
-        }
-
-        this.$nextTick(function () {
-          if (_this2.defaultSrcImage) {
-            if (object[_this2.propertyName] == '') {
-              _this2.form[_this2.propertyName] = _this2.defaultSrcImage;
-            }
-          }
-        });
+      handler: function handler(newValForm) {
+        this.handelShowBtnRemoveSingleImage();
+        this.handelShowDefaultSrcImage();
       },
       deep: true
     }
   },
   mounted: function mounted() {
-    var _this3 = this;
-
-    this.$nextTick(function () {
-      if (_this3.defaultSrcImage) {
-        _this3.form[_this3.propertyName] = _this3.defaultSrcImage;
-      }
-    });
+    this.handelShowBtnRemoveSingleImage();
+    this.handelShowDefaultSrcImage();
     this.handelDropImages();
   }
 });
@@ -4692,9 +4723,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['form', 'typeForm'],
@@ -5147,6 +5175,142 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/contact_us/Index.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/contact_us/Index.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_dataTables_buttons_DeleteRow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../components/dataTables/buttons/DeleteRow */ "./resources/js/components/dataTables/buttons/DeleteRow.vue");
+/* harmony import */ var _components_dataTables_Index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../components/dataTables/Index */ "./resources/js/components/dataTables/Index.vue");
+/* harmony import */ var _mixins_MixinsDatatable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../mixins/MixinsDatatable */ "./resources/js/mixins/MixinsDatatable.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    dataTable: _components_dataTables_Index__WEBPACK_IMPORTED_MODULE_1__["default"],
+    BtnDelete: _components_dataTables_buttons_DeleteRow__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  mixins: [_mixins_MixinsDatatable__WEBPACK_IMPORTED_MODULE_2__["default"]],
+  data: function data() {
+    return {
+      idPage: 'contact_us',
+      urlGetDataTable: '/contact_us',
+      filters: ['created-between', 'search'],
+      hideButtons: true,
+      columns: [{
+        label: "ID",
+        name: "id"
+      }, {
+        label: "name",
+        name: "name"
+      }, {
+        label: "email",
+        name: "email"
+      }, {
+        label: "phone",
+        name: "phone"
+      }, {
+        label: "message",
+        name: "message"
+      }, {
+        label: "Created at",
+        name: "created_at"
+      }],
+      columnsExceptedSorting: []
+    };
+  },
+  beforeRouteEnter: function beforeRouteEnter(to, from, next) {
+    next(function (vm) {
+      to.meta.title = vm.$t('sidebar.contact_us');
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/hotels/Create.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/hotels/Create.vue?vue&type=script&lang=js& ***!
@@ -5514,9 +5678,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_form_UploadImage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../components/form/UploadImage */ "./resources/js/components/form/UploadImage.vue");
-//
-//
-//
 //
 //
 //
@@ -6897,8 +7058,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['form', 'typeForm'],
@@ -6943,7 +7102,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_form_UploadImage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../components/form/UploadImage */ "./resources/js/components/form/UploadImage.vue");
-//
 //
 //
 //
@@ -8574,7 +8732,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -8706,6 +8863,7 @@ __webpack_require__.r(__webpack_exports__);
       urlCreateTravelCategory: '/travel_categories',
       form: new Form({
         name: '',
+        discount: '',
         image: '',
         travel_program_id: '',
         order: ''
@@ -8827,6 +8985,7 @@ __webpack_require__.r(__webpack_exports__);
       form: new Form({
         id: 0,
         name: '',
+        discount: '',
         image: '',
         travel_program_id: '',
         order: ''
@@ -8910,6 +9069,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_form_UploadImage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../components/form/UploadImage */ "./resources/js/components/form/UploadImage.vue");
 //
 //
 //
@@ -8993,106 +9153,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['form', 'typeForm'],
+  components: {
+    UploadImage: _components_form_UploadImage__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
-      travelCategoryImage: "",
-      droppedFiles: false,
       urlGetTravelPrograms: '/travel_programs/select',
       travelProgramsSelect: []
     };
   },
   methods: {
-    getIndex: function getIndex(array, key, value) {
-      return array.findIndex(function (i) {
-        return i[key] == value;
-      });
-    },
-    encodeFileAsURL: function encodeFileAsURL(files) {
-      var self = this;
-
-      if (!files.length) {
-        var file = files;
-        var reader = new FileReader();
-
-        reader.onloadend = function () {
-          self.form.image = reader.result;
-        };
-
-        if (file) {
-          if (file["size"] > 4000000) {
-            if (this.$i18n.locale == 'ar') {
-              Swal.fire("خطأ...", "الحجم المسموح به للصورة هو 4 ميجا بايت.", "error");
-            } else {
-              Swal.fire("Oops...", "You are uploading a large file 4MB last.", "error");
-            }
-          } else if (file['type'] != 'image/jpeg' && file['type'] != 'image/png' && file['type'] != 'image/gif') {
-            if (this.$i18n.locale == 'ar') {
-              Swal.fire("خطأ...", "يجب أن تكون الصورة لها امتداد من هذه الإمتدادات [jpg, png, gif].", "error");
-            } else {
-              Swal.fire("Oops...", "You must be image have extension between [jpg, png, gif].", "error");
-            }
-          } else {
-            reader.readAsDataURL(file);
-          }
-        }
-      }
-    },
-    showFiles: function showFiles(files, input) {
-      if (typeof input === 'string') {
-        input = $('#' + input);
-      }
-
-      var lengthFiles = files.length;
-
-      if (input.attr('multiple')) {
-        if (lengthFiles > 0) {
-          this.encodeFileAsURL(files);
-        }
-      } else {
-        if (lengthFiles > 0) {
-          this.encodeFileAsURL(files[0]);
-        }
-      }
-    },
-    handelDropImages: function handelDropImages() {
-      var self = this; // view-images
-
-      $('.wrapper-drop-image').on('drag dragstart dragend dragover dragenter dragleave drop', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-      }).on('dragover dragenter', function (e) {
-        $(this).addClass('is-dragover');
-      }).on('dragleave dragend drop', function () {
-        $(this).removeClass('is-dragover');
-      }).on('drop', function (e) {
-        this.droppedFiles = e.originalEvent.dataTransfer.files;
-        var lengthFiles = e.originalEvent.dataTransfer.files.length;
-        var input = $(this).find('.custom-file-drop');
-        self.showFiles(this.droppedFiles, input);
-      });
-    },
-    addDomainToImage: function addDomainToImage(url) {
-      // return url
-      var resultUrl = '';
-
-      if (url.indexOf("data:image/") === 0) {
-        resultUrl = url;
-      } else {
-        resultUrl = this.$domain + '/' + url;
-      }
-
-      return resultUrl;
-    },
     getTravelProgramsSelect: function getTravelProgramsSelect() {
       var _this = this;
 
@@ -9107,24 +9180,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  watch: {
-    "form.image": function formImage(val) {
-      this.travelCategoryImage = this.addDomainToImage(val);
-    }
-  },
   mounted: function mounted() {
-    var _this2 = this;
-
-    if (this.typeForm == 'edit') {
-      var getImage = setInterval(function () {
-        if (_this2.form.image != '') {
-          _this2.travelCategoryImage = _this2.$domain + '/' + _this2.form.image;
-          clearInterval(getImage);
-        }
-      }, 500);
-    }
-
-    this.handelDropImages();
     this.getTravelProgramsSelect();
   }
 });
@@ -9150,6 +9206,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_dataTables_filters_travelProgramsSelect__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./../../components/dataTables/filters/travelProgramsSelect */ "./resources/js/components/dataTables/filters/travelProgramsSelect.vue");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+//
+//
+//
+//
+//
 //
 //
 //
@@ -9310,6 +9371,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         label: "Name",
         name: "name"
       }, {
+        label: "discount",
+        name: "discount"
+      }, {
         label: "Image",
         name: "image"
       }, {
@@ -9446,6 +9510,7 @@ __webpack_require__.r(__webpack_exports__);
       urlCreateTravelProgram: '/travel_programs',
       form: new Form({
         name: '',
+        discount: '',
         image: '',
         small_info: '',
         big_info: '',
@@ -9568,6 +9633,7 @@ __webpack_require__.r(__webpack_exports__);
       form: new Form({
         id: 0,
         name: '',
+        discount: '',
         image: '',
         small_info: '',
         big_info: '',
@@ -9652,6 +9718,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_form_UploadImage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../components/form/UploadImage */ "./resources/js/components/form/UploadImage.vue");
 //
 //
 //
@@ -9749,123 +9816,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['form', 'typeForm'],
-  data: function data() {
-    return {
-      travelProgramImage: "",
-      droppedFiles: false
-    };
-  },
-  methods: {
-    getIndex: function getIndex(array, key, value) {
-      return array.findIndex(function (i) {
-        return i[key] == value;
-      });
-    },
-    encodeFileAsURL: function encodeFileAsURL(files) {
-      var self = this;
-
-      if (!files.length) {
-        var file = files;
-        var reader = new FileReader();
-
-        reader.onloadend = function () {
-          self.form.image = reader.result;
-        };
-
-        if (file) {
-          if (file["size"] > 4000000) {
-            if (this.$i18n.locale == 'ar') {
-              Swal.fire("خطأ...", "الحجم المسموح به للصورة هو 4 ميجا بايت.", "error");
-            } else {
-              Swal.fire("Oops...", "You are uploading a large file 4MB last.", "error");
-            }
-          } else if (file['type'] != 'image/jpeg' && file['type'] != 'image/png' && file['type'] != 'image/gif') {
-            if (this.$i18n.locale == 'ar') {
-              Swal.fire("خطأ...", "يجب أن تكون الصورة لها امتداد من هذه الإمتدادات [jpg, png, gif].", "error");
-            } else {
-              Swal.fire("Oops...", "You must be image have extension between [jpg, png, gif].", "error");
-            }
-          } else {
-            reader.readAsDataURL(file);
-          }
-        }
-      }
-    },
-    showFiles: function showFiles(files, input) {
-      if (typeof input === 'string') {
-        input = $('#' + input);
-      }
-
-      var lengthFiles = files.length;
-
-      if (input.attr('multiple')) {
-        if (lengthFiles > 0) {
-          this.encodeFileAsURL(files);
-        }
-      } else {
-        if (lengthFiles > 0) {
-          this.encodeFileAsURL(files[0]);
-        }
-      }
-    },
-    handelDropImages: function handelDropImages() {
-      var self = this; // view-images
-
-      $('.wrapper-drop-image').on('drag dragstart dragend dragover dragenter dragleave drop', function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-      }).on('dragover dragenter', function (e) {
-        $(this).addClass('is-dragover');
-      }).on('dragleave dragend drop', function () {
-        $(this).removeClass('is-dragover');
-      }).on('drop', function (e) {
-        this.droppedFiles = e.originalEvent.dataTransfer.files;
-        var lengthFiles = e.originalEvent.dataTransfer.files.length;
-        var input = $(this).find('.custom-file-drop');
-        self.showFiles(this.droppedFiles, input);
-      });
-    },
-    addDomainToImage: function addDomainToImage(url) {
-      // return url
-      var resultUrl = '';
-
-      if (url.indexOf("data:image/") === 0) {
-        resultUrl = url;
-      } else {
-        resultUrl = this.$domain + '/' + url;
-      }
-
-      return resultUrl;
-    }
-  },
-  watch: {
-    "form.image": function formImage(val) {
-      this.travelProgramImage = this.addDomainToImage(val);
-    }
-  },
-  mounted: function mounted() {
-    var _this = this;
-
-    if (this.typeForm == 'edit') {
-      var getImage = setInterval(function () {
-        if (_this.form.image != '') {
-          _this.travelProgramImage = _this.$domain + '/' + _this.form.image;
-          clearInterval(getImage);
-        }
-      }, 500);
-    }
-
-    this.handelDropImages();
+  components: {
+    UploadImage: _components_form_UploadImage__WEBPACK_IMPORTED_MODULE_0__["default"]
   }
 });
 
@@ -9887,6 +9842,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_dataTables_buttons_ForceDeleteRow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../components/dataTables/buttons/ForceDeleteRow */ "./resources/js/components/dataTables/buttons/ForceDeleteRow.vue");
 /* harmony import */ var _components_dataTables_Index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../components/dataTables/Index */ "./resources/js/components/dataTables/Index.vue");
 /* harmony import */ var _mixins_MixinsDatatable__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./../../mixins/MixinsDatatable */ "./resources/js/mixins/MixinsDatatable.js");
+//
+//
+//
+//
+//
 //
 //
 //
@@ -10027,6 +9987,9 @@ __webpack_require__.r(__webpack_exports__);
         label: "Name",
         name: "name"
       }, {
+        label: "discount",
+        name: "discount"
+      }, {
         label: "Image",
         name: "image"
       }, {
@@ -10143,6 +10106,7 @@ __webpack_require__.r(__webpack_exports__);
         type: "other",
         umrah_date: "",
         haram_distance: 0,
+        discount: '',
         favorite_company: 0,
         image: "",
         gallery: [],
@@ -10175,8 +10139,8 @@ __webpack_require__.r(__webpack_exports__);
       loadReq(this.$Progress);
       this.form.post(this.urlCreateTravel).then(function (response) {
         if (response.status === 200) {
-          console.log(response.data); // reset form
-
+          // console.log(response.data)
+          // reset form
           _this.form.reset();
 
           ToastReq.fire({
@@ -10290,6 +10254,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -10312,6 +10280,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         type: "other",
         umrah_date: "",
         haram_distance: 0,
+        discount: "",
         favorite_company: 0,
         image: "",
         gallery: [],
@@ -10863,6 +10832,19 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['form', 'typeForm'],
@@ -10876,21 +10858,24 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       urlGetTravelCategories: '/travel_categories/select',
       travelCategoriesSelect: [],
       travelTypes: [{
+        value: 'internal',
+        label: 'سياحة داخلية'
+      }, {
+        value: 'external',
+        label: 'سياحة خارجية'
+      }, {
         value: 'pilgrimage',
         label: 'حج'
       }, {
         value: 'umrah',
         label: 'عمرة'
-      }, {
-        value: 'other',
-        label: 'رحلة سياحية'
       }],
       haramDistance: [{
         value: 0,
-        label: 'الفندق بعيد عن الحرم'
+        label: 'بعيد'
       }, {
         value: 1,
-        label: 'الفندق قريب من الحرم'
+        label: 'قريب'
       }],
       stayTypes: [{
         value: 'بدون إفطار'
@@ -10907,7 +10892,11 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       }, {
         value: 1,
         label: 'شامل الانتقالات'
-      }]
+      }],
+      langDates: {
+        days: ['حد', 'اثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت'],
+        months: ['يناير', 'فبراير', 'مارس', 'إبريل', 'مايو', 'يوينو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر']
+      }
     };
   },
   methods: {
@@ -11214,6 +11203,11 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -11271,6 +11265,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         label: "Haram distance",
         name: "haram_distance"
       }, {
+        label: "discount",
+        name: "discount"
+      }, {
         label: "Favorite company",
         name: "favorite_company"
       }, {
@@ -11294,13 +11291,14 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       }],
       columnsExceptedSorting: ['hotel_id', 'travel_category_id', 'user_id'],
       travelTypes: {
+        internal: 'سياحة داخلية',
+        external: 'سياحة خارجية',
         pilgrimage: 'حج',
-        umrah: 'عمرة',
-        other: 'رحلة سياحية'
+        umrah: 'عمرة'
       },
       haramDistance: {
-        0: 'الفندق بعيد من الحرم',
-        1: 'الفندق قريب من الحرم'
+        0: 'بعيد',
+        1: 'قريب'
       }
     };
   },
@@ -11863,6 +11861,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -11895,6 +11905,7 @@ __webpack_require__.r(__webpack_exports__);
         type: "other",
         umrah_date: "",
         haram_distance: 0,
+        discount: "",
         favorite_company: 0,
         image: "",
         gallery: [],
@@ -11914,13 +11925,14 @@ __webpack_require__.r(__webpack_exports__);
         }
       },
       travelTypes: {
+        internal: 'سياحة داخلية',
+        external: 'سياحة خارجية',
         pilgrimage: 'حج',
-        umrah: 'عمرة',
-        other: 'رحلة سياحية'
+        umrah: 'عمرة'
       },
       haramDistance: {
-        0: 'الفندق بعيد من الحرم',
-        1: 'الفندق قريب من الحرم'
+        0: 'بعيد',
+        1: 'قريب'
       },
       transports: {
         0: 'بدون انتقالات',
@@ -32523,6 +32535,59 @@ var render = function() {
                 _vm._v(" "),
                 _c("li", { staticClass: "nav-item has-treeview" }, [
                   _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+                    _c("i", { staticClass: "nav-icon fas fa-envelope" }),
+                    _vm._v(" "),
+                    _c("p", [
+                      _vm._v(
+                        "\n                        " +
+                          _vm._s(_vm.$t("sidebar.contact_us")) +
+                          "\n                        "
+                      ),
+                      _c("i", {
+                        staticClass: "fas right",
+                        class:
+                          _vm.$i18n.locale == "ar"
+                            ? "fa-angle-right"
+                            : "fa-angle-left"
+                      })
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("ul", { staticClass: "nav nav-treeview" }, [
+                    _c(
+                      "li",
+                      { staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: { name: "contact_us" } }
+                          },
+                          [
+                            _c("i", { staticClass: "far fa-eye nav-icon" }),
+                            _vm._v(" "),
+                            _c("p", [
+                              _vm._v(
+                                " " +
+                                  _vm._s(
+                                    _vm.$t("global.show") +
+                                      " " +
+                                      _vm.$t("sidebar.all_contact_us")
+                                  ) +
+                                  " "
+                              )
+                            ])
+                          ]
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("li", { staticClass: "nav-item has-treeview" }, [
+                  _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
                     _c("i", { staticClass: "nav-icon fas fa-cogs" }),
                     _vm._v(" "),
                     _c("p", [
@@ -33996,7 +34061,7 @@ var render = function() {
                 type: "datetime",
                 format: "YYYY-MM-DD hh:mm:ss",
                 placeholder: _vm.$t("global.from"),
-                lang: "en"
+                lang: _vm.lang
               },
               model: {
                 value: _vm.tableData.from_date,
@@ -34019,7 +34084,7 @@ var render = function() {
                 type: "datetime",
                 format: "YYYY-MM-DD hh:mm:ss",
                 placeholder: _vm.$t("global.to"),
-                lang: "en"
+                lang: _vm.lang
               },
               model: {
                 value: _vm.tableData.to_date,
@@ -35038,7 +35103,9 @@ var render = function() {
           {
             staticClass: "wrapper-drop-image single-image",
             class: ((_obj = {
-              "contains-image": _vm.form[_vm.propertyName] != "",
+              "contains-image":
+                _vm.form[_vm.propertyName] != "" &&
+                _vm.form[_vm.propertyName] !== null,
               "is-invalid": _vm.form.errors.has(_vm.propertyName)
             }),
             (_obj[_vm.propertyName] = true),
@@ -35047,7 +35114,8 @@ var render = function() {
           [
             _c("div", { staticClass: "overlay-drop-image" }, [
               _c("div", { staticClass: "view-images" }, [
-                _vm.form[_vm.propertyName] != ""
+                _vm.form[_vm.propertyName] !== "" &&
+                _vm.form[_vm.propertyName] !== null
                   ? _c("div", { staticClass: "image" }, [
                       _c("div", { staticClass: "img" }, [
                         _c("img", {
@@ -35126,6 +35194,7 @@ var render = function() {
             class: ((_obj$1 = {
               "contains-image":
                 _vm.form[_vm.propertyName] !== null &&
+                _vm.form[_vm.propertyName] !== "" &&
                 _vm.form[_vm.propertyName].length > 0,
               "is-invalid": _vm.form.errors.has(_vm.propertyName)
             }),
@@ -36145,11 +36214,7 @@ var render = function() {
               { staticClass: "col-md-6" },
               [
                 _c("upload-image", {
-                  attrs: {
-                    maxSize: 2100000,
-                    propertyName: "image",
-                    form: _vm.form
-                  }
+                  attrs: { propertyName: "image", form: _vm.form }
                 })
               ],
               1
@@ -36168,8 +36233,6 @@ var render = function() {
             _c("upload-image", {
               attrs: {
                 type: "multiple",
-                maxSize: 2100000,
-                maxCount: 50,
                 propertyName: "gallery",
                 propertyDeletedName: "deletedGallery",
                 form: _vm.form
@@ -36858,6 +36921,251 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/contact_us/Index.vue?vue&type=template&id=3c9d883f&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/contact_us/Index.vue?vue&type=template&id=3c9d883f& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "data-table",
+    {
+      attrs: {
+        idPage: _vm.idPage,
+        showSettings: _vm.showSettings,
+        hideButtons: _vm.hideButtons,
+        columns: _vm.columns,
+        themeTableClasses: _vm.viewTableClasses,
+        dataTable: _vm.dataTable,
+        tableData: _vm.tableData,
+        perPage: _vm.perPage,
+        successResponse: _vm.successResponse,
+        columnsView: _vm.tableData.columns,
+        columnsExcepted: _vm.tableData.filter.columnsExcept,
+        themeTableClassesFilter: _vm.tableData.filter.viewTable,
+        sortOrders: _vm.sortOrders,
+        pagination: _vm.pagination,
+        totalLink: Math.ceil(_vm.pagination.total / _vm.tableData.length),
+        filters: _vm.filters,
+        actionMultiDelete: _vm.actionMultiDelete
+      },
+      on: {
+        prev: function($event) {
+          return _vm.getData(_vm.pagination.prevPageUrl)
+        },
+        next: function($event) {
+          return _vm.getData(_vm.pagination.nextPageUrl)
+        },
+        gotopage: _vm.gotopage,
+        toggleShowSettings: _vm.toggleShowSettings,
+        deleteResotreMulti: _vm.deleteResotreMulti,
+        getData: _vm.getData
+      }
+    },
+    [
+      _c(
+        "tbody",
+        _vm._l(_vm.dataTable, function(model, index) {
+          return _c(
+            "tr",
+            {
+              key: model.id,
+              staticClass: "tr-general",
+              class: index % 2 == 0 ? "even" : "odd",
+              attrs: { role: "row", "data-id": model.id }
+            },
+            [
+              _c(
+                "td",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.tableData.columns.indexOf("index") != -1,
+                      expression: "tableData.columns.indexOf('index') != -1"
+                    }
+                  ],
+                  staticClass: "index"
+                },
+                [
+                  _vm._v(
+                    "\n                " + _vm._s(index + 1) + "\n            "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "td",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.tableData.columns.indexOf("id") != -1,
+                      expression: "tableData.columns.indexOf('id') != -1"
+                    }
+                  ],
+                  staticClass: "id"
+                },
+                [
+                  _vm._v(
+                    "\n                " + _vm._s(model.id) + "\n            "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "td",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.tableData.columns.indexOf("name") != -1,
+                      expression: "tableData.columns.indexOf('name') != -1"
+                    }
+                  ],
+                  staticClass: "name"
+                },
+                [
+                  _vm._v(
+                    "\n                " + _vm._s(model.name) + "\n            "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "td",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.tableData.columns.indexOf("email") != -1,
+                      expression: "tableData.columns.indexOf('email') != -1"
+                    }
+                  ],
+                  staticClass: "email"
+                },
+                [
+                  _c("a", { attrs: { href: "mailto:" + model.email } }, [
+                    _vm._v(_vm._s(model.email))
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "td",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.tableData.columns.indexOf("phone") != -1,
+                      expression: "tableData.columns.indexOf('phone') != -1"
+                    }
+                  ],
+                  staticClass: "phone"
+                },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(model.phone) +
+                      "\n            "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "td",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.tableData.columns.indexOf("message") != -1,
+                      expression: "tableData.columns.indexOf('message') != -1"
+                    }
+                  ],
+                  staticClass: "message"
+                },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(model.message) +
+                      "\n            "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "td",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.tableData.columns.indexOf("created_at") != -1,
+                      expression:
+                        "tableData.columns.indexOf('created_at') != -1"
+                    }
+                  ],
+                  staticClass: "created_at"
+                },
+                [_c("relative-date", { attrs: { date: model.created_at } })],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "td",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.tableData.columns.indexOf("actions") != -1,
+                      expression: "tableData.columns.indexOf('actions') != -1"
+                    }
+                  ],
+                  staticClass: "actions"
+                },
+                [
+                  _c("btn-delete", {
+                    attrs: { model: model, modelName: "contact_us" },
+                    on: {
+                      destroyRow: function($event) {
+                        return _vm.destroyRow(model.id)
+                      }
+                    }
+                  })
+                ],
+                1
+              )
+            ]
+          )
+        }),
+        0
+      )
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/hotels/Create.vue?vue&type=template&id=14378b7d&":
 /*!***********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/views/hotels/Create.vue?vue&type=template&id=14378b7d& ***!
@@ -37475,11 +37783,7 @@ var render = function() {
               { staticClass: "col-md-6" },
               [
                 _c("upload-image", {
-                  attrs: {
-                    maxSize: 2100000,
-                    propertyName: "image",
-                    form: _vm.form
-                  }
+                  attrs: { propertyName: "image", form: _vm.form }
                 })
               ],
               1
@@ -37498,8 +37802,6 @@ var render = function() {
             _c("upload-image", {
               attrs: {
                 type: "multiple",
-                maxSize: 2100000,
-                maxCount: 50,
                 propertyName: "gallery",
                 propertyDeletedName: "deletedGallery",
                 form: _vm.form
@@ -39168,8 +39470,6 @@ var render = function() {
             _c("upload-image", {
               attrs: {
                 type: "multiple",
-                maxSize: 2100000,
-                maxCount: 50,
                 propertyName: "gallery",
                 propertyDeletedName: "deletedGallery",
                 form: _vm.form
@@ -39275,11 +39575,7 @@ var render = function() {
               { staticClass: "col-md-6" },
               [
                 _c("upload-image", {
-                  attrs: {
-                    maxSize: 2100000,
-                    propertyName: "image",
-                    form: _vm.form
-                  }
+                  attrs: { propertyName: "image", form: _vm.form }
                 })
               ],
               1
@@ -41158,8 +41454,7 @@ var render = function() {
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
           _c("label", [
-            _vm._v(" " + _vm._s(_vm.$t("settings_table.value")) + " "),
-            _c("span", { staticClass: "field-required" })
+            _vm._v(" " + _vm._s(_vm.$t("settings_table.value")) + " ")
           ]),
           _vm._v(" "),
           _vm.form.type == "string"
@@ -41240,8 +41535,8 @@ var render = function() {
                       _c("upload-image", {
                         attrs: {
                           form: _vm.form,
-                          propertyName: "value",
-                          maxSize: 4200000
+                          required: false,
+                          propertyName: "value"
                         }
                       })
                     ],
@@ -41423,6 +41718,7 @@ var render = function() {
                   staticClass: "value"
                 },
                 [
+                  setting.value != null &&
                   setting.value.indexOf("images/settings/") === 0
                     ? _c("img", {
                         staticClass: "avatar-table",
@@ -41804,6 +42100,49 @@ var render = function() {
           [
             _c("label", [
               _vm._v(
+                " " + _vm._s(_vm.$t("travel_categories_table.discount")) + " "
+              )
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.discount,
+                  expression: "form.discount"
+                }
+              ],
+              staticClass: "form-control",
+              class: { "is-invalid": _vm.form.errors.has("discount") },
+              attrs: {
+                type: "number",
+                max: "100",
+                min: "0",
+                placeholder: _vm.$t("travel_categories_table.discount")
+              },
+              domProps: { value: _vm.form.discount },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "discount", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("has-error", { attrs: { form: _vm.form, field: "discount" } })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", [
+              _vm._v(
                 " " + _vm._s(_vm.$t("travel_categories_table.order")) + " "
               )
             ]),
@@ -41907,74 +42246,16 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row justify-content-center" }, [
-            _c("div", { staticClass: "col-md-6" }, [
-              _c(
-                "div",
-                {
-                  staticClass: "wrapper-drop-image",
-                  class: {
-                    "contains-image": _vm.form.image != "",
-                    "is-invalid": _vm.form.errors.has("image")
-                  },
-                  attrs: { id: "travel_category-default-image" }
-                },
-                [
-                  _c("div", { staticClass: "overlay-drop-image" }, [
-                    _c("div", { staticClass: "view-images" }, [
-                      _vm.form.image != ""
-                        ? _c("div", { staticClass: "image elevation-5" }, [
-                            _c("div", { staticClass: "img" }, [
-                              _c("img", {
-                                attrs: { src: _vm.travelCategoryImage }
-                              })
-                            ])
-                          ])
-                        : _vm._e()
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "view-overlay",
-                        attrs: { for: "travel_category_image" }
-                      },
-                      [
-                        _c("div", { staticClass: "content-overlay" }, [
-                          _c("i", { staticClass: "icon far fa-image" }),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "title" }, [
-                            _vm._v(
-                              " " + _vm._s(_vm.$t("global.drag_msg")) + " "
-                            )
-                          ])
-                        ])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "custom-file-drop custom-file-input",
-                    class: { "is-invalid": _vm.form.errors.has("image") },
-                    attrs: {
-                      type: "file",
-                      id: "travel_category_image",
-                      accept: "image/*"
-                    },
-                    on: {
-                      change: function($event) {
-                        return _vm.showFiles(
-                          $event.target.files,
-                          $event.target.id
-                        )
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("has-error", { attrs: { form: _vm.form, field: "image" } })
-                ],
-                1
-              )
-            ])
+            _c(
+              "div",
+              { staticClass: "col-md-6" },
+              [
+                _c("upload-image", {
+                  attrs: { propertyName: "image", form: _vm.form }
+                })
+              ],
+              1
+            )
           ])
         ])
       ])
@@ -42130,6 +42411,28 @@ var render = function() {
                       _vm._s(_vm._f("capitalize")(travel_category.name)) +
                       "\n            "
                   )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "td",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.tableData.columns.indexOf("discount") != -1,
+                      expression: "tableData.columns.indexOf('discount') != -1"
+                    }
+                  ],
+                  staticClass: "discount"
+                },
+                [
+                  travel_category.discount
+                    ? _c("span", [
+                        _vm._v(_vm._s(travel_category.discount) + "%")
+                      ])
+                    : _vm._e()
                 ]
               ),
               _vm._v(" "),
@@ -42641,6 +42944,49 @@ var render = function() {
           [
             _c("label", [
               _vm._v(
+                " " + _vm._s(_vm.$t("travel_programs_table.discount")) + " "
+              )
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.discount,
+                  expression: "form.discount"
+                }
+              ],
+              staticClass: "form-control",
+              class: { "is-invalid": _vm.form.errors.has("discount") },
+              attrs: {
+                type: "number",
+                max: "100",
+                min: "0",
+                placeholder: _vm.$t("travel_programs_table.discount")
+              },
+              domProps: { value: _vm.form.discount },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "discount", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("has-error", { attrs: { form: _vm.form, field: "discount" } })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", [
+              _vm._v(
                 " " + _vm._s(_vm.$t("travel_programs_table.small_info")) + " "
               )
             ]),
@@ -42763,74 +43109,16 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row justify-content-center" }, [
-            _c("div", { staticClass: "col-md-6" }, [
-              _c(
-                "div",
-                {
-                  staticClass: "wrapper-drop-image",
-                  class: {
-                    "contains-image": _vm.form.image != "",
-                    "is-invalid": _vm.form.errors.has("image")
-                  },
-                  attrs: { id: "travel_program-default-image" }
-                },
-                [
-                  _c("div", { staticClass: "overlay-drop-image" }, [
-                    _c("div", { staticClass: "view-images" }, [
-                      _vm.form.image != ""
-                        ? _c("div", { staticClass: "image elevation-5" }, [
-                            _c("div", { staticClass: "img" }, [
-                              _c("img", {
-                                attrs: { src: _vm.travelProgramImage }
-                              })
-                            ])
-                          ])
-                        : _vm._e()
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "label",
-                      {
-                        staticClass: "view-overlay",
-                        attrs: { for: "travel_program_image" }
-                      },
-                      [
-                        _c("div", { staticClass: "content-overlay" }, [
-                          _c("i", { staticClass: "icon far fa-image" }),
-                          _vm._v(" "),
-                          _c("span", { staticClass: "title" }, [
-                            _vm._v(
-                              " " + _vm._s(_vm.$t("global.drag_msg")) + " "
-                            )
-                          ])
-                        ])
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c("input", {
-                    staticClass: "custom-file-drop custom-file-input",
-                    class: { "is-invalid": _vm.form.errors.has("image") },
-                    attrs: {
-                      type: "file",
-                      id: "travel_program_image",
-                      accept: "image/*"
-                    },
-                    on: {
-                      change: function($event) {
-                        return _vm.showFiles(
-                          $event.target.files,
-                          $event.target.id
-                        )
-                      }
-                    }
-                  }),
-                  _vm._v(" "),
-                  _c("has-error", { attrs: { form: _vm.form, field: "image" } })
-                ],
-                1
-              )
-            ])
+            _c(
+              "div",
+              { staticClass: "col-md-6" },
+              [
+                _c("upload-image", {
+                  attrs: { propertyName: "image", form: _vm.form }
+                })
+              ],
+              1
+            )
           ])
         ])
       ])
@@ -42968,6 +43256,28 @@ var render = function() {
                       _vm._s(_vm._f("capitalize")(travel_program.name)) +
                       "\n            "
                   )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "td",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.tableData.columns.indexOf("discount") != -1,
+                      expression: "tableData.columns.indexOf('discount') != -1"
+                    }
+                  ],
+                  staticClass: "discount"
+                },
+                [
+                  travel_program.discount
+                    ? _c("span", [
+                        _vm._v(_vm._s(travel_program.discount) + "%")
+                      ])
+                    : _vm._e()
                 ]
               ),
               _vm._v(" "),
@@ -43320,43 +43630,6 @@ var render = function() {
           _c("div", { staticClass: "row mt-3" }, [
             _c("div", { staticClass: "col-12" }, [
               _c("div", { staticClass: "card" }, [
-                _c("div", { staticClass: "card-header" }, [
-                  _c(
-                    "h3",
-                    { staticClass: "m-0 mb-2 text-dark" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "btn btn-primary btn-sm",
-                          class: { disabled: _vm.form.busy },
-                          attrs: {
-                            to: {
-                              name: "travel-profile",
-                              params: {
-                                id: _vm.travelEdit.id,
-                                travel: _vm.travelEdit
-                              }
-                            },
-                            href:
-                              _vm.$domain_admin +
-                              "/travel/profile/" +
-                              _vm.travelEdit.id
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                                    " +
-                              _vm._s(_vm.$t("global.goto_travel_profile")) +
-                              "\n                                "
-                          )
-                        ]
-                      )
-                    ],
-                    1
-                  )
-                ]),
-                _vm._v(" "),
                 _c(
                   "form",
                   {
@@ -43369,6 +43642,50 @@ var render = function() {
                     }
                   },
                   [
+                    _c("div", { staticClass: "card-header" }, [
+                      _c(
+                        "h3",
+                        { staticClass: "m-0 mb-2 text-dark float-right" },
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              staticClass: "btn btn-primary btn-sm",
+                              class: { disabled: _vm.form.busy },
+                              attrs: {
+                                to: {
+                                  name: "travel-profile",
+                                  params: {
+                                    id: _vm.travelEdit.id,
+                                    travel: _vm.travelEdit
+                                  }
+                                },
+                                href:
+                                  _vm.$domain_admin +
+                                  "/travel/profile/" +
+                                  _vm.travelEdit.id
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                                        " +
+                                  _vm._s(_vm.$t("global.goto_travel_profile")) +
+                                  "\n                                    "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "float-left" },
+                        [_c("btn-update", { attrs: { form: _vm.form } })],
+                        1
+                      )
+                    ]),
+                    _vm._v(" "),
                     _c(
                       "div",
                       { staticClass: "card-body" },
@@ -43643,7 +43960,7 @@ var render = function() {
             )
           : _vm._e(),
         _vm._v(" "),
-        _vm.form.type != "other"
+        _vm.form.type == "umrah" || _vm.form.type == "pilgrimage"
           ? _c(
               "div",
               { staticClass: "form-group" },
@@ -43709,6 +44026,47 @@ var render = function() {
               1
             )
           : _vm._e(),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", [
+              _vm._v(" " + _vm._s(_vm.$t("travels_table.discount")) + " ")
+            ]),
+            _vm._v(" "),
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.form.discount,
+                  expression: "form.discount"
+                }
+              ],
+              staticClass: "form-control",
+              class: { "is-invalid": _vm.form.errors.has("discount") },
+              attrs: {
+                type: "number",
+                max: "100",
+                min: "0",
+                placeholder: _vm.$t("travels_table.discount")
+              },
+              domProps: { value: _vm.form.discount },
+              on: {
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
+                  }
+                  _vm.$set(_vm.form, "discount", $event.target.value)
+                }
+              }
+            }),
+            _vm._v(" "),
+            _c("has-error", { attrs: { form: _vm.form, field: "discount" } })
+          ],
+          1
+        ),
         _vm._v(" "),
         _c(
           "div",
@@ -43965,11 +44323,7 @@ var render = function() {
               { staticClass: "col-md-6" },
               [
                 _c("upload-image", {
-                  attrs: {
-                    maxSize: 2100000,
-                    propertyName: "image",
-                    form: _vm.form
-                  }
+                  attrs: { propertyName: "image", form: _vm.form }
                 })
               ],
               1
@@ -43988,8 +44342,6 @@ var render = function() {
             _c("upload-image", {
               attrs: {
                 type: "multiple",
-                maxSize: 2100000,
-                maxCount: 50,
                 propertyName: "gallery",
                 propertyDeletedName: "deletedGallery",
                 form: _vm.form
@@ -44193,7 +44545,7 @@ var render = function() {
                               "travels_table.offers.date_from"
                             ),
                             width: "100%",
-                            lang: "en",
+                            lang: _vm.langDates,
                             "value-type": "format"
                           },
                           model: {
@@ -44229,7 +44581,7 @@ var render = function() {
                           attrs: {
                             placeholder: _vm.$t("travels_table.offers.date_to"),
                             width: "100%",
-                            lang: "en",
+                            lang: _vm.langDates,
                             "value-type": "format"
                           },
                           model: {
@@ -45039,6 +45391,26 @@ var render = function() {
                     {
                       name: "show",
                       rawName: "v-show",
+                      value: _vm.tableData.columns.indexOf("discount") != -1,
+                      expression: "tableData.columns.indexOf('discount') != -1"
+                    }
+                  ],
+                  staticClass: "discount"
+                },
+                [
+                  travel.discount
+                    ? _c("span", [_vm._v(_vm._s(travel.discount) + "%")])
+                    : _vm._e()
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "td",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
                       value:
                         _vm.tableData.columns.indexOf("favorite_company") != -1,
                       expression:
@@ -45531,7 +45903,8 @@ var render = function() {
                           ])
                         : _vm._e(),
                       _vm._v(" "),
-                      _vm.travelProfile.type !== "other"
+                      _vm.travelProfile.type == "umrah" ||
+                      _vm.travelProfile.type == "pilgrimage"
                         ? _c("li", { staticClass: "list-group-item" }, [
                             _c("b", [
                               _vm._v(
@@ -45556,6 +45929,24 @@ var render = function() {
                             ])
                           ])
                         : _vm._e(),
+                      _vm._v(" "),
+                      _c("li", { staticClass: "list-group-item" }, [
+                        _c("b", [
+                          _vm._v(
+                            "\n                                        " +
+                              _vm._s(_vm.$t("travels_table.discount")) +
+                              "\n                                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("a", { staticClass: "float-right" }, [
+                          _vm.travelProfile.discount
+                            ? _c("span", [
+                                _vm._v(_vm._s(_vm.travelProfile.discount) + "%")
+                              ])
+                            : _vm._e()
+                        ])
+                      ]),
                       _vm._v(" "),
                       _c("li", { staticClass: "list-group-item" }, [
                         _c("b", [
@@ -64220,10 +64611,10 @@ webpackContext.id = "./resources/js/lang sync recursive ^\\.\\/.*\\.json$";
 /*!***********************************!*\
   !*** ./resources/js/lang/ar.json ***!
   \***********************************/
-/*! exports provided: global, sidebar, datatable, users_table, hotels_table, rooms_table, travel_programs_table, travel_categories_table, travels_table, bookings_table, mailing_list_table, blogs_table, images_table, settings_table, default */
+/*! exports provided: global, sidebar, datatable, users_table, hotels_table, rooms_table, travel_programs_table, travel_categories_table, travels_table, bookings_table, mailing_list_table, blogs_table, images_table, contact_us_table, settings_table, default */
 /***/ (function(module) {
 
-module.exports = {"global":{"home":"الرئيسية","dashboard":"الرئيسية","user":"مدير","hotel":"فندق","the_hotel":"الفندق","the_price":"السعر","the_travel":"الرحلة","room":"غرفة","the_travel_program":"برنامج الرحلة","the_travel_category":"قسم الرحلة","the_images":"الصور","type":"نوع","comment":"تعليق","winner":"فائز","setting":"إعداد","no_rooms":"لا يوجد غرف","no_travels":"لا يوجد رحلات","no_hotel_features":"لا توجد مميزات للفندق","no_offers":"لا توجد عروض لهذه الرحلة","no_bookings":"لا توجد حجوزات لهذه الرحلة","no_gallery":"لا توجد صور","no_location":"لا توجد خريطة","show_map":"اعرض الخريطة","days":"أيام","day":"يوم","profile":"بروفايل","the_profile":"البروفايل","goto_travel_profile":"صفحة الرحلة","goto_hotel_profile":"صفحة الفندق","hotel_is_deleted":"الفندق محذوف","user_is_deleted":"المدير محذوف","travel_program_is_deleted":"برنامج الرحلة محذوف","travel_category_is_deleted":"قسم الرحلة محذوف","travel_is_deleted":"الرحلة محذوفة","offer_is_deleted":"العرض محذوف","logout":"تسجيل الخروج","create":"إنشاء","edit":"تعديل","update":"تحديث","save":"حفظ","read":"اقرأ","all":"الكل","read_more":"اقرأ المزيد","more_info":"معرفة المزيد","choose_image":"اختر صورة","drag_msg":"اسحب الصورة ثم ضعها هنا","active":"مفعل","disactive":"غير مفعل","available":"متاح","unavailable":"غير متاح","hidden":"مخفى","visible":"ظاهر","show":"عرض","view":"عرض","close":"إغلاق","display":"إظهار","from":"من","to":"إلى","in":"فى","on":"على","delete":"حذف","deleted":"تم الحذف","force_delete":"إزالة نهائيا","remove":"إزالة","removed":"تمت الإزالة","restore":"استرجاع","restored":"تم الإسترجاع","failed":"فشل","cancel":"إلغاء","yes_delete_it":"تأكيد الحذف","yes_remove_it":"تأكيد الإزالة","yes_restore_it":"تأكيد الإسترجاع","multi_delete_msg":"هل أنت متأكد من حذف جميع {model} المعلم عليها؟","multi_delete_success_msg":"تم حذف جميع {model} المعلم عليها.","multi_delete_failed_msg":"لم يتم حذف جميع {model} المعلم عليها.","multi_force_delete_msg":"هل أنت متأكد من إزالة جميع {model} المعلم عليها بشكل نهائى ؟","multi_force_delete_success_msg":"تم إزالة جميع {model} المعلم عليها بشكل نهائى.","multi_force_delete_failed_msg":"لم يتم إزالة جميع {model} المعلم عليها.","multi_restore_msg":"هل أنت متأكد من استرجاع جميع {model} المعلم عليها؟","multi_restore_success_msg":"تم استرجاع جميع {model} المعلم عليها.","multi_restore_failed_msg":"لم يتم استرجاع جميع {model} المعلم عليها.","settings_table":"إعدادات عرض جدول {model} فى كل الشاشات"},"sidebar":{"hotel_profile":"صفحة الفندق","travel_profile":"صفحة الرحلة","users":"المديرين","all_users":"جميع المديرين","new_user":"مدير جديد","edit_user":"تعديل مدير","hotels":"الفنادق","all_hotels":"جميع الفنادق","new_hotel":"فندق جديد","edit_hotel":"تعديل فندق","rooms":"الغرف","all_rooms":"جميع الغرف","new_room":"غرفة جديد","edit_room":"تعديل غرفة","travel_programs":"برامج الرحلات","all_travel_programs":"جميع برامج الرحلات","new_travel_program":"برنامج رحلة جديد","edit_travel_program":"تعديل برنامج رحلة","travel_categories":"أقسام الرحلات","all_travel_categories":"جميع أقسام الرحلات","new_travel_category":"قسم رحلات جديد","edit_travel_category":"تعديل قسم رحلات","travels":"الرحلات","all_travels":"جميع الرحلات","new_travel":"رحلة جديدة","edit_travel":"تعديل رحلة","bookings":"الحجوزات","all_bookings":"جميع الحجوزات","new_booking":"حجز جديد","edit_booking":"تعديل حجز","mailing_list":"القائمة البريدية","all_mailing_list":"جميع البريدات الإليكترونية","new_mailing_list":"بريد جديد","edit_mailing_list":"تعديل بريد","blogs":"المدونات","all_blogs":"جميع المدونات","new_blog":"مدونة جديدة","edit_blog":"تعديل مدونة","images":"الصور","all_images":"جميع الصور","new_image":"صورة جديدة","edit_image":"تعديل صورة","settings":"الإعدادات","all_settings":"جميع الإعدادات","new_setting":"إعداد جديد","edit_setting":"تعديل إعداد"},"datatable":{"showing":"إظهار","entries":"سجلات","from":"من","to":"إلى","of":"من","next":"التالى","prev":"السابق","empty_table":"جدول فارغ","no_data_msg":"لا يوجد بيانات فى  هذا الجدول.","trashed":"المهمل","activation":"التفعيل","display":"الظهور","rules":"الصلاحيات","sold_out":"نفاذ الكمية","discount":"الخصم","created_between":"تم إنشائه فى تاريخ","search":"بحث"},"users_table":{"id":"المعرف","name":"الإسم","email":"البريد الإلكترونى","password":"كلمة السر","repeat_password":"أعد كلمة السر","image":"الصورة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا المدير ؟","delete_success_msg":"تم حذف المدير.","delete_failed_msg":"لم يتم حذف المدير.","force_delete_msg":"هل أنت متأكد من إزالة هذا المدير بشكل نهائى ؟","force_delete_success_msg":"تم إزالة المدير بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة المدير.","restore_msg":"هل أنت متأكد من استرجاع هذا المدير ؟","restore_success_msg":"تم استرجاع المدير.","restore_failed_msg":"لم يتم استرجاع المدير.","p_create":{"success_msg":"تم إنشاء مدير جديد.","failed_msg":"لم يتم إنشاء المدير الجديد."},"p_edit":{"success_msg":"تم تحديث المدير.","failed_msg":"لم يتم تحديث هذا المدير."}},"hotels_table":{"id":"المعرف","name":"الإسم","address":"العنوان","rating":"التقيم","stars":"عدد النجوم","info":"الوصف","longitude":"خط الطول","latitude":"خط العرض","image":"الصورة","features":"المميزات","display":"الظهور","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"صور الفندق","feature_name":"اسم الميزة","plus":"للمزيد","rooms_count":"عدد الغرف","travels_count":"عدد الرحلات","hotel_info":"معلومات الفندق","location":"الموقع","location_map":"خريطة الموقع","msg_location_map":"ابحث عن مكان الفندق ثم انقل العلامة الحمراء إلى مكان الفندق بدقة.","error_location":"لم يتم العثور على المكان ، ابحث بكلمات أخرى.","remove_location":"إزالة الموقع","delete_hotel":"حذف الفندق","edit_hotel":"تعديل الفندق","empty_rooms_msg":"هذا الفندق ليس لديه غرف مضافة.","empty_travels_msg":"هذا الفندق ليس لديه رحلات مضافة.","empty_features_msg":"هذا الفندق ليس لديه مميزات.","empty_gallery_msg":"هذا الفندق ليس لديه صور مرفوعة.","delete_msg":"هل أنت متأكد من حذف هذا الفندق ؟","delete_success_msg":"تم حذف الفندق.","delete_failed_msg":"لم يتم حذف الفندق.","force_delete_msg":"هل أنت متأكد من إزالة هذا الفندق بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الفندق بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الفندق.","restore_msg":"هل أنت متأكد من استرجاع هذا الفندق ؟","restore_success_msg":"تم استرجاع الفندق.","restore_failed_msg":"لم يتم استرجاع الفندق.","p_create":{"success_msg":"تم إنشاء فندق جديد.","failed_msg":"لم يتم إنشاء الفندق الجديد."},"p_edit":{"success_msg":"تم تحديث الفندق.","failed_msg":"لم يتم تحديث هذا الفندق."}},"rooms_table":{"id":"المعرف","info":"معلومات الغرفة","options":"الخيارات","price_night":"سعر الليلة","offer_price":"سعر العرض","offer_days":"عدد أيام العرض","display":"الظهور","user_id":"أضيف بواسطة","hotel_id":"الفندق","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","offer":"العرض","night":"ليلة","nights":"ليالى","delete_room":"حذف الغرفة","edit_room":"تعديل الغرفة","delete_msg":"هل أنت متأكد من حذف هذه الغرفة ؟","delete_success_msg":"تم حذف الغرفة.","delete_failed_msg":"لم يتم حذف الغرفة.","force_delete_msg":"هل أنت متأكد من إزالة هذه الغرفة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الغرفة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الغرفة.","restore_msg":"هل أنت متأكد من استرجاع هذه الغرفة ؟","restore_success_msg":"تم استرجاع الغرفة.","restore_failed_msg":"لم يتم استرجاع الغرفة.","p_create":{"success_msg":"تم إنشاء غرغة جديدة.","failed_msg":"لم يتم إنشاء الغرفة الجديدة."},"p_edit":{"success_msg":"تم تحديث الغرفة.","failed_msg":"لم يتم تحديث هذه الغرفة."}},"travel_programs_table":{"id":"المعرف","name":"اسم البرنامج","image":"الخلفية","small_info":"معلومات قليلة","big_info":"معلومات كثيرة","order":"الترتيب","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_travel_program":"حذف البرنامج","edit_travel_program":"تعديل البرنامج","delete_msg":"هل أنت متأكد من حذف هذا البرنامج ؟","delete_success_msg":"تم حذف البرنامج.","delete_failed_msg":"لم يتم حذف البرنامج.","force_delete_msg":"هل أنت متأكد من إزالة هذا البرنامج بشكل نهائى ؟","force_delete_success_msg":"تم إزالة البرنامج بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة البرنامج.","restore_msg":"هل أنت متأكد من استرجاع هذا البرنامج ؟","restore_success_msg":"تم استرجاع البرنامج.","restore_failed_msg":"لم يتم استرجاع البرنامج.","p_create":{"success_msg":"تم إنشاء برنامج جديد.","failed_msg":"لم يتم إنشاء البرنامج الجديد."},"p_edit":{"success_msg":"تم تحديث البرنامج.","failed_msg":"لم يتم تحديث هذه البرنامج."}},"travel_categories_table":{"id":"المعرف","name":"اسم القسم","image":"الخلفية","travel_program_id":"برنامج الرحلات","order":"الترتيب","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_travel_category":"حذف القسم","edit_travel_category":"تعديل القسم","delete_msg":"هل أنت متأكد من حذف هذا القسم ؟","delete_success_msg":"تم حذف القسم.","delete_failed_msg":"لم يتم حذف القسم.","force_delete_msg":"هل أنت متأكد من إزالة هذا القسم بشكل نهائى ؟","force_delete_success_msg":"تم إزالة القسم بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة القسم.","restore_msg":"هل أنت متأكد من استرجاع هذا القسم ؟","restore_success_msg":"تم استرجاع القسم.","restore_failed_msg":"لم يتم استرجاع القسم.","p_create":{"success_msg":"تم إنشاء قسم جديد.","failed_msg":"لم يتم إنشاء القسم الجديد."},"p_edit":{"success_msg":"تم تحديث القسم.","failed_msg":"لم يتم تحديث هذه القسم."}},"travels_table":{"id":"المعرف","name":"اسم الرحلة","address_from":"عنوان الإقلاع","info":"تفاصيل الرحلة","image":"الصورة","type":"نوع الرحلة","umrah_date":"موعد العمرة","haram_distance":"المسافة بين الفندق والحرم","favorite_company":"تفضيل الحرية","favorite_company_yes":"تفضل","favorite_company_no":"لا تفضل","display":"الظهور","hotel_id":"الفندق","travel_category_id":"قسم الرحلة","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"صور الرحلة","offers_count":"عدد العروض","travel_info":"معلومات الرحلة","travel_offers":"عروض الرحلة","travel_offers_msg_form":"يجب إضافة عرض واحد للرحلة على الأقل.","delete_travel":"حذف الرحلة","edit_travel":"تعديل الرحلة","empty_gallery_msg":"هذه الرحلة ليس لديها صور مرفوعة.","empty_offers_msg":"هذه الرحلة ليس لديها عروض مضافة.","empty_bookings_msg":"هذه الرحلة ليس لديها حجوزات.","offers":{"info_offer":"وصف العرض","go_and_back":"ذهاب وعودة","only_go":"ذهاب فقط","date_from":"من","date_to":"إلى","time_period":"الفترة","stay_type":"نوع الإقامة","transport":"الإنتقالات","adults":"عدد البالغين","children":"عدد الأطفال","single_price":"فردية","twin_price":"زوجية","triple_price":"ثلاثية","title_number":"العرض رقم {number}","add_new_offer":"إضافة عرض جديد","delete_offer":"حذف العرض"},"delete_msg":"هل أنت متأكد من حذف هذه الرحلة ؟","delete_success_msg":"تم حذف الرحلة.","delete_failed_msg":"لم يتم حذف الرحلة.","force_delete_msg":"هل أنت متأكد من إزالة هذه الرحلة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الرحلة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الرحلة.","restore_msg":"هل أنت متأكد من استرجاع هذه الرحلة ؟","restore_success_msg":"تم استرجاع الرحلة.","restore_failed_msg":"لم يتم استرجاع الرحلة.","p_create":{"success_msg":"تم إنشاء رحلة جديدة.","failed_msg":"لم يتم إنشاء الرحلة الجديدة."},"p_edit":{"success_msg":"تم تحديث الرحلة.","failed_msg":"لم يتم تحديث هذه الرحلة."}},"bookings_table":{"id":"المعرف","name":"الإسم","email":"البريد الإليكترونى","phone":"الموبايل","message":"الرسالة","offer":"العرض المحجوز","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا الحجز ؟","delete_success_msg":"تم حذف الحجز.","delete_failed_msg":"لم يتم حذف الحجز.","force_delete_msg":"هل أنت متأكد من إزالة هذا الحجز بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الحجز بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الحجز.","restore_msg":"هل أنت متأكد من استرجاع هذا الحجز ؟","restore_success_msg":"تم استرجاع الحجز.","restore_failed_msg":"لم يتم استرجاع الحجز."},"mailing_list_table":{"id":"المعرف","email":"البريد الإليكترونى","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا البريد ؟","delete_success_msg":"تم حذف البريد.","delete_failed_msg":"لم يتم حذف البريد.","force_delete_msg":"","force_delete_success_msg":"","force_delete_failed_msg":"","restore_msg":"","restore_success_msg":"","restore_failed_msg":""},"blogs_table":{"id":"المعرف","title":"عنوان المدونة","content":"محتوى المدونة","image":"صورة المدونة","gallery":"صور المدونة","display":"الظهور","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_blog":"حذف المدونة","edit_blog":"تعديل المدونة","delete_msg":"هل أنت متأكد من حذف هذه المدونة ؟","delete_success_msg":"تم حذف المدونة.","delete_failed_msg":"لم يتم حذف المدونة.","force_delete_msg":"هل أنت متأكد من إزالة هذه المدونة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة المدونة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة المدونة.","restore_msg":"هل أنت متأكد من استرجاع هذه المدونة ؟","restore_success_msg":"تم استرجاع المدونة.","restore_failed_msg":"لم يتم استرجاع المدونة.","p_create":{"success_msg":"تم إنشاء مدونة جديدة.","failed_msg":"لم يتم إنشاء المدونة الجديدة."},"p_edit":{"success_msg":"تم تحديث المدونة.","failed_msg":"لم يتم تحديث هذه المدونة."}},"images_table":{"id":"المعرف","name":"الصورة","display":"الظهور","travel_category_id":"قسم الرحلات","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"الصور","images":"الصور","image":"الصورة","delete_image":"حذف الصورة","edit_image":"تعديل الصورة","delete_msg":"هل أنت متأكد من حذف هذه الصورة ؟","delete_success_msg":"تم حذف الصورة.","delete_failed_msg":"لم يتم حذف الصورة.","force_delete_msg":"هل أنت متأكد من إزالة هذه الصورة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الصورة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الصورة.","restore_msg":"هل أنت متأكد من استرجاع هذه الصورة ؟","restore_success_msg":"تم استرجاع الصورة.","restore_failed_msg":"لم يتم استرجاع الصورة.","p_create":{"success_msg":"تم إنشاء صورة جديدة.","failed_msg":"لم يتم إنشاء الصورة الجديدة."},"p_edit":{"success_msg":"تم تحديث الصورة.","failed_msg":"لم يتم تحديث هذه الصورة."}},"settings_table":{"id":"المعرف","slug":"الاسم التعبيرى","name":"اسم الإعداد","value":"القيمة","type":"النوع","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","carousel":"صور الصفحة الرئيسية","setting_types":{"string":"نص قصير","text":"نص طويل","image":"صورة"},"delete_msg":"هل أنت متأكد من حذف هذا الإعداد ؟","delete_success_msg":"تم حذف الإعداد.","delete_failed_msg":"لم يتم حذف الإعداد.","force_delete_msg":"هل أنت متأكد من إزالة هذا الإعداد بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الإعداد بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الإعداد.","restore_msg":"هل أنت متأكد من استرجاع هذا الإعداد ؟","restore_success_msg":"تم استرجاع الإعداد.","restore_failed_msg":"لم يتم استرجاع الإعداد.","p_create":{"success_msg":"تم إنشاء إعداد جديد.","failed_msg":"لم يتم إنشاء الإعداد الجديد."},"p_edit":{"success_msg":"تم تحديث الإعداد.","failed_msg":"لم يتم تحديث هذا الإعداد."},"p_edit_carousel":{"success_msg":"تم تحديث صور الصفحة الرئيسية.","failed_msg":"لم يتم تحديث صور الصفحة الرئيسية."}}};
+module.exports = {"global":{"home":"الرئيسية","dashboard":"الرئيسية","user":"مدير","hotel":"فندق","the_hotel":"الفندق","the_price":"السعر","the_travel":"الرحلة","room":"غرفة","the_travel_program":"برنامج الرحلة","the_travel_category":"قسم الرحلة","the_images":"الصور","type":"نوع","comment":"تعليق","winner":"فائز","setting":"إعداد","no_rooms":"لا يوجد غرف","no_travels":"لا يوجد رحلات","no_hotel_features":"لا توجد مميزات للفندق","no_offers":"لا توجد عروض لهذه الرحلة","no_bookings":"لا توجد حجوزات لهذه الرحلة","no_gallery":"لا توجد صور","no_location":"لا توجد خريطة","show_map":"اعرض الخريطة","days":"أيام","day":"يوم","profile":"بروفايل","the_profile":"البروفايل","goto_travel_profile":"صفحة الرحلة","goto_hotel_profile":"صفحة الفندق","hotel_is_deleted":"الفندق محذوف","user_is_deleted":"المدير محذوف","travel_program_is_deleted":"برنامج الرحلة محذوف","travel_category_is_deleted":"قسم الرحلة محذوف","travel_is_deleted":"الرحلة محذوفة","offer_is_deleted":"العرض محذوف","logout":"تسجيل الخروج","create":"إنشاء","edit":"تعديل","update":"تحديث","save":"حفظ","read":"اقرأ","all":"الكل","read_more":"اقرأ المزيد","more_info":"معرفة المزيد","choose_image":"اختر صورة","drag_msg":"اسحب الصورة ثم ضعها هنا","active":"مفعل","disactive":"غير مفعل","available":"متاح","unavailable":"غير متاح","hidden":"مخفى","visible":"ظاهر","show":"عرض","view":"عرض","close":"إغلاق","display":"إظهار","from":"من","to":"إلى","in":"فى","on":"على","delete":"حذف","deleted":"تم الحذف","force_delete":"إزالة نهائيا","remove":"إزالة","removed":"تمت الإزالة","restore":"استرجاع","restored":"تم الإسترجاع","failed":"فشل","cancel":"إلغاء","yes_delete_it":"تأكيد الحذف","yes_remove_it":"تأكيد الإزالة","yes_restore_it":"تأكيد الإسترجاع","multi_delete_msg":"هل أنت متأكد من حذف جميع {model} المعلم عليها؟","multi_delete_success_msg":"تم حذف جميع {model} المعلم عليها.","multi_delete_failed_msg":"لم يتم حذف جميع {model} المعلم عليها.","multi_force_delete_msg":"هل أنت متأكد من إزالة جميع {model} المعلم عليها بشكل نهائى ؟","multi_force_delete_success_msg":"تم إزالة جميع {model} المعلم عليها بشكل نهائى.","multi_force_delete_failed_msg":"لم يتم إزالة جميع {model} المعلم عليها.","multi_restore_msg":"هل أنت متأكد من استرجاع جميع {model} المعلم عليها؟","multi_restore_success_msg":"تم استرجاع جميع {model} المعلم عليها.","multi_restore_failed_msg":"لم يتم استرجاع جميع {model} المعلم عليها.","settings_table":"إعدادات عرض جدول {model} فى كل الشاشات"},"sidebar":{"hotel_profile":"صفحة الفندق","travel_profile":"صفحة الرحلة","users":"المديرين","all_users":"جميع المديرين","new_user":"مدير جديد","edit_user":"تعديل مدير","hotels":"الفنادق","all_hotels":"جميع الفنادق","new_hotel":"فندق جديد","edit_hotel":"تعديل فندق","rooms":"الغرف","all_rooms":"جميع الغرف","new_room":"غرفة جديد","edit_room":"تعديل غرفة","travel_programs":"برامج الرحلات","all_travel_programs":"جميع برامج الرحلات","new_travel_program":"برنامج رحلة جديد","edit_travel_program":"تعديل برنامج رحلة","travel_categories":"أقسام الرحلات","all_travel_categories":"جميع أقسام الرحلات","new_travel_category":"قسم رحلات جديد","edit_travel_category":"تعديل قسم رحلات","travels":"الرحلات","all_travels":"جميع الرحلات","new_travel":"رحلة جديدة","edit_travel":"تعديل رحلة","bookings":"الحجوزات","all_bookings":"جميع الحجوزات","new_booking":"حجز جديد","edit_booking":"تعديل حجز","mailing_list":"القائمة البريدية","all_mailing_list":"جميع البريدات الإليكترونية","new_mailing_list":"بريد جديد","edit_mailing_list":"تعديل بريد","blogs":"المدونات","all_blogs":"جميع المدونات","new_blog":"مدونة جديدة","edit_blog":"تعديل مدونة","images":"الصور","all_images":"جميع الصور","new_image":"صورة جديدة","edit_image":"تعديل صورة","contact_us":"اتصل بنا","all_contact_us":"جميع الرسائل","settings":"الإعدادات","all_settings":"جميع الإعدادات","new_setting":"إعداد جديد","edit_setting":"تعديل إعداد"},"datatable":{"showing":"إظهار","entries":"سجلات","from":"من","to":"إلى","of":"من","next":"التالى","prev":"السابق","empty_table":"جدول فارغ","no_data_msg":"لا يوجد بيانات فى  هذا الجدول.","trashed":"المهمل","activation":"التفعيل","display":"الظهور","rules":"الصلاحيات","sold_out":"نفاذ الكمية","discount":"الخصم","created_between":"تم إنشائه فى تاريخ","search":"بحث"},"users_table":{"id":"المعرف","name":"الإسم","email":"البريد الإلكترونى","password":"كلمة السر","repeat_password":"أعد كلمة السر","image":"الصورة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا المدير ؟","delete_success_msg":"تم حذف المدير.","delete_failed_msg":"لم يتم حذف المدير.","force_delete_msg":"هل أنت متأكد من إزالة هذا المدير بشكل نهائى ؟","force_delete_success_msg":"تم إزالة المدير بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة المدير.","restore_msg":"هل أنت متأكد من استرجاع هذا المدير ؟","restore_success_msg":"تم استرجاع المدير.","restore_failed_msg":"لم يتم استرجاع المدير.","p_create":{"success_msg":"تم إنشاء مدير جديد.","failed_msg":"لم يتم إنشاء المدير الجديد."},"p_edit":{"success_msg":"تم تحديث المدير.","failed_msg":"لم يتم تحديث هذا المدير."}},"hotels_table":{"id":"المعرف","name":"الإسم","address":"العنوان","rating":"التقيم","stars":"عدد النجوم","info":"الوصف","longitude":"خط الطول","latitude":"خط العرض","image":"الصورة","features":"المميزات","display":"الظهور","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"صور الفندق","feature_name":"اسم الميزة","plus":"للمزيد","rooms_count":"عدد الغرف","travels_count":"عدد الرحلات","hotel_info":"معلومات الفندق","location":"الموقع","location_map":"خريطة الموقع","msg_location_map":"ابحث عن مكان الفندق ثم انقل العلامة الحمراء إلى مكان الفندق بدقة.","error_location":"لم يتم العثور على المكان ، ابحث بكلمات أخرى.","remove_location":"إزالة الموقع","delete_hotel":"حذف الفندق","edit_hotel":"تعديل الفندق","empty_rooms_msg":"هذا الفندق ليس لديه غرف مضافة.","empty_travels_msg":"هذا الفندق ليس لديه رحلات مضافة.","empty_features_msg":"هذا الفندق ليس لديه مميزات.","empty_gallery_msg":"هذا الفندق ليس لديه صور مرفوعة.","delete_msg":"هل أنت متأكد من حذف هذا الفندق ؟","delete_success_msg":"تم حذف الفندق.","delete_failed_msg":"لم يتم حذف الفندق.","force_delete_msg":"هل أنت متأكد من إزالة هذا الفندق بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الفندق بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الفندق.","restore_msg":"هل أنت متأكد من استرجاع هذا الفندق ؟","restore_success_msg":"تم استرجاع الفندق.","restore_failed_msg":"لم يتم استرجاع الفندق.","p_create":{"success_msg":"تم إنشاء فندق جديد.","failed_msg":"لم يتم إنشاء الفندق الجديد."},"p_edit":{"success_msg":"تم تحديث الفندق.","failed_msg":"لم يتم تحديث هذا الفندق."}},"rooms_table":{"id":"المعرف","info":"معلومات الغرفة","options":"الخيارات","price_night":"سعر الليلة","offer_price":"سعر العرض","offer_days":"عدد أيام العرض","display":"الظهور","user_id":"أضيف بواسطة","hotel_id":"الفندق","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","offer":"العرض","night":"ليلة","nights":"ليالى","delete_room":"حذف الغرفة","edit_room":"تعديل الغرفة","delete_msg":"هل أنت متأكد من حذف هذه الغرفة ؟","delete_success_msg":"تم حذف الغرفة.","delete_failed_msg":"لم يتم حذف الغرفة.","force_delete_msg":"هل أنت متأكد من إزالة هذه الغرفة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الغرفة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الغرفة.","restore_msg":"هل أنت متأكد من استرجاع هذه الغرفة ؟","restore_success_msg":"تم استرجاع الغرفة.","restore_failed_msg":"لم يتم استرجاع الغرفة.","p_create":{"success_msg":"تم إنشاء غرغة جديدة.","failed_msg":"لم يتم إنشاء الغرفة الجديدة."},"p_edit":{"success_msg":"تم تحديث الغرفة.","failed_msg":"لم يتم تحديث هذه الغرفة."}},"travel_programs_table":{"id":"المعرف","name":"اسم البرنامج","image":"الخلفية","discount":"الخصم","small_info":"معلومات قليلة","big_info":"معلومات كثيرة","order":"الترتيب","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_travel_program":"حذف البرنامج","edit_travel_program":"تعديل البرنامج","delete_msg":"هل أنت متأكد من حذف هذا البرنامج ؟","delete_success_msg":"تم حذف البرنامج.","delete_failed_msg":"لم يتم حذف البرنامج.","force_delete_msg":"هل أنت متأكد من إزالة هذا البرنامج بشكل نهائى ؟","force_delete_success_msg":"تم إزالة البرنامج بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة البرنامج.","restore_msg":"هل أنت متأكد من استرجاع هذا البرنامج ؟","restore_success_msg":"تم استرجاع البرنامج.","restore_failed_msg":"لم يتم استرجاع البرنامج.","p_create":{"success_msg":"تم إنشاء برنامج جديد.","failed_msg":"لم يتم إنشاء البرنامج الجديد."},"p_edit":{"success_msg":"تم تحديث البرنامج.","failed_msg":"لم يتم تحديث هذه البرنامج."}},"travel_categories_table":{"id":"المعرف","name":"اسم القسم","discount":"الخصم","image":"الخلفية","travel_program_id":"برنامج الرحلات","order":"الترتيب","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_travel_category":"حذف القسم","edit_travel_category":"تعديل القسم","delete_msg":"هل أنت متأكد من حذف هذا القسم ؟","delete_success_msg":"تم حذف القسم.","delete_failed_msg":"لم يتم حذف القسم.","force_delete_msg":"هل أنت متأكد من إزالة هذا القسم بشكل نهائى ؟","force_delete_success_msg":"تم إزالة القسم بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة القسم.","restore_msg":"هل أنت متأكد من استرجاع هذا القسم ؟","restore_success_msg":"تم استرجاع القسم.","restore_failed_msg":"لم يتم استرجاع القسم.","p_create":{"success_msg":"تم إنشاء قسم جديد.","failed_msg":"لم يتم إنشاء القسم الجديد."},"p_edit":{"success_msg":"تم تحديث القسم.","failed_msg":"لم يتم تحديث هذه القسم."}},"travels_table":{"id":"المعرف","name":"اسم الرحلة","address_from":"عنوان الإقلاع","info":"تفاصيل الرحلة","image":"الصورة","type":"نوع الرحلة","umrah_date":"موعد العمرة","haram_distance":"المسافة بين الفندق والحرم","discount":"الخصم","favorite_company":"تفضيل الحرية","favorite_company_yes":"تفضل","favorite_company_no":"لا تفضل","display":"الظهور","hotel_id":"الفندق","travel_category_id":"قسم الرحلة","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"صور الرحلة","offers_count":"عدد العروض","travel_info":"معلومات الرحلة","travel_offers":"عروض الرحلة","travel_offers_msg_form":"يجب إضافة عرض واحد للرحلة على الأقل.","delete_travel":"حذف الرحلة","edit_travel":"تعديل الرحلة","empty_gallery_msg":"هذه الرحلة ليس لديها صور مرفوعة.","empty_offers_msg":"هذه الرحلة ليس لديها عروض مضافة.","empty_bookings_msg":"هذه الرحلة ليس لديها حجوزات.","offers":{"info_offer":"وصف العرض","go_and_back":"ذهاب وعودة","only_go":"ذهاب فقط","date_from":"من","date_to":"إلى","time_period":"الفترة","stay_type":"نوع الإقامة","transport":"الإنتقالات","adults":"عدد البالغين","children":"عدد الأطفال","single_price":"فردية","twin_price":"زوجية","triple_price":"ثلاثية","title_number":"العرض رقم {number}","add_new_offer":"إضافة عرض جديد","delete_offer":"حذف العرض"},"delete_msg":"هل أنت متأكد من حذف هذه الرحلة ؟","delete_success_msg":"تم حذف الرحلة.","delete_failed_msg":"لم يتم حذف الرحلة.","force_delete_msg":"هل أنت متأكد من إزالة هذه الرحلة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الرحلة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الرحلة.","restore_msg":"هل أنت متأكد من استرجاع هذه الرحلة ؟","restore_success_msg":"تم استرجاع الرحلة.","restore_failed_msg":"لم يتم استرجاع الرحلة.","p_create":{"success_msg":"تم إنشاء رحلة جديدة.","failed_msg":"لم يتم إنشاء الرحلة الجديدة."},"p_edit":{"success_msg":"تم تحديث الرحلة.","failed_msg":"لم يتم تحديث هذه الرحلة."}},"bookings_table":{"id":"المعرف","name":"الإسم","email":"البريد الإليكترونى","phone":"الموبايل","message":"الرسالة","offer":"العرض المحجوز","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا الحجز ؟","delete_success_msg":"تم حذف الحجز.","delete_failed_msg":"لم يتم حذف الحجز.","force_delete_msg":"هل أنت متأكد من إزالة هذا الحجز بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الحجز بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الحجز.","restore_msg":"هل أنت متأكد من استرجاع هذا الحجز ؟","restore_success_msg":"تم استرجاع الحجز.","restore_failed_msg":"لم يتم استرجاع الحجز."},"mailing_list_table":{"id":"المعرف","email":"البريد الإليكترونى","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا البريد ؟","delete_success_msg":"تم حذف البريد.","delete_failed_msg":"لم يتم حذف البريد.","force_delete_msg":"","force_delete_success_msg":"","force_delete_failed_msg":"","restore_msg":"","restore_success_msg":"","restore_failed_msg":""},"blogs_table":{"id":"المعرف","title":"عنوان المدونة","content":"محتوى المدونة","image":"صورة المدونة","gallery":"صور المدونة","display":"الظهور","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_blog":"حذف المدونة","edit_blog":"تعديل المدونة","delete_msg":"هل أنت متأكد من حذف هذه المدونة ؟","delete_success_msg":"تم حذف المدونة.","delete_failed_msg":"لم يتم حذف المدونة.","force_delete_msg":"هل أنت متأكد من إزالة هذه المدونة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة المدونة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة المدونة.","restore_msg":"هل أنت متأكد من استرجاع هذه المدونة ؟","restore_success_msg":"تم استرجاع المدونة.","restore_failed_msg":"لم يتم استرجاع المدونة.","p_create":{"success_msg":"تم إنشاء مدونة جديدة.","failed_msg":"لم يتم إنشاء المدونة الجديدة."},"p_edit":{"success_msg":"تم تحديث المدونة.","failed_msg":"لم يتم تحديث هذه المدونة."}},"images_table":{"id":"المعرف","name":"الصورة","display":"الظهور","travel_category_id":"قسم الرحلات","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"الصور","images":"الصور","image":"الصورة","delete_image":"حذف الصورة","edit_image":"تعديل الصورة","delete_msg":"هل أنت متأكد من حذف هذه الصورة ؟","delete_success_msg":"تم حذف الصورة.","delete_failed_msg":"لم يتم حذف الصورة.","force_delete_msg":"هل أنت متأكد من إزالة هذه الصورة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الصورة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الصورة.","restore_msg":"هل أنت متأكد من استرجاع هذه الصورة ؟","restore_success_msg":"تم استرجاع الصورة.","restore_failed_msg":"لم يتم استرجاع الصورة.","p_create":{"success_msg":"تم إنشاء صورة جديدة.","failed_msg":"لم يتم إنشاء الصورة الجديدة."},"p_edit":{"success_msg":"تم تحديث الصورة.","failed_msg":"لم يتم تحديث هذه الصورة."}},"contact_us_table":{"id":"المعرف","name":"الاسم","email":"البريد الإلكترونى","phone":"الموبايل","message":"الرسالة","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذه الرسالة ؟","delete_success_msg":"تم حذف الرسالة.","delete_failed_msg":"لم يتم حذف الرسالة.","force_delete_msg":"","force_delete_success_msg":"","force_delete_failed_msg":"","restore_msg":"","restore_success_msg":"","restore_failed_msg":""},"settings_table":{"id":"المعرف","slug":"الاسم التعبيرى","name":"اسم الإعداد","value":"القيمة","type":"النوع","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","carousel":"صور الصفحة الرئيسية","setting_types":{"string":"نص قصير","text":"نص طويل","image":"صورة"},"delete_msg":"هل أنت متأكد من حذف هذا الإعداد ؟","delete_success_msg":"تم حذف الإعداد.","delete_failed_msg":"لم يتم حذف الإعداد.","force_delete_msg":"هل أنت متأكد من إزالة هذا الإعداد بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الإعداد بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الإعداد.","restore_msg":"هل أنت متأكد من استرجاع هذا الإعداد ؟","restore_success_msg":"تم استرجاع الإعداد.","restore_failed_msg":"لم يتم استرجاع الإعداد.","p_create":{"success_msg":"تم إنشاء إعداد جديد.","failed_msg":"لم يتم إنشاء الإعداد الجديد."},"p_edit":{"success_msg":"تم تحديث الإعداد.","failed_msg":"لم يتم تحديث هذا الإعداد."},"p_edit_carousel":{"success_msg":"تم تحديث صور الصفحة الرئيسية.","failed_msg":"لم يتم تحديث صور الصفحة الرئيسية."}}};
 
 /***/ }),
 
@@ -65150,9 +65541,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _views_images_Index__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./views/images/Index */ "./resources/js/views/images/Index.vue");
 /* harmony import */ var _views_images_Create__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./views/images/Create */ "./resources/js/views/images/Create.vue");
 /* harmony import */ var _views_images_Edit__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./views/images/Edit */ "./resources/js/views/images/Edit.vue");
-/* harmony import */ var _views_settings_Index__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./views/settings/Index */ "./resources/js/views/settings/Index.vue");
-/* harmony import */ var _views_settings_Create__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./views/settings/Create */ "./resources/js/views/settings/Create.vue");
-/* harmony import */ var _views_settings_Edit__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./views/settings/Edit */ "./resources/js/views/settings/Edit.vue");
+/* harmony import */ var _views_contact_us_Index__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./views/contact_us/Index */ "./resources/js/views/contact_us/Index.vue");
+/* harmony import */ var _views_settings_Index__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./views/settings/Index */ "./resources/js/views/settings/Index.vue");
+/* harmony import */ var _views_settings_Create__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./views/settings/Create */ "./resources/js/views/settings/Create.vue");
+/* harmony import */ var _views_settings_Edit__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./views/settings/Edit */ "./resources/js/views/settings/Edit.vue");
 
  // default layout and dashboard
 
@@ -65195,6 +65587,8 @@ __webpack_require__.r(__webpack_exports__);
  // images
 
 
+
+ // contact_us
 
  // settings
 
@@ -65353,19 +65747,24 @@ var vueRouter = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
       name: 'edit-image',
       component: _views_images_Edit__WEBPACK_IMPORTED_MODULE_31__["default"],
       props: true
+    }, ////////////////// contact_us routes ///////////////////
+    {
+      path: 'contact_us',
+      name: 'contact_us',
+      component: _views_contact_us_Index__WEBPACK_IMPORTED_MODULE_32__["default"]
     }, ////////////////// settings routes ///////////////////
     {
       path: 'settings',
       name: 'settings',
-      component: _views_settings_Index__WEBPACK_IMPORTED_MODULE_32__["default"]
+      component: _views_settings_Index__WEBPACK_IMPORTED_MODULE_33__["default"]
     }, {
       path: 'setting/create',
       name: 'create-setting',
-      component: _views_settings_Create__WEBPACK_IMPORTED_MODULE_33__["default"]
+      component: _views_settings_Create__WEBPACK_IMPORTED_MODULE_34__["default"]
     }, {
       path: 'setting/:id/edit',
       name: 'edit-setting',
-      component: _views_settings_Edit__WEBPACK_IMPORTED_MODULE_34__["default"],
+      component: _views_settings_Edit__WEBPACK_IMPORTED_MODULE_35__["default"],
       props: true
     }]
   }, {
@@ -65798,6 +66197,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_a9104448___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_a9104448___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/views/contact_us/Index.vue":
+/*!*************************************************!*\
+  !*** ./resources/js/views/contact_us/Index.vue ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Index_vue_vue_type_template_id_3c9d883f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Index.vue?vue&type=template&id=3c9d883f& */ "./resources/js/views/contact_us/Index.vue?vue&type=template&id=3c9d883f&");
+/* harmony import */ var _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Index.vue?vue&type=script&lang=js& */ "./resources/js/views/contact_us/Index.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Index_vue_vue_type_template_id_3c9d883f___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Index_vue_vue_type_template_id_3c9d883f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/views/contact_us/Index.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/views/contact_us/Index.vue?vue&type=script&lang=js&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/views/contact_us/Index.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./Index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/contact_us/Index.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/views/contact_us/Index.vue?vue&type=template&id=3c9d883f&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/views/contact_us/Index.vue?vue&type=template&id=3c9d883f& ***!
+  \********************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_3c9d883f___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./Index.vue?vue&type=template&id=3c9d883f& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/views/contact_us/Index.vue?vue&type=template&id=3c9d883f&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_3c9d883f___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Index_vue_vue_type_template_id_3c9d883f___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

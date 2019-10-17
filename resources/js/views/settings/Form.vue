@@ -54,7 +54,7 @@
                 <!-- vlaue -->
 
                 <div class="form-group">
-                    <label> {{ $t('settings_table.value') }} <span class="field-required"></span></label>
+                    <label> {{ $t('settings_table.value') }} </label>
                     <div v-if="form.type == 'string'">
                         <input
                             v-model="form.value"
@@ -81,8 +81,8 @@
                             <div class="col-md-6">
                                 <upload-image
                                     :form="form"
+                                    :required="false"
                                     propertyName="value"
-                                    :maxSize="4200000"
                                 ></upload-image>
                             </div>
                         </div>

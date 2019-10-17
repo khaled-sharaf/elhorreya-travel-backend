@@ -70,6 +70,7 @@ export default {
             type: "other",
             umrah_date: "",
             haram_distance: 0,
+            discount: '',
             favorite_company: 0,
             image: "",
             gallery: [],
@@ -102,7 +103,7 @@ export default {
             loadReq(this.$Progress);
             this.form.post(this.urlCreateTravel).then(response => {
                 if (response.status === 200) {
-                    console.log(response.data)
+                    // console.log(response.data)
                     // reset form
                     this.form.reset();
                     ToastReq.fire({

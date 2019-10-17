@@ -40,8 +40,6 @@
 
                     <upload-image
                         type="multiple"
-                        :maxSize="2100000"
-                        :maxCount="50"
                         propertyName="gallery"
                         propertyDeletedName="deletedGallery"
                         :form="form"

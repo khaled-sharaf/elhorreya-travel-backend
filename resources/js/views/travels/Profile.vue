@@ -98,12 +98,24 @@
 
 
                                     <!-- haram_distance -->
-                                    <li class="list-group-item" v-if="travelProfile.type !== 'other'">
+                                    <li class="list-group-item" v-if="travelProfile.type == 'umrah' || travelProfile.type == 'pilgrimage'">
                                         <b>
                                             {{ $t('travels_table.haram_distance') }}
                                         </b>
                                         <a class="float-right">
                                             {{ haramDistance[travelProfile.haram_distance] }}
+                                        </a>
+                                    </li>
+                                    <!-- =========================================== -->
+
+
+                                    <!-- discount -->
+                                    <li class="list-group-item">
+                                        <b>
+                                            {{ $t('travels_table.discount') }}
+                                        </b>
+                                        <a class="float-right">
+                                            <span v-if="travelProfile.discount">{{ travelProfile.discount }}%</span>
                                         </a>
                                     </li>
                                     <!-- =========================================== -->
@@ -495,6 +507,7 @@ export default {
                 type: "other",
                 umrah_date: "",
                 haram_distance: 0,
+                discount: "",
                 favorite_company: 0,
                 image: "",
                 gallery: [],
@@ -514,13 +527,14 @@ export default {
                 },
             },
             travelTypes: {
+                internal: 'سياحة داخلية',
+                external: 'سياحة خارجية',
                 pilgrimage: 'حج',
                 umrah: 'عمرة',
-                other: 'رحلة سياحية'
             },
             haramDistance: {
-                0: 'الفندق بعيد من الحرم',
-                1: 'الفندق قريب من الحرم'
+                0: 'بعيد',
+                1: 'قريب',
             },
             transports: {
                 0: 'بدون انتقالات',

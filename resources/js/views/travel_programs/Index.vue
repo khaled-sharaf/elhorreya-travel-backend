@@ -51,6 +51,11 @@
                 </td>
 
 
+                <td v-show="tableData.columns.indexOf('discount') != -1" class="discount">
+                    <span v-if="travel_program.discount">{{travel_program.discount}}%</span>
+                </td>
+
+
                 <td v-show="tableData.columns.indexOf('image') != -1" class="image" style="text-align:center;">
                     <img class="avatar-table" :src="$domain + '/' + travel_program.image">
                 </td>
@@ -137,6 +142,7 @@ export default {
       columns: [
         { label: "ID", name: "id" },
         { label: "Name", name: "name" },
+        { label: "discount", name: "discount" },
         { label: "Image", name: "image" },
         { label: "Small info", name: "small_info" },
         { label: "Big info", name: "big_info" },

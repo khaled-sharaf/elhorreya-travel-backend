@@ -5,9 +5,14 @@ Route::group(['prefix' => env('CP_PREFIX')], function () {
     Route::redirect('/', url(env('CP_PREFIX') . '/dashboard'));
     Auth::routes(['register' => false]);
 });
-
 Route::get('/home', 'HomeController@index')->name('home');
 
+
+/**************** mailing_list *****************/
+// store
+Route::get('/mailing_list/subscribe/{token}', 'API\MailingListController@store');
+// destroy
+Route::get('/mailing_list/unsubscribe/{token}', 'API\MailingListController@destroy');
 
 
 
@@ -19,10 +24,12 @@ Route::get('/home', 'HomeController@index')->name('home');
 // use App\Hotel;
 // use App\ProductType;
 // use App\Winner;
-// use App\City;
+use App\Travel;
 
 
 Route::get('/', function () {
+    // $travel = Travel::find(12);
+    // return view('emails.mail-travel')->with('travel', $travel);
     return view('welcome');
 
 

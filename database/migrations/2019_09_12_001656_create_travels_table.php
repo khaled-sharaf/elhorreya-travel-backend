@@ -20,9 +20,10 @@ class CreateTravelsTable extends Migration
             $table->mediumText('info')->nullable();
             $table->string('image');
             $table->mediumText('gallery')->nullable();
-            $table->string('type', 20)->default('other'); // pilgrimage, umrah, other
+            $table->string('type', 20)->default('internal'); // pilgrimage, umrah, internal, external
             $table->string('umrah_date')->nullable();
             $table->boolean('haram_distance')->nullable();
+            $table->string('discount', 3)->nullable();
             $table->boolean('favorite_company')->default(0);
             $table->boolean('display')->default(1);
             $table->unsignedInteger('hotel_id');

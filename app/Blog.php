@@ -29,12 +29,13 @@ class Blog extends Model
     public function scopePaginateConvert($query, $length)
     {
         $blogs_paginate = $query->paginate($length);
-        $blogs_data =  $blogs_paginate->toArray()['data'];
-        if (count($blogs_data) > 0) {
-            $blogs_data = convert_column_to_array($blogs_data, 'gallery');
-        }
-        $blogs = paginate_collection($blogs_data, $length);
-        return $blogs;
+
+        $itemsTransformed = $blogs_paginate
+            ->getCollection()
+            ->map(function($item) {
+                return convert_column_to_array($item, 'gallery');
+        })->toArray();
+        return paginate_collection($blogs_paginate, $itemsTransformed);
     }
 
     public function scopeGetConvert($query)

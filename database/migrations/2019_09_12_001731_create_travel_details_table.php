@@ -17,8 +17,8 @@ class CreateTravelDetailsTable extends Migration
             $table->increments('id');
             $table->string('info_offer')->nullable();
             $table->boolean('go_and_back')->default(0); // 0 = go, 1 = go and back
-            $table->timestamp('date_from')->nullable();
-            $table->timestamp('date_to')->nullable();
+            $table->date('date_from')->nullable();
+            $table->date('date_to')->nullable();
             $table->tinyInteger('time_period')->nullable(); // count days = ( date from - date to )
             $table->string('stay_type')->nullable(); // إقامة فقط، شامل الإفضطار، نصف إقامة، شامل كليا
             $table->boolean('transport')->default(0); // 0 = بدون انتقالات،  1  = انتقالات

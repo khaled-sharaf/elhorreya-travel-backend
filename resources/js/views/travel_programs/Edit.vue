@@ -67,6 +67,7 @@ export default {
         form: new Form({
             id: 0,
             name: '',
+            discount: '',
             image: '',
             small_info: '',
             big_info: '',

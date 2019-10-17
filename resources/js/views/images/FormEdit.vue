@@ -27,7 +27,6 @@
                     <div class="row justify-content-center">
                         <div class="col-md-6">
                             <upload-image
-                                :maxSize="2100000"
                                 propertyName="image"
                                 :form="form"
                             ></upload-image>

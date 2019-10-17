@@ -18,6 +18,21 @@
                     <has-error :form="form" field="name"></has-error>
                 </div>
 
+                <!-- discount -->
+                <div class="form-group">
+                    <label> {{ $t('travel_programs_table.discount') }} </label>
+                    <input
+                        v-model="form.discount"
+                        type="number"
+                        max="100"
+                        min="0"
+                        :placeholder="$t('travel_programs_table.discount')"
+                        class="form-control"
+                        :class="{ 'is-invalid': form.errors.has('discount') }"
+                    >
+                    <has-error :form="form" field="discount"></has-error>
+                </div>
+
 
                 <!-- travel_program small_info -->
                 <div class="form-group">
@@ -66,33 +81,10 @@
                     <label> {{ $t('travel_programs_table.image') }} <span class="field-required"></span></label>
                     <div class="row justify-content-center">
                         <div class="col-md-6">
-                            <div class="wrapper-drop-image" :class="{'contains-image': form.image != '', 'is-invalid': form.errors.has('image')}" id="travel_program-default-image"> <!-- contains-image -->
-                                <div class="overlay-drop-image">
-                                    <div class="view-images">
-                                        <div class="image elevation-5" v-if="form.image != ''">
-                                            <div class="img">
-                                                <img :src="travelProgramImage">
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <label class="view-overlay" for="travel_program_image">
-                                        <div class="content-overlay">
-                                            <i class="icon far fa-image"></i>
-                                            <span class="title"> {{ $t('global.drag_msg') }} </span>
-                                        </div>
-                                    </label>
-                                </div>
-                                <input
-                                    type="file"
-                                    class="custom-file-drop custom-file-input"
-                                    id="travel_program_image"
-                                    accept="image/*"
-                                    @change="showFiles($event.target.files, $event.target.id)"
-                                    :class="{ 'is-invalid': form.errors.has('image') }"
-                                >
-                                <has-error :form="form" field="image"></has-error>
-                            </div>
+                            <upload-image
+                                propertyName="image"
+                                :form="form"
+                            ></upload-image>
                         </div>
                     </div>
                 </div>
@@ -104,120 +96,13 @@
 
 
 <script>
-  export default {
+
+import UploadImage from './../../components/form/UploadImage'
+
+export default {
     props: ['form', 'typeForm'],
-    data() {
-      return {
-        travelProgramImage: "",
-        droppedFiles: false
-      }
-    },
-    methods: {
-        getIndex(array, key, value) {
-            return array.findIndex(i => i[key] == value);
-        },
-        encodeFileAsURL(files) {
-            let self = this;
-            if (!files.length) {
-                let file = files;
-                let reader = new FileReader();
-                reader.onloadend = function() {
-                    self.form.image = reader.result
-                };
-                if (file) {
-                    if (file["size"] > 4000000) {
-                        if (this.$i18n.locale == 'ar') {
-                            Swal.fire(
-                                "خطأ...",
-                                "الحجم المسموح به للصورة هو 4 ميجا بايت.",
-                                "error"
-                            );
-                        } else {
-                            Swal.fire(
-                                "Oops...",
-                                "You are uploading a large file 4MB last.",
-                                "error"
-                            );
-                        }
-                    } else if (file['type'] != 'image/jpeg' && file['type'] != 'image/png' && file['type'] != 'image/gif') {
-                        if (this.$i18n.locale == 'ar') {
-                            Swal.fire(
-                                "خطأ...",
-                                "يجب أن تكون الصورة لها امتداد من هذه الإمتدادات [jpg, png, gif].",
-                                "error"
-                            );
-                        } else {
-                            Swal.fire(
-                                "Oops...",
-                                "You must be image have extension between [jpg, png, gif].",
-                                "error"
-                            );
-                        }
-                    } else {
-                        reader.readAsDataURL(file);
-                    }
-                }
-            }
-        },
-        showFiles(files, input) {
-            if (typeof input === 'string') {
-                input = $('#' + input)
-            }
-            let lengthFiles = files.length;
-            if (input.attr('multiple')) {
-                if (lengthFiles > 0) {
-                    this.encodeFileAsURL(files)
-                }
-            } else {
-                if (lengthFiles > 0) {
-                    this.encodeFileAsURL(files[0])
-                }
-            }
-        },
-        handelDropImages() {
-            const self = this;
-            // view-images
-            $('.wrapper-drop-image').on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }).on('dragover dragenter', function(e) {
-                $(this).addClass('is-dragover');
-            })
-            .on('dragleave dragend drop', function() {
-                $(this).removeClass('is-dragover');
-            })
-            .on('drop', function(e) {
-                this.droppedFiles = e.originalEvent.dataTransfer.files;
-                let lengthFiles = e.originalEvent.dataTransfer.files.length;
-                let input = $(this).find('.custom-file-drop');
-                self.showFiles(this.droppedFiles, input)
-            });
-        },
-        addDomainToImage(url) { // return url
-            let resultUrl = '';
-            if (url.indexOf("data:image/") === 0) {
-                resultUrl = url;
-            } else {
-                resultUrl = this.$domain + '/' + url;
-            }
-            return resultUrl;
-        },
-    },
-    watch: {
-        "form.image"(val) {
-            this.travelProgramImage = this.addDomainToImage(val);
-        }
-    },
-    mounted() {
-        if (this.typeForm == 'edit') {
-            let getImage = setInterval(() => {
-                if (this.form.image != '') {
-                    this.travelProgramImage = this.$domain + '/' + this.form.image
-                    clearInterval(getImage)
-                }
-            }, 500)
-        }
-        this.handelDropImages()
+    components: {
+        UploadImage
     }
   }
 </script>

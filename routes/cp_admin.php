@@ -78,14 +78,6 @@ Route::group(['middleware' => ['api'], 'prefix' => env('CP_PREFIX_API')], functi
 
 
 
-    /**************** Travel Details *****************/
-
-    Route::apiResource('travel_details', 'TravelDetailController')->parameters(['travel_details' => 'id']);
-
-    /*********************************************************************************/
-
-
-
     /**************** Bookings *****************/
 
     Route::apiResource('bookings', 'BookingController')->only(['index', 'destroy'])->parameters(['bookings' => 'id']);
@@ -120,6 +112,15 @@ Route::group(['middleware' => ['api'], 'prefix' => env('CP_PREFIX_API')], functi
     Route::apiResource('blogs', 'BlogController')->parameters(['blogs' => 'id']);
     Route::patch('blogs/restore/{id}', 'BlogController@restoreBlog');
     Route::post('blogs/delete_restore_multi', 'BlogController@deleteRestoreMulti');
+
+    /*********************************************************************************/
+
+
+
+    /**************** contact_us *****************/
+
+    Route::apiResource('contact_us', 'ContactUsController')->only(['index', 'destroy'])->parameters(['contact_us' => 'id']);
+    Route::post('contact_us/delete_restore_multi', 'ContactUsController@deleteRestoreMulti');
 
     /*********************************************************************************/
 

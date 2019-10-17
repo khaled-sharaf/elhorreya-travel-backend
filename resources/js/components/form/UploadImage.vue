@@ -2,11 +2,11 @@
     <div class="wrapper-upload-image">
          <!-- image -->
 
-        <div v-if="!type || type !== 'multiple'" class="wrapper-drop-image single-image" :class="{'contains-image': form[propertyName] != '', 'is-invalid': form.errors.has(propertyName), [propertyName]: true}">
+        <div v-if="!type || type !== 'multiple'" class="wrapper-drop-image single-image" :class="{'contains-image': form[propertyName] != '' && form[propertyName] !== null, 'is-invalid': form.errors.has(propertyName), [propertyName]: true}">
             <div class="overlay-drop-image">
                 <div class="view-images">
 
-                    <div class="image" v-if="form[propertyName] != ''">
+                    <div class="image" v-if="form[propertyName] !== '' && form[propertyName] !== null">
                         <div class="img">
                             <img :src="addDomainToImage(form[propertyName])">
                             <div v-if="showBtnRemoveSingleImage" class="remove-image" @click="removeSingleImage()"><i class="fas fa-times"></i></div>
@@ -36,7 +36,7 @@
 
         <!-- gallery -->
 
-        <div v-if="type && type === 'multiple'" class="wrapper-drop-image multi-image"  :class="{'contains-image': form[propertyName] !== null && form[propertyName].length > 0, 'is-invalid': form.errors.has(propertyName), [propertyName]: true}"> <!-- contains-image -->
+        <div v-if="type && type === 'multiple'" class="wrapper-drop-image multi-image"  :class="{'contains-image': form[propertyName] !== null && form[propertyName] !== '' && form[propertyName].length > 0, 'is-invalid': form.errors.has(propertyName), [propertyName]: true}"> <!-- contains-image -->
             <div class="overlay-drop-image" :for="propertyName">
                 <div class="view-images">
                     <div class="image elevation-5" v-for="(image, index) in form[propertyName]" :key="index">
@@ -89,15 +89,17 @@ export default {
             type: Object,
             required: true
         },
-        maxCount: Number,
+        maxCount: {
+            type: Number,
+            default: 50
+        },
         maxSize: {
             type: Number,
-            required: true
+            default: 5242880
         },
     },
     data() {
       return {
-        printSrcImage: "",
         error: true,
         maxSizeMb: (this.maxSize / 1024 / 1024).toFixed(1),
         showBtnRemoveSingleImage: false
@@ -263,7 +265,7 @@ export default {
             });
         },
         addDomainToImage(url) { // return url
-            let resultUrl = ''
+            let resultUrl
             if (url.indexOf('data:image/') === 0 || url.indexOf('http') === 0) {
                 resultUrl = url
             } else {
@@ -271,40 +273,42 @@ export default {
             }
             return resultUrl
         },
+        handelShowBtnRemoveSingleImage() {
+            if ( (this.defaultSrcImage && this.form[this.propertyName] != this.defaultSrcImage) && !this.required ) {
+                this.showBtnRemoveSingleImage = true
+            } else if ( (this.defaultSrcImage && this.form[this.propertyName] == this.defaultSrcImage) && !this.required ) {
+                this.showBtnRemoveSingleImage = false
+
+            } else if (!this.required && !this.defaultSrcImage) {
+                this.showBtnRemoveSingleImage = true
+            } else {
+                this.showBtnRemoveSingleImage = false
+            }
+        },
+
+        handelShowDefaultSrcImage() {
+            this.$nextTick(() => {
+                if (this.defaultSrcImage) {
+                    if (this.form[this.propertyName] == '') {
+                        this.form[this.propertyName] = this.defaultSrcImage
+                    }
+                }
+            })
+        }
     },
 
     watch: {
         form: {
-            handler(object) {
-                if ( (this.defaultSrcImage && this.form[this.propertyName] != this.defaultSrcImage) && !this.required ) {
-                    this.showBtnRemoveSingleImage = true
-                } else if ( (this.defaultSrcImage && this.form[this.propertyName] == this.defaultSrcImage) && !this.required ) {
-                    this.showBtnRemoveSingleImage = false
-
-                } else if (!this.required && !this.defaultSrcImage) {
-                    this.showBtnRemoveSingleImage = true
-                } else {
-                    this.showBtnRemoveSingleImage = false
-                }
-
-
-                this.$nextTick(() => {
-                    if (this.defaultSrcImage) {
-                        if (object[this.propertyName] == '') {
-                            this.form[this.propertyName] = this.defaultSrcImage
-                        }
-                    }
-                })
+            handler(newValForm) {
+                this.handelShowBtnRemoveSingleImage()
+                this.handelShowDefaultSrcImage()
             },
             deep: true
         }
     },
     mounted() {
-        this.$nextTick(() => {
-            if (this.defaultSrcImage) {
-                this.form[this.propertyName] = this.defaultSrcImage
-            }
-        })
+        this.handelShowBtnRemoveSingleImage()
+        this.handelShowDefaultSrcImage()
         this.handelDropImages()
     }
 }

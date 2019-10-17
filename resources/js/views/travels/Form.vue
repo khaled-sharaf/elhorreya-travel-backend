@@ -76,7 +76,7 @@
 
 
                 <!-- haram distance -->
-                <div class="form-group" v-if="form.type != 'other'">
+                <div class="form-group" v-if="form.type == 'umrah' || form.type == 'pilgrimage'">
                     <label> {{ $t('travels_table.haram_distance') }} <span class="field-required"></span></label>
                     <select
                         v-model="form.haram_distance"
@@ -86,6 +86,22 @@
                         <option v-for="distance in haramDistance" :key="distance.value" :value="distance.value" v-text="distance.label"></option>
                     </select>
                     <has-error :form="form" field="haram_distance"></has-error>
+                </div>
+
+
+                <!-- discount -->
+                <div class="form-group">
+                    <label> {{ $t('travels_table.discount') }} </label>
+                    <input
+                        v-model="form.discount"
+                        type="number"
+                        max="100"
+                        min="0"
+                        :placeholder="$t('travels_table.discount')"
+                        class="form-control"
+                        :class="{ 'is-invalid': form.errors.has('discount') }"
+                    >
+                    <has-error :form="form" field="discount"></has-error>
                 </div>
 
 
@@ -153,7 +169,6 @@
                         <div class="col-md-6">
 
                             <upload-image
-                                :maxSize="2100000"
                                 propertyName="image"
                                 :form="form"
                             ></upload-image>
@@ -168,8 +183,6 @@
 
                     <upload-image
                         type="multiple"
-                        :maxSize="2100000"
-                        :maxCount="50"
                         propertyName="gallery"
                         propertyDeletedName="deletedGallery"
                         :form="form"
@@ -237,7 +250,7 @@
                                     :class="{ 'is-invalid': form.errors.has(`offers.${index}.date_from`) }"
                                     class="offer-date date-from"
                                     width="100%"
-                                    lang="en"
+                                    :lang="langDates"
                                     value-type="format"
                                 ></date-picker>
                                 <has-error :form="form" :field="`offers.${index}.date_from`"></has-error>
@@ -253,7 +266,7 @@
                                     :class="{ 'is-invalid': form.errors.has(`offers.${index}.date_to`) }"
                                     class="offer-date date-to"
                                     width="100%"
-                                    lang="en"
+                                    :lang="langDates"
                                     value-type="format"
                                 ></date-picker>
                                 <has-error :form="form" :field="`offers.${index}.date_to`"></has-error>
@@ -426,13 +439,14 @@ export default {
             urlGetTravelCategories: '/travel_categories/select',
             travelCategoriesSelect: [],
             travelTypes: [
+                {value: 'internal', label: 'سياحة داخلية'},
+                {value: 'external', label: 'سياحة خارجية'},
                 {value: 'pilgrimage', label: 'حج'},
                 {value: 'umrah', label: 'عمرة'},
-                {value: 'other', label: 'رحلة سياحية'}
             ],
             haramDistance: [
-                {value: 0, label: 'الفندق بعيد عن الحرم'},
-                {value: 1, label: 'الفندق قريب من الحرم'}
+                {value: 0, label: 'بعيد'},
+                {value: 1, label: 'قريب'}
             ],
             stayTypes: [
                 {value: 'بدون إفطار'},
@@ -443,7 +457,12 @@ export default {
             transports: [
                 {value: 0, label: 'بدون انتقالات'},
                 {value: 1, label: 'شامل الانتقالات'},
-            ]
+            ],
+
+            langDates: {
+                days: ['حد', 'اثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت'],
+                months: ['يناير', 'فبراير', 'مارس', 'إبريل', 'مايو', 'يوينو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر']
+            },
         }
     },
 

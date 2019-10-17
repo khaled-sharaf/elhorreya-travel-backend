@@ -26,6 +26,12 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+
+        // $schedule->exec('php artisan queue:work')
+        $schedule->command('queue:work')
+                ->everyMinute()
+                // ->withoutOverlapping()
+                ->appendOutputTo(storage_path() . '/logs/queue-jobs.log');
     }
 
     /**

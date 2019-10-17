@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Travel;
+use App\MailingList;
+use App\Jobs\SendMailingTravel;
 
 use Image;
 use File;
+use Artisan;
 
 class TravelController extends Controller
 {
@@ -89,11 +92,12 @@ class TravelController extends Controller
     {
         $request->validate([
             'name' => 'required|string|between:2,180',
-            'address_from' => 'nullable|string|between:3,180',
+            'address_from' => 'required_if:type,external|nullable|string|between:3,180',
             'info' => 'nullable|string|min:5',
-            'type' => 'required|in:pilgrimage,umrah,other',
+            'type' => 'required|in:pilgrimage,umrah,internal,external',
             'umrah_date' => 'required_if:type,umrah|nullable|string|between:2,50',
-            'haram_distance' => 'required_unless:type,other|nullable|in:0,1',
+            'haram_distance' => 'required_unless:type,internal,external|nullable|in:0,1',
+            'discount' => 'nullable|integer|max:100',
             'favorite_company' => 'required|in:0,1',
             'hotel_id' => 'required|exists:hotels,id',
             'travel_category_id' => 'required|exists:travel_categories,id',
@@ -117,7 +121,7 @@ class TravelController extends Controller
         ]);
         $data = $request->toArray();
 
-        if ($data['type'] == 'other') {
+        if ($data['type'] != 'pilgrimage' && $data['type'] != 'umrah') {
             $data['umrah_date'] = null;
             $data['haram_distance'] = null;
         } else if ($data['type'] == 'pilgrimage') {
@@ -171,6 +175,12 @@ class TravelController extends Controller
         }
         $travel->offers()->createMany($data['offers']);
         $createdTravel = Travel::findConvert($travel->id);
+
+        // send travel to all email in mailing list
+        $sendMail = (new SendMailingTravel($createdTravel));
+        // ->delay(now()->addSeconds(5));
+        dispatch($sendMail);
+
         return response(['message' => 'Travel has been created.', 'data' => $createdTravel]);
     }
 
@@ -188,11 +198,12 @@ class TravelController extends Controller
     {
         $request->validate([
             'name' => 'required|string|between:2,180',
-            'address_from' => 'nullable|string|between:3,180',
+            'address_from' => 'required_if:type,external|nullable|string|between:3,180',
             'info' => 'nullable|string|min:5',
-            'type' => 'required|in:pilgrimage,umrah,other',
+            'type' => 'required|in:pilgrimage,umrah,internal,external',
             'umrah_date' => 'required_if:type,umrah|nullable|string|between:2,50',
-            'haram_distance' => 'required_unless:type,other|nullable|in:0,1',
+            'haram_distance' => 'required_unless:type,internal,external|nullable|in:0,1',
+            'discount' => 'nullable|integer|max:100',
             'favorite_company' => 'required|in:0,1',
             'hotel_id' => 'required|exists:hotels,id',
             'travel_category_id' => 'required|exists:travel_categories,id',
@@ -218,7 +229,7 @@ class TravelController extends Controller
         $keys_except = ['deletedGallery', 'deletedOffers'];
         $data = $request->except($keys_except);
 
-        if ($data['type'] == 'other') {
+        if ($data['type'] != 'pilgrimage' && $data['type'] != 'umrah') {
             $data['umrah_date'] = null;
             $data['haram_distance'] = null;
         } else if ($data['type'] == 'pilgrimage') {

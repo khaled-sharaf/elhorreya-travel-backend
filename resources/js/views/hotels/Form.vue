@@ -146,7 +146,6 @@
                         <div class="col-md-6">
 
                             <upload-image
-                                :maxSize="2100000"
                                 propertyName="image"
                                 :form="form"
                             ></upload-image>
@@ -161,8 +160,6 @@
 
                     <upload-image
                         type="multiple"
-                        :maxSize="2100000"
-                        :maxCount="50"
                         propertyName="gallery"
                         propertyDeletedName="deletedGallery"
                         :form="form"
