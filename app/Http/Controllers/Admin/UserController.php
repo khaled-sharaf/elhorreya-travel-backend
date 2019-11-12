@@ -188,6 +188,9 @@ class UserController extends Controller
         $ids = $request->ids;
         $action = $request->action;
 
+        if (in_array('1', $ids)) {
+            return response(['error' => 'This user can\'t delete it.'], 403);
+        }
         if ($action == 'delete') {
             User::destroy($ids);
         } else if ($action == 'force_delete') {

@@ -227,7 +227,14 @@
             font-weight: bold;
         }
         .mark.info {
-            color: #3498db;
+            color: #17a2b8;
+        }
+        .mark.bg-info {
+            font-size: 15px;
+            padding: 2px 8px;
+            background-color: #17a2b8;
+            color: #FFF;
+            border-radius: 4px;
         }
         .separator {
             display: block;
@@ -289,15 +296,15 @@
             padding: 20px;
         }
         .content .list .item {
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             overflow: hidden;
         }
         .content .list .item .item-label {
-            width: 150px;
+            width: 170px;
             float: right;
         }
         .content .list .item .item-value {
-            width: calc(100% - 150px);
+            width: calc(100% - 170px);
             float: right;
 
         }
@@ -351,6 +358,18 @@
         <div class="list">
                 <div class="item">
                     <b class="item-label">
+                    الرقم المعرف للحجز
+                    </b>
+                    <span class="item-value">
+                        <span class="mark bg-info">
+                            {{ $data['id'] }}
+                        </span>
+                    </span>
+                </div>
+                <!-- ======================================= -->
+
+                <div class="item">
+                    <b class="item-label">
                     الإسم
                     </b>
                     <span class="item-value">
@@ -391,12 +410,44 @@
 
                 <div class="item">
                     <b class="item-label">
+                    عدد البالغين
+                    </b>
+                    <span class="item-value">
+                        {{ $data['adults'] }}
+                    </span>
+                </div>
+                <!-- ======================================= -->
+
+                <div class="item">
+                    <b class="item-label">
+                    عدد الأطفال
+                    </b>
+                    <span class="item-value">
+                        {{ $data['children'] }}
+                    </span>
+                </div>
+                <!-- ======================================= -->
+
+                <div class="item">
+                    <b class="item-label">
                     الرحلة
                     </b>
                     <span class="item-value">
                         <a class="btn btn-info btn-sm" href="{{ aurl('travel/profile/' . $data['travel_id']) }}">
                             اعرض الرحلة
                         </a>
+                    </span>
+                </div>
+                <!-- ======================================= -->
+
+                <div class="item">
+                    <b class="item-label">
+                    الرقم المعرف للعرض
+                    </b>
+                    <span class="item-value">
+                        <span class="mark bg-info">
+                            {{ $data['travel_detail_id'] }}
+                        </span>
                     </span>
                 </div>
                 <!-- ======================================= -->

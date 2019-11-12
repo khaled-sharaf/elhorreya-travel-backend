@@ -20,16 +20,30 @@
 
 
                 <!-- address -->
-                <div class="form-group">
-                    <label> {{ $t('hotels_table.address') }} <span class="field-required"></span></label>
-                    <input
-                        v-model="form.address"
-                        type="text"
-                        :placeholder="$t('hotels_table.address')"
-                        class="form-control"
-                        :class="{ 'is-invalid': form.errors.has('address') }"
-                    >
-                    <has-error :form="form" field="address"></has-error>
+                <div class="row">
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <label> {{ $t('hotels_table.address') }} <span class="field-required"></span></label>
+                            <input
+                                v-model="form.address"
+                                type="text"
+                                :placeholder="$t('hotels_table.address')"
+                                class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('address') }"
+                            >
+                            <has-error :form="form" field="address"></has-error>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <!-- address suggested  -->
+                        <div class="form-group">
+                            <label> {{ $t('hotels_table.address_suggested') }}</label>
+                            <select v-model="currentAddressSuggested" class="custom-select">
+                                <option value=""></option>
+                                <option v-for="address in addressesSuggested" :key="address" :value="address" v-text="address"></option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
 
 
@@ -211,6 +225,21 @@ export default {
     components: {
         UploadImage
     },
+    data() {
+        return {
+            addressesSuggested: [],
+            currentAddressSuggested: ''
+        }
+    },
+
+    watch: {
+        currentAddressSuggested(newVal) {
+            if (newVal !== '') {
+                this.form.address = newVal
+            }
+        }
+    },
+
     methods: {
         addNewFeature() {
             this.form.features.push({value: ''})
@@ -231,8 +260,60 @@ export default {
             scriptMap.setAttribute('defer', true);
             scriptMap.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyADsFcbM6g-A_nUwh41pFn9EgDdlRC6lGY&language=ar&region=EG&callback=initMapHotel');
         },
+
+        async getTravelCategoriesSelect() {
+            await axios.get('/travel_categories/select').then(response => {
+                if (response.status === 200) {
+                    const data = response.data
+                    if (typeof data === 'object') {
+                        const addresses = data.travel_categories.filter(category => category.type === 3).map(category => category.name)
+                        this.addressesSuggested.push(...addresses)
+                        this.addressesSuggested = this.addressesSuggested.filter((address, index, self) => {
+                            return self.indexOf(address) === index && address !== 'شم النسيم' && address !== 'العيد'
+                        })
+                    } else {
+                        setTimeout(() => {
+                            this.getTravelCategoriesSelect()
+                        }, 500)
+                    }
+                }
+            })
+            .catch(errors => {
+                setTimeout(() => {
+                    this.getTravelCategoriesSelect()
+                }, 500)
+            })
+        },
+
+
+        async getHotelsSelect() {
+            await axios.get('/hotels/select').then(response => {
+                if (response.status === 200) {
+                    const data = response.data
+                    if (typeof data === 'object') {
+                        const addresses = data.hotels.map(hotel => hotel.address)
+                        this.addressesSuggested.push(...addresses)
+                        this.addressesSuggested = this.addressesSuggested.filter((address, index, self) => {
+                            return self.indexOf(address) === index
+                        })
+                    } else {
+                        setTimeout(() => {
+                            this.getHotelsSelect()
+                        }, 500)
+                    }
+                }
+            })
+            .catch(errors => {
+                setTimeout(() => {
+                    this.getHotelsSelect()
+                }, 500)
+            })
+        }
     },
     mounted() {
+        this.getHotelsSelect().then(() => {
+            this.getTravelCategoriesSelect()
+        })
         if (this.typeForm == 'edit') {
             const getData = setInterval(() => {
                 if (this.form.name != '') {

@@ -5,9 +5,9 @@
             <div class="header"> {{$t('global.the_hotel')}} </div>
             <div class="body">
                 <div class="wrapper-select-item">
-                    <select class="custom-select custom-select-sm" v-model="tableData.hotel_id" @change="$emit('getData')">
+                    <select class="custom-select custom-select-sm" v-model="tableData.hotel_id" @change="getData()">
                         <option value="">{{$t('global.all')}}</option>
-                        <option :value="hotel.id" v-for="hotel in hotels" :key="hotel.id" v-text="hotel.name"></option>
+                        <option :value="hotel.id" v-for="hotel in hotels" :key="hotel.id" v-text="hotel.name + ' --- ' + hotel.address"></option>
                     </select>
                 </div>
             </div>
@@ -24,7 +24,8 @@
 export default {
     props: [
     "tableData",
-    "hotels"
+    "hotels",
+    "getData"
   ],
 }
 </script>

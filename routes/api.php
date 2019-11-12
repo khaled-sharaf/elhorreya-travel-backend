@@ -3,6 +3,17 @@
 use Illuminate\Http\Request;
 
 
+/*********************************************************************************/
+
+
+/**************** global *****************/
+Route::get('/menu-and-settings', 'TravelProgramController@getMenuAndSettings');
+Route::get('/hotels-address', 'HotelController@getAddressAll');
+Route::put('/visitor', 'SettingController@addVisitor');
+
+/*********************************************************************************/
+
+
 /**************** mailing_list *****************/
 // store
 Route::post('/mailing_list/subscribe', 'MailingListController@sendMailStore');
@@ -26,22 +37,49 @@ Route::post('/contact_us', 'ContactUsController@store');
 /*********************************************************************************/
 
 
-/**************** settings *****************/
 
-// get all settings
-Route::get('/settings', 'SettingController@getSettings');
+// home page
+
+Route::get('/best-travels-offer', 'TravelController@bestTravelsOffer');
+Route::get('/best-travels-external', 'TravelController@getBestTravelsExternal');
 
 /*********************************************************************************/
 
-
-/**************** global *****************/
-Route::get('/menu', 'TravelProgramController@getMenu');
-Route::get('/hotels-address', 'HotelController@getAddressAll');
-
-/****************************************/
+// travels page
 Route::get('/search', 'TravelController@search');
 
+Route::get('/min-max-price-travels', 'TravelController@getMinMaxPrice');
+Route::get('/umrah-dates', 'TravelController@umrahDates');
+
+
+Route::get('/get-travels-by-category', 'TravelController@getByCategory');
+Route::get('/travel', 'TravelController@show');
+Route::get('/travels-others', 'TravelController@others');
+
+
 /*********************************************************************************/
+
+// hotels
+
+Route::get('/hotels', 'HotelController@index');
+Route::get('/hotel', 'HotelController@show');
+Route::get('/hotels-others', 'HotelController@others');
+
+/*********************************************************************************/
+
+// images
+
+Route::get('/images-by-category', 'ImageController@imagesByCategory');
+
+/*********************************************************************************/
+
+// blogs
+
+Route::get('/blogs', 'BlogController@index');
+Route::get('/blog', 'BlogController@show');
+
+/*********************************************************************************/
+
 
 
 

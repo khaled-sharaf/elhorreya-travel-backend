@@ -21,7 +21,11 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('admin.cp_layout');
+        if (auth()->check() && auth()->user()->rule == 1) {
+            return view('admin.cp_layout');
+        } else {
+            return redirect(env('CP_PREFIX') . '/login');
+        }
     }
 
     public function modelsCounts() {

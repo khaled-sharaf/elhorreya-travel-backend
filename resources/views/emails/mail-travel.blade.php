@@ -536,7 +536,8 @@
             تشكرك على متابعتك لها.
         </div>
 
-        <a class="btn btn-secondary btn-sm float-left" href="{{ url('mailing_list/unsubscripe') }}">
+        {{-- <a class="btn btn-secondary btn-sm float-left" href="{{ url('mailing_list/unsubscribe') }}"> --}}
+        <a class="btn btn-secondary btn-sm float-left" href="http://localhost:8080/mailing_list/unsubscribe">
             إلغاء الإشتراك فى خدمة القائمة البريدية
         </a>
     </footer>

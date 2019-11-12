@@ -14,16 +14,11 @@
         :themeTableClassesFilter="tableData.filter.viewTable"
         :sortOrders="sortOrders"
         :pagination="pagination"
-        :totalLink="Math.ceil(pagination.total / tableData.length)"
         :filters="filters"
-        :actionMultiDelete="actionMultiDelete"
 
-        @prev="getData(pagination.prevPageUrl)"
-        @next="getData(pagination.nextPageUrl)"
-        @gotopage="gotopage"
-        @toggleShowSettings="toggleShowSettings"
-        @deleteResotreMulti="deleteResotreMulti"
-        @getData="getData"
+        :toggleShowSettings="toggleShowSettings"
+        :deleteResotreMulti="deleteResotreMulti"
+        :getData="getData"
     >
         <tbody>
             <tr

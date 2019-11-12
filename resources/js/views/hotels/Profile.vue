@@ -218,7 +218,7 @@
                         <div class="card-body">
                             <div class="tab-content">
                             <div class="tab-pane active" id="gallery">
-                                <div class="gallery-in-profile" v-if="(hotelProfile.gallery.length > 0) && currentChildTable === 'gallery'">
+                                <div class="gallery-in-profile" v-if="(hotelProfile.gallery != null && hotelProfile.gallery.length > 0) && currentChildTable === 'gallery'">
                                     <div class="image" v-for="image in hotelProfile.gallery" :key="image.id">
                                         <img :src="$domain + '/' + image.value">
                                     </div>

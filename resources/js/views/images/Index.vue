@@ -14,21 +14,16 @@
         :themeTableClassesFilter="tableData.filter.viewTable"
         :sortOrders="sortOrders"
         :pagination="pagination"
-        :totalLink="Math.ceil(pagination.total / tableData.length)"
         :filters="filters"
-        :actionMultiDelete="actionMultiDelete"
 
-        @prev="getData(pagination.prevPageUrl)"
-        @next="getData(pagination.nextPageUrl)"
-        @gotopage="gotopage"
-        @toggleShowSettings="toggleShowSettings"
-        @deleteResotreMulti="deleteResotreMulti"
-        @getData="getData"
+        :toggleShowSettings="toggleShowSettings"
+        :deleteResotreMulti="deleteResotreMulti"
+        :getData="getData"
     >
 
         <template v-slot:filters>
             <travel-categories-select
-                @getData="getData"
+                :getData="getData"
                 :tableData="tableData"
                 :travelCategories="travelCategoriesSelect"
             ></travel-categories-select>
@@ -63,13 +58,13 @@
                 <td v-show="tableData.columns.indexOf('travel_category_id') != -1" class="travel_category_id">
                     <router-link
                         class="link-router-in-table"
-                        v-if="image.travel_category !== null"
+                        v-if="image.category !== null"
                         :href="$domain_admin + '/travel_category/' + image.travel_category_id + '/edit'"
-                        :to="{name: 'edit-travel_category', params: {id: image.travel_category_id, travel_category: image.travel_category}}"
+                        :to="{name: 'edit-travel_category', params: {id: image.travel_category_id, travel_category: image.category}}"
                         data-name="edit-travel_category"
-                        :data-params='"{\"travel_category\":" + JSON.stringify(image.travel_category) + ", \"id\":" + image.travel_category_id + "}"'
+                        :data-params='"{\"travel_category\":" + JSON.stringify(image.category) + ", \"id\":" + image.travel_category_id + "}"'
                     >
-                        {{ image.travel_category.name }}
+                        {{ image.category.name }}
                     </router-link>
                     <span class="badge badge-danger" v-else> {{ $t('global.travel_category_is_deleted') }} - id:{{image.travel_category_id}}</span>
                 </td>

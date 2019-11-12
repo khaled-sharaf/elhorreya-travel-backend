@@ -36,8 +36,12 @@
     .brand-link {
         text-align: center;
         background-color: #EEE !important;
+        padding: 0;
+        overflow: hidden;
         .brand-image {
             float: none;
+            max-height: 100px;
+            margin-top: -22px;
             margin: {
                 left: auto;
                 right: auto;

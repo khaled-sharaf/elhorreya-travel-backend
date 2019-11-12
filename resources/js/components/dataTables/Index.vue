@@ -15,7 +15,7 @@
                                     <div class="card-header">
 
                                         <table-settings
-                                            @toggleShowSettings="$emit('toggleShowSettings')"
+                                            :toggleShowSettings="toggleShowSettings"
                                             :showSettings="showSettings"
                                             :idPage="idPage"
                                             :columns="columns"
@@ -30,25 +30,25 @@
 
                                             <activation
                                                 v-if="filters.indexOf('activation') != -1"
-                                                @getData="$emit('getData')"
+                                                :getData="getData"
                                                 :tableData="tableData"
                                             ></activation>
 
                                             <trashed
                                                 v-if="filters.indexOf('trashed') != -1"
-                                                @getData="$emit('getData')"
+                                                :getData="getData"
                                                 :tableData="tableData"
                                             ></trashed>
 
                                             <display
                                                 v-if="filters.indexOf('display') != -1"
-                                                @getData="$emit('getData')"
+                                                :getData="getData"
                                                 :tableData="tableData"
                                             ></display>
 
                                             <created-between
                                                 v-if="filters.indexOf('created-between') != -1"
-                                                @getData="$emit('getData')"
+                                                :getData="getData"
                                                 :tableData="tableData"
                                             ></created-between>
 
@@ -60,15 +60,14 @@
                                             <!-- Search -->
                                             <search
                                                 v-if="filters.indexOf('search') != -1"
-                                                @getData="$emit('getData')"
+                                                :getData="getData"
                                                 :tableData="tableData"
                                             ></search>
 
                                             <!-- Filter columns -->
                                             <filters-columns
-                                                @getData="$emit('getData')"
-                                                @deleteResotreMulti="$emit('deleteResotreMulti')"
-                                                :actionMultiDelete="actionMultiDelete"
+                                                :getData="getData"
+                                                :deleteResotreMulti="deleteResotreMulti"
                                                 :columns="columns"
                                                 :themeTableClasses="themeTableClasses"
                                                 :tableData="tableData"
@@ -112,7 +111,7 @@
                                                     :themeTableClassesFilter="themeTableClassesFilter"
                                                     :sortOrders="sortOrders"
                                                     :tableData="tableData"
-                                                    @getData="$emit('getData')"
+                                                    :getData="getData"
                                                 >
                                                     <slot></slot>
                                                 </table-wrapper>
@@ -125,10 +124,7 @@
                                         <div class="row-pagination">
                                             <pagination
                                                 :pagination="pagination"
-                                                :totalLink="totalLink"
-                                                @prev="$emit('prev')"
-                                                @next="$emit('next')"
-                                                @gotopage="$emit('gotopage')"
+                                                :getData="getData"
                                             ></pagination>
                                         </div>
                                     </div> <!-- /.card-footer -->
@@ -181,9 +177,12 @@ export default {
         'themeTableClassesFilter',
         'sortOrders',
         'pagination',
-        'totalLink',
         'filters',
-        'actionMultiDelete'
+
+        // functions
+        'toggleShowSettings',
+        'deleteResotreMulti',
+        'getData'
     ],
     components: {
         // global

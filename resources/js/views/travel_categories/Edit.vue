@@ -67,6 +67,7 @@ export default {
         form: new Form({
             id: 0,
             name: '',
+            type: 3,
             discount: '',
             image: '',
             travel_program_id: '',

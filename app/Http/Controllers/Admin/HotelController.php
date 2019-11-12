@@ -17,7 +17,7 @@ class HotelController extends Controller
 
     public function hotelsSelect()
     {
-        $hotels = Hotel::select(['id', 'name'])->get();
+        $hotels = Hotel::select(['id', 'name', 'address'])->get();
         return response(['hotels' => $hotels]);
     }
 
@@ -77,7 +77,7 @@ class HotelController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'name' => 'required|string|between:5,180',
+            'name' => 'required|string|between:2,180',
             'address' => 'required|string|between:3,180',
             'rating' => 'required|integer|between:0,100',
             'stars' => 'required|in:3,4,5,7',

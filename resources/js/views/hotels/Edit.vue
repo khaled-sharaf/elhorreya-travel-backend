@@ -103,6 +103,12 @@ export default {
             this.form.put(this.urlModel + '/' + this.form.id).then(response => {
                 if (response.status === 200) {
                     this.hotelEdit = response.data.data;
+                    if (!this.hotelEdit.features.length) {
+                        this.hotelEdit.features.push({value: ''})
+                    }
+                    this.hotelEdit.deletedGallery = []
+                    this.hotelEdit.deletedFeatures = []
+
                     this.form.fill(this.hotelEdit)
                     ToastReq.fire({
                         text: this.success_msg

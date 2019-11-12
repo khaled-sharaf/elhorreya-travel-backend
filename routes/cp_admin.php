@@ -1,8 +1,5 @@
 <?php
 
-// here all routes control panel
-Route::get(env('CP_PREFIX') . '/{path?}', 'HomeController@index')->where('path', '.*');
-
 
 Route::group(['middleware' => ['api'], 'prefix' => env('CP_PREFIX_API')], function () {
 

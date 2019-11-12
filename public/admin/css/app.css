@@ -11864,6 +11864,15 @@ a.text-dark:focus {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: reverse;
           flex-direction: row-reverse;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+   -ms-user-select: none;
+       user-select: none;
+}
+
+.dataTables_wrapper .dataTables_length .page-item.active,
+.dataTables_wrapper .dataTables_paginate .page-item.active {
+  pointer-events: none;
 }
 
 .dataTables_wrapper .dataTables_info > span {
@@ -11958,6 +11967,73 @@ a.text-dark:focus {
 .wrapper-stars-rating .stars-rating > i.solid {
   overflow: hidden;
   z-index: 3;
+}
+
+.pagination {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+          align-items: center;
+  margin: 15px 0;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.pagination a {
+  text-decoration: none;
+}
+
+.pagination a,
+.pagination a:hover {
+  color: #333;
+}
+
+.pagination a:focus {
+  outline: none;
+}
+
+.pagination .page-item:not(.break-view-class) a {
+  background-color: #FFF;
+  padding: 2px 12px;
+  border-radius: 3px;
+  margin: 0 3px;
+  -o-box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.3);
+  -webkit-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+
+.pagination .page-item:not(.break-view-class) a:hover {
+  background-color: #DDD;
+}
+
+.pagination .page-item.break-view-class a {
+  pointer-events: none;
+}
+
+.pagination .page-item.active a {
+  background-color: #3490dc;
+  color: #FFF;
+}
+
+.pagination .next-item,
+.pagination .prev-item {
+  margin: 0 10px;
+}
+
+.pagination .next-item a,
+.pagination .prev-item a {
+  font-size: 20px;
+  color: #3490dc;
+}
+
+.pagination .next-item.disabled a,
+.pagination .prev-item.disabled a {
+  pointer-events: none;
 }
 
 @-webkit-keyframes bounce-in {
@@ -12444,10 +12520,14 @@ a.text-dark:focus {
 .main-sidebar .brand-link {
   text-align: center;
   background-color: #EEE !important;
+  padding: 0;
+  overflow: hidden;
 }
 
 .main-sidebar .brand-link .brand-image {
   float: none;
+  max-height: 100px;
+  margin-top: -22px;
   margin-left: auto;
   margin-right: auto;
 }

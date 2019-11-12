@@ -9,8 +9,56 @@ use App\Hotel;
 class HotelController extends Controller
 {
 
-    public function getAddressAll() {
-        $hotels = Hotel::get();
+    public function getAddressAll()
+    {
+        $hotels = Hotel::display()->latest()->with('travels')->getConvert();
         return response(['data' => $hotels]);
     }
+
+
+    public function index(Request $request)
+    {
+        $city = $request->city;
+        $stars = $request->stars;
+        $sortBy = $request->sortBy != '' ? $request->sortBy : 'id';
+
+        $query = Hotel::display();
+
+        if ($city != '') {
+            $query->where('address', 'like', '%' . $city . '%');
+        }
+
+        if ($stars != '') {
+            $query->where('stars', '<=', $stars);
+        }
+
+        $hotels = $query->orderBy($sortBy, 'desc')->paginateConvert(12);
+
+        return response(['hotels' => $hotels]);
+    }
+
+    public function show(Request $request)
+    {
+        $id = $request->id;
+        $hotel = Hotel::display()->findConvert($id);
+        $hotel_arr = collect($hotel)->toArray();
+        $hotel = key_exists('id', $hotel_arr) ? $hotel : null;
+        return response(['hotel' => $hotel]);
+    }
+
+
+    public function others(Request $request)
+    {
+        $id = $request->id;
+        $address = $request->address;
+
+        $hotels = Hotel::
+            display()
+            ->where('address', 'like', '%' . $address . '%')
+            ->where('id', '!=', $id)
+            ->latest()->take(6)->getConvert();
+
+        return response(['hotels' => $hotels]);
+    }
+
 }

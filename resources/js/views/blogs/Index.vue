@@ -14,16 +14,11 @@
         :themeTableClassesFilter="tableData.filter.viewTable"
         :sortOrders="sortOrders"
         :pagination="pagination"
-        :totalLink="Math.ceil(pagination.total / tableData.length)"
         :filters="filters"
-        :actionMultiDelete="actionMultiDelete"
 
-        @prev="getData(pagination.prevPageUrl)"
-        @next="getData(pagination.nextPageUrl)"
-        @gotopage="gotopage"
-        @toggleShowSettings="toggleShowSettings"
-        @deleteResotreMulti="deleteResotreMulti"
-        @getData="getData"
+        :toggleShowSettings="toggleShowSettings"
+        :deleteResotreMulti="deleteResotreMulti"
+        :getData="getData"
     >
         <tbody>
             <tr
@@ -51,9 +46,7 @@
                 </td>
 
 
-                <td v-show="tableData.columns.indexOf('content') != -1" class="content">
-                    {{blog.content}}
-                </td>
+                <td v-show="tableData.columns.indexOf('content') != -1" class="content" v-html="blog.content.replace(/(?:\r\n|\r|\n)/g, '<br>')"></td>
 
 
                 <td v-show="tableData.columns.indexOf('image') != -1" class="image" style="text-align:center;">

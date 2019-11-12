@@ -59,16 +59,17 @@ export default {
         "columnsView",
         "columnsExcepted",
         "sortOrders",
-        "tableData"
+        "tableData",
+
+        "getData"
     ],
     methods: {
         sortBy(key) {
-            // console.log('a', key)
             if (this.columnsExcepted.indexOf(key) == -1) {
                 this.tableData.sortBy = key
                 this.sortOrders[key] = this.sortOrders[key] * -1
                 this.tableData.dir = this.sortOrders[key] == 1 ? "asc" : "desc"
-                this.$emit('getData')
+                this.getData()
             }
         },
         classesTh(columnName) {

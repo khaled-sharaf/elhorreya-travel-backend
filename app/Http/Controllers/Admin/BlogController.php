@@ -67,7 +67,7 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         $this->validate(request(), [
-            'title' => 'required|string|between:5,180',
+            'title' => 'required|string|between:3,180',
             'content' => 'required|string|min:5',
             'image' => 'required|string',
             'gallery' => 'nullable|array',
@@ -130,7 +130,7 @@ class BlogController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate(request(), [
-            'title' => 'required|string|between:5,180',
+            'title' => 'required|string|between:3,180',
             'content' => 'required|string|min:5',
             'image' => 'required|string',
             'gallery' => 'nullable|array',

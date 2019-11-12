@@ -18,6 +18,20 @@
                     <has-error :form="form" field="name"></has-error>
                 </div>
 
+
+                <!-- type -->
+                <div class="form-group">
+                    <label> {{ $t('travel_categories_table.type') }} <span class="field-required"></span></label>
+                    <select
+                        v-model="form.type"
+                        class="form-control"
+                        :class="{ 'is-invalid': form.errors.has('type') }"
+                    >
+                        <option v-for="type in categoryTypes" :key="type.value" :value="type.value" v-text="type.label"></option>
+                    </select>
+                    <has-error :form="form" field="type"></has-error>
+                </div>
+
                 <!-- discount -->
                 <div class="form-group">
                     <label> {{ $t('travel_categories_table.discount') }} </label>
@@ -92,6 +106,13 @@ export default {
       return {
         urlGetTravelPrograms: '/travel_programs/select',
         travelProgramsSelect: [],
+        categoryTypes: [
+            {value: 1, label: 'حج'},
+            {value: 2, label: 'عمرة'},
+            {value: 3, label: 'سياحة داخلية'},
+            {value: 4, label: 'سياحة خارجية'},
+            {value: 5, label: 'شهر العسل'},
+        ]
       }
     },
     methods: {

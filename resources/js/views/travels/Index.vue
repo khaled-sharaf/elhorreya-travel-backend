@@ -14,28 +14,23 @@
         :themeTableClassesFilter="tableData.filter.viewTable"
         :sortOrders="sortOrders"
         :pagination="pagination"
-        :totalLink="Math.ceil(pagination.total / tableData.length)"
         :filters="filters"
-        :actionMultiDelete="actionMultiDelete"
 
-        @prev="getData(pagination.prevPageUrl)"
-        @next="getData(pagination.nextPageUrl)"
-        @gotopage="gotopage"
-        @toggleShowSettings="toggleShowSettings"
-        @deleteResotreMulti="deleteResotreMulti"
-        @getData="getData"
+        :toggleShowSettings="toggleShowSettings"
+        :deleteResotreMulti="deleteResotreMulti"
+        :getData="getData"
     >
 
         <template v-slot:filters>
             <hotels-select
                 v-if="$route.name == 'travels'"
-                @getData="getData"
+                :getData="getData"
                 :tableData="tableData"
                 :hotels="hotelsSelect"
             ></hotels-select>
 
             <travel-categories-select
-                @getData="getData"
+                :getData="getData"
                 :tableData="tableData"
                 :travelCategories="travelCategoriesSelect"
             ></travel-categories-select>
@@ -112,9 +107,27 @@
                         data-name="hotel-profile"
                         :data-params='"{\"hotel\":" + JSON.stringify(travel.hotel) + ", \"id\":" + travel.hotel_id + "}"'
                     >
-                        {{ travel.hotel.name }}
+                        {{ travel.hotel.name + ' --- ' + travel.hotel.address }}
                     </router-link>
                     <span class="badge badge-danger" v-else> {{ $t('global.hotel_is_deleted') }} - id:{{travel.hotel_id}}</span>
+                </td>
+
+
+                <td v-show="tableData.columns.indexOf('hotel_2_id') != -1" class="hotel_2_id">
+                    <span v-if="travel.hotel_2_id !== null">
+                        <router-link
+                            class="link-router-in-table"
+                            v-if="travel.hotel_2 !== null"
+                            :href="$domain_admin + '/hotel/profile/' + travel.hotel_2_id"
+                            :to="{name: 'hotel-profile', params: {id: travel.hotel_2_id, hotel: travel.hotel_2}}"
+                            data-name="hotel-profile"
+                            :data-params='"{\"hotel\":" + JSON.stringify(travel.hotel_2) + ", \"id\":" + travel.hotel_2_id + "}"'
+                        >
+                            {{ travel.hotel_2.name + ' --- ' + travel.hotel_2.address }}
+                        </router-link>
+                        <span class="badge badge-danger" v-else> {{ $t('global.hotel_is_deleted') }} - id:{{travel.hotel_2_id}}</span>
+                    </span>
+                    <span class="badge badge-info" v-else> لا يوجد فندق ثانى</span>
                 </td>
 
 
@@ -232,6 +245,7 @@ export default {
                 { label: "discount", name: "discount" },
                 { label: "Favorite company", name: "favorite_company" },
                 { label: "Hotel", name: "hotel_id" },
+                { label: "Hotel 2", name: "hotel_2_id" },
                 { label: "Travel category", name: "travel_category_id" },
                 { label: "Display", name: "display" },
                 { label: "Created by", name: "user_id" },

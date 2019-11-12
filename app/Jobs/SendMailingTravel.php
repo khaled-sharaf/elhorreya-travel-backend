@@ -32,15 +32,15 @@ class SendMailingTravel implements ShouldQueue
     {
         $emails_count = MailingList::count();
         $offset = 0;
-        $limit = 1;
+        $limit = 200;
         $all_emails = [];
-        // for ($i = 0; $i < ceil($emails_count / $limit); $i++) {
+        for ($i = 0; $i < ceil($emails_count / $limit); $i++) {
             $part_mails = MailingList::select('email')->offset($offset)->limit($limit)->get()->pluck('email');
             foreach ($part_mails->all() as $email) {
                 $all_emails[] = $email;
             }
             $offset = $offset + $limit;
-        // }
+        }
         if (count($all_emails) > 0) {
             Mail::to($all_emails)->send(new MailingTravel($this->data));
         }

@@ -16,6 +16,7 @@ class CreateTravelCategoriesTable extends Migration
         Schema::create('travel_categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->boolean('type');
             $table->string('image');
             $table->string('discount', 3)->nullable();
             $table->integer('order')->nullable();

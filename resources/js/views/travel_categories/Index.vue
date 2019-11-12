@@ -14,20 +14,15 @@
         :themeTableClassesFilter="tableData.filter.viewTable"
         :sortOrders="sortOrders"
         :pagination="pagination"
-        :totalLink="Math.ceil(pagination.total / tableData.length)"
         :filters="filters"
-        :actionMultiDelete="actionMultiDelete"
 
-        @prev="getData(pagination.prevPageUrl)"
-        @next="getData(pagination.nextPageUrl)"
-        @gotopage="gotopage"
-        @toggleShowSettings="toggleShowSettings"
-        @deleteResotreMulti="deleteResotreMulti"
-        @getData="getData"
+        :toggleShowSettings="toggleShowSettings"
+        :deleteResotreMulti="deleteResotreMulti"
+        :getData="getData"
     >
         <template v-slot:filters>
             <travel-programs-select
-                @getData="getData"
+                :getData="getData"
                 :tableData="tableData"
                 :travelPrograms="travelProgramsSelect"
             ></travel-programs-select>
@@ -56,7 +51,15 @@
 
 
                 <td v-show="tableData.columns.indexOf('name') != -1" class="name">
-                    {{travel_category.name | capitalize }}
+                    {{travel_category.name }}
+                </td>
+
+
+                <td v-show="tableData.columns.indexOf('type') != -1" class="type">
+                    {{ categoryTypes.filter(item => {
+                        return item.value == travel_category.type
+                        })[0].label
+                    }}
                 </td>
 
 
@@ -160,17 +163,25 @@ export default {
       travelProgramsSelect: [],
       filters: ['trashed', 'created-between', 'search'],
       columns: [
-        { label: "ID", name: "id" },
-        { label: "Name", name: "name" },
+        { label: "id", name: "id" },
+        { label: "name", name: "name" },
+        { label: "type", name: "type" },
         { label: "discount", name: "discount" },
-        { label: "Image", name: "image" },
-        { label: "Order", name: "order" },
-        { label: "Travel program", name: "travel_program_id" },
+        { label: "image", name: "image" },
+        { label: "order", name: "order" },
+        { label: "travel program", name: "travel_program_id" },
         { label: "Created by", name: "user_id" },
         { label: "Updated at", name: "updated_at" },
         { label: "Created at", name: "created_at" }
       ],
-      columnsExceptedSorting: ['travel_program_id', 'user_id']
+      columnsExceptedSorting: ['travel_program_id', 'user_id'],
+      categoryTypes: [
+          {value: 1, label: 'حج'},
+          {value: 2, label: 'عمرة'},
+          {value: 3, label: 'سياحة داخلية'},
+          {value: 4, label: 'سياحة خارجية'},
+          {value: 5, label: 'شهر العسل'},
+      ]
     };
   },
     methods: {

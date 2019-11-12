@@ -4,12 +4,12 @@
 
 <template>
     <div class="sidebar-layout">
-        <aside class="main-sidebar elevation-4 sidebar-dark-info">
+        <aside class="main-sidebar elevation-4 sidebar-dark-warning">
             <!-- Brand Logo -->
             <router-link :to="{name: 'home'}" class="brand-link">
-                <img :src="$domain + '/images/logo.jpg'" alt="logo" class="brand-image">
+                <img :src="$domain + $settings.logo" alt="logo" class="brand-image">
                 <!-- <img :src="$domain + '/' + $settings.logo" :alt="$settings.site_name + ' logo'" class="brand-image"> -->
-                <!-- <span class="brand-text font-weight-light">{{ $settings.site_name }}</span> -->
+                <!-- <span class="brand-text font-weight-light">{{ $settings.site_name_ar }}</span> -->
             </router-link>
 
             <!-- Sidebar -->

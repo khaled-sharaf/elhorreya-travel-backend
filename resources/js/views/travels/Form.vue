@@ -122,16 +122,31 @@
 
                 <!-- hotel -->
                 <div class="form-group">
-                    <label> {{ $t('global.the_hotel') }} <span class="field-required"></span></label>
+                    <label> {{ $t('travels_table.hotel_id') }} <span class="field-required"></span></label>
                     <select
                         v-model="form.hotel_id"
                         class="custom-select"
                         :class="{ 'is-invalid': form.errors.has('hotel_id') }"
                         >
-                        <option v-for="hotel in hotelsSelect" :value="hotel.id" :key="hotel.id" v-text="hotel.name"></option>
+                        <option v-for="hotel in hotelsSelect" :value="hotel.id" :key="hotel.id" v-text="hotel.name + ' --- ' + hotel.address"></option>
                     </select>
                     <has-error :form="form" field="hotel_id"></has-error>
                 </div>
+
+
+                <!-- hotel 2 -->
+                <div class="form-group">
+                    <label> {{ $t('travels_table.hotel_2_id') }}</label>
+                    <select
+                        v-model="form.hotel_2_id"
+                        class="custom-select"
+                        :class="{ 'is-invalid': form.errors.has('hotel_2_id') }"
+                        >
+                        <option v-for="hotel in hotelsSelect" :value="hotel.id" :key="hotel.id" v-text="hotel.name + ' --- ' + hotel.address"></option>
+                    </select>
+                    <has-error :form="form" field="hotel_2_id"></has-error>
+                </div>
+
 
                 <!-- travel_category -->
                 <div class="form-group">
@@ -147,7 +162,7 @@
                 </div>
 
 
-                <!-- dispaly travel -->
+                <!-- display travel -->
                 <div class="form-group">
                     <label> {{ $t('datatable.display') }} <span class="field-required"></span></label>
                     <select
@@ -303,7 +318,7 @@
 
 
                             <!-- adults -->
-                            <div class="form-group col-lg-6 required">
+                            <div class="form-group col-lg-6">
                                 <input
                                     v-model="form.offers[index].adults"
                                     type="number"
@@ -511,8 +526,14 @@ export default {
                 if (error.indexOf('offers.') != -1) {
                     const indexNumber = error.indexOf('.')
                     if (indexNumber === 6) {
-                        if (parseInt(error[indexNumber + 1]) === index) {
-                            indexes.push(index)
+                        if (index < 10) {
+                            if (parseInt(error[indexNumber + 1]) === index) {
+                                indexes.push(index)
+                            }
+                        } else {
+                            if (parseInt(error[indexNumber + 1] + error[indexNumber + 2]) === index) {
+                                indexes.push(index)
+                            }
                         }
                     }
                 }

@@ -7,7 +7,7 @@
             <button
                 v-if="tableData.trashed != 0"
                 class="btn btn-danger btn-sm btn-delete-all"
-                @click.prevent="deleteMulti('delete')"
+                @click.prevent="deleteResotreMulti('delete')"
                 >
                 <i class="fa fa-trash"></i>
             </button>
@@ -16,7 +16,7 @@
             <button
                 v-if="tableData.trashed != 1"
                 class="btn btn-info btn-sm btn-restore-all"
-                @click.prevent="deleteMulti('restore')"
+                @click.prevent="deleteResotreMulti('restore')"
                 >
                 <i class="fas fa-undo-alt"></i>
             </button>
@@ -25,7 +25,7 @@
             <button
                 v-if="tableData.trashed == 0"
                 class="btn btn-danger btn-sm btn-force-delete-all"
-                @click.prevent="deleteMulti('force_delete')"
+                @click.prevent="deleteResotreMulti('force_delete')"
                 >
                 {{ $t('global.force_delete') }}
                 <i class="far fa-trash-alt"></i>
@@ -34,7 +34,7 @@
 
         <!-- dataTables_length -->
         <label class="dataTables_length">
-            <select class="custom-select" v-model="tableData.length" @change="$emit('getData')">
+            <select class="custom-select" v-model="tableData.length" @change="getData()">
                 <option
                     v-for="(records, index) in perPage"
                     :key="index"
@@ -87,7 +87,7 @@
 
         <!-- dataTables_refresh -->
         <label class="dataTables_refresh">
-            <button class="btn btn-outline-secondary" @click="$emit('getData')">
+            <button class="btn btn-outline-secondary" @click="getData()">
                 <i class="fas fa-sync-alt"></i>
             </button>
         </label>
@@ -107,7 +107,8 @@ export default {
         "themeTableClasses",
         "tableData",
         "perPage",
-        "actionMultiDelete"
+        "deleteResotreMulti",
+        "getData"
     ],
     data() {
         return {
@@ -119,10 +120,6 @@ export default {
             this.updatedColumns = this.columns.filter(column => {
                 return column.name != 'show_plus' && column.name != 'select_row'
             })
-        },
-        deleteMulti(action) {
-            this.actionMultiDelete.action = action
-            this.$emit('deleteResotreMulti')
         }
     },
     watch: {

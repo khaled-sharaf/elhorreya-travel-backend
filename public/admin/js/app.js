@@ -86,6 +86,18 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./node_modules/@babel/runtime/regenerator/index.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! regenerator-runtime */ "./node_modules/regenerator-runtime/runtime.js");
+
+
+/***/ }),
+
 /***/ "./node_modules/axios/index.js":
 /*!*************************************!*\
   !*** ./node_modules/axios/index.js ***!
@@ -2409,10 +2421,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 // global components
 
 
@@ -2426,7 +2434,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['idPage', 'routeCreate', 'showSettings', 'hideButtons', 'columns', 'themeTableClasses', 'dataTable', 'tableData', 'perPage', 'successResponse', 'columnsView', 'columnsExcepted', 'themeTableClassesFilter', 'sortOrders', 'pagination', 'totalLink', 'filters', 'actionMultiDelete'],
+  props: ['idPage', 'routeCreate', 'showSettings', 'hideButtons', 'columns', 'themeTableClasses', 'dataTable', 'tableData', 'perPage', 'successResponse', 'columnsView', 'columnsExcepted', 'themeTableClassesFilter', 'sortOrders', 'pagination', 'filters', // functions
+  'toggleShowSettings', 'deleteResotreMulti', 'getData'],
   components: {
     // global
     TableWrapper: _TableWrapper__WEBPACK_IMPORTED_MODULE_0__["default"],
@@ -2490,80 +2499,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["pagination", "totalLink"]
+  props: ['pagination', 'getData'],
+  methods: {
+    gotopage: function gotopage(numPage) {
+      this.getData(this.pagination.path + '?page=' + numPage);
+    }
+  }
 });
 
 /***/ }),
@@ -2690,7 +2632,7 @@ function _readOnlyError(name) { throw new Error("\"" + name + "\" is read-only")
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['showSettings', 'idPage', 'columns'],
+  props: ['showSettings', 'idPage', 'columns', 'toggleShowSettings'],
   data: function data() {
     return {
       successGetSettings: false,
@@ -2804,7 +2746,7 @@ function _readOnlyError(name) { throw new Error("\"" + name + "\" is read-only")
       this.saveSettingsInDB(oldSettings);
       localStorage.setItem(this.$nameSettingsInDB, JSON.stringify(oldSettings)); // close settings
 
-      this.$emit('toggleShowSettings');
+      this.toggleShowSettings();
     },
     setScreenSizesFromLocale: function setScreenSizesFromLocale() {
       var _this2 = this;
@@ -2918,15 +2860,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["successResponse", "dataTable", "columns", "themeTableClassesFilter", "columnsView", "columnsExcepted", "sortOrders", "tableData"],
+  props: ["successResponse", "dataTable", "columns", "themeTableClassesFilter", "columnsView", "columnsExcepted", "sortOrders", "tableData", "getData"],
   methods: {
     sortBy: function sortBy(key) {
-      // console.log('a', key)
       if (this.columnsExcepted.indexOf(key) == -1) {
         this.tableData.sortBy = key;
         this.sortOrders[key] = this.sortOrders[key] * -1;
         this.tableData.dir = this.sortOrders[key] == 1 ? "asc" : "desc";
-        this.$emit('getData');
+        this.getData();
       }
     },
     classesTh: function classesTh(columnName) {
@@ -3176,7 +3117,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["tableData"]
+  props: ['tableData', 'getData']
 });
 
 /***/ }),
@@ -3287,7 +3228,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["tableData"]
+  props: ["tableData", 'getData']
 });
 
 /***/ }),
@@ -3404,7 +3345,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["columns", "themeTableClasses", "tableData", "perPage", "actionMultiDelete"],
+  props: ["columns", "themeTableClasses", "tableData", "perPage", "deleteResotreMulti", "getData"],
   data: function data() {
     return {
       updatedColumns: []
@@ -3415,10 +3356,6 @@ __webpack_require__.r(__webpack_exports__);
       this.updatedColumns = this.columns.filter(function (column) {
         return column.name != 'show_plus' && column.name != 'select_row';
       });
-    },
-    deleteMulti: function deleteMulti(action) {
-      this.actionMultiDelete.action = action;
-      this.$emit('deleteResotreMulti');
     }
   },
   watch: {
@@ -3481,7 +3418,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["tableData"]
+  props: ['tableData', 'getData']
 });
 
 /***/ }),
@@ -3534,7 +3471,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["tableData"]
+  props: ['tableData', 'getData']
 });
 
 /***/ }),
@@ -3571,7 +3508,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["tableData", "hotels"]
+  props: ["tableData", "hotels", "getData"]
 });
 
 /***/ }),
@@ -3608,7 +3545,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["tableData", "travelCategories"]
+  props: ["tableData", "travelCategories", "getData"]
 });
 
 /***/ }),
@@ -3645,7 +3582,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["tableData", "travelPrograms"]
+  props: ["tableData", "travelPrograms", "getData"]
 });
 
 /***/ }),
@@ -3682,7 +3619,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["tableData", "travels"]
+  props: ["tableData", "travels", "getData"]
 });
 
 /***/ }),
@@ -4880,13 +4817,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -5096,6 +5026,13 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -5134,6 +5071,12 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       }, {
         label: "message",
         name: "message"
+      }, {
+        label: "adults",
+        name: "adults"
+      }, {
+        label: "children",
+        name: "children"
       }, {
         label: "Offer",
         name: "offer"
@@ -5220,11 +5163,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_dataTables_buttons_DeleteRow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../components/dataTables/buttons/DeleteRow */ "./resources/js/components/dataTables/buttons/DeleteRow.vue");
 /* harmony import */ var _components_dataTables_Index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../components/dataTables/Index */ "./resources/js/components/dataTables/Index.vue");
 /* harmony import */ var _mixins_MixinsDatatable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../mixins/MixinsDatatable */ "./resources/js/mixins/MixinsDatatable.js");
-//
-//
-//
-//
-//
 //
 //
 //
@@ -5607,6 +5545,15 @@ __webpack_require__.r(__webpack_exports__);
         if (response.status === 200) {
           _this.hotelEdit = response.data.data;
 
+          if (!_this.hotelEdit.features.length) {
+            _this.hotelEdit.features.push({
+              value: ''
+            });
+          }
+
+          _this.hotelEdit.deletedGallery = [];
+          _this.hotelEdit.deletedFeatures = [];
+
           _this.form.fill(_this.hotelEdit);
 
           ToastReq.fire({
@@ -5710,7 +5657,39 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _components_form_UploadImage__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../components/form/UploadImage */ "./resources/js/components/form/UploadImage.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _components_form_UploadImage__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../components/form/UploadImage */ "./resources/js/components/form/UploadImage.vue");
+
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5920,7 +5899,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['form', 'typeForm'],
   components: {
-    UploadImage: _components_form_UploadImage__WEBPACK_IMPORTED_MODULE_0__["default"]
+    UploadImage: _components_form_UploadImage__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      addressesSuggested: [],
+      currentAddressSuggested: ''
+    };
+  },
+  watch: {
+    currentAddressSuggested: function currentAddressSuggested(newVal) {
+      if (newVal !== '') {
+        this.form.address = newVal;
+      }
+    }
   },
   methods: {
     addNewFeature: function addNewFeature() {
@@ -5944,15 +5936,127 @@ __webpack_require__.r(__webpack_exports__);
       scriptMap.setAttribute('async', true);
       scriptMap.setAttribute('defer', true);
       scriptMap.setAttribute('src', 'https://maps.googleapis.com/maps/api/js?key=AIzaSyADsFcbM6g-A_nUwh41pFn9EgDdlRC6lGY&language=ar&region=EG&callback=initMapHotel');
-    }
+    },
+    getTravelCategoriesSelect: function () {
+      var _getTravelCategoriesSelect = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        var _this = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios.get('/travel_categories/select').then(function (response) {
+                  if (response.status === 200) {
+                    var data = response.data;
+
+                    if (_typeof(data) === 'object') {
+                      var _this$addressesSugges;
+
+                      var addresses = data.travel_categories.filter(function (category) {
+                        return category.type === 3;
+                      }).map(function (category) {
+                        return category.name;
+                      });
+
+                      (_this$addressesSugges = _this.addressesSuggested).push.apply(_this$addressesSugges, _toConsumableArray(addresses));
+
+                      _this.addressesSuggested = _this.addressesSuggested.filter(function (address, index, self) {
+                        return self.indexOf(address) === index && address !== 'شم النسيم' && address !== 'العيد';
+                      });
+                    } else {
+                      setTimeout(function () {
+                        _this.getTravelCategoriesSelect();
+                      }, 500);
+                    }
+                  }
+                })["catch"](function (errors) {
+                  setTimeout(function () {
+                    _this.getTravelCategoriesSelect();
+                  }, 500);
+                });
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }));
+
+      function getTravelCategoriesSelect() {
+        return _getTravelCategoriesSelect.apply(this, arguments);
+      }
+
+      return getTravelCategoriesSelect;
+    }(),
+    getHotelsSelect: function () {
+      var _getHotelsSelect = _asyncToGenerator(
+      /*#__PURE__*/
+      _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee2() {
+        var _this2 = this;
+
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.next = 2;
+                return axios.get('/hotels/select').then(function (response) {
+                  if (response.status === 200) {
+                    var data = response.data;
+
+                    if (_typeof(data) === 'object') {
+                      var _this2$addressesSugge;
+
+                      var addresses = data.hotels.map(function (hotel) {
+                        return hotel.address;
+                      });
+
+                      (_this2$addressesSugge = _this2.addressesSuggested).push.apply(_this2$addressesSugge, _toConsumableArray(addresses));
+
+                      _this2.addressesSuggested = _this2.addressesSuggested.filter(function (address, index, self) {
+                        return self.indexOf(address) === index;
+                      });
+                    } else {
+                      setTimeout(function () {
+                        _this2.getHotelsSelect();
+                      }, 500);
+                    }
+                  }
+                })["catch"](function (errors) {
+                  setTimeout(function () {
+                    _this2.getHotelsSelect();
+                  }, 500);
+                });
+
+              case 2:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      function getHotelsSelect() {
+        return _getHotelsSelect.apply(this, arguments);
+      }
+
+      return getHotelsSelect;
+    }()
   },
   mounted: function mounted() {
-    var _this = this;
+    var _this3 = this;
+
+    this.getHotelsSelect().then(function () {
+      _this3.getTravelCategoriesSelect();
+    });
 
     if (this.typeForm == 'edit') {
       var getData = setInterval(function () {
-        if (_this.form.name != '') {
-          _this.showGoogleMapHotel();
+        if (_this3.form.name != '') {
+          _this3.showGoogleMapHotel();
 
           clearInterval(getData);
         }
@@ -5984,11 +6088,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_dataTables_Index__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./../../components/dataTables/Index */ "./resources/js/components/dataTables/Index.vue");
 /* harmony import */ var _mixins_MixinsDatatable__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./../../mixins/MixinsDatatable */ "./resources/js/mixins/MixinsDatatable.js");
 /* harmony import */ var _ModalLocation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ModalLocation */ "./resources/js/views/hotels/ModalLocation.vue");
-//
-//
-//
-//
-//
 //
 //
 //
@@ -7320,11 +7419,6 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -7428,11 +7522,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_dataTables_buttons_DeleteRow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../components/dataTables/buttons/DeleteRow */ "./resources/js/components/dataTables/buttons/DeleteRow.vue");
 /* harmony import */ var _components_dataTables_Index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../components/dataTables/Index */ "./resources/js/components/dataTables/Index.vue");
 /* harmony import */ var _mixins_MixinsDatatable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./../../mixins/MixinsDatatable */ "./resources/js/mixins/MixinsDatatable.js");
-//
-//
-//
-//
-//
 //
 //
 //
@@ -7990,11 +8079,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_dataTables_filters_hotelsSelect__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./../../components/dataTables/filters/hotelsSelect */ "./resources/js/components/dataTables/filters/hotelsSelect.vue");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-//
-//
-//
-//
-//
 //
 //
 //
@@ -8760,11 +8844,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -8896,6 +8975,7 @@ __webpack_require__.r(__webpack_exports__);
       urlCreateTravelCategory: '/travel_categories',
       form: new Form({
         name: '',
+        type: 3,
         discount: '',
         image: '',
         travel_program_id: '',
@@ -9018,6 +9098,7 @@ __webpack_require__.r(__webpack_exports__);
       form: new Form({
         id: 0,
         name: '',
+        type: 3,
         discount: '',
         image: '',
         travel_program_id: '',
@@ -9186,6 +9267,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['form', 'typeForm'],
@@ -9195,7 +9290,23 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       urlGetTravelPrograms: '/travel_programs/select',
-      travelProgramsSelect: []
+      travelProgramsSelect: [],
+      categoryTypes: [{
+        value: 1,
+        label: 'حج'
+      }, {
+        value: 2,
+        label: 'عمرة'
+      }, {
+        value: 3,
+        label: 'سياحة داخلية'
+      }, {
+        value: 4,
+        label: 'سياحة خارجية'
+      }, {
+        value: 5,
+        label: 'شهر العسل'
+      }]
     };
   },
   methods: {
@@ -9370,6 +9481,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
+//
+//
 
 
 
@@ -9398,22 +9512,25 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       travelProgramsSelect: [],
       filters: ['trashed', 'created-between', 'search'],
       columns: [{
-        label: "ID",
+        label: "id",
         name: "id"
       }, {
-        label: "Name",
+        label: "name",
         name: "name"
+      }, {
+        label: "type",
+        name: "type"
       }, {
         label: "discount",
         name: "discount"
       }, {
-        label: "Image",
+        label: "image",
         name: "image"
       }, {
-        label: "Order",
+        label: "order",
         name: "order"
       }, {
-        label: "Travel program",
+        label: "travel program",
         name: "travel_program_id"
       }, {
         label: "Created by",
@@ -9425,7 +9542,23 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
         label: "Created at",
         name: "created_at"
       }],
-      columnsExceptedSorting: ['travel_program_id', 'user_id']
+      columnsExceptedSorting: ['travel_program_id', 'user_id'],
+      categoryTypes: [{
+        value: 1,
+        label: 'حج'
+      }, {
+        value: 2,
+        label: 'عمرة'
+      }, {
+        value: 3,
+        label: 'سياحة داخلية'
+      }, {
+        value: 4,
+        label: 'سياحة خارجية'
+      }, {
+        value: 5,
+        label: 'شهر العسل'
+      }]
     };
   },
   methods: {
@@ -9985,11 +10118,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 
@@ -10144,6 +10272,7 @@ __webpack_require__.r(__webpack_exports__);
         image: "",
         gallery: [],
         hotel_id: "",
+        hotel_2_id: "",
         travel_category_id: "",
         display: 1,
         offers: [{
@@ -10319,6 +10448,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         gallery: [],
         deletedGallery: [],
         hotel_id: "",
+        hotel_2_id: "",
         travel_category_id: "",
         display: 1,
         deletedOffers: [],
@@ -10878,6 +11008,21 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['form', 'typeForm'],
@@ -10981,8 +11126,14 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
           var indexNumber = error.indexOf('.');
 
           if (indexNumber === 6) {
-            if (parseInt(error[indexNumber + 1]) === index) {
-              indexes.push(index);
+            if (index < 10) {
+              if (parseInt(error[indexNumber + 1]) === index) {
+                indexes.push(index);
+              }
+            } else {
+              if (parseInt(error[indexNumber + 1] + error[indexNumber + 2]) === index) {
+                indexes.push(index);
+              }
             }
           }
         }
@@ -11241,6 +11392,19 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -11306,6 +11470,9 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       }, {
         label: "Hotel",
         name: "hotel_id"
+      }, {
+        label: "Hotel 2",
+        name: "hotel_2_id"
       }, {
         label: "Travel category",
         name: "travel_category_id"
@@ -11906,6 +12073,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -11943,12 +12146,18 @@ __webpack_require__.r(__webpack_exports__);
         image: "",
         gallery: [],
         hotel_id: "",
+        hotel_2_id: "",
         travel_category_id: "",
         display: 1,
         offers_count: 0,
         offers: [],
         hotel: {
-          name: ''
+          name: '',
+          address: ''
+        },
+        hotel_2: {
+          name: '',
+          address: ''
         },
         user: {
           name: ''
@@ -11970,7 +12179,8 @@ __webpack_require__.r(__webpack_exports__);
       transports: {
         0: 'بدون انتقالات',
         1: 'شامل الانتقالات'
-      }
+      },
+      counterText: ['الأول', 'الثانى', 'الثالث', 'الرابع', 'الخامس', 'السادس', 'السابع', 'الثامن', 'التاسع', 'العاشر', 'الحادى عشر', 'الثانى عشر', 'الثالث عشر', 'الرابع عشر', 'الخامس عشر']
     };
   },
   methods: {
@@ -12464,11 +12674,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_dataTables_buttons_ForceDeleteRow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../components/dataTables/buttons/ForceDeleteRow */ "./resources/js/components/dataTables/buttons/ForceDeleteRow.vue");
 /* harmony import */ var _components_dataTables_Index__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../components/dataTables/Index */ "./resources/js/components/dataTables/Index.vue");
 /* harmony import */ var _mixins_MixinsDatatable__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./../../mixins/MixinsDatatable */ "./resources/js/mixins/MixinsDatatable.js");
-//
-//
-//
-//
-//
 //
 //
 //
@@ -48269,6 +48474,743 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/regenerator-runtime/runtime.js":
+/*!*****************************************************!*\
+  !*** ./node_modules/regenerator-runtime/runtime.js ***!
+  \*****************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var runtime = (function (exports) {
+  "use strict";
+
+  var Op = Object.prototype;
+  var hasOwn = Op.hasOwnProperty;
+  var undefined; // More compressible than void 0.
+  var $Symbol = typeof Symbol === "function" ? Symbol : {};
+  var iteratorSymbol = $Symbol.iterator || "@@iterator";
+  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+    var generator = Object.create(protoGenerator.prototype);
+    var context = new Context(tryLocsList || []);
+
+    // The ._invoke method unifies the implementations of the .next,
+    // .throw, and .return methods.
+    generator._invoke = makeInvokeMethod(innerFn, self, context);
+
+    return generator;
+  }
+  exports.wrap = wrap;
+
+  // Try/catch helper to minimize deoptimizations. Returns a completion
+  // record like context.tryEntries[i].completion. This interface could
+  // have been (and was previously) designed to take a closure to be
+  // invoked without arguments, but in all the cases we care about we
+  // already have an existing method we want to call, so there's no need
+  // to create a new function object. We can even get away with assuming
+  // the method takes exactly one argument, since that happens to be true
+  // in every case, so we don't have to touch the arguments object. The
+  // only additional allocation required is the completion record, which
+  // has a stable shape and so hopefully should be cheap to allocate.
+  function tryCatch(fn, obj, arg) {
+    try {
+      return { type: "normal", arg: fn.call(obj, arg) };
+    } catch (err) {
+      return { type: "throw", arg: err };
+    }
+  }
+
+  var GenStateSuspendedStart = "suspendedStart";
+  var GenStateSuspendedYield = "suspendedYield";
+  var GenStateExecuting = "executing";
+  var GenStateCompleted = "completed";
+
+  // Returning this object from the innerFn has the same effect as
+  // breaking out of the dispatch switch statement.
+  var ContinueSentinel = {};
+
+  // Dummy constructor functions that we use as the .constructor and
+  // .constructor.prototype properties for functions that return Generator
+  // objects. For full spec compliance, you may wish to configure your
+  // minifier not to mangle the names of these two functions.
+  function Generator() {}
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+
+  // This is a polyfill for %IteratorPrototype% for environments that
+  // don't natively support it.
+  var IteratorPrototype = {};
+  IteratorPrototype[iteratorSymbol] = function () {
+    return this;
+  };
+
+  var getProto = Object.getPrototypeOf;
+  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  if (NativeIteratorPrototype &&
+      NativeIteratorPrototype !== Op &&
+      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+    // This environment has a native %IteratorPrototype%; use it instead
+    // of the polyfill.
+    IteratorPrototype = NativeIteratorPrototype;
+  }
+
+  var Gp = GeneratorFunctionPrototype.prototype =
+    Generator.prototype = Object.create(IteratorPrototype);
+  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
+  GeneratorFunctionPrototype.constructor = GeneratorFunction;
+  GeneratorFunctionPrototype[toStringTagSymbol] =
+    GeneratorFunction.displayName = "GeneratorFunction";
+
+  // Helper for defining the .next, .throw, and .return methods of the
+  // Iterator interface in terms of a single ._invoke method.
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function(method) {
+      prototype[method] = function(arg) {
+        return this._invoke(method, arg);
+      };
+    });
+  }
+
+  exports.isGeneratorFunction = function(genFun) {
+    var ctor = typeof genFun === "function" && genFun.constructor;
+    return ctor
+      ? ctor === GeneratorFunction ||
+        // For the native GeneratorFunction constructor, the best we can
+        // do is to check its .name property.
+        (ctor.displayName || ctor.name) === "GeneratorFunction"
+      : false;
+  };
+
+  exports.mark = function(genFun) {
+    if (Object.setPrototypeOf) {
+      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+    } else {
+      genFun.__proto__ = GeneratorFunctionPrototype;
+      if (!(toStringTagSymbol in genFun)) {
+        genFun[toStringTagSymbol] = "GeneratorFunction";
+      }
+    }
+    genFun.prototype = Object.create(Gp);
+    return genFun;
+  };
+
+  // Within the body of any async function, `await x` is transformed to
+  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+  // `hasOwn.call(value, "__await")` to determine if the yielded value is
+  // meant to be awaited.
+  exports.awrap = function(arg) {
+    return { __await: arg };
+  };
+
+  function AsyncIterator(generator) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+      if (record.type === "throw") {
+        reject(record.arg);
+      } else {
+        var result = record.arg;
+        var value = result.value;
+        if (value &&
+            typeof value === "object" &&
+            hasOwn.call(value, "__await")) {
+          return Promise.resolve(value.__await).then(function(value) {
+            invoke("next", value, resolve, reject);
+          }, function(err) {
+            invoke("throw", err, resolve, reject);
+          });
+        }
+
+        return Promise.resolve(value).then(function(unwrapped) {
+          // When a yielded Promise is resolved, its final value becomes
+          // the .value of the Promise<{value,done}> result for the
+          // current iteration.
+          result.value = unwrapped;
+          resolve(result);
+        }, function(error) {
+          // If a rejected Promise was yielded, throw the rejection back
+          // into the async generator function so it can be handled there.
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+    }
+
+    var previousPromise;
+
+    function enqueue(method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new Promise(function(resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise =
+        // If enqueue has been called before, then we want to wait until
+        // all previous Promises have been resolved before calling invoke,
+        // so that results are always delivered in the correct order. If
+        // enqueue has not been called before, then it is important to
+        // call invoke immediately, without waiting on a callback to fire,
+        // so that the async generator function has the opportunity to do
+        // any necessary setup in a predictable way. This predictability
+        // is why the Promise constructor synchronously invokes its
+        // executor callback, and why async functions synchronously
+        // execute code before the first await. Since we implement simple
+        // async functions in terms of async generators, it is especially
+        // important to get this right, even though it requires care.
+        previousPromise ? previousPromise.then(
+          callInvokeWithMethodAndArg,
+          // Avoid propagating failures to Promises returned by later
+          // invocations of the iterator.
+          callInvokeWithMethodAndArg
+        ) : callInvokeWithMethodAndArg();
+    }
+
+    // Define the unified helper method that is used to implement .next,
+    // .throw, and .return (see defineIteratorMethods).
+    this._invoke = enqueue;
+  }
+
+  defineIteratorMethods(AsyncIterator.prototype);
+  AsyncIterator.prototype[asyncIteratorSymbol] = function () {
+    return this;
+  };
+  exports.AsyncIterator = AsyncIterator;
+
+  // Note that simple async functions are implemented on top of
+  // AsyncIterator objects; they just return a Promise for the value of
+  // the final result produced by the iterator.
+  exports.async = function(innerFn, outerFn, self, tryLocsList) {
+    var iter = new AsyncIterator(
+      wrap(innerFn, outerFn, self, tryLocsList)
+    );
+
+    return exports.isGeneratorFunction(outerFn)
+      ? iter // If outerFn is a generator, return the full iterator.
+      : iter.next().then(function(result) {
+          return result.done ? result.value : iter.next();
+        });
+  };
+
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = GenStateSuspendedStart;
+
+    return function invoke(method, arg) {
+      if (state === GenStateExecuting) {
+        throw new Error("Generator is already running");
+      }
+
+      if (state === GenStateCompleted) {
+        if (method === "throw") {
+          throw arg;
+        }
+
+        // Be forgiving, per 25.3.3.3.3 of the spec:
+        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+        return doneResult();
+      }
+
+      context.method = method;
+      context.arg = arg;
+
+      while (true) {
+        var delegate = context.delegate;
+        if (delegate) {
+          var delegateResult = maybeInvokeDelegate(delegate, context);
+          if (delegateResult) {
+            if (delegateResult === ContinueSentinel) continue;
+            return delegateResult;
+          }
+        }
+
+        if (context.method === "next") {
+          // Setting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          context.sent = context._sent = context.arg;
+
+        } else if (context.method === "throw") {
+          if (state === GenStateSuspendedStart) {
+            state = GenStateCompleted;
+            throw context.arg;
+          }
+
+          context.dispatchException(context.arg);
+
+        } else if (context.method === "return") {
+          context.abrupt("return", context.arg);
+        }
+
+        state = GenStateExecuting;
+
+        var record = tryCatch(innerFn, self, context);
+        if (record.type === "normal") {
+          // If an exception is thrown from innerFn, we leave state ===
+          // GenStateExecuting and loop back for another invocation.
+          state = context.done
+            ? GenStateCompleted
+            : GenStateSuspendedYield;
+
+          if (record.arg === ContinueSentinel) {
+            continue;
+          }
+
+          return {
+            value: record.arg,
+            done: context.done
+          };
+
+        } else if (record.type === "throw") {
+          state = GenStateCompleted;
+          // Dispatch the exception by looping back around to the
+          // context.dispatchException(context.arg) call above.
+          context.method = "throw";
+          context.arg = record.arg;
+        }
+      }
+    };
+  }
+
+  // Call delegate.iterator[context.method](context.arg) and handle the
+  // result, either by returning a { value, done } result from the
+  // delegate iterator, or by modifying context.method and context.arg,
+  // setting context.delegate to null, and returning the ContinueSentinel.
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+    if (method === undefined) {
+      // A .throw or .return when the delegate iterator has no .throw
+      // method always terminates the yield* loop.
+      context.delegate = null;
+
+      if (context.method === "throw") {
+        // Note: ["return"] must be used for ES3 parsing compatibility.
+        if (delegate.iterator["return"]) {
+          // If the delegate iterator has a return method, give it a
+          // chance to clean up.
+          context.method = "return";
+          context.arg = undefined;
+          maybeInvokeDelegate(delegate, context);
+
+          if (context.method === "throw") {
+            // If maybeInvokeDelegate(context) changed context.method from
+            // "return" to "throw", let that override the TypeError below.
+            return ContinueSentinel;
+          }
+        }
+
+        context.method = "throw";
+        context.arg = new TypeError(
+          "The iterator does not provide a 'throw' method");
+      }
+
+      return ContinueSentinel;
+    }
+
+    var record = tryCatch(method, delegate.iterator, context.arg);
+
+    if (record.type === "throw") {
+      context.method = "throw";
+      context.arg = record.arg;
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    var info = record.arg;
+
+    if (! info) {
+      context.method = "throw";
+      context.arg = new TypeError("iterator result is not an object");
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    if (info.done) {
+      // Assign the result of the finished delegate to the temporary
+      // variable specified by delegate.resultName (see delegateYield).
+      context[delegate.resultName] = info.value;
+
+      // Resume execution at the desired location (see delegateYield).
+      context.next = delegate.nextLoc;
+
+      // If context.method was "throw" but the delegate handled the
+      // exception, let the outer generator proceed normally. If
+      // context.method was "next", forget context.arg since it has been
+      // "consumed" by the delegate iterator. If context.method was
+      // "return", allow the original .return call to continue in the
+      // outer generator.
+      if (context.method !== "return") {
+        context.method = "next";
+        context.arg = undefined;
+      }
+
+    } else {
+      // Re-yield the result returned by the delegate method.
+      return info;
+    }
+
+    // The delegate iterator is finished, so forget it and continue with
+    // the outer generator.
+    context.delegate = null;
+    return ContinueSentinel;
+  }
+
+  // Define Generator.prototype.{next,throw,return} in terms of the
+  // unified ._invoke helper method.
+  defineIteratorMethods(Gp);
+
+  Gp[toStringTagSymbol] = "Generator";
+
+  // A Generator should always return itself as the iterator object when the
+  // @@iterator function is called on it. Some browsers' implementations of the
+  // iterator prototype chain incorrectly implement this, causing the Generator
+  // object to not be returned from this call. This ensures that doesn't happen.
+  // See https://github.com/facebook/regenerator/issues/274 for more details.
+  Gp[iteratorSymbol] = function() {
+    return this;
+  };
+
+  Gp.toString = function() {
+    return "[object Generator]";
+  };
+
+  function pushTryEntry(locs) {
+    var entry = { tryLoc: locs[0] };
+
+    if (1 in locs) {
+      entry.catchLoc = locs[1];
+    }
+
+    if (2 in locs) {
+      entry.finallyLoc = locs[2];
+      entry.afterLoc = locs[3];
+    }
+
+    this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal";
+    delete record.arg;
+    entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    // The root entry object (effectively a try statement without a catch
+    // or a finally block) gives us a place to store values thrown from
+    // locations where there is no enclosing try statement.
+    this.tryEntries = [{ tryLoc: "root" }];
+    tryLocsList.forEach(pushTryEntry, this);
+    this.reset(true);
+  }
+
+  exports.keys = function(object) {
+    var keys = [];
+    for (var key in object) {
+      keys.push(key);
+    }
+    keys.reverse();
+
+    // Rather than returning an object with a next method, we keep
+    // things simple and return the next function itself.
+    return function next() {
+      while (keys.length) {
+        var key = keys.pop();
+        if (key in object) {
+          next.value = key;
+          next.done = false;
+          return next;
+        }
+      }
+
+      // To avoid creating an additional object, we just hang the .value
+      // and .done properties off the next function object itself. This
+      // also ensures that the minifier will not anonymize the function.
+      next.done = true;
+      return next;
+    };
+  };
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) {
+        return iteratorMethod.call(iterable);
+      }
+
+      if (typeof iterable.next === "function") {
+        return iterable;
+      }
+
+      if (!isNaN(iterable.length)) {
+        var i = -1, next = function next() {
+          while (++i < iterable.length) {
+            if (hasOwn.call(iterable, i)) {
+              next.value = iterable[i];
+              next.done = false;
+              return next;
+            }
+          }
+
+          next.value = undefined;
+          next.done = true;
+
+          return next;
+        };
+
+        return next.next = next;
+      }
+    }
+
+    // Return an iterator with no values.
+    return { next: doneResult };
+  }
+  exports.values = values;
+
+  function doneResult() {
+    return { value: undefined, done: true };
+  }
+
+  Context.prototype = {
+    constructor: Context,
+
+    reset: function(skipTempReset) {
+      this.prev = 0;
+      this.next = 0;
+      // Resetting context._sent for legacy support of Babel's
+      // function.sent implementation.
+      this.sent = this._sent = undefined;
+      this.done = false;
+      this.delegate = null;
+
+      this.method = "next";
+      this.arg = undefined;
+
+      this.tryEntries.forEach(resetTryEntry);
+
+      if (!skipTempReset) {
+        for (var name in this) {
+          // Not sure about the optimal order of these conditions:
+          if (name.charAt(0) === "t" &&
+              hasOwn.call(this, name) &&
+              !isNaN(+name.slice(1))) {
+            this[name] = undefined;
+          }
+        }
+      }
+    },
+
+    stop: function() {
+      this.done = true;
+
+      var rootEntry = this.tryEntries[0];
+      var rootRecord = rootEntry.completion;
+      if (rootRecord.type === "throw") {
+        throw rootRecord.arg;
+      }
+
+      return this.rval;
+    },
+
+    dispatchException: function(exception) {
+      if (this.done) {
+        throw exception;
+      }
+
+      var context = this;
+      function handle(loc, caught) {
+        record.type = "throw";
+        record.arg = exception;
+        context.next = loc;
+
+        if (caught) {
+          // If the dispatched exception was caught by a catch block,
+          // then let that catch block handle the exception normally.
+          context.method = "next";
+          context.arg = undefined;
+        }
+
+        return !! caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        var record = entry.completion;
+
+        if (entry.tryLoc === "root") {
+          // Exception thrown outside of any try block that could handle
+          // it, so set the completion value of the entire function to
+          // throw the exception.
+          return handle("end");
+        }
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc");
+          var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            } else if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            }
+
+          } else if (hasFinally) {
+            if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else {
+            throw new Error("try statement without catch or finally");
+          }
+        }
+      }
+    },
+
+    abrupt: function(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc <= this.prev &&
+            hasOwn.call(entry, "finallyLoc") &&
+            this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+
+      if (finallyEntry &&
+          (type === "break" ||
+           type === "continue") &&
+          finallyEntry.tryLoc <= arg &&
+          arg <= finallyEntry.finallyLoc) {
+        // Ignore the finally entry if control is not jumping to a
+        // location outside the try/catch block.
+        finallyEntry = null;
+      }
+
+      var record = finallyEntry ? finallyEntry.completion : {};
+      record.type = type;
+      record.arg = arg;
+
+      if (finallyEntry) {
+        this.method = "next";
+        this.next = finallyEntry.finallyLoc;
+        return ContinueSentinel;
+      }
+
+      return this.complete(record);
+    },
+
+    complete: function(record, afterLoc) {
+      if (record.type === "throw") {
+        throw record.arg;
+      }
+
+      if (record.type === "break" ||
+          record.type === "continue") {
+        this.next = record.arg;
+      } else if (record.type === "return") {
+        this.rval = this.arg = record.arg;
+        this.method = "return";
+        this.next = "end";
+      } else if (record.type === "normal" && afterLoc) {
+        this.next = afterLoc;
+      }
+
+      return ContinueSentinel;
+    },
+
+    finish: function(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) {
+          this.complete(entry.completion, entry.afterLoc);
+          resetTryEntry(entry);
+          return ContinueSentinel;
+        }
+      }
+    },
+
+    "catch": function(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+          if (record.type === "throw") {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+          return thrown;
+        }
+      }
+
+      // The context.catch method must only be called with a location
+      // argument that corresponds to a known catch block.
+      throw new Error("illegal catch attempt");
+    },
+
+    delegateYield: function(iterable, resultName, nextLoc) {
+      this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      };
+
+      if (this.method === "next") {
+        // Deliberately forget the last sent value so that we don't
+        // accidentally pass it on to the delegate.
+        this.arg = undefined;
+      }
+
+      return ContinueSentinel;
+    }
+  };
+
+  // Regardless of whether this script is executing as a CommonJS module
+  // or not, return the runtime object so that we can declare the variable
+  // regeneratorRuntime in the outer scope, which allows this module to be
+  // injected easily by `bin/regenerator --include-runtime script.js`.
+  return exports;
+
+}(
+  // If this script is executing as a CommonJS module, use module.exports
+  // as the regeneratorRuntime namespace. Otherwise create a new empty
+  // object. Either way, the resulting object will be used to initialize
+  // the regeneratorRuntime variable at the top of this file.
+   true ? module.exports : undefined
+));
+
+try {
+  regeneratorRuntime = runtime;
+} catch (accidentalStrictMode) {
+  // This module should not be running in strict mode, so the above
+  // assignment should always work unless something is misconfigured. Just
+  // in case runtime.js accidentally runs in strict mode, we can escape
+  // strict mode using a global Function call. This could conceivably fail
+  // if a Content Security Policy forbids using Function, but in that case
+  // the proper solution is to fix the accidental strict mode problem. If
+  // you've misconfigured your bundler to force strict mode and applied a
+  // CSP to forbid Function, and you're not willing to fix either of those
+  // problems, please detail your unique predicament in a GitHub issue.
+  Function("r", "regeneratorRuntime = r")(runtime);
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/setimmediate/setImmediate.js":
 /*!***************************************************!*\
   !*** ./node_modules/setimmediate/setImmediate.js ***!
@@ -54993,7 +55935,8 @@ var render = function() {
     _c(
       "nav",
       {
-        staticClass: "main-header navbar navbar-expand navbar-dark navbar-info"
+        staticClass:
+          "main-header navbar navbar-expand navbar-dark navbar-warning"
       },
       [
         _c("ul", { staticClass: "navbar-nav" }, [
@@ -55102,7 +56045,7 @@ var render = function() {
   return _c("div", { staticClass: "sidebar-layout" }, [
     _c(
       "aside",
-      { staticClass: "main-sidebar elevation-4 sidebar-dark-info" },
+      { staticClass: "main-sidebar elevation-4 sidebar-dark-warning" },
       [
         _c(
           "router-link",
@@ -55110,7 +56053,7 @@ var render = function() {
           [
             _c("img", {
               staticClass: "brand-image",
-              attrs: { src: _vm.$domain + "/images/logo.jpg", alt: "logo" }
+              attrs: { src: _vm.$domain + _vm.$settings.logo, alt: "logo" }
             })
           ]
         ),
@@ -56157,14 +57100,10 @@ var render = function() {
                           _vm.$route.name == _vm.idPage
                             ? _c("table-settings", {
                                 attrs: {
+                                  toggleShowSettings: _vm.toggleShowSettings,
                                   showSettings: _vm.showSettings,
                                   idPage: _vm.idPage,
                                   columns: _vm.columns
-                                },
-                                on: {
-                                  toggleShowSettings: function($event) {
-                                    return _vm.$emit("toggleShowSettings")
-                                  }
                                 }
                               })
                             : _vm._e(),
@@ -56177,44 +57116,36 @@ var render = function() {
                               _vm._v(" "),
                               _vm.filters.indexOf("activation") != -1
                                 ? _c("activation", {
-                                    attrs: { tableData: _vm.tableData },
-                                    on: {
-                                      getData: function($event) {
-                                        return _vm.$emit("getData")
-                                      }
+                                    attrs: {
+                                      getData: _vm.getData,
+                                      tableData: _vm.tableData
                                     }
                                   })
                                 : _vm._e(),
                               _vm._v(" "),
                               _vm.filters.indexOf("trashed") != -1
                                 ? _c("trashed", {
-                                    attrs: { tableData: _vm.tableData },
-                                    on: {
-                                      getData: function($event) {
-                                        return _vm.$emit("getData")
-                                      }
+                                    attrs: {
+                                      getData: _vm.getData,
+                                      tableData: _vm.tableData
                                     }
                                   })
                                 : _vm._e(),
                               _vm._v(" "),
                               _vm.filters.indexOf("display") != -1
                                 ? _c("display", {
-                                    attrs: { tableData: _vm.tableData },
-                                    on: {
-                                      getData: function($event) {
-                                        return _vm.$emit("getData")
-                                      }
+                                    attrs: {
+                                      getData: _vm.getData,
+                                      tableData: _vm.tableData
                                     }
                                   })
                                 : _vm._e(),
                               _vm._v(" "),
                               _vm.filters.indexOf("created-between") != -1
                                 ? _c("created-between", {
-                                    attrs: { tableData: _vm.tableData },
-                                    on: {
-                                      getData: function($event) {
-                                        return _vm.$emit("getData")
-                                      }
+                                    attrs: {
+                                      getData: _vm.getData,
+                                      tableData: _vm.tableData
                                     }
                                   })
                                 : _vm._e()
@@ -56228,30 +57159,21 @@ var render = function() {
                             [
                               _vm.filters.indexOf("search") != -1
                                 ? _c("search", {
-                                    attrs: { tableData: _vm.tableData },
-                                    on: {
-                                      getData: function($event) {
-                                        return _vm.$emit("getData")
-                                      }
+                                    attrs: {
+                                      getData: _vm.getData,
+                                      tableData: _vm.tableData
                                     }
                                   })
                                 : _vm._e(),
                               _vm._v(" "),
                               _c("filters-columns", {
                                 attrs: {
-                                  actionMultiDelete: _vm.actionMultiDelete,
+                                  getData: _vm.getData,
+                                  deleteResotreMulti: _vm.deleteResotreMulti,
                                   columns: _vm.columns,
                                   themeTableClasses: _vm.themeTableClasses,
                                   tableData: _vm.tableData,
                                   perPage: _vm.perPage
-                                },
-                                on: {
-                                  getData: function($event) {
-                                    return _vm.$emit("getData")
-                                  },
-                                  deleteResotreMulti: function($event) {
-                                    return _vm.$emit("deleteResotreMulti")
-                                  }
                                 }
                               }),
                               _vm._v(" "),
@@ -56319,12 +57241,8 @@ var render = function() {
                                     themeTableClassesFilter:
                                       _vm.themeTableClassesFilter,
                                     sortOrders: _vm.sortOrders,
-                                    tableData: _vm.tableData
-                                  },
-                                  on: {
-                                    getData: function($event) {
-                                      return _vm.$emit("getData")
-                                    }
+                                    tableData: _vm.tableData,
+                                    getData: _vm.getData
                                   }
                                 },
                                 [_vm._t("default")],
@@ -56344,18 +57262,7 @@ var render = function() {
                             _c("pagination", {
                               attrs: {
                                 pagination: _vm.pagination,
-                                totalLink: _vm.totalLink
-                              },
-                              on: {
-                                prev: function($event) {
-                                  return _vm.$emit("prev")
-                                },
-                                next: function($event) {
-                                  return _vm.$emit("next")
-                                },
-                                gotopage: function($event) {
-                                  return _vm.$emit("gotopage")
-                                }
+                                getData: _vm.getData
                               }
                             })
                           ],
@@ -56417,227 +57324,38 @@ var render = function() {
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "col-sm-12 col-md-7" }, [
-      _c("div", { staticClass: "dataTables_paginate" }, [
-        _c(
-          "ul",
-          { staticClass: "pagination" },
-          [
-            _c("li", { staticClass: "page-item" }, [
-              _vm.pagination.prevPageUrl
-                ? _c(
-                    "a",
-                    {
-                      staticClass: "page-link",
-                      attrs: { tabindex: "0" },
-                      on: {
-                        click: function($event) {
-                          return _vm.$emit("prev")
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(_vm.$t("datatable.prev")))]
-                  )
-                : _c(
-                    "a",
-                    {
-                      staticClass: "disabled page-link",
-                      attrs: { disabled: true, tabindex: "0" }
-                    },
-                    [_vm._v(_vm._s(_vm.$t("datatable.prev")))]
-                  )
-            ]),
-            _vm._v(" "),
-            _vm.totalLink > 2 && _vm.pagination.currentPage > 2
-              ? _c(
-                  "li",
-                  {
-                    staticClass: "paginate_button page-item",
-                    class: _vm.pagination.currentPage == 1 ? "active" : ""
+      _c(
+        "div",
+        { staticClass: "dataTables_paginate" },
+        [
+          _vm.pagination.path != ""
+            ? _c("paginate", {
+                attrs: {
+                  "page-count": Math.ceil(
+                    _vm.pagination.total / _vm.pagination.perPage
+                  ),
+                  "click-handler": _vm.gotopage,
+                  "prev-text": "<i class='fas fa-arrow-right'></i>",
+                  "next-text": "<i class='fas fa-arrow-left'></i>",
+                  "container-class": "pagination",
+                  "page-class": "page-item",
+                  "next-class": "next-item",
+                  "prev-class": "prev-item",
+                  "break-view-class": "break-view-class",
+                  "hide-prev-next": true
+                },
+                model: {
+                  value: _vm.pagination.currentPage,
+                  callback: function($$v) {
+                    _vm.$set(_vm.pagination, "currentPage", $$v)
                   },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "page-link",
-                        attrs: { "data-dt-idx": "1", tabindex: "0" },
-                        on: {
-                          click: function($event) {
-                            return _vm.$emit("gotopage", 1)
-                          }
-                        }
-                      },
-                      [_vm._v("1")]
-                    )
-                  ]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.totalLink > 2 && _vm.pagination.currentPage > 3
-              ? _c("li", [_vm._v("...")])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm._l(_vm.totalLink, function(i) {
-              return _c(
-                "li",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.pagination.currentPage - 1 == i,
-                      expression: "(pagination.currentPage - 1) == i"
-                    }
-                  ],
-                  key: Math.random() * i * 100,
-                  staticClass: "paginate_button page-item"
-                },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "page-link",
-                      attrs: { "data-dt-idx": i, tabindex: "0" },
-                      on: {
-                        click: function($event) {
-                          return _vm.$emit("gotopage", i)
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(i))]
-                  )
-                ]
-              )
-            }),
-            _vm._v(" "),
-            _vm._l(_vm.totalLink, function(i) {
-              return _c(
-                "li",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.pagination.currentPage == i,
-                      expression: "pagination.currentPage == i"
-                    }
-                  ],
-                  key: Math.random() * i * 101,
-                  staticClass: "paginate_button page-item",
-                  class: _vm.pagination.currentPage == i ? "active" : ""
-                },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "page-link",
-                      attrs: { "data-dt-idx": i, tabindex: "0" },
-                      on: {
-                        click: function($event) {
-                          return _vm.$emit("gotopage", i)
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(i))]
-                  )
-                ]
-              )
-            }),
-            _vm._v(" "),
-            _vm._l(_vm.totalLink, function(i) {
-              return _c(
-                "li",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.pagination.currentPage + 1 == i,
-                      expression: "(pagination.currentPage + 1) == i"
-                    }
-                  ],
-                  key: Math.random() * i * 102,
-                  staticClass: "paginate_button page-item"
-                },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "page-link",
-                      attrs: { "data-dt-idx": i, tabindex: "0" },
-                      on: {
-                        click: function($event) {
-                          return _vm.$emit("gotopage", i)
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(i))]
-                  )
-                ]
-              )
-            }),
-            _vm._v(" "),
-            _vm.totalLink > 2 && _vm.totalLink - _vm.pagination.currentPage > 2
-              ? _c("li", [_vm._v("...")])
-              : _vm._e(),
-            _vm._v(" "),
-            _vm.totalLink > 2 &&
-            _vm.totalLink - _vm.pagination.currentPage > 1 &&
-            _vm.pagination.currentPage >= 2
-              ? _c(
-                  "li",
-                  {
-                    staticClass: "paginate_button page-item",
-                    class:
-                      _vm.pagination.currentPage == _vm.totalLink
-                        ? "active"
-                        : ""
-                  },
-                  [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "page-link",
-                        attrs: { "data-dt-idx": _vm.totalLink, tabindex: "0" },
-                        on: {
-                          click: function($event) {
-                            return _vm.$emit("gotopage", _vm.totalLink)
-                          }
-                        }
-                      },
-                      [_vm._v(_vm._s(_vm.totalLink))]
-                    )
-                  ]
-                )
-              : _vm._e(),
-            _vm._v(" "),
-            _c("li", { staticClass: "page-item" }, [
-              _vm.pagination.nextPageUrl
-                ? _c(
-                    "a",
-                    {
-                      staticClass: "page-link",
-                      attrs: { tabindex: "0" },
-                      on: {
-                        click: function($event) {
-                          return _vm.$emit("next")
-                        }
-                      }
-                    },
-                    [_vm._v(_vm._s(_vm.$t("datatable.next")))]
-                  )
-                : _c(
-                    "a",
-                    {
-                      staticClass: "disabled page-link",
-                      attrs: { disabled: true, tabindex: "0" }
-                    },
-                    [_vm._v(_vm._s(_vm.$t("datatable.next")))]
-                  )
-            ])
-          ],
-          2
-        )
-      ])
+                  expression: "pagination.currentPage"
+                }
+              })
+            : _vm._e()
+        ],
+        1
+      )
     ])
   ])
 }
@@ -56673,7 +57391,7 @@ var render = function() {
           staticClass: "btn btn-secondary btn-sm btn-settings-table",
           on: {
             click: function($event) {
-              return _vm.$emit("toggleShowSettings")
+              return _vm.toggleShowSettings()
             }
           }
         },
@@ -56698,7 +57416,7 @@ var render = function() {
                 if ($event.target !== $event.currentTarget) {
                   return null
                 }
-                return _vm.$emit("toggleShowSettings")
+                return _vm.toggleShowSettings()
               }
             }
           },
@@ -56711,7 +57429,7 @@ var render = function() {
                     staticClass: "btn btn-transparent btn-close-settings",
                     on: {
                       click: function($event) {
-                        return _vm.$emit("toggleShowSettings")
+                        return _vm.toggleShowSettings()
                       }
                     }
                   },
@@ -57410,7 +58128,7 @@ var render = function() {
             on: {
               click: function($event) {
                 _vm.tableData.active = "1"
-                _vm.$emit("getData")
+                _vm.getData()
               }
             }
           },
@@ -57425,7 +58143,7 @@ var render = function() {
             on: {
               click: function($event) {
                 _vm.tableData.active = "0"
-                _vm.$emit("getData")
+                _vm.getData()
               }
             }
           },
@@ -57440,7 +58158,7 @@ var render = function() {
             on: {
               click: function($event) {
                 _vm.tableData.active = ""
-                _vm.$emit("getData")
+                _vm.getData()
               }
             }
           },
@@ -57565,7 +58283,7 @@ var render = function() {
             on: {
               click: function($event) {
                 _vm.tableData.display = "1"
-                _vm.$emit("getData")
+                _vm.getData()
               }
             }
           },
@@ -57580,7 +58298,7 @@ var render = function() {
             on: {
               click: function($event) {
                 _vm.tableData.display = "0"
-                _vm.$emit("getData")
+                _vm.getData()
               }
             }
           },
@@ -57595,7 +58313,7 @@ var render = function() {
             on: {
               click: function($event) {
                 _vm.tableData.display = ""
-                _vm.$emit("getData")
+                _vm.getData()
               }
             }
           },
@@ -57637,7 +58355,7 @@ var render = function() {
               on: {
                 click: function($event) {
                   $event.preventDefault()
-                  return _vm.deleteMulti("delete")
+                  return _vm.deleteResotreMulti("delete")
                 }
               }
             },
@@ -57653,7 +58371,7 @@ var render = function() {
               on: {
                 click: function($event) {
                   $event.preventDefault()
-                  return _vm.deleteMulti("restore")
+                  return _vm.deleteResotreMulti("restore")
                 }
               }
             },
@@ -57669,7 +58387,7 @@ var render = function() {
               on: {
                 click: function($event) {
                   $event.preventDefault()
-                  return _vm.deleteMulti("force_delete")
+                  return _vm.deleteResotreMulti("force_delete")
                 }
               }
             },
@@ -57716,7 +58434,7 @@ var render = function() {
                 )
               },
               function($event) {
-                return _vm.$emit("getData")
+                return _vm.getData()
               }
             ]
           }
@@ -57856,7 +58574,7 @@ var render = function() {
           staticClass: "btn btn-outline-secondary",
           on: {
             click: function($event) {
-              return _vm.$emit("getData")
+              return _vm.getData()
             }
           }
         },
@@ -57927,7 +58645,7 @@ var render = function() {
               _vm.$set(_vm.tableData, "search", $event.target.value)
             },
             function($event) {
-              return _vm.$emit("getData")
+              return _vm.getData()
             }
           ]
         }
@@ -57943,7 +58661,7 @@ var render = function() {
               on: {
                 click: function($event) {
                   _vm.tableData.search = ""
-                  _vm.$emit("getData")
+                  _vm.getData()
                 }
               }
             },
@@ -57999,7 +58717,7 @@ var render = function() {
             on: {
               click: function($event) {
                 _vm.tableData.trashed = "1"
-                _vm.$emit("getData")
+                _vm.getData()
               }
             }
           },
@@ -58014,7 +58732,7 @@ var render = function() {
             on: {
               click: function($event) {
                 _vm.tableData.trashed = "0"
-                _vm.$emit("getData")
+                _vm.getData()
               }
             }
           },
@@ -58029,7 +58747,7 @@ var render = function() {
             on: {
               click: function($event) {
                 _vm.tableData.trashed = "2"
-                _vm.$emit("getData")
+                _vm.getData()
               }
             }
           },
@@ -58099,7 +58817,7 @@ var render = function() {
                     )
                   },
                   function($event) {
-                    return _vm.$emit("getData")
+                    return _vm.getData()
                   }
                 ]
               }
@@ -58112,7 +58830,10 @@ var render = function() {
               _vm._l(_vm.hotels, function(hotel) {
                 return _c("option", {
                   key: hotel.id,
-                  domProps: { value: hotel.id, textContent: _vm._s(hotel.name) }
+                  domProps: {
+                    value: hotel.id,
+                    textContent: _vm._s(hotel.name + " --- " + hotel.address)
+                  }
                 })
               })
             ],
@@ -58183,7 +58904,7 @@ var render = function() {
                     )
                   },
                   function($event) {
-                    return _vm.$emit("getData")
+                    return _vm.getData()
                   }
                 ]
               }
@@ -58270,7 +58991,7 @@ var render = function() {
                     )
                   },
                   function($event) {
-                    return _vm.$emit("getData")
+                    return _vm.getData()
                   }
                 ]
               }
@@ -58357,7 +59078,7 @@ var render = function() {
                     )
                   },
                   function($event) {
-                    return _vm.$emit("getData")
+                    return _vm.getData()
                   }
                 ]
               }
@@ -59712,18 +60433,7 @@ var render = function() {
         themeTableClassesFilter: _vm.tableData.filter.viewTable,
         sortOrders: _vm.sortOrders,
         pagination: _vm.pagination,
-        totalLink: Math.ceil(_vm.pagination.total / _vm.tableData.length),
         filters: _vm.filters,
-        actionMultiDelete: _vm.actionMultiDelete
-      },
-      on: {
-        prev: function($event) {
-          return _vm.getData(_vm.pagination.prevPageUrl)
-        },
-        next: function($event) {
-          return _vm.getData(_vm.pagination.nextPageUrl)
-        },
-        gotopage: _vm.gotopage,
         toggleShowSettings: _vm.toggleShowSettings,
         deleteResotreMulti: _vm.deleteResotreMulti,
         getData: _vm.getData
@@ -59804,27 +60514,22 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c(
-                "td",
-                {
-                  directives: [
-                    {
-                      name: "show",
-                      rawName: "v-show",
-                      value: _vm.tableData.columns.indexOf("content") != -1,
-                      expression: "tableData.columns.indexOf('content') != -1"
-                    }
-                  ],
-                  staticClass: "content"
-                },
-                [
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(blog.content) +
-                      "\n            "
+              _c("td", {
+                directives: [
+                  {
+                    name: "show",
+                    rawName: "v-show",
+                    value: _vm.tableData.columns.indexOf("content") != -1,
+                    expression: "tableData.columns.indexOf('content') != -1"
+                  }
+                ],
+                staticClass: "content",
+                domProps: {
+                  innerHTML: _vm._s(
+                    blog.content.replace(/(?:\r\n|\r|\n)/g, "<br>")
                   )
-                ]
-              ),
+                }
+              }),
               _vm._v(" "),
               _c(
                 "td",
@@ -60011,18 +60716,7 @@ var render = function() {
         themeTableClassesFilter: _vm.tableData.filter.viewTable,
         sortOrders: _vm.sortOrders,
         pagination: _vm.pagination,
-        totalLink: Math.ceil(_vm.pagination.total / _vm.tableData.length),
         filters: _vm.filters,
-        actionMultiDelete: _vm.actionMultiDelete
-      },
-      on: {
-        prev: function($event) {
-          return _vm.getData(_vm.pagination.prevPageUrl)
-        },
-        next: function($event) {
-          return _vm.getData(_vm.pagination.nextPageUrl)
-        },
-        gotopage: _vm.gotopage,
         toggleShowSettings: _vm.toggleShowSettings,
         deleteResotreMulti: _vm.deleteResotreMulti,
         getData: _vm.getData
@@ -60035,10 +60729,10 @@ var render = function() {
               _vm.$route.name == "bookings"
                 ? _c("travels-select", {
                     attrs: {
+                      getData: _vm.getData,
                       tableData: _vm.tableData,
                       travels: _vm.travelsSelect
-                    },
-                    on: { getData: _vm.getData }
+                    }
                   })
                 : _vm._e()
             ]
@@ -60194,6 +60888,50 @@ var render = function() {
                     {
                       name: "show",
                       rawName: "v-show",
+                      value: _vm.tableData.columns.indexOf("adults") != -1,
+                      expression: "tableData.columns.indexOf('adults') != -1"
+                    }
+                  ],
+                  staticClass: "adults"
+                },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(booking.adults) +
+                      "\n            "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "td",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.tableData.columns.indexOf("children") != -1,
+                      expression: "tableData.columns.indexOf('children') != -1"
+                    }
+                  ],
+                  staticClass: "children"
+                },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(booking.children) +
+                      "\n            "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "td",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
                       value: _vm.tableData.columns.indexOf("offer") != -1,
                       expression: "tableData.columns.indexOf('offer') != -1"
                     }
@@ -60238,7 +60976,21 @@ var render = function() {
                           _vm._v(
                             "\n                    " +
                               _vm._s(booking.travel.name) +
-                              "\n                "
+                              "\n                    "
+                          ),
+                          _c(
+                            "span",
+                            {
+                              staticClass: "badge badge-success",
+                              staticStyle: { "font-size": "12px !important" }
+                            },
+                            [
+                              _vm._v(
+                                "\n                        رقم\n                        " +
+                                  _vm._s(booking.offer.id) +
+                                  "\n                    "
+                              )
+                            ]
                           )
                         ]
                       )
@@ -60381,18 +61133,7 @@ var render = function() {
         themeTableClassesFilter: _vm.tableData.filter.viewTable,
         sortOrders: _vm.sortOrders,
         pagination: _vm.pagination,
-        totalLink: Math.ceil(_vm.pagination.total / _vm.tableData.length),
         filters: _vm.filters,
-        actionMultiDelete: _vm.actionMultiDelete
-      },
-      on: {
-        prev: function($event) {
-          return _vm.getData(_vm.pagination.prevPageUrl)
-        },
-        next: function($event) {
-          return _vm.getData(_vm.pagination.nextPageUrl)
-        },
-        gotopage: _vm.gotopage,
         toggleShowSettings: _vm.toggleShowSettings,
         deleteResotreMulti: _vm.deleteResotreMulti,
         getData: _vm.getData
@@ -60857,45 +61598,98 @@ var render = function() {
           1
         ),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "form-group" },
-          [
-            _c("label", [
-              _vm._v(" " + _vm._s(_vm.$t("hotels_table.address")) + " "),
-              _c("span", { staticClass: "field-required" })
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.form.address,
-                  expression: "form.address"
-                }
-              ],
-              staticClass: "form-control",
-              class: { "is-invalid": _vm.form.errors.has("address") },
-              attrs: {
-                type: "text",
-                placeholder: _vm.$t("hotels_table.address")
-              },
-              domProps: { value: _vm.form.address },
-              on: {
-                input: function($event) {
-                  if ($event.target.composing) {
-                    return
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-sm-8" }, [
+            _c(
+              "div",
+              { staticClass: "form-group" },
+              [
+                _c("label", [
+                  _vm._v(" " + _vm._s(_vm.$t("hotels_table.address")) + " "),
+                  _c("span", { staticClass: "field-required" })
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.form.address,
+                      expression: "form.address"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  class: { "is-invalid": _vm.form.errors.has("address") },
+                  attrs: {
+                    type: "text",
+                    placeholder: _vm.$t("hotels_table.address")
+                  },
+                  domProps: { value: _vm.form.address },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.form, "address", $event.target.value)
+                    }
                   }
-                  _vm.$set(_vm.form, "address", $event.target.value)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _c("has-error", { attrs: { form: _vm.form, field: "address" } })
-          ],
-          1
-        ),
+                }),
+                _vm._v(" "),
+                _c("has-error", { attrs: { form: _vm.form, field: "address" } })
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "col-sm-4" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c("label", [
+                _vm._v(" " + _vm._s(_vm.$t("hotels_table.address_suggested")))
+              ]),
+              _vm._v(" "),
+              _c(
+                "select",
+                {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.currentAddressSuggested,
+                      expression: "currentAddressSuggested"
+                    }
+                  ],
+                  staticClass: "custom-select",
+                  on: {
+                    change: function($event) {
+                      var $$selectedVal = Array.prototype.filter
+                        .call($event.target.options, function(o) {
+                          return o.selected
+                        })
+                        .map(function(o) {
+                          var val = "_value" in o ? o._value : o.value
+                          return val
+                        })
+                      _vm.currentAddressSuggested = $event.target.multiple
+                        ? $$selectedVal
+                        : $$selectedVal[0]
+                    }
+                  }
+                },
+                [
+                  _c("option", { attrs: { value: "" } }),
+                  _vm._v(" "),
+                  _vm._l(_vm.addressesSuggested, function(address) {
+                    return _c("option", {
+                      key: address,
+                      domProps: { value: address, textContent: _vm._s(address) }
+                    })
+                  })
+                ],
+                2
+              )
+            ])
+          ])
+        ]),
         _vm._v(" "),
         _c(
           "div",
@@ -61369,18 +62163,7 @@ var render = function() {
         themeTableClassesFilter: _vm.tableData.filter.viewTable,
         sortOrders: _vm.sortOrders,
         pagination: _vm.pagination,
-        totalLink: Math.ceil(_vm.pagination.total / _vm.tableData.length),
         filters: _vm.filters,
-        actionMultiDelete: _vm.actionMultiDelete
-      },
-      on: {
-        prev: function($event) {
-          return _vm.getData(_vm.pagination.prevPageUrl)
-        },
-        next: function($event) {
-          return _vm.getData(_vm.pagination.nextPageUrl)
-        },
-        gotopage: _vm.gotopage,
         toggleShowSettings: _vm.toggleShowSettings,
         deleteResotreMulti: _vm.deleteResotreMulti,
         getData: _vm.getData
@@ -62405,6 +63188,7 @@ var render = function() {
                           attrs: { id: "gallery" }
                         },
                         [
+                          _vm.hotelProfile.gallery != null &&
                           _vm.hotelProfile.gallery.length > 0 &&
                           _vm.currentChildTable === "gallery"
                             ? _c(
@@ -63053,18 +63837,7 @@ var render = function() {
         themeTableClassesFilter: _vm.tableData.filter.viewTable,
         sortOrders: _vm.sortOrders,
         pagination: _vm.pagination,
-        totalLink: Math.ceil(_vm.pagination.total / _vm.tableData.length),
         filters: _vm.filters,
-        actionMultiDelete: _vm.actionMultiDelete
-      },
-      on: {
-        prev: function($event) {
-          return _vm.getData(_vm.pagination.prevPageUrl)
-        },
-        next: function($event) {
-          return _vm.getData(_vm.pagination.nextPageUrl)
-        },
-        gotopage: _vm.gotopage,
         toggleShowSettings: _vm.toggleShowSettings,
         deleteResotreMulti: _vm.deleteResotreMulti,
         getData: _vm.getData
@@ -63076,10 +63849,10 @@ var render = function() {
             return [
               _c("travel-categories-select", {
                 attrs: {
+                  getData: _vm.getData,
                   tableData: _vm.tableData,
                   travelCategories: _vm.travelCategoriesSelect
-                },
-                on: { getData: _vm.getData }
+                }
               })
             ]
           },
@@ -63180,7 +63953,7 @@ var render = function() {
                   staticClass: "travel_category_id"
                 },
                 [
-                  image.travel_category !== null
+                  image.category !== null
                     ? _c(
                         "router-link",
                         {
@@ -63195,13 +63968,13 @@ var render = function() {
                               name: "edit-travel_category",
                               params: {
                                 id: image.travel_category_id,
-                                travel_category: image.travel_category
+                                travel_category: image.category
                               }
                             },
                             "data-name": "edit-travel_category",
                             "data-params":
                               '{"travel_category":' +
-                              JSON.stringify(image.travel_category) +
+                              JSON.stringify(image.category) +
                               ', "id":' +
                               image.travel_category_id +
                               "}"
@@ -63210,7 +63983,7 @@ var render = function() {
                         [
                           _vm._v(
                             "\n                    " +
-                              _vm._s(image.travel_category.name) +
+                              _vm._s(image.category.name) +
                               "\n                "
                           )
                         ]
@@ -63394,18 +64167,7 @@ var render = function() {
         themeTableClassesFilter: _vm.tableData.filter.viewTable,
         sortOrders: _vm.sortOrders,
         pagination: _vm.pagination,
-        totalLink: Math.ceil(_vm.pagination.total / _vm.tableData.length),
         filters: _vm.filters,
-        actionMultiDelete: _vm.actionMultiDelete
-      },
-      on: {
-        prev: function($event) {
-          return _vm.getData(_vm.pagination.prevPageUrl)
-        },
-        next: function($event) {
-          return _vm.getData(_vm.pagination.nextPageUrl)
-        },
-        gotopage: _vm.gotopage,
         toggleShowSettings: _vm.toggleShowSettings,
         deleteResotreMulti: _vm.deleteResotreMulti,
         getData: _vm.getData
@@ -64117,18 +64879,7 @@ var render = function() {
         themeTableClassesFilter: _vm.tableData.filter.viewTable,
         sortOrders: _vm.sortOrders,
         pagination: _vm.pagination,
-        totalLink: Math.ceil(_vm.pagination.total / _vm.tableData.length),
         filters: _vm.filters,
-        actionMultiDelete: _vm.actionMultiDelete
-      },
-      on: {
-        prev: function($event) {
-          return _vm.getData(_vm.pagination.prevPageUrl)
-        },
-        next: function($event) {
-          return _vm.getData(_vm.pagination.nextPageUrl)
-        },
-        gotopage: _vm.gotopage,
         toggleShowSettings: _vm.toggleShowSettings,
         deleteResotreMulti: _vm.deleteResotreMulti,
         getData: _vm.getData
@@ -64141,10 +64892,10 @@ var render = function() {
               _vm.$route.name == "rooms"
                 ? _c("hotels-select", {
                     attrs: {
+                      getData: _vm.getData,
                       tableData: _vm.tableData,
                       hotels: _vm.hotelsSelect
-                    },
-                    on: { getData: _vm.getData }
+                    }
                   })
                 : _vm._e()
             ]
@@ -65017,18 +65768,7 @@ var render = function() {
         themeTableClassesFilter: _vm.tableData.filter.viewTable,
         sortOrders: _vm.sortOrders,
         pagination: _vm.pagination,
-        totalLink: Math.ceil(_vm.pagination.total / _vm.tableData.length),
         filters: _vm.filters,
-        actionMultiDelete: _vm.actionMultiDelete
-      },
-      on: {
-        prev: function($event) {
-          return _vm.getData(_vm.pagination.prevPageUrl)
-        },
-        next: function($event) {
-          return _vm.getData(_vm.pagination.nextPageUrl)
-        },
-        gotopage: _vm.gotopage,
         toggleShowSettings: _vm.toggleShowSettings,
         deleteResotreMulti: _vm.deleteResotreMulti,
         getData: _vm.getData
@@ -65527,6 +66267,65 @@ var render = function() {
           [
             _c("label", [
               _vm._v(
+                " " + _vm._s(_vm.$t("travel_categories_table.type")) + " "
+              ),
+              _c("span", { staticClass: "field-required" })
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.type,
+                    expression: "form.type"
+                  }
+                ],
+                staticClass: "form-control",
+                class: { "is-invalid": _vm.form.errors.has("type") },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.form,
+                      "type",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              _vm._l(_vm.categoryTypes, function(type) {
+                return _c("option", {
+                  key: type.value,
+                  domProps: {
+                    value: type.value,
+                    textContent: _vm._s(type.label)
+                  }
+                })
+              }),
+              0
+            ),
+            _vm._v(" "),
+            _c("has-error", { attrs: { form: _vm.form, field: "type" } })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", [
+              _vm._v(
                 " " + _vm._s(_vm.$t("travel_categories_table.discount")) + " "
               )
             ]),
@@ -65729,18 +66528,7 @@ var render = function() {
         themeTableClassesFilter: _vm.tableData.filter.viewTable,
         sortOrders: _vm.sortOrders,
         pagination: _vm.pagination,
-        totalLink: Math.ceil(_vm.pagination.total / _vm.tableData.length),
         filters: _vm.filters,
-        actionMultiDelete: _vm.actionMultiDelete
-      },
-      on: {
-        prev: function($event) {
-          return _vm.getData(_vm.pagination.prevPageUrl)
-        },
-        next: function($event) {
-          return _vm.getData(_vm.pagination.nextPageUrl)
-        },
-        gotopage: _vm.gotopage,
         toggleShowSettings: _vm.toggleShowSettings,
         deleteResotreMulti: _vm.deleteResotreMulti,
         getData: _vm.getData
@@ -65752,10 +66540,10 @@ var render = function() {
             return [
               _c("travel-programs-select", {
                 attrs: {
+                  getData: _vm.getData,
                   tableData: _vm.tableData,
                   travelPrograms: _vm.travelProgramsSelect
-                },
-                on: { getData: _vm.getData }
+                }
               })
             ]
           },
@@ -65835,7 +66623,33 @@ var render = function() {
                 [
                   _vm._v(
                     "\n                " +
-                      _vm._s(_vm._f("capitalize")(travel_category.name)) +
+                      _vm._s(travel_category.name) +
+                      "\n            "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "td",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.tableData.columns.indexOf("type") != -1,
+                      expression: "tableData.columns.indexOf('type') != -1"
+                    }
+                  ],
+                  staticClass: "type"
+                },
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(
+                        _vm.categoryTypes.filter(function(item) {
+                          return item.value == travel_category.type
+                        })[0].label
+                      ) +
                       "\n            "
                   )
                 ]
@@ -66592,18 +67406,7 @@ var render = function() {
         themeTableClassesFilter: _vm.tableData.filter.viewTable,
         sortOrders: _vm.sortOrders,
         pagination: _vm.pagination,
-        totalLink: Math.ceil(_vm.pagination.total / _vm.tableData.length),
         filters: _vm.filters,
-        actionMultiDelete: _vm.actionMultiDelete
-      },
-      on: {
-        prev: function($event) {
-          return _vm.getData(_vm.pagination.prevPageUrl)
-        },
-        next: function($event) {
-          return _vm.getData(_vm.pagination.nextPageUrl)
-        },
-        gotopage: _vm.gotopage,
         toggleShowSettings: _vm.toggleShowSettings,
         deleteResotreMulti: _vm.deleteResotreMulti,
         getData: _vm.getData
@@ -67572,7 +68375,7 @@ var render = function() {
           { staticClass: "form-group" },
           [
             _c("label", [
-              _vm._v(" " + _vm._s(_vm.$t("global.the_hotel")) + " "),
+              _vm._v(" " + _vm._s(_vm.$t("travels_table.hotel_id")) + " "),
               _c("span", { staticClass: "field-required" })
             ]),
             _vm._v(" "),
@@ -67610,13 +68413,72 @@ var render = function() {
               _vm._l(_vm.hotelsSelect, function(hotel) {
                 return _c("option", {
                   key: hotel.id,
-                  domProps: { value: hotel.id, textContent: _vm._s(hotel.name) }
+                  domProps: {
+                    value: hotel.id,
+                    textContent: _vm._s(hotel.name + " --- " + hotel.address)
+                  }
                 })
               }),
               0
             ),
             _vm._v(" "),
             _c("has-error", { attrs: { form: _vm.form, field: "hotel_id" } })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "form-group" },
+          [
+            _c("label", [
+              _vm._v(" " + _vm._s(_vm.$t("travels_table.hotel_2_id")))
+            ]),
+            _vm._v(" "),
+            _c(
+              "select",
+              {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.hotel_2_id,
+                    expression: "form.hotel_2_id"
+                  }
+                ],
+                staticClass: "custom-select",
+                class: { "is-invalid": _vm.form.errors.has("hotel_2_id") },
+                on: {
+                  change: function($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function(o) {
+                        return o.selected
+                      })
+                      .map(function(o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.$set(
+                      _vm.form,
+                      "hotel_2_id",
+                      $event.target.multiple ? $$selectedVal : $$selectedVal[0]
+                    )
+                  }
+                }
+              },
+              _vm._l(_vm.hotelsSelect, function(hotel) {
+                return _c("option", {
+                  key: hotel.id,
+                  domProps: {
+                    value: hotel.id,
+                    textContent: _vm._s(hotel.name + " --- " + hotel.address)
+                  }
+                })
+              }),
+              0
+            ),
+            _vm._v(" "),
+            _c("has-error", { attrs: { form: _vm.form, field: "hotel_2_id" } })
           ],
           1
         ),
@@ -68158,7 +69020,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "div",
-                      { staticClass: "form-group col-lg-6 required" },
+                      { staticClass: "form-group col-lg-6" },
                       [
                         _c("input", {
                           directives: [
@@ -68576,18 +69438,7 @@ var render = function() {
         themeTableClassesFilter: _vm.tableData.filter.viewTable,
         sortOrders: _vm.sortOrders,
         pagination: _vm.pagination,
-        totalLink: Math.ceil(_vm.pagination.total / _vm.tableData.length),
         filters: _vm.filters,
-        actionMultiDelete: _vm.actionMultiDelete
-      },
-      on: {
-        prev: function($event) {
-          return _vm.getData(_vm.pagination.prevPageUrl)
-        },
-        next: function($event) {
-          return _vm.getData(_vm.pagination.nextPageUrl)
-        },
-        gotopage: _vm.gotopage,
         toggleShowSettings: _vm.toggleShowSettings,
         deleteResotreMulti: _vm.deleteResotreMulti,
         getData: _vm.getData
@@ -68600,19 +69451,19 @@ var render = function() {
               _vm.$route.name == "travels"
                 ? _c("hotels-select", {
                     attrs: {
+                      getData: _vm.getData,
                       tableData: _vm.tableData,
                       hotels: _vm.hotelsSelect
-                    },
-                    on: { getData: _vm.getData }
+                    }
                   })
                 : _vm._e(),
               _vm._v(" "),
               _c("travel-categories-select", {
                 attrs: {
+                  getData: _vm.getData,
                   tableData: _vm.tableData,
                   travelCategories: _vm.travelCategoriesSelect
-                },
-                on: { getData: _vm.getData }
+                }
               })
             ]
           },
@@ -68898,7 +69749,11 @@ var render = function() {
                         [
                           _vm._v(
                             "\n                    " +
-                              _vm._s(travel.hotel.name) +
+                              _vm._s(
+                                travel.hotel.name +
+                                  " --- " +
+                                  travel.hotel.address
+                              ) +
                               "\n                "
                           )
                         ]
@@ -68913,6 +69768,86 @@ var render = function() {
                       ])
                 ],
                 1
+              ),
+              _vm._v(" "),
+              _c(
+                "td",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.tableData.columns.indexOf("hotel_2_id") != -1,
+                      expression:
+                        "tableData.columns.indexOf('hotel_2_id') != -1"
+                    }
+                  ],
+                  staticClass: "hotel_2_id"
+                },
+                [
+                  travel.hotel_2_id !== null
+                    ? _c(
+                        "span",
+                        [
+                          travel.hotel_2 !== null
+                            ? _c(
+                                "router-link",
+                                {
+                                  staticClass: "link-router-in-table",
+                                  attrs: {
+                                    href:
+                                      _vm.$domain_admin +
+                                      "/hotel/profile/" +
+                                      travel.hotel_2_id,
+                                    to: {
+                                      name: "hotel-profile",
+                                      params: {
+                                        id: travel.hotel_2_id,
+                                        hotel: travel.hotel_2
+                                      }
+                                    },
+                                    "data-name": "hotel-profile",
+                                    "data-params":
+                                      '{"hotel":' +
+                                      JSON.stringify(travel.hotel_2) +
+                                      ', "id":' +
+                                      travel.hotel_2_id +
+                                      "}"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                        " +
+                                      _vm._s(
+                                        travel.hotel_2.name +
+                                          " --- " +
+                                          travel.hotel_2.address
+                                      ) +
+                                      "\n                    "
+                                  )
+                                ]
+                              )
+                            : _c(
+                                "span",
+                                { staticClass: "badge badge-danger" },
+                                [
+                                  _vm._v(
+                                    " " +
+                                      _vm._s(
+                                        _vm.$t("global.hotel_is_deleted")
+                                      ) +
+                                      " - id:" +
+                                      _vm._s(travel.hotel_2_id)
+                                  )
+                                ]
+                              )
+                        ],
+                        1
+                      )
+                    : _c("span", { staticClass: "badge badge-info" }, [
+                        _vm._v(" لا يوجد فندق ثانى")
+                      ])
+                ]
               ),
               _vm._v(" "),
               _c(
@@ -69409,7 +70344,11 @@ var render = function() {
                                   [
                                     _vm._v(
                                       "\n                                            " +
-                                        _vm._s(_vm.travelProfile.hotel.name) +
+                                        _vm._s(
+                                          _vm.travelProfile.hotel.name +
+                                            " --- " +
+                                            _vm.travelProfile.hotel.address
+                                        ) +
                                         "\n                                        "
                                     )
                                   ]
@@ -69431,6 +70370,79 @@ var render = function() {
                           ],
                           1
                         )
+                      ]),
+                      _vm._v(" "),
+                      _c("li", { staticClass: "list-group-item" }, [
+                        _c("b", [
+                          _vm._v(
+                            "\n                                        " +
+                              _vm._s(_vm.$t("travels_table.hotel_2_id")) +
+                              "\n                                    "
+                          )
+                        ]),
+                        _vm._v(" "),
+                        _c("a", { staticClass: "float-right" }, [
+                          _vm.travelProfile.hotel_2_id !== null
+                            ? _c(
+                                "span",
+                                [
+                                  _vm.travelProfile.hotel_2 !== null
+                                    ? _c(
+                                        "router-link",
+                                        {
+                                          attrs: {
+                                            href:
+                                              _vm.$domain_admin +
+                                              "/hotel/profile/" +
+                                              _vm.travelProfile.hotel_2_id,
+                                            to: {
+                                              name: "hotel-profile",
+                                              params: {
+                                                id:
+                                                  _vm.travelProfile.hotel_2_id,
+                                                hotel: _vm.travelProfile.hotel_2
+                                              }
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _vm._v(
+                                            "\n                                                " +
+                                              _vm._s(
+                                                _vm.travelProfile.hotel_2.name +
+                                                  " --- " +
+                                                  _vm.travelProfile.hotel_2
+                                                    .address
+                                              ) +
+                                              "\n                                            "
+                                          )
+                                        ]
+                                      )
+                                    : _c(
+                                        "span",
+                                        { staticClass: "badge badge-danger" },
+                                        [
+                                          _vm._v(
+                                            " " +
+                                              _vm._s(
+                                                _vm.$t(
+                                                  "global.hotel_is_deleted"
+                                                )
+                                              ) +
+                                              " - id:" +
+                                              _vm._s(
+                                                _vm.travelProfile.hotel_2_id
+                                              )
+                                          )
+                                        ]
+                                      )
+                                ],
+                                1
+                              )
+                            : _c("span", { staticClass: "badge badge-info" }, [
+                                _vm._v(" لا يوجد فندق ثانى")
+                              ])
+                        ])
                       ]),
                       _vm._v(" "),
                       _c("li", { staticClass: "list-group-item" }, [
@@ -69746,6 +70758,7 @@ var render = function() {
                           attrs: { id: "gallery" }
                         },
                         [
+                          _vm.travelProfile.gallery != null &&
                           _vm.travelProfile.gallery.length > 0 &&
                           _vm.currentChildTable === "gallery"
                             ? _c(
@@ -69831,8 +70844,8 @@ var render = function() {
                                         [
                                           _c("h3", { staticClass: "title" }, [
                                             _vm._v(
-                                              "\n                                                    العرض رقم\n                                                    " +
-                                                _vm._s(index + 1) +
+                                              "\n                                                    العرض\n                                                    " +
+                                                _vm._s(_vm.counterText[index]) +
                                                 "\n                                                "
                                             )
                                           ])
@@ -69844,6 +70857,53 @@ var render = function() {
                                           "ul",
                                           { staticClass: "list-group mb-3" },
                                           [
+                                            _c(
+                                              "li",
+                                              {
+                                                staticClass: "list-group-item"
+                                              },
+                                              [
+                                                _c("b", [
+                                                  _vm._v(
+                                                    "\n                                                            " +
+                                                      _vm._s(
+                                                        _vm.$t(
+                                                          "travels_table.offers.id"
+                                                        )
+                                                      ) +
+                                                      "\n                                                        "
+                                                  )
+                                                ]),
+                                                _vm._v(" "),
+                                                _c(
+                                                  "a",
+                                                  {
+                                                    staticClass: "float-right"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass:
+                                                          "badge badge-success",
+                                                        staticStyle: {
+                                                          "font-size":
+                                                            "16px !important"
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                                                                " +
+                                                            _vm._s(offer.id) +
+                                                            "\n                                                            "
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ]
+                                            ),
+                                            _vm._v(" "),
                                             _c(
                                               "li",
                                               {
@@ -70890,22 +71950,9 @@ var render = function() {
         themeTableClassesFilter: _vm.tableData.filter.viewTable,
         sortOrders: _vm.sortOrders,
         pagination: _vm.pagination,
-        totalLink: Math.ceil(_vm.pagination.total / _vm.tableData.length),
         filters: _vm.filters,
-        actionMultiDelete: _vm.actionMultiDelete
-      },
-      on: {
-        prev: function($event) {
-          return _vm.getData(_vm.pagination.prevPageUrl)
-        },
-        next: function($event) {
-          return _vm.getData(_vm.pagination.nextPageUrl)
-        },
-        gotopage: _vm.gotopage,
         toggleShowSettings: _vm.toggleShowSettings,
-        deleteResotreMulti: function($event) {
-          return _vm.deleteResotreMulti(_vm.actionMultiDelete)
-        },
+        deleteResotreMulti: _vm.deleteResotreMulti,
         getData: _vm.getData
       }
     },
@@ -85908,6 +86955,17 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./node_modules/vuejs-paginate/dist/index.js":
+/*!***************************************************!*\
+  !*** ./node_modules/vuejs-paginate/dist/index.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+!function(e,t){ true?module.exports=t():undefined}(this,function(){return function(e){function t(s){if(n[s])return n[s].exports;var a=n[s]={exports:{},id:s,loaded:!1};return e[s].call(a.exports,a,a.exports,t),a.loaded=!0,a.exports}var n={};return t.m=e,t.c=n,t.p="",t(0)}([function(e,t,n){"use strict";function s(e){return e&&e.__esModule?e:{default:e}}var a=n(1),i=s(a);e.exports=i.default},function(e,t,n){n(2);var s=n(6)(n(7),n(8),"data-v-82963a40",null);e.exports=s.exports},function(e,t,n){var s=n(3);"string"==typeof s&&(s=[[e.id,s,""]]);n(5)(s,{});s.locals&&(e.exports=s.locals)},function(e,t,n){t=e.exports=n(4)(),t.push([e.id,"a[data-v-82963a40]{cursor:pointer}",""])},function(e,t){e.exports=function(){var e=[];return e.toString=function(){for(var e=[],t=0;t<this.length;t++){var n=this[t];n[2]?e.push("@media "+n[2]+"{"+n[1]+"}"):e.push(n[1])}return e.join("")},e.i=function(t,n){"string"==typeof t&&(t=[[null,t,""]]);for(var s={},a=0;a<this.length;a++){var i=this[a][0];"number"==typeof i&&(s[i]=!0)}for(a=0;a<t.length;a++){var r=t[a];"number"==typeof r[0]&&s[r[0]]||(n&&!r[2]?r[2]=n:n&&(r[2]="("+r[2]+") and ("+n+")"),e.push(r))}},e}},function(e,t,n){function s(e,t){for(var n=0;n<e.length;n++){var s=e[n],a=c[s.id];if(a){a.refs++;for(var i=0;i<a.parts.length;i++)a.parts[i](s.parts[i]);for(;i<s.parts.length;i++)a.parts.push(l(s.parts[i],t))}else{for(var r=[],i=0;i<s.parts.length;i++)r.push(l(s.parts[i],t));c[s.id]={id:s.id,refs:1,parts:r}}}}function a(e){for(var t=[],n={},s=0;s<e.length;s++){var a=e[s],i=a[0],r=a[1],o=a[2],l=a[3],u={css:r,media:o,sourceMap:l};n[i]?n[i].parts.push(u):t.push(n[i]={id:i,parts:[u]})}return t}function i(e,t){var n=g(),s=C[C.length-1];if("top"===e.insertAt)s?s.nextSibling?n.insertBefore(t,s.nextSibling):n.appendChild(t):n.insertBefore(t,n.firstChild),C.push(t);else{if("bottom"!==e.insertAt)throw new Error("Invalid value for parameter 'insertAt'. Must be 'top' or 'bottom'.");n.appendChild(t)}}function r(e){e.parentNode.removeChild(e);var t=C.indexOf(e);t>=0&&C.splice(t,1)}function o(e){var t=document.createElement("style");return t.type="text/css",i(e,t),t}function l(e,t){var n,s,a;if(t.singleton){var i=v++;n=h||(h=o(t)),s=u.bind(null,n,i,!1),a=u.bind(null,n,i,!0)}else n=o(t),s=d.bind(null,n),a=function(){r(n)};return s(e),function(t){if(t){if(t.css===e.css&&t.media===e.media&&t.sourceMap===e.sourceMap)return;s(e=t)}else a()}}function u(e,t,n,s){var a=n?"":s.css;if(e.styleSheet)e.styleSheet.cssText=b(t,a);else{var i=document.createTextNode(a),r=e.childNodes;r[t]&&e.removeChild(r[t]),r.length?e.insertBefore(i,r[t]):e.appendChild(i)}}function d(e,t){var n=t.css,s=t.media,a=t.sourceMap;if(s&&e.setAttribute("media",s),a&&(n+="\n/*# sourceURL="+a.sources[0]+" */",n+="\n/*# sourceMappingURL=data:application/json;base64,"+btoa(unescape(encodeURIComponent(JSON.stringify(a))))+" */"),e.styleSheet)e.styleSheet.cssText=n;else{for(;e.firstChild;)e.removeChild(e.firstChild);e.appendChild(document.createTextNode(n))}}var c={},p=function(e){var t;return function(){return"undefined"==typeof t&&(t=e.apply(this,arguments)),t}},f=p(function(){return/msie [6-9]\b/.test(window.navigator.userAgent.toLowerCase())}),g=p(function(){return document.head||document.getElementsByTagName("head")[0]}),h=null,v=0,C=[];e.exports=function(e,t){t=t||{},"undefined"==typeof t.singleton&&(t.singleton=f()),"undefined"==typeof t.insertAt&&(t.insertAt="bottom");var n=a(e);return s(n,t),function(e){for(var i=[],r=0;r<n.length;r++){var o=n[r],l=c[o.id];l.refs--,i.push(l)}if(e){var u=a(e);s(u,t)}for(var r=0;r<i.length;r++){var l=i[r];if(0===l.refs){for(var d=0;d<l.parts.length;d++)l.parts[d]();delete c[l.id]}}}};var b=function(){var e=[];return function(t,n){return e[t]=n,e.filter(Boolean).join("\n")}}()},function(e,t){e.exports=function(e,t,n,s){var a,i=e=e||{},r=typeof e.default;"object"!==r&&"function"!==r||(a=e,i=e.default);var o="function"==typeof i?i.options:i;if(t&&(o.render=t.render,o.staticRenderFns=t.staticRenderFns),n&&(o._scopeId=n),s){var l=o.computed||(o.computed={});Object.keys(s).forEach(function(e){var t=s[e];l[e]=function(){return t}})}return{esModule:a,exports:i,options:o}}},function(e,t){"use strict";Object.defineProperty(t,"__esModule",{value:!0}),t.default={props:{value:{type:Number},pageCount:{type:Number,required:!0},forcePage:{type:Number},clickHandler:{type:Function,default:function(){}},pageRange:{type:Number,default:3},marginPages:{type:Number,default:1},prevText:{type:String,default:"Prev"},nextText:{type:String,default:"Next"},breakViewText:{type:String,default:"…"},containerClass:{type:String},pageClass:{type:String},pageLinkClass:{type:String},prevClass:{type:String},prevLinkClass:{type:String},nextClass:{type:String},nextLinkClass:{type:String},breakViewClass:{type:String},breakViewLinkClass:{type:String},activeClass:{type:String,default:"active"},disabledClass:{type:String,default:"disabled"},noLiSurround:{type:Boolean,default:!1},firstLastButton:{type:Boolean,default:!1},firstButtonText:{type:String,default:"First"},lastButtonText:{type:String,default:"Last"},hidePrevNext:{type:Boolean,default:!1}},beforeUpdate:function(){void 0!==this.forcePage&&this.forcePage!==this.selected&&(this.selected=this.forcePage)},computed:{selected:{get:function(){return this.value||this.innerValue},set:function(e){this.innerValue=e}},pages:function(){var e=this,t={};if(this.pageCount<=this.pageRange)for(var n=0;n<this.pageCount;n++){var s={index:n,content:n+1,selected:n===this.selected-1};t[n]=s}else{for(var a=Math.floor(this.pageRange/2),i=function(n){var s={index:n,content:n+1,selected:n===e.selected-1};t[n]=s},r=function(e){var n={disabled:!0,breakView:!0};t[e]=n},o=0;o<this.marginPages;o++)i(o);var l=0;this.selected-a>0&&(l=this.selected-1-a);var u=l+this.pageRange-1;u>=this.pageCount&&(u=this.pageCount-1,l=u-this.pageRange+1);for(var d=l;d<=u&&d<=this.pageCount-1;d++)i(d);l>this.marginPages&&r(l-1),u+1<this.pageCount-this.marginPages&&r(u+1);for(var c=this.pageCount-1;c>=this.pageCount-this.marginPages;c--)i(c)}return t}},data:function(){return{innerValue:1}},methods:{handlePageSelected:function(e){this.selected!==e&&(this.innerValue=e,this.$emit("input",e),this.clickHandler(e))},prevPage:function(){this.selected<=1||this.handlePageSelected(this.selected-1)},nextPage:function(){this.selected>=this.pageCount||this.handlePageSelected(this.selected+1)},firstPageSelected:function(){return 1===this.selected},lastPageSelected:function(){return this.selected===this.pageCount||0===this.pageCount},selectFirstPage:function(){this.selected<=1||this.handlePageSelected(1)},selectLastPage:function(){this.selected>=this.pageCount||this.handlePageSelected(this.pageCount)}}}},function(e,t){e.exports={render:function(){var e=this,t=e.$createElement,n=e._self._c||t;return e.noLiSurround?n("div",{class:e.containerClass},[e.firstLastButton?n("a",{class:[e.pageLinkClass,e.firstPageSelected()?e.disabledClass:""],attrs:{tabindex:"0"},domProps:{innerHTML:e._s(e.firstButtonText)},on:{click:function(t){e.selectFirstPage()},keyup:function(t){return"button"in t||!e._k(t.keyCode,"enter",13)?void e.selectFirstPage():null}}}):e._e(),e._v(" "),e.firstPageSelected()&&e.hidePrevNext?e._e():n("a",{class:[e.prevLinkClass,e.firstPageSelected()?e.disabledClass:""],attrs:{tabindex:"0"},domProps:{innerHTML:e._s(e.prevText)},on:{click:function(t){e.prevPage()},keyup:function(t){return"button"in t||!e._k(t.keyCode,"enter",13)?void e.prevPage():null}}}),e._v(" "),e._l(e.pages,function(t){return[t.breakView?n("a",{class:[e.pageLinkClass,e.breakViewLinkClass,t.disabled?e.disabledClass:""],attrs:{tabindex:"0"}},[e._t("breakViewContent",[e._v(e._s(e.breakViewText))])],2):t.disabled?n("a",{class:[e.pageLinkClass,t.selected?e.activeClass:"",e.disabledClass],attrs:{tabindex:"0"}},[e._v(e._s(t.content))]):n("a",{class:[e.pageLinkClass,t.selected?e.activeClass:""],attrs:{tabindex:"0"},on:{click:function(n){e.handlePageSelected(t.index+1)},keyup:function(n){return"button"in n||!e._k(n.keyCode,"enter",13)?void e.handlePageSelected(t.index+1):null}}},[e._v(e._s(t.content))])]}),e._v(" "),e.lastPageSelected()&&e.hidePrevNext?e._e():n("a",{class:[e.nextLinkClass,e.lastPageSelected()?e.disabledClass:""],attrs:{tabindex:"0"},domProps:{innerHTML:e._s(e.nextText)},on:{click:function(t){e.nextPage()},keyup:function(t){return"button"in t||!e._k(t.keyCode,"enter",13)?void e.nextPage():null}}}),e._v(" "),e.firstLastButton?n("a",{class:[e.pageLinkClass,e.lastPageSelected()?e.disabledClass:""],attrs:{tabindex:"0"},domProps:{innerHTML:e._s(e.lastButtonText)},on:{click:function(t){e.selectLastPage()},keyup:function(t){return"button"in t||!e._k(t.keyCode,"enter",13)?void e.selectLastPage():null}}}):e._e()],2):n("ul",{class:e.containerClass},[e.firstLastButton?n("li",{class:[e.pageClass,e.firstPageSelected()?e.disabledClass:""]},[n("a",{class:e.pageLinkClass,attrs:{tabindex:e.firstPageSelected()?-1:0},domProps:{innerHTML:e._s(e.firstButtonText)},on:{click:function(t){e.selectFirstPage()},keyup:function(t){return"button"in t||!e._k(t.keyCode,"enter",13)?void e.selectFirstPage():null}}})]):e._e(),e._v(" "),e.firstPageSelected()&&e.hidePrevNext?e._e():n("li",{class:[e.prevClass,e.firstPageSelected()?e.disabledClass:""]},[n("a",{class:e.prevLinkClass,attrs:{tabindex:e.firstPageSelected()?-1:0},domProps:{innerHTML:e._s(e.prevText)},on:{click:function(t){e.prevPage()},keyup:function(t){return"button"in t||!e._k(t.keyCode,"enter",13)?void e.prevPage():null}}})]),e._v(" "),e._l(e.pages,function(t){return n("li",{class:[e.pageClass,t.selected?e.activeClass:"",t.disabled?e.disabledClass:"",t.breakView?e.breakViewClass:""]},[t.breakView?n("a",{class:[e.pageLinkClass,e.breakViewLinkClass],attrs:{tabindex:"0"}},[e._t("breakViewContent",[e._v(e._s(e.breakViewText))])],2):t.disabled?n("a",{class:e.pageLinkClass,attrs:{tabindex:"0"}},[e._v(e._s(t.content))]):n("a",{class:e.pageLinkClass,attrs:{tabindex:"0"},on:{click:function(n){e.handlePageSelected(t.index+1)},keyup:function(n){return"button"in n||!e._k(n.keyCode,"enter",13)?void e.handlePageSelected(t.index+1):null}}},[e._v(e._s(t.content))])])}),e._v(" "),e.lastPageSelected()&&e.hidePrevNext?e._e():n("li",{class:[e.nextClass,e.lastPageSelected()?e.disabledClass:""]},[n("a",{class:e.nextLinkClass,attrs:{tabindex:e.lastPageSelected()?-1:0},domProps:{innerHTML:e._s(e.nextText)},on:{click:function(t){e.nextPage()},keyup:function(t){return"button"in t||!e._k(t.keyCode,"enter",13)?void e.nextPage():null}}})]),e._v(" "),e.firstLastButton?n("li",{class:[e.pageClass,e.lastPageSelected()?e.disabledClass:""]},[n("a",{class:e.pageLinkClass,attrs:{tabindex:e.lastPageSelected()?-1:0},domProps:{innerHTML:e._s(e.lastButtonText)},on:{click:function(t){e.selectLastPage()},keyup:function(t){return"button"in t||!e._k(t.keyCode,"enter",13)?void e.selectLastPage():null}}})]):e._e()],2)},staticRenderFns:[]}}])});
+
+/***/ }),
+
 /***/ "./node_modules/webpack/buildin/global.js":
 /*!***********************************!*\
   !*** (webpack)/buildin/global.js ***!
@@ -86065,12 +87123,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components.js */ "./resources/js/components.js");
 /* harmony import */ var _filters_js__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./filters.js */ "./resources/js/filters.js");
 /* harmony import */ var _directives_js__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./directives.js */ "./resources/js/directives.js");
-/* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vform */ "./node_modules/vform/dist/vform.common.js");
-/* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(vform__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
-/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var vue2_datepicker__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! vue2-datepicker */ "./node_modules/vue2-datepicker/lib/index.js");
-/* harmony import */ var vue2_datepicker__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(vue2_datepicker__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var vuejs_paginate__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! vuejs-paginate */ "./node_modules/vuejs-paginate/dist/index.js");
+/* harmony import */ var vuejs_paginate__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(vuejs_paginate__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! vform */ "./node_modules/vform/dist/vform.common.js");
+/* harmony import */ var vform__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(vform__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var vue2_datepicker__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! vue2-datepicker */ "./node_modules/vue2-datepicker/lib/index.js");
+/* harmony import */ var vue2_datepicker__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(vue2_datepicker__WEBPACK_IMPORTED_MODULE_14__);
 // const domain = 'http://localhost:8000'
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
@@ -86080,7 +87140,7 @@ Vue.config.productionTip = false; // global properties
 Vue.prototype.$domain = window.url;
 Vue.prototype.$auth = window.auth;
 Vue.prototype.$settings = window.settings;
-Vue.prototype.$domain_admin = window.url + '/' + window.cp_prefix;
+Vue.prototype.$domain_admin = window.url + window.cp_prefix;
 Vue.prototype.$nameSettingsInDB = 'data_tabel_settings_view_columns';
 /**************************************************************************************/
 
@@ -86101,25 +87161,30 @@ Vue.prototype.$nameSettingsInDB = 'data_tabel_settings_view_columns';
 
 
 /**************************************************************************************/
+// paginate
 
 
-window.Form = vform__WEBPACK_IMPORTED_MODULE_11__["Form"]; // vue form
-
-Vue.component(vform__WEBPACK_IMPORTED_MODULE_11__["HasError"].name, vform__WEBPACK_IMPORTED_MODULE_11__["HasError"]);
-Vue.component(vform__WEBPACK_IMPORTED_MODULE_11__["AlertError"].name, vform__WEBPACK_IMPORTED_MODULE_11__["AlertError"]);
-Vue.component(vform__WEBPACK_IMPORTED_MODULE_11__["AlertErrors"].name, vform__WEBPACK_IMPORTED_MODULE_11__["AlertErrors"]);
-Vue.component(vform__WEBPACK_IMPORTED_MODULE_11__["AlertSuccess"].name, vform__WEBPACK_IMPORTED_MODULE_11__["AlertSuccess"]);
+Vue.component('paginate', vuejs_paginate__WEBPACK_IMPORTED_MODULE_11___default.a);
 /**************************************************************************************/
 
 
-window.Swal = sweetalert2__WEBPACK_IMPORTED_MODULE_12___default.a;
-var ToastReq = sweetalert2__WEBPACK_IMPORTED_MODULE_12___default.a.mixin({
+window.Form = vform__WEBPACK_IMPORTED_MODULE_12__["Form"]; // vue form
+
+Vue.component(vform__WEBPACK_IMPORTED_MODULE_12__["HasError"].name, vform__WEBPACK_IMPORTED_MODULE_12__["HasError"]);
+Vue.component(vform__WEBPACK_IMPORTED_MODULE_12__["AlertError"].name, vform__WEBPACK_IMPORTED_MODULE_12__["AlertError"]);
+Vue.component(vform__WEBPACK_IMPORTED_MODULE_12__["AlertErrors"].name, vform__WEBPACK_IMPORTED_MODULE_12__["AlertErrors"]);
+Vue.component(vform__WEBPACK_IMPORTED_MODULE_12__["AlertSuccess"].name, vform__WEBPACK_IMPORTED_MODULE_12__["AlertSuccess"]);
+/**************************************************************************************/
+
+
+window.Swal = sweetalert2__WEBPACK_IMPORTED_MODULE_13___default.a;
+var ToastReq = sweetalert2__WEBPACK_IMPORTED_MODULE_13___default.a.mixin({
   position: "top-end",
   showConfirmButton: false,
   timer: 1500,
   type: "success"
 });
-var ToastFailed = sweetalert2__WEBPACK_IMPORTED_MODULE_12___default.a.mixin({
+var ToastFailed = sweetalert2__WEBPACK_IMPORTED_MODULE_13___default.a.mixin({
   showConfirmButton: false,
   type: 'error' // timer: 1500,
 
@@ -86129,7 +87194,7 @@ window.ToastFailed = ToastFailed;
 /**************************************************************************************/
 
 
-Vue.component(vue2_datepicker__WEBPACK_IMPORTED_MODULE_13___default.a.name, vue2_datepicker__WEBPACK_IMPORTED_MODULE_13___default.a);
+Vue.component(vue2_datepicker__WEBPACK_IMPORTED_MODULE_14___default.a.name, vue2_datepicker__WEBPACK_IMPORTED_MODULE_14___default.a);
 /**************************************************************************************/
 
 var app = new Vue({
@@ -86173,7 +87238,7 @@ __webpack_require__(/*! ./custom-jquery-include.js */ "./resources/js/custom-jqu
 
 window.axios = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-axios.defaults.baseURL = window.url + '/' + window.cp_prefix_api;
+axios.defaults.baseURL = window.url + window.cp_prefix_api;
 /**
  * Next we will register the CSRF Token as a common header with Axios so that
  * all outgoing HTTP requests automatically have it attached. This is just
@@ -86262,7 +87327,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("relative-date", {
 });
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component("rates-stars", {
   props: {
-    'rates-count': Number
+    'rates-count': {
+      type: Number,
+      required: true
+    }
   },
   template: "<div class=\"wrapper-stars-rating\">\n        <i class=\"stars-rating\">\n            <i class=\"regular\" :style=\"{backgroundImage: 'url(' + $domain + '/admin/images/5-stars-regular.png)'}\"></i>\n            <i class=\"solid\" :style=\"{width: ratesCount + '%', backgroundImage: 'url(' + $domain + '/admin/images/5-stars-solid.png)'}\"></i>\n        </i>\n        <slot></slot>\n    </div>" //  v-html="countStarRate"
 
@@ -88483,7 +89551,7 @@ webpackContext.id = "./resources/js/lang sync recursive ^\\.\\/.*\\.json$";
 /*! exports provided: global, sidebar, datatable, users_table, hotels_table, rooms_table, travel_programs_table, travel_categories_table, travels_table, bookings_table, mailing_list_table, blogs_table, images_table, contact_us_table, settings_table, default */
 /***/ (function(module) {
 
-module.exports = {"global":{"home":"الرئيسية","dashboard":"الرئيسية","user":"مدير","hotel":"فندق","the_hotel":"الفندق","the_price":"السعر","the_travel":"الرحلة","room":"غرفة","the_travel_program":"برنامج الرحلة","the_travel_category":"قسم الرحلة","the_images":"الصور","type":"نوع","comment":"تعليق","winner":"فائز","setting":"إعداد","no_rooms":"لا يوجد غرف","no_travels":"لا يوجد رحلات","no_hotel_features":"لا توجد مميزات للفندق","no_offers":"لا توجد عروض لهذه الرحلة","no_bookings":"لا توجد حجوزات لهذه الرحلة","no_gallery":"لا توجد صور","no_location":"لا توجد خريطة","show_map":"اعرض الخريطة","days":"أيام","day":"يوم","profile":"بروفايل","the_profile":"البروفايل","goto_travel_profile":"صفحة الرحلة","goto_hotel_profile":"صفحة الفندق","hotel_is_deleted":"الفندق محذوف","user_is_deleted":"المدير محذوف","travel_program_is_deleted":"برنامج الرحلة محذوف","travel_category_is_deleted":"قسم الرحلة محذوف","travel_is_deleted":"الرحلة محذوفة","offer_is_deleted":"العرض محذوف","logout":"تسجيل الخروج","create":"إنشاء","edit":"تعديل","update":"تحديث","save":"حفظ","read":"اقرأ","all":"الكل","read_more":"اقرأ المزيد","more_info":"معرفة المزيد","choose_image":"اختر صورة","drag_msg":"اسحب الصورة ثم ضعها هنا","active":"مفعل","disactive":"غير مفعل","available":"متاح","unavailable":"غير متاح","hidden":"مخفى","visible":"ظاهر","show":"عرض","view":"عرض","close":"إغلاق","display":"إظهار","from":"من","to":"إلى","in":"فى","on":"على","delete":"حذف","deleted":"تم الحذف","force_delete":"إزالة نهائيا","remove":"إزالة","removed":"تمت الإزالة","restore":"استرجاع","restored":"تم الإسترجاع","failed":"فشل","cancel":"إلغاء","yes_delete_it":"تأكيد الحذف","yes_remove_it":"تأكيد الإزالة","yes_restore_it":"تأكيد الإسترجاع","multi_delete_msg":"هل أنت متأكد من حذف جميع {model} المعلم عليها؟","multi_delete_success_msg":"تم حذف جميع {model} المعلم عليها.","multi_delete_failed_msg":"لم يتم حذف جميع {model} المعلم عليها.","multi_force_delete_msg":"هل أنت متأكد من إزالة جميع {model} المعلم عليها بشكل نهائى ؟","multi_force_delete_success_msg":"تم إزالة جميع {model} المعلم عليها بشكل نهائى.","multi_force_delete_failed_msg":"لم يتم إزالة جميع {model} المعلم عليها.","multi_restore_msg":"هل أنت متأكد من استرجاع جميع {model} المعلم عليها؟","multi_restore_success_msg":"تم استرجاع جميع {model} المعلم عليها.","multi_restore_failed_msg":"لم يتم استرجاع جميع {model} المعلم عليها.","settings_table":"إعدادات عرض جدول {model} فى كل الشاشات"},"sidebar":{"hotel_profile":"صفحة الفندق","travel_profile":"صفحة الرحلة","users":"المديرين","all_users":"جميع المديرين","new_user":"مدير جديد","edit_user":"تعديل مدير","hotels":"الفنادق","all_hotels":"جميع الفنادق","new_hotel":"فندق جديد","edit_hotel":"تعديل فندق","rooms":"الغرف","all_rooms":"جميع الغرف","new_room":"غرفة جديد","edit_room":"تعديل غرفة","travel_programs":"برامج الرحلات","all_travel_programs":"جميع برامج الرحلات","new_travel_program":"برنامج رحلة جديد","edit_travel_program":"تعديل برنامج رحلة","travel_categories":"أقسام الرحلات","all_travel_categories":"جميع أقسام الرحلات","new_travel_category":"قسم رحلات جديد","edit_travel_category":"تعديل قسم رحلات","travels":"الرحلات","all_travels":"جميع الرحلات","new_travel":"رحلة جديدة","edit_travel":"تعديل رحلة","bookings":"الحجوزات","all_bookings":"جميع الحجوزات","new_booking":"حجز جديد","edit_booking":"تعديل حجز","mailing_list":"القائمة البريدية","all_mailing_list":"جميع البريدات الإليكترونية","new_mailing_list":"بريد جديد","edit_mailing_list":"تعديل بريد","blogs":"المدونات","all_blogs":"جميع المدونات","new_blog":"مدونة جديدة","edit_blog":"تعديل مدونة","images":"الصور","all_images":"جميع الصور","new_image":"صورة جديدة","edit_image":"تعديل صورة","contact_us":"اتصل بنا","all_contact_us":"جميع الرسائل","settings":"الإعدادات","all_settings":"جميع الإعدادات","new_setting":"إعداد جديد","edit_setting":"تعديل إعداد"},"datatable":{"showing":"إظهار","entries":"سجلات","from":"من","to":"إلى","of":"من","next":"التالى","prev":"السابق","empty_table":"جدول فارغ","no_data_msg":"لا يوجد بيانات فى  هذا الجدول.","trashed":"المهمل","activation":"التفعيل","display":"الظهور","rules":"الصلاحيات","sold_out":"نفاذ الكمية","discount":"الخصم","created_between":"تم إنشائه فى تاريخ","search":"بحث"},"users_table":{"id":"المعرف","name":"الإسم","email":"البريد الإلكترونى","password":"كلمة السر","repeat_password":"أعد كلمة السر","image":"الصورة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا المدير ؟","delete_success_msg":"تم حذف المدير.","delete_failed_msg":"لم يتم حذف المدير.","force_delete_msg":"هل أنت متأكد من إزالة هذا المدير بشكل نهائى ؟","force_delete_success_msg":"تم إزالة المدير بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة المدير.","restore_msg":"هل أنت متأكد من استرجاع هذا المدير ؟","restore_success_msg":"تم استرجاع المدير.","restore_failed_msg":"لم يتم استرجاع المدير.","p_create":{"success_msg":"تم إنشاء مدير جديد.","failed_msg":"لم يتم إنشاء المدير الجديد."},"p_edit":{"success_msg":"تم تحديث المدير.","failed_msg":"لم يتم تحديث هذا المدير."}},"hotels_table":{"id":"المعرف","name":"الإسم","address":"العنوان","rating":"التقيم","stars":"عدد النجوم","info":"الوصف","longitude":"خط الطول","latitude":"خط العرض","image":"الصورة","features":"المميزات","display":"الظهور","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"صور الفندق","feature_name":"اسم الميزة","plus":"للمزيد","rooms_count":"عدد الغرف","travels_count":"عدد الرحلات","hotel_info":"معلومات الفندق","location":"الموقع","location_map":"خريطة الموقع","msg_location_map":"ابحث عن مكان الفندق ثم انقل العلامة الحمراء إلى مكان الفندق بدقة.","error_location":"لم يتم العثور على المكان ، ابحث بكلمات أخرى.","remove_location":"إزالة الموقع","delete_hotel":"حذف الفندق","edit_hotel":"تعديل الفندق","empty_rooms_msg":"هذا الفندق ليس لديه غرف مضافة.","empty_travels_msg":"هذا الفندق ليس لديه رحلات مضافة.","empty_features_msg":"هذا الفندق ليس لديه مميزات.","empty_gallery_msg":"هذا الفندق ليس لديه صور مرفوعة.","delete_msg":"هل أنت متأكد من حذف هذا الفندق ؟","delete_success_msg":"تم حذف الفندق.","delete_failed_msg":"لم يتم حذف الفندق.","force_delete_msg":"هل أنت متأكد من إزالة هذا الفندق بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الفندق بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الفندق.","restore_msg":"هل أنت متأكد من استرجاع هذا الفندق ؟","restore_success_msg":"تم استرجاع الفندق.","restore_failed_msg":"لم يتم استرجاع الفندق.","p_create":{"success_msg":"تم إنشاء فندق جديد.","failed_msg":"لم يتم إنشاء الفندق الجديد."},"p_edit":{"success_msg":"تم تحديث الفندق.","failed_msg":"لم يتم تحديث هذا الفندق."}},"rooms_table":{"id":"المعرف","info":"معلومات الغرفة","options":"الخيارات","price_night":"سعر الليلة","offer_price":"سعر العرض","offer_days":"عدد أيام العرض","display":"الظهور","user_id":"أضيف بواسطة","hotel_id":"الفندق","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","offer":"العرض","night":"ليلة","nights":"ليالى","delete_room":"حذف الغرفة","edit_room":"تعديل الغرفة","delete_msg":"هل أنت متأكد من حذف هذه الغرفة ؟","delete_success_msg":"تم حذف الغرفة.","delete_failed_msg":"لم يتم حذف الغرفة.","force_delete_msg":"هل أنت متأكد من إزالة هذه الغرفة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الغرفة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الغرفة.","restore_msg":"هل أنت متأكد من استرجاع هذه الغرفة ؟","restore_success_msg":"تم استرجاع الغرفة.","restore_failed_msg":"لم يتم استرجاع الغرفة.","p_create":{"success_msg":"تم إنشاء غرغة جديدة.","failed_msg":"لم يتم إنشاء الغرفة الجديدة."},"p_edit":{"success_msg":"تم تحديث الغرفة.","failed_msg":"لم يتم تحديث هذه الغرفة."}},"travel_programs_table":{"id":"المعرف","name":"اسم البرنامج","image":"الخلفية","discount":"الخصم","small_info":"معلومات قليلة","big_info":"معلومات كثيرة","order":"الترتيب","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_travel_program":"حذف البرنامج","edit_travel_program":"تعديل البرنامج","delete_msg":"هل أنت متأكد من حذف هذا البرنامج ؟","delete_success_msg":"تم حذف البرنامج.","delete_failed_msg":"لم يتم حذف البرنامج.","force_delete_msg":"هل أنت متأكد من إزالة هذا البرنامج بشكل نهائى ؟","force_delete_success_msg":"تم إزالة البرنامج بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة البرنامج.","restore_msg":"هل أنت متأكد من استرجاع هذا البرنامج ؟","restore_success_msg":"تم استرجاع البرنامج.","restore_failed_msg":"لم يتم استرجاع البرنامج.","p_create":{"success_msg":"تم إنشاء برنامج جديد.","failed_msg":"لم يتم إنشاء البرنامج الجديد."},"p_edit":{"success_msg":"تم تحديث البرنامج.","failed_msg":"لم يتم تحديث هذه البرنامج."}},"travel_categories_table":{"id":"المعرف","name":"اسم القسم","discount":"الخصم","image":"الخلفية","travel_program_id":"برنامج الرحلات","order":"الترتيب","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_travel_category":"حذف القسم","edit_travel_category":"تعديل القسم","delete_msg":"هل أنت متأكد من حذف هذا القسم ؟","delete_success_msg":"تم حذف القسم.","delete_failed_msg":"لم يتم حذف القسم.","force_delete_msg":"هل أنت متأكد من إزالة هذا القسم بشكل نهائى ؟","force_delete_success_msg":"تم إزالة القسم بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة القسم.","restore_msg":"هل أنت متأكد من استرجاع هذا القسم ؟","restore_success_msg":"تم استرجاع القسم.","restore_failed_msg":"لم يتم استرجاع القسم.","p_create":{"success_msg":"تم إنشاء قسم جديد.","failed_msg":"لم يتم إنشاء القسم الجديد."},"p_edit":{"success_msg":"تم تحديث القسم.","failed_msg":"لم يتم تحديث هذه القسم."}},"travels_table":{"id":"المعرف","name":"اسم الرحلة","address_from":"عنوان الإقلاع","info":"تفاصيل الرحلة","image":"الصورة","type":"نوع الرحلة","umrah_date":"موعد العمرة","haram_distance":"المسافة بين الفندق والحرم","discount":"الخصم","favorite_company":"تفضيل الحرية","favorite_company_yes":"تفضل","favorite_company_no":"لا تفضل","display":"الظهور","hotel_id":"الفندق","travel_category_id":"قسم الرحلة","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"صور الرحلة","offers_count":"عدد العروض","travel_info":"معلومات الرحلة","travel_offers":"عروض الرحلة","travel_offers_msg_form":"يجب إضافة عرض واحد للرحلة على الأقل.","delete_travel":"حذف الرحلة","edit_travel":"تعديل الرحلة","empty_gallery_msg":"هذه الرحلة ليس لديها صور مرفوعة.","empty_offers_msg":"هذه الرحلة ليس لديها عروض مضافة.","empty_bookings_msg":"هذه الرحلة ليس لديها حجوزات.","offers":{"info_offer":"وصف العرض","go_and_back":"ذهاب وعودة","only_go":"ذهاب فقط","date_from":"من","date_to":"إلى","time_period":"الفترة","stay_type":"نوع الإقامة","transport":"الإنتقالات","adults":"عدد البالغين","children":"عدد الأطفال","single_price":"فردية","twin_price":"زوجية","triple_price":"ثلاثية","title_number":"العرض رقم {number}","add_new_offer":"إضافة عرض جديد","delete_offer":"حذف العرض"},"delete_msg":"هل أنت متأكد من حذف هذه الرحلة ؟","delete_success_msg":"تم حذف الرحلة.","delete_failed_msg":"لم يتم حذف الرحلة.","force_delete_msg":"هل أنت متأكد من إزالة هذه الرحلة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الرحلة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الرحلة.","restore_msg":"هل أنت متأكد من استرجاع هذه الرحلة ؟","restore_success_msg":"تم استرجاع الرحلة.","restore_failed_msg":"لم يتم استرجاع الرحلة.","p_create":{"success_msg":"تم إنشاء رحلة جديدة.","failed_msg":"لم يتم إنشاء الرحلة الجديدة."},"p_edit":{"success_msg":"تم تحديث الرحلة.","failed_msg":"لم يتم تحديث هذه الرحلة."}},"bookings_table":{"id":"المعرف","name":"الإسم","email":"البريد الإليكترونى","phone":"الموبايل","message":"الرسالة","offer":"العرض المحجوز","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا الحجز ؟","delete_success_msg":"تم حذف الحجز.","delete_failed_msg":"لم يتم حذف الحجز.","force_delete_msg":"هل أنت متأكد من إزالة هذا الحجز بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الحجز بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الحجز.","restore_msg":"هل أنت متأكد من استرجاع هذا الحجز ؟","restore_success_msg":"تم استرجاع الحجز.","restore_failed_msg":"لم يتم استرجاع الحجز."},"mailing_list_table":{"id":"المعرف","email":"البريد الإليكترونى","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا البريد ؟","delete_success_msg":"تم حذف البريد.","delete_failed_msg":"لم يتم حذف البريد.","force_delete_msg":"","force_delete_success_msg":"","force_delete_failed_msg":"","restore_msg":"","restore_success_msg":"","restore_failed_msg":""},"blogs_table":{"id":"المعرف","title":"عنوان المدونة","content":"محتوى المدونة","image":"صورة المدونة","gallery":"صور المدونة","display":"الظهور","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_blog":"حذف المدونة","edit_blog":"تعديل المدونة","delete_msg":"هل أنت متأكد من حذف هذه المدونة ؟","delete_success_msg":"تم حذف المدونة.","delete_failed_msg":"لم يتم حذف المدونة.","force_delete_msg":"هل أنت متأكد من إزالة هذه المدونة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة المدونة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة المدونة.","restore_msg":"هل أنت متأكد من استرجاع هذه المدونة ؟","restore_success_msg":"تم استرجاع المدونة.","restore_failed_msg":"لم يتم استرجاع المدونة.","p_create":{"success_msg":"تم إنشاء مدونة جديدة.","failed_msg":"لم يتم إنشاء المدونة الجديدة."},"p_edit":{"success_msg":"تم تحديث المدونة.","failed_msg":"لم يتم تحديث هذه المدونة."}},"images_table":{"id":"المعرف","name":"الصورة","display":"الظهور","travel_category_id":"قسم الرحلات","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"الصور","images":"الصور","image":"الصورة","delete_image":"حذف الصورة","edit_image":"تعديل الصورة","delete_msg":"هل أنت متأكد من حذف هذه الصورة ؟","delete_success_msg":"تم حذف الصورة.","delete_failed_msg":"لم يتم حذف الصورة.","force_delete_msg":"هل أنت متأكد من إزالة هذه الصورة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الصورة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الصورة.","restore_msg":"هل أنت متأكد من استرجاع هذه الصورة ؟","restore_success_msg":"تم استرجاع الصورة.","restore_failed_msg":"لم يتم استرجاع الصورة.","p_create":{"success_msg":"تم إنشاء صورة جديدة.","failed_msg":"لم يتم إنشاء الصورة الجديدة."},"p_edit":{"success_msg":"تم تحديث الصورة.","failed_msg":"لم يتم تحديث هذه الصورة."}},"contact_us_table":{"id":"المعرف","name":"الاسم","email":"البريد الإلكترونى","phone":"الموبايل","message":"الرسالة","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذه الرسالة ؟","delete_success_msg":"تم حذف الرسالة.","delete_failed_msg":"لم يتم حذف الرسالة.","force_delete_msg":"","force_delete_success_msg":"","force_delete_failed_msg":"","restore_msg":"","restore_success_msg":"","restore_failed_msg":""},"settings_table":{"id":"المعرف","slug":"الاسم التعبيرى","name":"اسم الإعداد","value":"القيمة","type":"النوع","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","carousel":"صور الصفحة الرئيسية","setting_types":{"string":"نص قصير","text":"نص طويل","image":"صورة"},"delete_msg":"هل أنت متأكد من حذف هذا الإعداد ؟","delete_success_msg":"تم حذف الإعداد.","delete_failed_msg":"لم يتم حذف الإعداد.","force_delete_msg":"هل أنت متأكد من إزالة هذا الإعداد بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الإعداد بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الإعداد.","restore_msg":"هل أنت متأكد من استرجاع هذا الإعداد ؟","restore_success_msg":"تم استرجاع الإعداد.","restore_failed_msg":"لم يتم استرجاع الإعداد.","p_create":{"success_msg":"تم إنشاء إعداد جديد.","failed_msg":"لم يتم إنشاء الإعداد الجديد."},"p_edit":{"success_msg":"تم تحديث الإعداد.","failed_msg":"لم يتم تحديث هذا الإعداد."},"p_edit_carousel":{"success_msg":"تم تحديث صور الصفحة الرئيسية.","failed_msg":"لم يتم تحديث صور الصفحة الرئيسية."}}};
+module.exports = {"global":{"home":"الرئيسية","dashboard":"الرئيسية","user":"مدير","hotel":"فندق","the_hotel":"الفندق","the_price":"السعر","the_travel":"الرحلة","room":"غرفة","the_travel_program":"برنامج الرحلة","the_travel_category":"قسم الرحلة","the_images":"الصور","type":"نوع","comment":"تعليق","winner":"فائز","setting":"إعداد","no_rooms":"لا يوجد غرف","no_travels":"لا يوجد رحلات","no_hotel_features":"لا توجد مميزات للفندق","no_offers":"لا توجد عروض لهذه الرحلة","no_bookings":"لا توجد حجوزات لهذه الرحلة","no_gallery":"لا توجد صور","no_location":"لا توجد خريطة","show_map":"اعرض الخريطة","days":"أيام","day":"يوم","profile":"بروفايل","the_profile":"البروفايل","goto_travel_profile":"صفحة الرحلة","goto_hotel_profile":"صفحة الفندق","hotel_is_deleted":"الفندق محذوف","user_is_deleted":"المدير محذوف","travel_program_is_deleted":"برنامج الرحلة محذوف","travel_category_is_deleted":"قسم الرحلة محذوف","travel_is_deleted":"الرحلة محذوفة","offer_is_deleted":"العرض محذوف","logout":"تسجيل الخروج","create":"إنشاء","edit":"تعديل","update":"تحديث","save":"حفظ","read":"اقرأ","all":"الكل","read_more":"اقرأ المزيد","more_info":"معرفة المزيد","choose_image":"اختر صورة","drag_msg":"اسحب الصورة ثم ضعها هنا","active":"مفعل","disactive":"غير مفعل","available":"متاح","unavailable":"غير متاح","hidden":"مخفى","visible":"ظاهر","show":"عرض","view":"عرض","close":"إغلاق","display":"إظهار","from":"من","to":"إلى","in":"فى","on":"على","delete":"حذف","deleted":"تم الحذف","force_delete":"إزالة نهائيا","remove":"إزالة","removed":"تمت الإزالة","restore":"استرجاع","restored":"تم الإسترجاع","failed":"فشل","cancel":"إلغاء","yes_delete_it":"تأكيد الحذف","yes_remove_it":"تأكيد الإزالة","yes_restore_it":"تأكيد الإسترجاع","multi_delete_msg":"هل أنت متأكد من حذف جميع {model} المعلم عليها؟","multi_delete_success_msg":"تم حذف جميع {model} المعلم عليها.","multi_delete_failed_msg":"لم يتم حذف جميع {model} المعلم عليها.","multi_force_delete_msg":"هل أنت متأكد من إزالة جميع {model} المعلم عليها بشكل نهائى ؟","multi_force_delete_success_msg":"تم إزالة جميع {model} المعلم عليها بشكل نهائى.","multi_force_delete_failed_msg":"لم يتم إزالة جميع {model} المعلم عليها.","multi_restore_msg":"هل أنت متأكد من استرجاع جميع {model} المعلم عليها؟","multi_restore_success_msg":"تم استرجاع جميع {model} المعلم عليها.","multi_restore_failed_msg":"لم يتم استرجاع جميع {model} المعلم عليها.","settings_table":"إعدادات عرض جدول {model} فى كل الشاشات"},"sidebar":{"hotel_profile":"صفحة الفندق","travel_profile":"صفحة الرحلة","users":"المديرين","all_users":"جميع المديرين","new_user":"مدير جديد","edit_user":"تعديل مدير","hotels":"الفنادق","all_hotels":"جميع الفنادق","new_hotel":"فندق جديد","edit_hotel":"تعديل فندق","rooms":"الغرف","all_rooms":"جميع الغرف","new_room":"غرفة جديد","edit_room":"تعديل غرفة","travel_programs":"برامج الرحلات","all_travel_programs":"جميع برامج الرحلات","new_travel_program":"برنامج رحلة جديد","edit_travel_program":"تعديل برنامج رحلة","travel_categories":"أقسام الرحلات","all_travel_categories":"جميع أقسام الرحلات","new_travel_category":"قسم رحلات جديد","edit_travel_category":"تعديل قسم رحلات","travels":"الرحلات","all_travels":"جميع الرحلات","new_travel":"رحلة جديدة","edit_travel":"تعديل رحلة","bookings":"الحجوزات","all_bookings":"جميع الحجوزات","new_booking":"حجز جديد","edit_booking":"تعديل حجز","mailing_list":"القائمة البريدية","all_mailing_list":"جميع البريدات الإليكترونية","new_mailing_list":"بريد جديد","edit_mailing_list":"تعديل بريد","blogs":"المدونات","all_blogs":"جميع المدونات","new_blog":"مدونة جديدة","edit_blog":"تعديل مدونة","images":"الصور","all_images":"جميع الصور","new_image":"صورة جديدة","edit_image":"تعديل صورة","contact_us":"اتصل بنا","all_contact_us":"جميع الرسائل","settings":"الإعدادات","all_settings":"جميع الإعدادات","new_setting":"إعداد جديد","edit_setting":"تعديل إعداد"},"datatable":{"showing":"إظهار","entries":"سجلات","from":"من","to":"إلى","of":"من","next":"التالى","prev":"السابق","empty_table":"جدول فارغ","no_data_msg":"لا يوجد بيانات فى  هذا الجدول.","trashed":"المهمل","activation":"التفعيل","display":"الظهور","rules":"الصلاحيات","sold_out":"نفاذ الكمية","discount":"الخصم","created_between":"تم إنشائه فى تاريخ","search":"بحث"},"users_table":{"id":"المعرف","name":"الإسم","email":"البريد الإلكترونى","password":"كلمة السر","repeat_password":"أعد كلمة السر","image":"الصورة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا المدير ؟","delete_success_msg":"تم حذف المدير.","delete_failed_msg":"لم يتم حذف المدير.","force_delete_msg":"هل أنت متأكد من إزالة هذا المدير بشكل نهائى ؟","force_delete_success_msg":"تم إزالة المدير بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة المدير.","restore_msg":"هل أنت متأكد من استرجاع هذا المدير ؟","restore_success_msg":"تم استرجاع المدير.","restore_failed_msg":"لم يتم استرجاع المدير.","p_create":{"success_msg":"تم إنشاء مدير جديد.","failed_msg":"لم يتم إنشاء المدير الجديد."},"p_edit":{"success_msg":"تم تحديث المدير.","failed_msg":"لم يتم تحديث هذا المدير."}},"hotels_table":{"id":"المعرف","name":"الإسم","address":"العنوان","address_suggested":"عنوان مقترح","rating":"التقيم","stars":"عدد النجوم","info":"الوصف","longitude":"خط الطول","latitude":"خط العرض","image":"الصورة","features":"المميزات","display":"الظهور","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"صور الفندق","feature_name":"اسم الميزة","plus":"للمزيد","rooms_count":"عدد الغرف","travels_count":"عدد الرحلات","hotel_info":"معلومات الفندق","location":"الموقع","location_map":"خريطة الموقع","msg_location_map":"ابحث عن مكان الفندق ثم انقل العلامة الحمراء إلى مكان الفندق بدقة.","error_location":"لم يتم العثور على المكان ، ابحث بكلمات أخرى.","remove_location":"إزالة الموقع","delete_hotel":"حذف الفندق","edit_hotel":"تعديل الفندق","empty_rooms_msg":"هذا الفندق ليس لديه غرف مضافة.","empty_travels_msg":"هذا الفندق ليس لديه رحلات مضافة.","empty_features_msg":"هذا الفندق ليس لديه مميزات.","empty_gallery_msg":"هذا الفندق ليس لديه صور مرفوعة.","delete_msg":"هل أنت متأكد من حذف هذا الفندق ؟","delete_success_msg":"تم حذف الفندق.","delete_failed_msg":"لم يتم حذف الفندق.","force_delete_msg":"هل أنت متأكد من إزالة هذا الفندق بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الفندق بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الفندق.","restore_msg":"هل أنت متأكد من استرجاع هذا الفندق ؟","restore_success_msg":"تم استرجاع الفندق.","restore_failed_msg":"لم يتم استرجاع الفندق.","p_create":{"success_msg":"تم إنشاء فندق جديد.","failed_msg":"لم يتم إنشاء الفندق الجديد."},"p_edit":{"success_msg":"تم تحديث الفندق.","failed_msg":"لم يتم تحديث هذا الفندق."}},"rooms_table":{"id":"المعرف","info":"معلومات الغرفة","options":"الخيارات","price_night":"سعر الليلة","offer_price":"سعر العرض","offer_days":"عدد أيام العرض","display":"الظهور","user_id":"أضيف بواسطة","hotel_id":"الفندق","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","offer":"العرض","night":"ليلة","nights":"ليالى","delete_room":"حذف الغرفة","edit_room":"تعديل الغرفة","delete_msg":"هل أنت متأكد من حذف هذه الغرفة ؟","delete_success_msg":"تم حذف الغرفة.","delete_failed_msg":"لم يتم حذف الغرفة.","force_delete_msg":"هل أنت متأكد من إزالة هذه الغرفة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الغرفة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الغرفة.","restore_msg":"هل أنت متأكد من استرجاع هذه الغرفة ؟","restore_success_msg":"تم استرجاع الغرفة.","restore_failed_msg":"لم يتم استرجاع الغرفة.","p_create":{"success_msg":"تم إنشاء غرغة جديدة.","failed_msg":"لم يتم إنشاء الغرفة الجديدة."},"p_edit":{"success_msg":"تم تحديث الغرفة.","failed_msg":"لم يتم تحديث هذه الغرفة."}},"travel_programs_table":{"id":"المعرف","name":"اسم البرنامج","image":"الخلفية","discount":"الخصم","small_info":"معلومات قليلة","big_info":"معلومات كثيرة","order":"الترتيب","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_travel_program":"حذف البرنامج","edit_travel_program":"تعديل البرنامج","delete_msg":"هل أنت متأكد من حذف هذا البرنامج ؟","delete_success_msg":"تم حذف البرنامج.","delete_failed_msg":"لم يتم حذف البرنامج.","force_delete_msg":"هل أنت متأكد من إزالة هذا البرنامج بشكل نهائى ؟","force_delete_success_msg":"تم إزالة البرنامج بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة البرنامج.","restore_msg":"هل أنت متأكد من استرجاع هذا البرنامج ؟","restore_success_msg":"تم استرجاع البرنامج.","restore_failed_msg":"لم يتم استرجاع البرنامج.","p_create":{"success_msg":"تم إنشاء برنامج جديد.","failed_msg":"لم يتم إنشاء البرنامج الجديد."},"p_edit":{"success_msg":"تم تحديث البرنامج.","failed_msg":"لم يتم تحديث هذه البرنامج."}},"travel_categories_table":{"id":"المعرف","name":"اسم القسم","type":"نوع القسم","discount":"الخصم","image":"الخلفية","travel_program_id":"برنامج الرحلات","order":"الترتيب","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_travel_category":"حذف القسم","edit_travel_category":"تعديل القسم","delete_msg":"هل أنت متأكد من حذف هذا القسم ؟","delete_success_msg":"تم حذف القسم.","delete_failed_msg":"لم يتم حذف القسم.","force_delete_msg":"هل أنت متأكد من إزالة هذا القسم بشكل نهائى ؟","force_delete_success_msg":"تم إزالة القسم بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة القسم.","restore_msg":"هل أنت متأكد من استرجاع هذا القسم ؟","restore_success_msg":"تم استرجاع القسم.","restore_failed_msg":"لم يتم استرجاع القسم.","p_create":{"success_msg":"تم إنشاء قسم جديد.","failed_msg":"لم يتم إنشاء القسم الجديد."},"p_edit":{"success_msg":"تم تحديث القسم.","failed_msg":"لم يتم تحديث هذه القسم."}},"travels_table":{"id":"المعرف","name":"اسم الرحلة","address_from":"عنوان الإقلاع","info":"تفاصيل الرحلة","image":"الصورة","type":"نوع الرحلة","umrah_date":"موعد العمرة","haram_distance":"المسافة بين الفندق والحرم","discount":"الخصم","favorite_company":"تفضيل الحرية","favorite_company_yes":"تفضل","favorite_company_no":"لا تفضل","display":"الظهور","hotel_id":"الفندق","hotel_2_id":"الفندق الثانى","travel_category_id":"قسم الرحلة","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"صور الرحلة","offers_count":"عدد العروض","travel_info":"معلومات الرحلة","travel_offers":"عروض الرحلة","travel_offers_msg_form":"يجب إضافة عرض واحد للرحلة على الأقل.","delete_travel":"حذف الرحلة","edit_travel":"تعديل الرحلة","empty_gallery_msg":"هذه الرحلة ليس لديها صور مرفوعة.","empty_offers_msg":"هذه الرحلة ليس لديها عروض مضافة.","empty_bookings_msg":"هذه الرحلة ليس لديها حجوزات.","offers":{"id":"الرقم المعرف للعرض","info_offer":"وصف العرض","go_and_back":"ذهاب وعودة","only_go":"ذهاب فقط","date_from":"من","date_to":"إلى","time_period":"الفترة","stay_type":"نوع الإقامة","transport":"الإنتقالات","adults":"عدد البالغين","children":"عدد الأطفال","single_price":"فردية","twin_price":"زوجية","triple_price":"ثلاثية","title_number":"العرض رقم {number}","add_new_offer":"إضافة عرض جديد","delete_offer":"حذف العرض"},"delete_msg":"هل أنت متأكد من حذف هذه الرحلة ؟","delete_success_msg":"تم حذف الرحلة.","delete_failed_msg":"لم يتم حذف الرحلة.","force_delete_msg":"هل أنت متأكد من إزالة هذه الرحلة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الرحلة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الرحلة.","restore_msg":"هل أنت متأكد من استرجاع هذه الرحلة ؟","restore_success_msg":"تم استرجاع الرحلة.","restore_failed_msg":"لم يتم استرجاع الرحلة.","p_create":{"success_msg":"تم إنشاء رحلة جديدة.","failed_msg":"لم يتم إنشاء الرحلة الجديدة."},"p_edit":{"success_msg":"تم تحديث الرحلة.","failed_msg":"لم يتم تحديث هذه الرحلة."}},"bookings_table":{"id":"المعرف","name":"الإسم","email":"البريد الإليكترونى","phone":"الموبايل","message":"الرسالة","adults":"عدد البالغين","children":"عدد الأطفال","offer":"العرض المحجوز","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا الحجز ؟","delete_success_msg":"تم حذف الحجز.","delete_failed_msg":"لم يتم حذف الحجز.","force_delete_msg":"هل أنت متأكد من إزالة هذا الحجز بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الحجز بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الحجز.","restore_msg":"هل أنت متأكد من استرجاع هذا الحجز ؟","restore_success_msg":"تم استرجاع الحجز.","restore_failed_msg":"لم يتم استرجاع الحجز."},"mailing_list_table":{"id":"المعرف","email":"البريد الإليكترونى","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا البريد ؟","delete_success_msg":"تم حذف البريد.","delete_failed_msg":"لم يتم حذف البريد.","force_delete_msg":"","force_delete_success_msg":"","force_delete_failed_msg":"","restore_msg":"","restore_success_msg":"","restore_failed_msg":""},"blogs_table":{"id":"المعرف","title":"عنوان المدونة","content":"محتوى المدونة","image":"صورة المدونة","gallery":"صور المدونة","display":"الظهور","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_blog":"حذف المدونة","edit_blog":"تعديل المدونة","delete_msg":"هل أنت متأكد من حذف هذه المدونة ؟","delete_success_msg":"تم حذف المدونة.","delete_failed_msg":"لم يتم حذف المدونة.","force_delete_msg":"هل أنت متأكد من إزالة هذه المدونة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة المدونة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة المدونة.","restore_msg":"هل أنت متأكد من استرجاع هذه المدونة ؟","restore_success_msg":"تم استرجاع المدونة.","restore_failed_msg":"لم يتم استرجاع المدونة.","p_create":{"success_msg":"تم إنشاء مدونة جديدة.","failed_msg":"لم يتم إنشاء المدونة الجديدة."},"p_edit":{"success_msg":"تم تحديث المدونة.","failed_msg":"لم يتم تحديث هذه المدونة."}},"images_table":{"id":"المعرف","name":"الصورة","display":"الظهور","travel_category_id":"قسم الرحلات","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"الصور","images":"الصور","image":"الصورة","delete_image":"حذف الصورة","edit_image":"تعديل الصورة","delete_msg":"هل أنت متأكد من حذف هذه الصورة ؟","delete_success_msg":"تم حذف الصورة.","delete_failed_msg":"لم يتم حذف الصورة.","force_delete_msg":"هل أنت متأكد من إزالة هذه الصورة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الصورة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الصورة.","restore_msg":"هل أنت متأكد من استرجاع هذه الصورة ؟","restore_success_msg":"تم استرجاع الصورة.","restore_failed_msg":"لم يتم استرجاع الصورة.","p_create":{"success_msg":"تم إنشاء صورة جديدة.","failed_msg":"لم يتم إنشاء الصورة الجديدة."},"p_edit":{"success_msg":"تم تحديث الصورة.","failed_msg":"لم يتم تحديث هذه الصورة."}},"contact_us_table":{"id":"المعرف","name":"الاسم","email":"البريد الإلكترونى","phone":"الموبايل","message":"الرسالة","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذه الرسالة ؟","delete_success_msg":"تم حذف الرسالة.","delete_failed_msg":"لم يتم حذف الرسالة.","force_delete_msg":"","force_delete_success_msg":"","force_delete_failed_msg":"","restore_msg":"","restore_success_msg":"","restore_failed_msg":""},"settings_table":{"id":"المعرف","slug":"الاسم التعبيرى","name":"اسم الإعداد","value":"القيمة","type":"النوع","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","carousel":"صور الصفحة الرئيسية","setting_types":{"string":"نص قصير","text":"نص طويل","image":"صورة"},"delete_msg":"هل أنت متأكد من حذف هذا الإعداد ؟","delete_success_msg":"تم حذف الإعداد.","delete_failed_msg":"لم يتم حذف الإعداد.","force_delete_msg":"هل أنت متأكد من إزالة هذا الإعداد بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الإعداد بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الإعداد.","restore_msg":"هل أنت متأكد من استرجاع هذا الإعداد ؟","restore_success_msg":"تم استرجاع الإعداد.","restore_failed_msg":"لم يتم استرجاع الإعداد.","p_create":{"success_msg":"تم إنشاء إعداد جديد.","failed_msg":"لم يتم إنشاء الإعداد الجديد."},"p_edit":{"success_msg":"تم تحديث الإعداد.","failed_msg":"لم يتم تحديث هذا الإعداد."},"p_edit_carousel":{"success_msg":"تم تحديث صور الصفحة الرئيسية.","failed_msg":"لم يتم تحديث صور الصفحة الرئيسية."}}};
 
 /***/ }),
 
@@ -88683,20 +89751,20 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       sortOrders: {},
       showSettings: false,
       viewColumnsResponsive: {},
-      actionMultiDelete: {
-        action: 'delete'
-      },
       viewTableClasses: ["responsive", "dark", "light", "hover", "striped", "bordered", "borderless", "sm"],
       perPage: [5, 10, 15, 20, 25, 50, 100],
       pagination: {
-        lastPage: "",
-        currentPage: "",
-        total: "",
-        lastPageUrl: "",
-        nextPageUrl: "",
-        prevPageUrl: "",
-        from: "",
-        to: ""
+        currentPage: 0,
+        firstPageUrl: '',
+        from: 0,
+        lastPage: '',
+        lastPageUrl: '',
+        nextPageUrl: '',
+        path: '',
+        perPage: 0,
+        prevPageUrl: '',
+        to: 0,
+        total: 0
       },
       tableData: {
         draw: 0,
@@ -88831,18 +89899,22 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       });
     },
     gotopage: function gotopage(value) {
+      console.log(this.urlGetDataTable, value);
       this.getData(this.urlGetDataTable + "?page=" + value);
     },
     // get data
     configPagination: function configPagination(data) {
-      this.pagination.lastPage = data.last_page;
       this.pagination.currentPage = data.current_page;
-      this.pagination.total = data.total;
+      this.pagination.firstPageUrl = data.first_page_url;
+      this.pagination.from = data.from;
+      this.pagination.lastPage = data.last_page;
       this.pagination.lastPageUrl = data.last_page_url;
       this.pagination.nextPageUrl = data.next_page_url;
+      this.pagination.path = data.path;
+      this.pagination.perPage = data.per_page;
       this.pagination.prevPageUrl = data.prev_page_url;
-      this.pagination.from = data.from;
       this.pagination.to = data.to;
+      this.pagination.total = data.total;
     },
     sortBy: function sortBy(key) {
       this.tableData.sortBy = key;
@@ -89107,8 +90179,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     deleteResotreMulti: function deleteResotreMulti() {
       var _this8 = this;
 
+      var action = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'delete';
       var self = this;
-      var action = this.actionMultiDelete.action;
       var title = '',
           message = '',
           success_message = '',

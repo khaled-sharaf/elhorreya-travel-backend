@@ -22,7 +22,7 @@ class CreateTravelDetailsTable extends Migration
             $table->tinyInteger('time_period')->nullable(); // count days = ( date from - date to )
             $table->string('stay_type')->nullable(); // إقامة فقط، شامل الإفضطار، نصف إقامة، شامل كليا
             $table->boolean('transport')->default(0); // 0 = بدون انتقالات،  1  = انتقالات
-            $table->integer('adults')->default(2);
+            $table->integer('adults')->nullable()->default(0);
             $table->integer('children')->nullable()->default(0);
             $table->double('single_price')->nullable();
             $table->double('twin_price')->nullable();

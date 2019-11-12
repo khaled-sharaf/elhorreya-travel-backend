@@ -10,7 +10,6 @@ use App\Jobs\SendMailingTravel;
 
 use Image;
 use File;
-use Artisan;
 
 class TravelController extends Controller
 {
@@ -45,7 +44,9 @@ class TravelController extends Controller
         }
 
         if ($hotel_id != '') {
-            $query->where('hotel_id', $hotel_id);
+            $query->where(function($q) use ($hotel_id) {
+                $q->orWhere('hotel_id', $hotel_id)->orWhere('hotel_2_id', $hotel_id);
+            });
         }
 
         if ($trashed == 0) {
@@ -100,6 +101,7 @@ class TravelController extends Controller
             'discount' => 'nullable|integer|max:100',
             'favorite_company' => 'required|in:0,1',
             'hotel_id' => 'required|exists:hotels,id',
+            'hotel_2_id' => 'nullable|exists:hotels,id',
             'travel_category_id' => 'required|exists:travel_categories,id',
             'image' => 'required|string',
             'gallery' => 'nullable|array',
@@ -112,7 +114,7 @@ class TravelController extends Controller
             'offers.*.date_to' => 'required|date|after:offers.*.date_from',
             'offers.*.stay_type' => 'required',
             'offers.*.transport' => 'required',
-            'offers.*.adults' => 'required|integer|max:999',
+            'offers.*.adults' => 'nullable|integer|max:999',
             'offers.*.children' => 'nullable|integer|max:999',
             'offers.*.single_price' => 'required|numeric',
             'offers.*.twin_price' => 'nullable|numeric',
@@ -178,7 +180,7 @@ class TravelController extends Controller
 
         // send travel to all email in mailing list
         $sendMail = (new SendMailingTravel($createdTravel));
-        // ->delay(now()->addSeconds(5));
+        // ->delay(now()->addSeconds(3));
         dispatch($sendMail);
 
         return response(['message' => 'Travel has been created.', 'data' => $createdTravel]);
@@ -206,6 +208,7 @@ class TravelController extends Controller
             'discount' => 'nullable|integer|max:100',
             'favorite_company' => 'required|in:0,1',
             'hotel_id' => 'required|exists:hotels,id',
+            'hotel_2_id' => 'nullable|exists:hotels,id',
             'travel_category_id' => 'required|exists:travel_categories,id',
             'image' => 'required|string',
             'gallery' => 'nullable|array',
@@ -218,7 +221,7 @@ class TravelController extends Controller
             'offers.*.date_to' => 'required|date|after:offers.*.date_from',
             'offers.*.stay_type' => 'required',
             'offers.*.transport' => 'required',
-            'offers.*.adults' => 'required|integer|max:999',
+            'offers.*.adults' => 'nullable|integer|max:999',
             'offers.*.children' => 'nullable|integer|max:999',
             'offers.*.single_price' => 'required|numeric',
             'offers.*.twin_price' => 'nullable|numeric',

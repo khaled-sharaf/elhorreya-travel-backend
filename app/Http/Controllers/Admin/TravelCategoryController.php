@@ -16,7 +16,7 @@ class TravelCategoryController extends Controller
 
     public function TravelCategoriesSelect()
     {
-        $travel_categories = TravelCategory::select(['id', 'name'])->get();
+        $travel_categories = TravelCategory::select(['id', 'name', 'type'])->get();
         return response(['travel_categories' => $travel_categories]);
     }
 
@@ -77,6 +77,7 @@ class TravelCategoryController extends Controller
     {
         $this->validate(request(), [
             'name' => 'required|string|between:2,180',
+            'type' => 'required|integer|between:1,5',
             'discount' => 'nullable|integer|max:100',
             'image' => 'required|string',
             'order' => 'nullable|integer|min:1',
@@ -119,6 +120,7 @@ class TravelCategoryController extends Controller
     {
         $this->validate(request(), [
             'name' => 'required|string|between:2,180',
+            'type' => 'required|integer|between:1,5',
             'discount' => 'nullable|integer|max:100',
             'image' => 'required|string',
             'order' => 'nullable|integer|min:1',

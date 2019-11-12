@@ -14,22 +14,17 @@
         :themeTableClassesFilter="tableData.filter.viewTable"
         :sortOrders="sortOrders"
         :pagination="pagination"
-        :totalLink="Math.ceil(pagination.total / tableData.length)"
         :filters="filters"
-        :actionMultiDelete="actionMultiDelete"
 
-        @prev="getData(pagination.prevPageUrl)"
-        @next="getData(pagination.nextPageUrl)"
-        @gotopage="gotopage"
-        @toggleShowSettings="toggleShowSettings"
-        @deleteResotreMulti="deleteResotreMulti"
-        @getData="getData"
+        :toggleShowSettings="toggleShowSettings"
+        :deleteResotreMulti="deleteResotreMulti"
+        :getData="getData"
     >
 
         <template v-slot:filters>
             <travels-select
                 v-if="$route.name == 'bookings'"
-                @getData="getData"
+                :getData="getData"
                 :tableData="tableData"
                 :travels="travelsSelect"
             ></travels-select>
@@ -76,6 +71,14 @@
                     {{booking.message}}
                 </td>
 
+                <td v-show="tableData.columns.indexOf('adults') != -1" class="adults">
+                    {{booking.adults}}
+                </td>
+
+                <td v-show="tableData.columns.indexOf('children') != -1" class="children">
+                    {{booking.children}}
+                </td>
+
 
 
                 <td v-show="tableData.columns.indexOf('offer') != -1" class="offer">
@@ -89,6 +92,10 @@
                         :data-params='`{"travel": ${JSON.stringify(booking.travel)}, "id": ${booking.travel_id}, "offer_id": ${booking.travel_detail_id}}`'
                     >
                         {{ booking.travel.name }}
+                        <span class="badge badge-success" style="font-size: 12px !important">
+                            رقم
+                            {{ booking.offer.id }}
+                        </span>
                     </router-link>
                     <span class="badge badge-danger" v-else> {{ $t('global.travel_is_deleted') }} - id:{{booking.travel_id}}</span>
                 </td>
@@ -160,6 +167,8 @@ export default {
                 { label: "email", name: "email" },
                 { label: "phone", name: "phone" },
                 { label: "message", name: "message" },
+                { label: "adults", name: "adults" },
+                { label: "children", name: "children" },
                 { label: "Offer", name: "offer" },
                 { label: "Updated at", name: "updated_at" },
                 { label: "Created at", name: "created_at" }

@@ -12,7 +12,7 @@ class Image extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'name', 'display', 'travel_type_id', 'user_id'
+        'name', 'display', 'travel_category_id', 'user_id'
     ];
 
     public function scopeDisplay($query)
@@ -25,8 +25,8 @@ class Image extends Model
         return $this->belongsTo('App\User');
     }
 
-    public function travel_category()
+    public function category()
     {
-        return $this->belongsTo('App\TravelCategory');
+        return $this->belongsTo('App\TravelCategory', 'travel_category_id');
     }
 }

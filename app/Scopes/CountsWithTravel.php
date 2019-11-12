@@ -10,6 +10,6 @@ class CountsWithTravel implements Scope
 {
     public function apply(Builder $builder, Model $model)
     {
-        $builder->with(['user', 'offers', 'hotel', 'travel_category'])->withCount(['offers', 'bookings']);
+        $builder->with(['offers', 'user', 'hotel', 'hotel_2', 'travel_category'])->withCount(['offers', 'bookings']);
     }
 }

@@ -75,6 +75,7 @@ export default {
             image: "",
             gallery: [],
             hotel_id: "",
+            hotel_2_id: "",
             travel_category_id: "",
             display: 1,
             offers: [

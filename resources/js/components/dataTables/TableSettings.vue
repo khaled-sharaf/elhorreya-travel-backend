@@ -2,7 +2,7 @@
     <div id="table-settings-wrapper">
         <button
             class="btn btn-secondary btn-sm btn-settings-table"
-            @click="$emit('toggleShowSettings')"
+            @click="toggleShowSettings()"
         >
             <i class="fas fa-cog"></i>
         </button>
@@ -10,14 +10,14 @@
             <div
                 class="table-settings-view"
                 v-show="showSettings"
-                @click.self="$emit('toggleShowSettings')"
+                @click.self="toggleShowSettings()"
             >
                 <div class="content-settings-wrapper">
                     <!-- header -->
                     <header class="header">
                         <button
                             class="btn btn-transparent btn-close-settings"
-                            @click="$emit('toggleShowSettings')"
+                            @click="toggleShowSettings()"
                         >
                             <span></span>
                             <span></span>
@@ -107,7 +107,8 @@
         props: [
             'showSettings',
             'idPage',
-            'columns'
+            'columns',
+            'toggleShowSettings'
         ],
         data() {
             return {
@@ -232,7 +233,7 @@
                 localStorage.setItem(this.$nameSettingsInDB, JSON.stringify(oldSettings))
 
                 // close settings
-                this.$emit('toggleShowSettings')
+                this.toggleShowSettings()
             },
 
             setScreenSizesFromLocale() {

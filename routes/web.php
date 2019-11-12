@@ -1,10 +1,16 @@
 <?php
 
 
+// here all routes control panel
+
 Route::group(['prefix' => env('CP_PREFIX')], function () {
-    Route::redirect('/', url(env('CP_PREFIX') . '/dashboard'));
+    Route::redirect('/', url('/home'));
     Auth::routes(['register' => false]);
+
+    Route::get('/{path?}', 'Admin\HomeController@index')->where('path', '.*');
 });
+
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 
@@ -24,27 +30,12 @@ Route::get('/mailing_list/unsubscribe/{token}', 'API\MailingListController@destr
 // use App\Hotel;
 // use App\ProductType;
 // use App\Winner;
-use App\Travel;
+// use App\Travel;
 
+Route::view('/{path?}', 'welcome')->where('path', '.*');
 
-Route::get('/', function () {
-    // $travel = Travel::find(12);
-    // return view('emails.mail-travel')->with('travel', $travel);
-    return view('welcome');
-
-
-    // $pro = Pro::find(3)->comments()->with('user')->get();
-    // $pro = Pro::find(3)->with('rates')->get();
-    // $pro = Company::with(['products', 'rates'])->get();
-    // $pro = ProductType::with('products')->get();
-    // $pro = ProductDetails::with(['products', 'productType'])->get();
-    // $pro = Winner::get();
-
-    // dd(City::find(5)->city_name, City::find(5)->governorate->governorate_name);
-
-    // \Image::make('C:\xampp\htdocs\Belal\xorpin-backend\public\images\camera.png')
-    //         ->resize(100, 100)
-    //         ->save('C:\xampp\htdocs\Belal\xorpin-backend\public\images\camera1.png');
-
-
-});
+// Route::get('/', function () {
+    // $travels = Travel::where('travel_category_id', 5)->get();
+    // $travels = convert_column_to_array($travels, 'gallery');
+    // dd($travels->count());
+// });

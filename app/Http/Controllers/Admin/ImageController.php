@@ -27,7 +27,7 @@ class ImageController extends Controller
         $trashed = $request->trashed;
         $from_date = $request->from_date;
         $to_date = $request->to_date;
-        $query = ImageModel::select('*')->orderBy($sortBy, $dir)->with(['user', 'travel_category']);
+        $query = ImageModel::select('*')->orderBy($sortBy, $dir)->with(['user', 'category']);
 
         if ($travel_category_id != '') {
             $query->where('travel_category_id', $travel_category_id);

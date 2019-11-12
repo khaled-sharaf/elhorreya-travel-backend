@@ -27,6 +27,7 @@ class CreateTravelsTable extends Migration
             $table->boolean('favorite_company')->default(0);
             $table->boolean('display')->default(1);
             $table->unsignedInteger('hotel_id');
+            $table->unsignedInteger('hotel_2_id')->nullable();
             $table->unsignedInteger('travel_category_id');
             $table->unsignedInteger('user_id');
             $table->softDeletes();

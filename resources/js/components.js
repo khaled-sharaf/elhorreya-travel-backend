@@ -49,7 +49,10 @@ Vue.component("relative-date", {
 
 Vue.component("rates-stars", {
     props: {
-        'rates-count': Number
+        'rates-count': {
+            type: Number,
+            required: true
+        }
     },
     template: `<div class="wrapper-stars-rating">
         <i class="stars-rating">

@@ -11,7 +11,7 @@ Vue.config.productionTip = false
 Vue.prototype.$domain = window.url
 Vue.prototype.$auth = window.auth
 Vue.prototype.$settings = window.settings
-Vue.prototype.$domain_admin = window.url + '/' + window.cp_prefix
+Vue.prototype.$domain_admin = window.url + window.cp_prefix
 Vue.prototype.$nameSettingsInDB = 'data_tabel_settings_view_columns'
 
 
@@ -38,6 +38,11 @@ import './components.js'
 import './filters.js'
 import './directives.js'
 
+/**************************************************************************************/
+// paginate
+
+import Paginate from 'vuejs-paginate'
+Vue.component('paginate', Paginate)
 /**************************************************************************************/
 
 import { Form, HasError, AlertError, AlertErrors, AlertSuccess } from "vform";

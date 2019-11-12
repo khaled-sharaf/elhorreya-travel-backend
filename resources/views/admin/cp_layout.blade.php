@@ -48,10 +48,10 @@
   <!-- Main Footer -->
 
 
-  <footer class="main-footer">
+  {{-- <footer class="main-footer">
     <strong>Copyright &copy; {{ date('Y') }} <a href="{{ url('/') }}">{{ config('app.name') }}</a>.</strong>
     All rights reserved.
-  </footer>
+  </footer> --}}
 </div>
 <!-- ./wrapper -->
 
@@ -59,7 +59,7 @@
 <script>
     // set auth user in object global in all file js
     window.csrf_token = '{{csrf_token()}}';
-    window.url = '{{url("/")}}';
+    window.url = '{{url("/")}}/';
     window.cp_prefix = '{{ env("CP_PREFIX") }}';
     window.cp_prefix_api = '{{ env("CP_PREFIX_API") }}';
     window.admin_prefix = '{{ url("/") . "/" . env("CP_PREFIX") }}';

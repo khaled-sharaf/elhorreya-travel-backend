@@ -90,6 +90,7 @@ export default {
                 gallery: [],
                 deletedGallery: [],
                 hotel_id: "",
+                hotel_2_id: "",
                 travel_category_id: "",
                 display: 1,
                 deletedOffers: [],

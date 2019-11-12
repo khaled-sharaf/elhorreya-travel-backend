@@ -7,14 +7,14 @@
                 class="form-control form-control-sm"
                 v-model="tableData.search"
                 :placeholder="$t('datatable.search')"
-                @input="$emit('getData')"
+                @input="getData()"
             >
             <span class="icon search">
                 <i class="fas fa-search"></i>
             </span>
             <span
                 class="icon delete"
-                @click="tableData.search = ''; $emit('getData');"
+                @click="tableData.search = ''; getData();"
                 v-if="tableData.search.length"
             >
             <i class="fas fa-times-circle"></i>
@@ -30,7 +30,8 @@
 <script>
 export default {
     props: [
-    "tableData"
+    'tableData',
+    'getData'
   ],
 }
 </script>

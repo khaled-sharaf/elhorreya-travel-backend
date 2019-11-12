@@ -133,9 +133,32 @@
                                                 :href="$domain_admin + '/hotel/profile/' + travelProfile.hotel_id"
                                                 :to="{name: 'hotel-profile', params: {id: travelProfile.hotel_id, hotel: travelProfile.hotel}}"
                                             >
-                                                {{ travelProfile.hotel.name }}
+                                                {{ travelProfile.hotel.name + ' --- ' + travelProfile.hotel.address }}
                                             </router-link>
                                             <span class="badge badge-danger" v-else> {{ $t('global.hotel_is_deleted') }} - id:{{travelProfile.hotel_id}}</span>
+                                        </a>
+                                    </li>
+                                    <!-- =========================================== -->
+
+
+
+                                     <!-- hotel 2 -->
+                                    <li class="list-group-item">
+                                        <b>
+                                            {{ $t('travels_table.hotel_2_id') }}
+                                        </b>
+                                        <a class="float-right">
+                                            <span v-if="travelProfile.hotel_2_id !== null">
+                                                <router-link
+                                                    v-if="travelProfile.hotel_2 !== null"
+                                                    :href="$domain_admin + '/hotel/profile/' + travelProfile.hotel_2_id"
+                                                    :to="{name: 'hotel-profile', params: {id: travelProfile.hotel_2_id, hotel: travelProfile.hotel_2}}"
+                                                >
+                                                    {{ travelProfile.hotel_2.name + ' --- ' + travelProfile.hotel_2.address }}
+                                                </router-link>
+                                                <span class="badge badge-danger" v-else> {{ $t('global.hotel_is_deleted') }} - id:{{travelProfile.hotel_2_id}}</span>
+                                            </span>
+                                            <span class="badge badge-info" v-else> لا يوجد فندق ثانى</span>
                                         </a>
                                     </li>
                                     <!-- =========================================== -->
@@ -264,7 +287,7 @@
                             <div class="card-body">
                                 <div class="tab-content">
                                     <div class="tab-pane" :class="{'active': currentChildTable == 'gallery'}" id="gallery">
-                                        <div class="gallery-in-profile" v-if="(travelProfile.gallery.length > 0) && currentChildTable === 'gallery'">
+                                        <div class="gallery-in-profile" v-if="(travelProfile.gallery != null && travelProfile.gallery.length > 0) && currentChildTable === 'gallery'">
                                             <div class="image" v-for="image in travelProfile.gallery" :key="image.id">
                                                 <img :src="$domain + '/' + image.value">
                                             </div>
@@ -280,14 +303,27 @@
                                             <div class="offer-wrapper" :data-id="offer.id" v-for="(offer, index) in travelProfile.offers" :key="offer.id">
                                                 <div class="offer-title">
                                                     <h3 class="title">
-                                                        العرض رقم
-                                                        {{ index + 1 }}
+                                                        العرض
+                                                        {{ counterText[index] }}
                                                     </h3>
                                                 </div>
                                                 <div class="offer">
                                                     <!-- list-group -->
                                                     <ul class="list-group mb-3">
 
+
+                                                        <!-- id -->
+                                                        <li class="list-group-item">
+                                                            <b>
+                                                                {{ $t('travels_table.offers.id') }}
+                                                            </b>
+                                                            <a class="float-right">
+                                                                <span class="badge badge-success" style="font-size: 16px !important">
+                                                                    {{ offer.id }}
+                                                                </span>
+                                                            </a>
+                                                        </li>
+                                                        <!-- =========================================== -->
 
                                                         <!-- info_offer -->
                                                         <li class="list-group-item">
@@ -512,12 +548,18 @@ export default {
                 image: "",
                 gallery: [],
                 hotel_id: "",
+                hotel_2_id: "",
                 travel_category_id: "",
                 display: 1,
                 offers_count: 0,
                 offers: [],
                 hotel: {
-                    name: ''
+                    name: '',
+                    address: ''
+                },
+                hotel_2: {
+                    name: '',
+                    address: ''
                 },
                 user: {
                     name: ''
@@ -539,7 +581,25 @@ export default {
             transports: {
                 0: 'بدون انتقالات',
                 1: 'شامل الانتقالات'
-            }
+            },
+
+            counterText: [
+                'الأول',
+                'الثانى',
+                'الثالث',
+                'الرابع',
+                'الخامس',
+                'السادس',
+                'السابع',
+                'الثامن',
+                'التاسع',
+                'العاشر',
+                'الحادى عشر',
+                'الثانى عشر',
+                'الثالث عشر',
+                'الرابع عشر',
+                'الخامس عشر',
+            ]
         }
     },
     methods: {

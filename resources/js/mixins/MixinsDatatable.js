@@ -11,9 +11,6 @@ export default {
             sortOrders: {},
             showSettings: false,
             viewColumnsResponsive: {},
-            actionMultiDelete: {
-                action: 'delete'
-            },
 
             viewTableClasses: [
                 "responsive",
@@ -27,14 +24,17 @@ export default {
             ],
             perPage: [5, 10, 15, 20, 25, 50, 100],
             pagination: {
-                lastPage: "",
-                currentPage: "",
-                total: "",
-                lastPageUrl: "",
-                nextPageUrl: "",
-                prevPageUrl: "",
-                from: "",
-                to: ""
+                currentPage: 0,
+                firstPageUrl: '',
+                from: 0,
+                lastPage: '',
+                lastPageUrl: '',
+                nextPageUrl: '',
+                path: '',
+                perPage: 0,
+                prevPageUrl: '',
+                to: 0,
+                total: 0,
             },
 
             tableData: {
@@ -161,18 +161,22 @@ export default {
             })
         },
         gotopage(value) {
+            console.log(this.urlGetDataTable, value)
             this.getData(this.urlGetDataTable + "?page=" + value)
         },
         // get data
         configPagination(data) {
-            this.pagination.lastPage = data.last_page
             this.pagination.currentPage = data.current_page
-            this.pagination.total = data.total
+            this.pagination.firstPageUrl = data.first_page_url
+            this.pagination.from = data.from
+            this.pagination.lastPage = data.last_page
             this.pagination.lastPageUrl = data.last_page_url
             this.pagination.nextPageUrl = data.next_page_url
+            this.pagination.path = data.path
+            this.pagination.perPage = data.per_page
             this.pagination.prevPageUrl = data.prev_page_url
-            this.pagination.from = data.from
             this.pagination.to = data.to
+            this.pagination.total = data.total
         },
         sortBy(key) {
             this.tableData.sortBy = key
@@ -428,9 +432,8 @@ export default {
                 }
             })
         },
-        deleteResotreMulti() {
+        deleteResotreMulti(action = 'delete') {
             const self = this
-            const action = this.actionMultiDelete.action
             let title = '',
                 message = '',
                 success_message = '',

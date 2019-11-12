@@ -15,7 +15,7 @@ class Travel extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'name', 'address_from', 'info', 'image', 'gallery', 'type', 'umrah_date', 'haram_distance', 'discount', 'favorite_company', 'display', 'hotel_id', 'travel_category_id', 'user_id'
+        'name', 'address_from', 'info', 'image', 'gallery', 'type', 'umrah_date', 'haram_distance', 'discount', 'favorite_company', 'display', 'hotel_id', 'hotel_2_id', 'travel_category_id', 'user_id'
     ];
 
     public function scopeDisplay($query)
@@ -59,6 +59,11 @@ class Travel extends Model
     }
 
     public function hotel()
+    {
+        return $this->belongsTo('App\Hotel');
+    }
+
+    public function hotel_2()
     {
         return $this->belongsTo('App\Hotel');
     }

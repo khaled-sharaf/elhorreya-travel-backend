@@ -232,6 +232,7 @@
         "id": "المعرف",
         "name": "الإسم",
         "address": "العنوان",
+        "address_suggested": "عنوان مقترح",
         "rating": "التقيم",
         "stars": "عدد النجوم",
         "info": "الوصف",
@@ -377,6 +378,7 @@
     "travel_categories_table": {
         "id": "المعرف",
         "name": "اسم القسم",
+        "type": "نوع القسم",
         "discount": "الخصم",
         "image": "الخلفية",
         "travel_program_id": "برنامج الرحلات",
@@ -429,6 +431,7 @@
         "favorite_company_no": "لا تفضل",
         "display": "الظهور",
         "hotel_id": "الفندق",
+        "hotel_2_id": "الفندق الثانى",
         "travel_category_id": "قسم الرحلة",
         "user_id": "أضيف بواسطة",
         "updated_at": "أخر تعديل",
@@ -447,6 +450,7 @@
         "empty_bookings_msg": "هذه الرحلة ليس لديها حجوزات.",
 
         "offers": {
+            "id": "الرقم المعرف للعرض",
             "info_offer": "وصف العرض",
             "go_and_back": "ذهاب وعودة",
             "only_go": "ذهاب فقط",
@@ -496,6 +500,8 @@
         "email": "البريد الإليكترونى",
         "phone": "الموبايل",
         "message": "الرسالة",
+        "adults": "عدد البالغين",
+        "children": "عدد الأطفال",
         "offer": "العرض المحجوز",
         "updated_at": "أخر تعديل",
         "created_at": "تاريخ الإنشاء",

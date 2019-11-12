@@ -12,7 +12,7 @@ class Booking extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'name', 'email', 'phone', 'message', 'travel_id', 'travel_detail_id'
+        'name', 'email', 'phone', 'message', 'adults', 'children', 'travel_id', 'travel_detail_id'
     ];
 
     public function travel() {
