@@ -34,7 +34,7 @@
                 </div>
 
                 <!-- price night -->
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label>{{$t('rooms_table.price_night')}} <span class="field-required"></span></label>
                     <input
                         v-model="form.price_night"
@@ -44,10 +44,10 @@
                         :class="{ 'is-invalid': form.errors.has('price_night') }"
                     >
                     <has-error :form="form" field="price_night"></has-error>
-                </div>
+                </div> -->
 
                 <!-- offer days -->
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label>{{$t('rooms_table.offer_days')}}</label>
                     <input
                         v-model="form.offer_days"
@@ -57,10 +57,10 @@
                         :class="{ 'is-invalid': form.errors.has('offer_days') }"
                     >
                     <has-error :form="form" field="offer_days"></has-error>
-                </div>
+                </div> -->
 
                 <!-- offer price -->
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label>{{$t('rooms_table.offer_price')}}</label>
                     <input
                         v-model="form.offer_price"
@@ -70,7 +70,7 @@
                         :class="{ 'is-invalid': form.errors.has('offer_price') }"
                     >
                     <has-error :form="form" field="offer_price"></has-error>
-                </div>
+                </div> -->
 
                 <!-- hotel -->
                 <div class="form-group">
@@ -127,7 +127,14 @@
         getHotelsSelect() {
             axios.get(this.urlGetHotels).then(response => {
                 if (response.status === 200) {
-                    this.hotelsSelect = response.data.hotels
+                    const data = response.data
+                    if (typeof data === 'object') {
+                        this.hotelsSelect = response.data.hotels
+                    } else {
+                        setTimeout(() => {
+                            this.getHotelsSelect()
+                        }, 1000)
+                    }
                 }
             })
             .catch(errors => {

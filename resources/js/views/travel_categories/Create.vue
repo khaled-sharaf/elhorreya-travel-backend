@@ -69,7 +69,7 @@ export default {
             discount: '',
             image: '',
             travel_program_id: '',
-            order: '',
+            // order: '',
         }),
         idPage: 'travel_categories',
         typePage: 'create'

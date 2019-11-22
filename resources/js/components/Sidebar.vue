@@ -340,6 +340,12 @@
                                     <p> {{ $t('global.create') + ' ' + $t('sidebar.new_setting') }} </p>
                                 </router-link>
                             </li>
+                            <li class="nav-item">
+                                <router-link :to="{name: 'home_tabs'}" class="nav-link">
+                                    <i class="fas fa-image nav-icon"></i>
+                                    <p> {{ $t('sidebar.home_tabs') }} </p>
+                                </router-link>
+                            </li>
                         </ul>
                     </li>
 

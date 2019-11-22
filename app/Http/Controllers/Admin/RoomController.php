@@ -76,9 +76,9 @@ class RoomController extends Controller
         $this->validate(request(), [
             'info' => 'required|string|between:3,180',
             'options' => 'required|string',
-            'price_night' => 'required|numeric',
-            'offer_days' => 'nullable|numeric|required_with:offer_price',
-            'offer_price' => 'nullable|numeric|required_with:offer_days',
+            // 'price_night' => 'required|numeric',
+            // 'offer_days' => 'nullable|numeric|required_with:offer_price',
+            // 'offer_price' => 'nullable|numeric|required_with:offer_days',
             'hotel_id' => 'required|exists:hotels,id',
             'display' => 'required|in:0,1',
         ]);
@@ -100,9 +100,9 @@ class RoomController extends Controller
         $this->validate(request(), [
             'info' => 'required|string|between:3,180',
             'options' => 'required|string',
-            'price_night' => 'required|numeric',
-            'offer_days' => 'nullable|numeric|required_with:offer_price',
-            'offer_price' => 'nullable|numeric|required_with:offer_days',
+            // 'price_night' => 'required|numeric',
+            // 'offer_days' => 'nullable|numeric|required_with:offer_price',
+            // 'offer_price' => 'nullable|numeric|required_with:offer_days',
             'hotel_id' => 'required|exists:hotels,id',
             'display' => 'required|in:0,1',
         ]);

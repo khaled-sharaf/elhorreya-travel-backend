@@ -79,7 +79,7 @@ class HotelController extends Controller
         $this->validate(request(), [
             'name' => 'required|string|between:2,180',
             'address' => 'required|string|between:3,180',
-            'rating' => 'required|integer|between:0,100',
+            // 'rating' => 'required|integer|between:0,100',
             'stars' => 'required|in:3,4,5,7',
             'info' => 'required|string|min:5',
             'latitude' => 'nullable|numeric|required_with:longitude',
@@ -160,7 +160,7 @@ class HotelController extends Controller
         $this->validate(request(), [
             'name' => 'required|string|between:2,180',
             'address' => 'required|string|between:3,180',
-            'rating' => 'required|integer|between:0,100',
+            // 'rating' => 'required|integer|between:0,100',
             'stars' => 'required|in:3,4,5,7',
             'info' => 'required|string|min:5',
             'latitude' => 'nullable|numeric|required_with:longitude',

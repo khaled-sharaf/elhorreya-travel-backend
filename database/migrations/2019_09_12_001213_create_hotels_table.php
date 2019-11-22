@@ -17,7 +17,7 @@ class CreateHotelsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('address');
-            $table->tinyInteger('rating')->default(0);
+            $table->tinyInteger('rating')->default(0)->nullable();
             $table->boolean('stars')->nullable();
             $table->mediumText('info')->nullable();
             $table->string('longitude')->nullable();

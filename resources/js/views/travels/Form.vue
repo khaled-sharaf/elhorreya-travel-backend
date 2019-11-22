@@ -19,34 +19,6 @@
                 </div>
 
 
-                <!-- address_from -->
-                <div class="form-group">
-                    <label> {{ $t('travels_table.address_from') }}</label>
-                    <input
-                        v-model="form.address_from"
-                        type="text"
-                        :placeholder="$t('travels_table.address_from')"
-                        class="form-control"
-                        :class="{ 'is-invalid': form.errors.has('address_from') }"
-                    >
-                    <has-error :form="form" field="address_from"></has-error>
-                </div>
-
-
-                <!-- travel info -->
-                <div class="form-group">
-                    <label> {{ $t('travels_table.info') }}</label>
-                    <textarea
-                        v-model="form.info"
-                        type="text"
-                        :placeholder="$t('travels_table.info')"
-                        class="form-control textarea-form"
-                        :class="{ 'is-invalid': form.errors.has('info') }"
-                    ></textarea>
-                    <has-error :form="form" field="info"></has-error>
-                </div>
-
-
                 <!-- type travel -->
                 <div class="form-group">
                     <label> {{ $t('travels_table.type') }} <span class="field-required"></span></label>
@@ -54,7 +26,8 @@
                         v-model="form.type"
                         class="custom-select"
                         :class="{ 'is-invalid': form.errors.has('type') }"
-                        >
+                        :disabled="typeForm === 'edit'"
+                    >
                         <option v-for="type in travelTypes" :key="type.value" :value="type.value" v-text="type.label"></option>
                     </select>
                     <has-error :form="form" field="type"></has-error>
@@ -62,7 +35,7 @@
 
 
                 <!-- umrah date -->
-                <div class="form-group" v-if="form.type == 'umrah'">
+                <div class="form-group" v-if="form.type === 'umrah'">
                     <label> {{ $t('travels_table.umrah_date') }} <span class="field-required"></span></label>
                     <input
                         v-model="form.umrah_date"
@@ -76,7 +49,7 @@
 
 
                 <!-- haram distance -->
-                <div class="form-group" v-if="form.type == 'umrah' || form.type == 'pilgrimage'">
+                <div class="form-group" v-if="form.type === 'umrah' || form.type === 'pilgrimage'">
                     <label> {{ $t('travels_table.haram_distance') }} <span class="field-required"></span></label>
                     <select
                         v-model="form.haram_distance"
@@ -86,6 +59,93 @@
                         <option v-for="distance in haramDistance" :key="distance.value" :value="distance.value" v-text="distance.label"></option>
                     </select>
                     <has-error :form="form" field="haram_distance"></has-error>
+                </div>
+
+
+                <!-- address_from -->
+                <div class="form-group" v-if="form.type !== 'umrah' && form.type !== 'pilgrimage'">
+                    <label> {{ $t('travels_table.address_from') }}</label>
+                    <input
+                        v-model="form.address_from"
+                        type="text"
+                        :placeholder="$t('travels_table.address_from')"
+                        class="form-control"
+                        :class="{ 'is-invalid': form.errors.has('address_from') }"
+                    >
+                    <has-error :form="form" field="address_from"></has-error>
+                </div>
+
+                <div class="form-group itinerary" v-else>
+                    <label> {{ $t('travels_table.itinerary') }}</label>
+                    <div class="row">
+
+                        <div class="form-group col-12 col-sm-4">
+                            <input
+                                v-model="form.itinerary_1"
+                                type="text"
+                                :placeholder="$t('travels_table.city')"
+                                class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('itinerary_1') }"
+                            >
+                            <has-error :form="form" field="itinerary_1"></has-error>
+                        </div>
+
+                        <div class="form-group col-12 col-sm-4">
+                            <input
+                                v-model="form.itinerary_2"
+                                type="text"
+                                :placeholder="$t('travels_table.city')"
+                                class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('itinerary_2') }"
+                            >
+                            <has-error :form="form" field="itinerary_2"></has-error>
+                        </div>
+
+                        <div class="form-group col-12 col-sm-4">
+                            <input
+                                v-model="form.itinerary_3"
+                                type="text"
+                                :placeholder="$t('travels_table.city')"
+                                class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('itinerary_3') }"
+                            >
+                            <has-error :form="form" field="itinerary_3"></has-error>
+                        </div>
+
+                        <div class="form-group col-12 col-sm-4">
+                            <input
+                                v-model="form.itinerary_4"
+                                type="text"
+                                :placeholder="$t('travels_table.city')"
+                                class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('itinerary_4') }"
+                            >
+                            <has-error :form="form" field="itinerary_4"></has-error>
+                        </div>
+
+                        <div class="form-group col-12 col-sm-4">
+                            <input
+                                v-model="form.itinerary_5"
+                                type="text"
+                                :placeholder="$t('travels_table.city')"
+                                class="form-control"
+                                :class="{ 'is-invalid': form.errors.has('itinerary_5') }"
+                            >
+                            <has-error :form="form" field="itinerary_5"></has-error>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <!-- travel info -->
+                <div class="form-group">
+                    <label> {{ $t('travels_table.info') }}</label>
+                    <vue-editor
+                        v-model="form.info"
+                        :class="{ 'is-invalid': form.errors.has('info') }"
+                    ></vue-editor>
+                    <span class="help-error-form" v-if="form.errors.has('info')" v-text="form.errors.get('info')"></span>
                 </div>
 
 
@@ -127,7 +187,7 @@
                         v-model="form.hotel_id"
                         class="custom-select"
                         :class="{ 'is-invalid': form.errors.has('hotel_id') }"
-                        >
+                    >
                         <option v-for="hotel in hotelsSelect" :value="hotel.id" :key="hotel.id" v-text="hotel.name + ' --- ' + hotel.address"></option>
                     </select>
                     <has-error :form="form" field="hotel_id"></has-error>
@@ -141,7 +201,7 @@
                         v-model="form.hotel_2_id"
                         class="custom-select"
                         :class="{ 'is-invalid': form.errors.has('hotel_2_id') }"
-                        >
+                    >
                         <option v-for="hotel in hotelsSelect" :value="hotel.id" :key="hotel.id" v-text="hotel.name + ' --- ' + hotel.address"></option>
                     </select>
                     <has-error :form="form" field="hotel_2_id"></has-error>
@@ -149,13 +209,13 @@
 
 
                 <!-- travel_category -->
-                <div class="form-group">
+                <div class="form-group" v-if="form.type !== 'external'">
                     <label> {{ $t('global.the_travel_category') }} <span class="field-required"></span></label>
                     <select
                         v-model="form.travel_category_id"
                         class="custom-select"
                         :class="{ 'is-invalid': form.errors.has('travel_category_id') }"
-                        >
+                    >
                         <option v-for="travel_category in travelCategoriesSelect" :value="travel_category.id" :key="travel_category.id" v-text="travel_category.name"></option>
                     </select>
                     <has-error :form="form" field="travel_category_id"></has-error>
@@ -169,7 +229,7 @@
                         v-model="form.display"
                         class="custom-select"
                         :class="{ 'is-invalid': form.errors.has('display') }"
-                        >
+                    >
                         <option value="1"> {{ $t('global.visible') }} </option>
                         <option value="0"> {{ $t('global.hidden') }} </option>
                     </select>
@@ -193,7 +253,7 @@
                 </div>
 
                 <!-- gallery -->
-                <div class="form-group">
+                <div class="form-group" v-if="form.type === 'umrah' || form.type === 'pilgrimage'">
                     <label> {{ $t('travels_table.gallery') }} </label>
 
                     <upload-image
@@ -220,13 +280,14 @@
                             <div class="form-group col-12">
                                 <div class="offer-title">
                                     <h3 class="title">
-                                        {{ $t('travels_table.offers.title_number', {number: index + 1}) }}
+                                        {{ $t('travels_table.offers.offer') }}
+                                        {{ counterText[index] }}
                                     </h3>
                                 </div>
                             </div>
 
                             <!-- info_offer -->
-                            <div class="form-group col-lg-6">
+                            <div class="form-group col-lg-12">
                                 <input
                                     v-model="form.offers[index].info_offer"
                                     type="text"
@@ -240,7 +301,7 @@
 
 
                             <!-- go_and_back -->
-                            <div class="form-group col-lg-6 required">
+                            <!-- <div class="form-group col-lg-6 required" v-if="form.type === 'umrah' || form.type === 'pilgrimage'">
                                 <select
                                     v-model="form.offers[index].go_and_back"
                                     class="custom-select"
@@ -250,7 +311,7 @@
                                     <option :value="1" v-text="$t('travels_table.offers.go_and_back')"></option>
                                 </select>
                                 <has-error :form="form" :field="`offers.${index}.go_and_back`"></has-error>
-                            </div>
+                            </div> -->
                             <!-- ./go_and_back -->
 
                             <div class="form-group col-12">
@@ -287,6 +348,36 @@
                                 <has-error :form="form" :field="`offers.${index}.date_to`"></has-error>
                             </div>
                             <!-- ./date_to -->
+
+
+                            <!-- hotel_days -->
+                            <div class="form-group col-lg-6 required" v-if="form.type === 'umrah' || form.type === 'pilgrimage'">
+                                <input
+                                    v-model="form.offers[index].hotel_days"
+                                    type="number"
+                                    max="100"
+                                    :placeholder="$t('travels_table.offers.hotel_days')"
+                                    class="form-control"
+                                    :class="{ 'is-invalid': form.errors.has(`offers.${index}.hotel_days`) }"
+                                >
+                                <has-error :form="form" :field="`offers.${index}.hotel_days`"></has-error>
+                            </div>
+                            <!-- ./hotel_days -->
+
+
+                            <!-- hotel_2_days -->
+                            <div class="form-group col-lg-6 required" v-if="form.type === 'umrah' || form.type === 'pilgrimage'">
+                                <input
+                                    v-model="form.offers[index].hotel_2_days"
+                                    type="number"
+                                    max="100"
+                                    :placeholder="$t('travels_table.offers.hotel_2_days')"
+                                    class="form-control"
+                                    :class="{ 'is-invalid': form.errors.has(`offers.${index}.hotel_2_days`) }"
+                                >
+                                <has-error :form="form" :field="`offers.${index}.hotel_2_days`"></has-error>
+                            </div>
+                            <!-- ./hotel_2_days -->
 
 
                             <!-- stay_type -->
@@ -349,12 +440,41 @@
                                 <label class="internal-label"> {{ $t('global.the_price') }} </label>
                             </div>
 
+
+                            <!-- child_price -->
+                            <div class="form-group col-lg-6 required" v-if="form.type === 'umrah' || form.type === 'pilgrimage'">
+                                <input
+                                    v-model="form.offers[index].child_price"
+                                    type="number"
+                                    :placeholder="$t('travels_table.offers.child_price')"
+                                    class="form-control"
+                                    :class="{ 'is-invalid': form.errors.has(`offers.${index}.child_price`) }"
+                                >
+                                <has-error :form="form" :field="`offers.${index}.child_price`"></has-error>
+                            </div>
+                            <!-- ./child_price -->
+
+
+                            <!-- baby_price -->
+                            <div class="form-group col-lg-6 required" v-if="form.type === 'umrah' || form.type === 'pilgrimage'">
+                                <input
+                                    v-model="form.offers[index].baby_price"
+                                    type="number"
+                                    :placeholder="$t('travels_table.offers.baby_price')"
+                                    class="form-control"
+                                    :class="{ 'is-invalid': form.errors.has(`offers.${index}.baby_price`) }"
+                                >
+                                <has-error :form="form" :field="`offers.${index}.baby_price`"></has-error>
+                            </div>
+                            <!-- ./baby_price -->
+
+
                             <!-- single_price -->
                             <div class="form-group col-lg-6 required">
                                 <input
                                     v-model="form.offers[index].single_price"
                                     type="number"
-                                    :placeholder="$t('travels_table.offers.single_price')"
+                                    :placeholder="form.type === 'umrah' || form.type === 'pilgrimage' ? $t('travels_table.offers.twin_price') : $t('travels_table.offers.single_price')"
                                     class="form-control"
                                     :class="{ 'is-invalid': form.errors.has(`offers.${index}.single_price`) }"
                                 >
@@ -368,7 +488,7 @@
                                 <input
                                     v-model="form.offers[index].twin_price"
                                     type="number"
-                                    :placeholder="$t('travels_table.offers.twin_price')"
+                                    :placeholder="form.type === 'umrah' || form.type === 'pilgrimage' ? $t('travels_table.offers.triple_price') : $t('travels_table.offers.twin_price')"
                                     class="form-control"
                                     :class="{ 'is-invalid': form.errors.has(`offers.${index}.twin_price`) }"
                                 >
@@ -382,7 +502,7 @@
                                 <input
                                     v-model="form.offers[index].triple_price"
                                     type="number"
-                                    :placeholder="$t('travels_table.offers.triple_price')"
+                                    :placeholder="form.type === 'umrah' || form.type === 'pilgrimage' ? $t('travels_table.offers.forth_price') : $t('travels_table.offers.triple_price')"
                                     class="form-control"
                                     :class="{ 'is-invalid': form.errors.has(`offers.${index}.triple_price`) }"
                                 >
@@ -454,10 +574,10 @@ export default {
             urlGetTravelCategories: '/travel_categories/select',
             travelCategoriesSelect: [],
             travelTypes: [
-                {value: 'internal', label: 'سياحة داخلية'},
-                {value: 'external', label: 'سياحة خارجية'},
                 {value: 'pilgrimage', label: 'حج'},
                 {value: 'umrah', label: 'عمرة'},
+                {value: 'internal', label: 'سياحة داخلية'},
+                {value: 'external', label: 'عروض الطيران'},
             ],
             haramDistance: [
                 {value: 0, label: 'بعيد'},
@@ -478,6 +598,24 @@ export default {
                 days: ['حد', 'اثنين', 'ثلاثاء', 'أربعاء', 'خميس', 'جمعة', 'سبت'],
                 months: ['يناير', 'فبراير', 'مارس', 'إبريل', 'مايو', 'يوينو', 'يوليو', 'أغسطس', 'سبتمبر', 'أكتوبر', 'نوفمبر', 'ديسمبر']
             },
+
+            counterText: [
+                'الأول',
+                'الثانى',
+                'الثالث',
+                'الرابع',
+                'الخامس',
+                'السادس',
+                'السابع',
+                'الثامن',
+                'التاسع',
+                'العاشر',
+                'الحادى عشر',
+                'الثانى عشر',
+                'الثالث عشر',
+                'الرابع عشر',
+                'الخامس عشر',
+            ],
         }
     },
 
@@ -548,10 +686,14 @@ export default {
                     go_and_back: 0,
                     date_from: "",
                     date_to: "",
+                    hotel_days: "",
+                    hotel_2_days: "",
                     stay_type: "بدون إفطار",
                     transport: 0,
                     adults: "",
                     children: "",
+                    child_price: "",
+                    baby_price: "",
                     single_price: "",
                     twin_price: "",
                     triple_price: "",

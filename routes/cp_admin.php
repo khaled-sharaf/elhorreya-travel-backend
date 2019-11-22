@@ -133,4 +133,14 @@ Route::group(['middleware' => ['api'], 'prefix' => env('CP_PREFIX_API')], functi
     /*********************************************************************************/
 
 
+
+    /**************** Settings *****************/
+
+    Route::get('home_tabs', 'HomeTabController@index');
+    Route::get('home_tabs/getTravelsByCategories', 'HomeTabController@getTravelsByCategories');
+    Route::put('home_tabs', 'HomeTabController@update');
+
+    /*********************************************************************************/
+
+
 });

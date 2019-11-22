@@ -40,9 +40,9 @@
                                     <li class="list-group-item">
                                         <b> {{ $t('hotels_table.travels_count') }} </b> <a class="float-right">{{ hotelProfile.travels_count == null ? 0 : hotelProfile.travels_count }}</a>
                                     </li>
-                                    <li class="list-group-item">
+                                    <!-- <li class="list-group-item">
                                         <b> {{ $t('hotels_table.rating') }} </b> <a class="float-right"> {{ hotelProfile.rating }}% <rates-stars :rates-count="hotelProfile.rating"></rates-stars> </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
 
                                 <!-- btn delete hotel -->
@@ -116,9 +116,7 @@
                                             {{ $t('hotels_table.info') }}
                                         </b>
                                         <a class="float-right">
-                                            <div v-read-more:toggle="{limit: 100, textBtnRead: 'إقرأ المزيد', textBtnUnread: 'إقرأ أقل'}">
-                                                {{hotelProfile.info}}
-                                            </div>
+                                            <div class="view-text-editor" v-html="hotelProfile.info" v-read-more:toggle="{limit: 100, textBtnRead: 'إقرأ المزيد', textBtnUnread: 'إقرأ أقل'}"></div>
                                         </a>
                                     </li>
                                     <!-- =========================================== -->

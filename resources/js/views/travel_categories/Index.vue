@@ -73,9 +73,9 @@
                 </td>
 
 
-                <td v-show="tableData.columns.indexOf('order') != -1" class="order">
+                <!-- <td v-show="tableData.columns.indexOf('order') != -1" class="order">
                     {{travel_category.order}}
-                </td>
+                </td> -->
 
 
                 <td v-show="tableData.columns.indexOf('travel_program_id') != -1" class="travel_program_id">
@@ -168,7 +168,7 @@ export default {
         { label: "type", name: "type" },
         { label: "discount", name: "discount" },
         { label: "image", name: "image" },
-        { label: "order", name: "order" },
+        // { label: "order", name: "order" },
         { label: "travel program", name: "travel_program_id" },
         { label: "Created by", name: "user_id" },
         { label: "Updated at", name: "updated_at" },
@@ -179,8 +179,8 @@ export default {
           {value: 1, label: 'حج'},
           {value: 2, label: 'عمرة'},
           {value: 3, label: 'سياحة داخلية'},
-          {value: 4, label: 'سياحة خارجية'},
-          {value: 5, label: 'شهر العسل'},
+        //   {value: 4, label: 'سياحة خارجية'},
+          {value: 5, label: 'موسم'},
       ]
     };
   },

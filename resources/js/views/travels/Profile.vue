@@ -77,9 +77,7 @@
                                             {{ $t('travels_table.info') }}
                                         </b>
                                         <a class="float-right">
-                                            <div v-read-more:toggle="{limit: 100, textBtnRead: 'إقرأ المزيد', textBtnUnread: 'إقرأ أقل'}">
-                                                {{travelProfile.info}}
-                                            </div>
+                                            <div class="view-text-editor" v-html="travelProfile.info" v-read-more:toggle="{limit: 100, textBtnRead: 'إقرأ المزيد', textBtnUnread: 'إقرأ أقل'}"></div>
                                         </a>
                                     </li>
                                     <!-- =========================================== -->
@@ -98,12 +96,27 @@
 
 
                                     <!-- haram_distance -->
-                                    <li class="list-group-item" v-if="travelProfile.type == 'umrah' || travelProfile.type == 'pilgrimage'">
+                                    <li class="list-group-item" v-if="travelProfile.type === 'umrah' || travelProfile.type === 'pilgrimage'">
                                         <b>
                                             {{ $t('travels_table.haram_distance') }}
                                         </b>
                                         <a class="float-right">
                                             {{ haramDistance[travelProfile.haram_distance] }}
+                                        </a>
+                                    </li>
+                                    <!-- =========================================== -->
+
+                                    <!-- haram_distance -->
+                                    <li class="list-group-item" v-if="travelProfile.type === 'umrah' || travelProfile.type === 'pilgrimage'">
+                                        <b>
+                                            {{ $t('travels_table.itinerary') }}
+                                        </b>
+                                        <a class="float-right">
+                                            {{ travelProfile.itinerary_1 }} -
+                                            {{ travelProfile.itinerary_2 }} -
+                                            {{ travelProfile.itinerary_3 }} -
+                                            {{ travelProfile.itinerary_4 }}
+                                            {{ travelProfile.itinerary_5 !== null ? ' - ' + travelProfile.itinerary_5 : '' }}
                                         </a>
                                     </li>
                                     <!-- =========================================== -->
@@ -381,6 +394,30 @@
                                                         </li>
                                                         <!-- =========================================== -->
 
+                                                        <!-- hotel_days -->
+                                                        <li class="list-group-item" v-if="travelProfile.type === 'umrah' || travelProfile.type === 'pilgrimage'">
+                                                            <b>
+                                                                {{ $t('travels_table.offers.hotel_days') }}
+                                                            </b>
+                                                            <a class="float-right">
+                                                                {{ offer.hotel_days }}
+                                                                {{ 11 > offer.hotel_days && offer.hotel_days > 2 ? $t('global.days') : $t('global.day') }}
+                                                            </a>
+                                                        </li>
+                                                        <!-- =========================================== -->
+
+                                                        <!-- hotel_2_days -->
+                                                        <li class="list-group-item" v-if="travelProfile.type === 'umrah' || travelProfile.type === 'pilgrimage'">
+                                                            <b>
+                                                                {{ $t('travels_table.offers.hotel_2_days') }}
+                                                            </b>
+                                                            <a class="float-right">
+                                                                {{ offer.hotel_2_days }}
+                                                                {{ 11 > offer.hotel_2_days && offer.hotel_2_days > 2 ? $t('global.days') : $t('global.day') }}
+                                                            </a>
+                                                        </li>
+                                                        <!-- =========================================== -->
+
                                                         <!-- stay_type -->
                                                         <li class="list-group-item">
                                                             <b>
@@ -425,10 +462,32 @@
                                                         </li>
                                                         <!-- =========================================== -->
 
+                                                        <!-- child_price -->
+                                                        <li class="list-group-item" v-if="travelProfile.type === 'umrah' || travelProfile.type === 'pilgrimage'">
+                                                            <b>
+                                                                {{ $t('travels_table.offers.child_price') }}
+                                                            </b>
+                                                            <a class="float-right">
+                                                                {{ offer.child_price }}
+                                                            </a>
+                                                        </li>
+                                                        <!-- =========================================== -->
+
+                                                        <!-- baby_price -->
+                                                        <li class="list-group-item" v-if="travelProfile.type === 'umrah' || travelProfile.type === 'pilgrimage'">
+                                                            <b>
+                                                                {{ $t('travels_table.offers.baby_price') }}
+                                                            </b>
+                                                            <a class="float-right">
+                                                                {{ offer.baby_price }}
+                                                            </a>
+                                                        </li>
+                                                        <!-- =========================================== -->
+
                                                         <!-- single_price -->
                                                         <li class="list-group-item">
                                                             <b>
-                                                                {{ $t('travels_table.offers.single_price') }}
+                                                                {{ travelProfile.type === 'umrah' || travelProfile.type === 'pilgrimage' ? $t('travels_table.offers.twin_price') : $t('travels_table.offers.single_price') }}
                                                             </b>
                                                             <a class="float-right">
                                                                 {{ offer.single_price }}
@@ -439,7 +498,7 @@
                                                         <!-- twin_price -->
                                                         <li class="list-group-item">
                                                             <b>
-                                                                {{ $t('travels_table.offers.twin_price') }}
+                                                                {{ travelProfile.type === 'umrah' || travelProfile.type === 'pilgrimage' ? $t('travels_table.offers.triple_price') : $t('travels_table.offers.twin_price') }}
                                                             </b>
                                                             <a class="float-right">
                                                                 {{ offer.twin_price }}
@@ -450,7 +509,7 @@
                                                         <!-- triple_price -->
                                                         <li class="list-group-item">
                                                             <b>
-                                                                {{ $t('travels_table.offers.triple_price') }}
+                                                                {{ travelProfile.type === 'umrah' || travelProfile.type === 'pilgrimage' ? $t('travels_table.offers.forth_price') : $t('travels_table.offers.triple_price') }}
                                                             </b>
                                                             <a class="float-right">
                                                                 {{ offer.triple_price }}
@@ -570,7 +629,7 @@ export default {
             },
             travelTypes: {
                 internal: 'سياحة داخلية',
-                external: 'سياحة خارجية',
+                external: 'عروض الطيران',
                 pilgrimage: 'حج',
                 umrah: 'عمرة',
             },

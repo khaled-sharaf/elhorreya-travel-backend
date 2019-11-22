@@ -51,14 +51,11 @@
                 <!-- travel_program big_info -->
                 <div class="form-group">
                     <label> {{ $t('travel_programs_table.big_info') }} </label>
-                    <textarea
+                    <vue-editor
                         v-model="form.big_info"
-                        type="text"
-                        :placeholder="$t('travel_programs_table.big_info')"
-                        class="form-control textarea-form"
                         :class="{ 'is-invalid': form.errors.has('big_info') }"
-                    ></textarea>
-                    <has-error :form="form" field="big_info"></has-error>
+                    ></vue-editor>
+                    <span class="help-error-form" v-if="form.errors.has('big_info')" v-text="form.errors.get('big_info')"></span>
                 </div>
 
 

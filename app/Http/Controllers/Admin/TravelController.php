@@ -98,24 +98,33 @@ class TravelController extends Controller
             'type' => 'required|in:pilgrimage,umrah,internal,external',
             'umrah_date' => 'required_if:type,umrah|nullable|string|between:2,50',
             'haram_distance' => 'required_unless:type,internal,external|nullable|in:0,1',
+            'itinerary_1' => 'required_if:type,pilgrimage,umrah|max:20',
+            'itinerary_2' => 'required_if:type,pilgrimage,umrah|max:20',
+            'itinerary_3' => 'required_if:type,pilgrimage,umrah|max:20',
+            'itinerary_4' => 'required_if:type,pilgrimage,umrah|max:20',
+            'itinerary_5' => 'nullable|max:20',
             'discount' => 'nullable|integer|max:100',
             'favorite_company' => 'required|in:0,1',
             'hotel_id' => 'required|exists:hotels,id',
             'hotel_2_id' => 'nullable|exists:hotels,id',
-            'travel_category_id' => 'required|exists:travel_categories,id',
+            'travel_category_id' => 'nullable|exists:travel_categories,id',
             'image' => 'required|string',
             'gallery' => 'nullable|array',
             'offers' => 'required|array|min:1',
             'display' => 'required|in:0,1',
 
             'offers.*.info_offer' => 'nullable|string|between:2,180',
-            'offers.*.go_and_back' => 'required|in:0,1',
+            // 'offers.*.go_and_back' => 'required|in:0,1',
             'offers.*.date_from' => 'required|date|before:offers.*.date_to',
             'offers.*.date_to' => 'required|date|after:offers.*.date_from',
+            'offers.*.hotel_days' => 'required_if:type,umrah,pilgrimage|max:100',
+            'offers.*.hotel_2_days' => 'required_if:type,umrah,pilgrimage|max:100',
             'offers.*.stay_type' => 'required',
             'offers.*.transport' => 'required',
             'offers.*.adults' => 'nullable|integer|max:999',
             'offers.*.children' => 'nullable|integer|max:999',
+            'offers.*.child_price' => 'nullable|numeric',
+            'offers.*.baby_price' => 'nullable|numeric',
             'offers.*.single_price' => 'required|numeric',
             'offers.*.twin_price' => 'nullable|numeric',
             'offers.*.triple_price' => 'nullable|numeric',
@@ -146,7 +155,7 @@ class TravelController extends Controller
         /****************************************************************************/
 
         // handel gallery
-        if (count($data['gallery']) > 0) {
+        if (count($data['gallery']) > 0 && ($data['type'] === 'umrah' || $data['type'] === 'pilgrimage')) {
             $galleryDB = [];
             foreach ($data['gallery'] as $image) {
                 $get_ext = explode(';', explode('/', $image['value'])[1])[0];
@@ -205,24 +214,33 @@ class TravelController extends Controller
             'type' => 'required|in:pilgrimage,umrah,internal,external',
             'umrah_date' => 'required_if:type,umrah|nullable|string|between:2,50',
             'haram_distance' => 'required_unless:type,internal,external|nullable|in:0,1',
+            'itinerary_1' => 'required_if:type,pilgrimage,umrah|max:20',
+            'itinerary_2' => 'required_if:type,pilgrimage,umrah|max:20',
+            'itinerary_3' => 'required_if:type,pilgrimage,umrah|max:20',
+            'itinerary_4' => 'required_if:type,pilgrimage,umrah|max:20',
+            'itinerary_5' => 'nullable|max:20',
             'discount' => 'nullable|integer|max:100',
             'favorite_company' => 'required|in:0,1',
             'hotel_id' => 'required|exists:hotels,id',
             'hotel_2_id' => 'nullable|exists:hotels,id',
-            'travel_category_id' => 'required|exists:travel_categories,id',
+            'travel_category_id' => 'nullable|exists:travel_categories,id',
             'image' => 'required|string',
             'gallery' => 'nullable|array',
             'offers' => 'required|array|min:1',
             'display' => 'required|in:0,1',
 
             'offers.*.info_offer' => 'nullable|string|between:2,180',
-            'offers.*.go_and_back' => 'required|in:0,1',
+            // 'offers.*.go_and_back' => 'required|in:0,1',
             'offers.*.date_from' => 'required|date|before:offers.*.date_to',
             'offers.*.date_to' => 'required|date|after:offers.*.date_from',
+            'offers.*.hotel_days' => 'required_if:type,umrah,pilgrimage|max:100',
+            'offers.*.hotel_2_days' => 'required_if:type,umrah,pilgrimage|max:100',
             'offers.*.stay_type' => 'required',
             'offers.*.transport' => 'required',
             'offers.*.adults' => 'nullable|integer|max:999',
             'offers.*.children' => 'nullable|integer|max:999',
+            'offers.*.child_price' => 'nullable|numeric',
+            'offers.*.baby_price' => 'nullable|numeric',
             'offers.*.single_price' => 'required|numeric',
             'offers.*.twin_price' => 'nullable|numeric',
             'offers.*.triple_price' => 'nullable|numeric',
@@ -281,7 +299,7 @@ class TravelController extends Controller
         /*================================================*/
         $gallery_saved = [];
         // save new image if exists new image
-        if ($galllery_new->count() > 0) {
+        if ($galllery_new->count() > 0 && ($data['type'] === 'umrah' || $data['type'] === 'pilgrimage')) {
             foreach ($galllery_new as $image) {
                 $get_ext = explode(';', explode('/', $image['value'])[1])[0];
                 $ext = $get_ext == 'jpeg' ? 'jpg' : $get_ext;

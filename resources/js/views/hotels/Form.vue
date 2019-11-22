@@ -48,7 +48,7 @@
 
 
                 <!-- rating -->
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label> {{ $t('hotels_table.rating') + ' ' + $t('global.from') }} 0 {{ $t('global.to') }} 100 </label>
                     <input
                         v-model="form.rating"
@@ -58,7 +58,7 @@
                         :class="{ 'is-invalid': form.errors.has('rating') }"
                     >
                     <has-error :form="form" field="rating"></has-error>
-                </div>
+                </div> -->
 
 
                 <!-- stars hotel -->
@@ -127,14 +127,11 @@
                 <!-- hotel info -->
                 <div class="form-group">
                     <label> {{ $t('hotels_table.info') }} <span class="field-required"></span></label>
-                    <textarea
+                    <vue-editor
                         v-model="form.info"
-                        type="text"
-                        :placeholder="$t('hotels_table.info')"
-                        class="form-control textarea-form"
                         :class="{ 'is-invalid': form.errors.has('info') }"
-                    ></textarea>
-                    <has-error :form="form" field="info"></has-error>
+                    ></vue-editor>
+                    <span class="help-error-form" v-if="form.errors.has('info')" v-text="form.errors.get('info')"></span>
                 </div>
 
 

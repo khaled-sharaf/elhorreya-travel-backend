@@ -62,7 +62,7 @@
 
 
                 <td v-show="tableData.columns.indexOf('big_info') != -1" class="big_info">
-                    {{travel_program.big_info}}
+                    <div class="view-text-editor" v-html="travel_program.big_info"></div>
                 </td>
 
 

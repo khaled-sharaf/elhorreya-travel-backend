@@ -22,14 +22,11 @@
                 <!-- blog content -->
                 <div class="form-group">
                     <label> {{ $t('blogs_table.content') }} <span class="field-required"></span></label>
-                    <textarea
+                    <vue-editor
                         v-model="form.content"
-                        type="text"
-                        :placeholder="$t('blogs_table.content')"
-                        class="form-control textarea-form"
                         :class="{ 'is-invalid': form.errors.has('content') }"
-                    ></textarea>
-                    <has-error :form="form" field="content"></has-error>
+                    ></vue-editor>
+                    <span class="help-error-form" v-if="form.errors.has('content')" v-text="form.errors.get('content')"></span>
                 </div>
 
 

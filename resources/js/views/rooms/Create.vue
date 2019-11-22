@@ -67,9 +67,9 @@ export default {
         form: new Form({
             info: '',
             options: 'بدون إفطار',
-            price_night: '',
-            offer_days: '',
-            offer_price: '',
+            // price_night: '',
+            // offer_days: '',
+            // offer_price: '',
             hotel_id: '',
             display: 1,
         }),

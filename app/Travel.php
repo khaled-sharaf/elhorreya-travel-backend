@@ -15,7 +15,26 @@ class Travel extends Model
     protected $dates = ['deleted_at'];
 
     protected $fillable = [
-        'name', 'address_from', 'info', 'image', 'gallery', 'type', 'umrah_date', 'haram_distance', 'discount', 'favorite_company', 'display', 'hotel_id', 'hotel_2_id', 'travel_category_id', 'user_id'
+        'name',
+        'address_from',
+        'info',
+        'image',
+        'gallery',
+        'type',
+        'umrah_date',
+        'haram_distance',
+        'itinerary_1',
+        'itinerary_2',
+        'itinerary_3',
+        'itinerary_4',
+        'itinerary_5',
+        'discount',
+        'favorite_company',
+        'display',
+        'hotel_id',
+        'hotel_2_id',
+        'travel_category_id',
+        'user_id'
     ];
 
     public function scopeDisplay($query)

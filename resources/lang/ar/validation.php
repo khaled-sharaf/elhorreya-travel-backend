@@ -164,6 +164,7 @@ return [
         'category' => 'القسم',
         'options' => 'الخيارات',
         'info' => 'المعلومات',
+        'message' => 'الرسالة',
 
         'description' => 'الوصف',
         'website' => 'موقع الويب',
@@ -191,6 +192,11 @@ return [
         'address_from' => 'عنوان الإقلاع',
         'umrah_date' => 'موعد العمرة',
         'haram_distance' => 'المسافة بين الفندق والحرم',
+        'itinerary_1' => 'المدينة الأولى',
+        'itinerary_2' => 'المدينة الثانية',
+        'itinerary_3' => 'المدينة الثالثة',
+        'itinerary_4' => 'المدينة الرابعة',
+        'itinerary_5' => 'المدينة الخامسة',
         'favorite_company' => 'تفضيل الحرية',
         'offers' => 'العروض',
 
@@ -207,8 +213,9 @@ return [
         'offers.*.triple_price' => 'سعر ثلاث أفراد',
         'offers.*.display' => 'ظهور العرض',
 
+        'tabs.*.name' => 'اسم العرض',
+        'tabs.*.categories' => 'الأقسام',
+        'tabs.*.travels' => 'الرحلات',
 
-
-        'message' => 'الرسالة',
     ],
 ];

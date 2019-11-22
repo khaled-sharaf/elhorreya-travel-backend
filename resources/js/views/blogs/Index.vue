@@ -46,7 +46,9 @@
                 </td>
 
 
-                <td v-show="tableData.columns.indexOf('content') != -1" class="content" v-html="blog.content.replace(/(?:\r\n|\r|\n)/g, '<br>')"></td>
+                <td v-show="tableData.columns.indexOf('content') != -1" class="content">
+                    <div class="view-text-editor" v-html="blog.content"></div>
+                </td>
 
 
                 <td v-show="tableData.columns.indexOf('image') != -1" class="image" style="text-align:center;">

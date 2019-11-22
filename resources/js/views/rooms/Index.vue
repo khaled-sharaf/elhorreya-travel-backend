@@ -61,12 +61,12 @@
                 </td>
 
 
-                <td v-show="tableData.columns.indexOf('price_night') != -1" class="price_night">
+                <!-- <td v-show="tableData.columns.indexOf('price_night') != -1" class="price_night">
                     {{room.price_night}}
-                </td>
+                </td> -->
 
 
-                <td v-show="tableData.columns.indexOf('offer') != -1" class="offer">
+                <!-- <td v-show="tableData.columns.indexOf('offer') != -1" class="offer">
                     <span v-if="(room.offer_price != null && room.offer_price != 0) && (room.offer_days != null && room.offer_days != 0)">
                         <span class="badge badge-danger" v-text="room.offer_price"></span>
                         {{ $t('global.in') }}
@@ -79,7 +79,7 @@
                         </span>
                     </span>
                     <span v-else>ــــ</span>
-                </td>
+                </td> -->
 
                 <td v-show="tableData.columns.indexOf('display') != -1" class="display">
                     <show-display :model="room"></show-display>
@@ -181,8 +181,8 @@ export default {
                 { label: "ID", name: "id" },
                 { label: "Info", name: "info" },
                 { label: "Options", name: "options" },
-                { label: "Price night", name: "price_night" },
-                { label: "Offer", name: "offer" },
+                // { label: "Price night", name: "price_night" },
+                // { label: "Offer", name: "offer" },
                 { label: "Display", name: "display" },
                 { label: "Hotel", name: "hotel_id" },
                 { label: "Created by", name: "user_id" },

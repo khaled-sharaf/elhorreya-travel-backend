@@ -17,7 +17,7 @@ class CreateRoomsTable extends Migration
             $table->increments('id');
             $table->string('info');
             $table->string('options');
-            $table->double('price_night');
+            $table->double('price_night')->nullable();
             $table->double('offer_price')->nullable();
             $table->double('offer_days')->nullable();
             $table->boolean('display')->default(1);

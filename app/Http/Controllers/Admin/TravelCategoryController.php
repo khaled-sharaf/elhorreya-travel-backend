@@ -16,7 +16,7 @@ class TravelCategoryController extends Controller
 
     public function TravelCategoriesSelect()
     {
-        $travel_categories = TravelCategory::select(['id', 'name', 'type'])->get();
+        $travel_categories = TravelCategory::get();
         return response(['travel_categories' => $travel_categories]);
     }
 

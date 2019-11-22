@@ -31,6 +31,22 @@
         </template>
 
 
+        <template v-slot:buttons>
+            <export-excel
+                v-if="dataTable.length"
+                class="btn btn-primary btn-sm"
+                :data="dataTable"
+                :fields="excel_fields"
+                name="booking"
+            >
+                <i class="fas fa-download"></i>
+                Excel
+            </export-excel>
+
+        </template>
+
+
+
         <tbody>
             <tr
                 role="row"
@@ -173,7 +189,29 @@ export default {
                 { label: "Updated at", name: "updated_at" },
                 { label: "Created at", name: "created_at" }
             ],
-            columnsExceptedSorting: ['offer', 'message']
+            columnsExceptedSorting: ['offer', 'message'],
+            excel_fields: {
+                'الرقم المعرف': 'id',
+                'الاسم' : 'name',
+                'البريد الإليكترونى' : 'email',
+                'الموبايل' : 'phone',
+                'الرسالة' : 'message',
+                'عدد البالغين' : 'adults',
+                'عدد الأطفال' : 'children',
+                'العرض المحجوز' : {
+                    field: 'offer',
+                    callback: (value) => {
+                        return 'الرقم المعرف للعرض: ' + value.id
+                    }
+                },
+                'الرحلة' : {
+                    field: 'travel',
+                    callback: (value) => {
+                        return value.name
+                    }
+                },
+                'تاريخ الحجز' : 'created_at',
+            }
         };
     },
     methods: {

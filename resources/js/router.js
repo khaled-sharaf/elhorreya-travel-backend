@@ -71,6 +71,9 @@ import Settings from './views/settings/Index'
 import CreateSetting from './views/settings/Create'
 import EditSetting from './views/settings/Edit'
 
+// home_tabs
+import HomeTabs from './views/home_tabs/Edit'
+
 
 Vue.use(Router)
 
@@ -304,7 +307,17 @@ const vueRouter = new Router({
                     name: 'edit-setting',
                     component: EditSetting,
                     props: true
-                }
+                },
+
+
+
+
+                ////////////////// Home Tabs routes ///////////////////
+                {
+                    path: 'home_tabs',
+                    name: 'home_tabs',
+                    component: HomeTabs
+                },
             ]
         },
         {

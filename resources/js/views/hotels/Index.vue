@@ -64,11 +64,11 @@
                 </td>
 
 
-                <td v-show="tableData.columns.indexOf('rating') != -1" class="rating">
+                <!-- <td v-show="tableData.columns.indexOf('rating') != -1" class="rating">
                     <rates-stars :rates-count="hotel.rating">
                         <div class="text-center" style="font-size: 11px;">{{ hotel.rating }} %</div>
                     </rates-stars>
-                </td>
+                </td> -->
 
 
                 <td v-show="tableData.columns.indexOf('stars') != -1" class="stars">
@@ -77,9 +77,8 @@
 
 
                 <td v-show="tableData.columns.indexOf('info') != -1" class="info">
-                    {{hotel.info}}
+                    <div class="view-text-editor" v-html="hotel.info"></div>
                 </td>
-
 
                 <td v-show="tableData.columns.indexOf('location') != -1" class="location">
                     <button
@@ -184,7 +183,7 @@ export default {
                 { label: "ID", name: "id" },
                 { label: "Name", name: "name" },
                 { label: "Address", name: "address" },
-                { label: "Rating", name: "rating" },
+                // { label: "Rating", name: "rating" },
                 { label: "Stars", name: "stars" },
                 { label: "Info", name: "info" },
                 { label: "Location", name: "location" },

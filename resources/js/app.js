@@ -33,6 +33,16 @@ import './plugins/select2/select2.min.js'
 import './plugins/overlayScrollbars/OverlayScrollbars.min.css'
 import './plugins/overlayScrollbars/jquery.overlayScrollbars.min.js'
 
+// json-excel
+import './plugins/excel-export.js'
+
+// vue2-editor
+import './plugins/vue2-editor.js'
+
+// vSelect
+import './plugins/vSelect.js'
+
+
 import './plugins/progressBar.js'
 import './components.js'
 import './filters.js'

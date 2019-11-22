@@ -132,17 +132,20 @@
 
 
                 <td v-show="tableData.columns.indexOf('travel_category_id') != -1" class="travel_category_id">
-                    <router-link
-                        class="link-router-in-table"
-                        v-if="travel.travel_category !== null"
-                        :href="$domain_admin + '/travel_category/' + travel.travel_category_id + '/edit'"
-                        :to="{name: 'edit-travel_category', params: {id: travel.travel_category_id, travel_category: travel.travel_category}}"
-                        data-name="edit-travel_category"
-                        :data-params='"{\"travel_category\":" + JSON.stringify(travel.travel_category) + ", \"id\":" + travel.travel_category_id + "}"'
-                    >
-                        {{ travel.travel_category.name }}
-                    </router-link>
-                    <span class="badge badge-danger" v-else> {{ $t('global.travel_category_is_deleted') }} - id:{{travel.travel_category_id}}</span>
+                    <span v-if="travel.type === 'external'">عروض الطيران</span>
+                    <span v-else>
+                        <router-link
+                            class="link-router-in-table"
+                            v-if="travel.travel_category !== null"
+                            :href="$domain_admin + '/travel_category/' + travel.travel_category_id + '/edit'"
+                            :to="{name: 'edit-travel_category', params: {id: travel.travel_category_id, travel_category: travel.travel_category}}"
+                            data-name="edit-travel_category"
+                            :data-params='"{\"travel_category\":" + JSON.stringify(travel.travel_category) + ", \"id\":" + travel.travel_category_id + "}"'
+                        >
+                            {{ travel.travel_category.name }}
+                        </router-link>
+                        <span class="badge badge-danger" v-else> {{ $t('global.travel_category_is_deleted') }} - id:{{travel.travel_category_id}}</span>
+                    </span>
                 </td>
 
 
@@ -255,7 +258,7 @@ export default {
             columnsExceptedSorting: ['hotel_id', 'travel_category_id', 'user_id'],
             travelTypes: {
                 internal: 'سياحة داخلية',
-                external: 'سياحة خارجية',
+                external: 'عروض الطيران',
                 pilgrimage: 'حج',
                 umrah: 'عمرة',
             },

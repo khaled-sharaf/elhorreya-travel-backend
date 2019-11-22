@@ -49,7 +49,7 @@
 
 
                 <!-- order -->
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label> {{ $t('travel_categories_table.order')}} </label>
                     <input
                         v-model="form.order"
@@ -59,7 +59,7 @@
                         :class="{ 'is-invalid': form.errors.has('order') }"
                     >
                     <has-error :form="form" field="order"></has-error>
-                </div>
+                </div> -->
 
 
                 <!-- travel_program -->
@@ -110,8 +110,8 @@ export default {
             {value: 1, label: 'حج'},
             {value: 2, label: 'عمرة'},
             {value: 3, label: 'سياحة داخلية'},
-            {value: 4, label: 'سياحة خارجية'},
-            {value: 5, label: 'شهر العسل'},
+            // {value: 4, label: 'سياحة خارجية'},
+            {value: 5, label: 'موسم'},
         ]
       }
     },
@@ -119,7 +119,14 @@ export default {
         getTravelProgramsSelect() {
             axios.get(this.urlGetTravelPrograms).then(response => {
                 if (response.status === 200) {
-                    this.travelProgramsSelect = response.data.travel_programs
+                    const data = response.data
+                    if (typeof data === 'object') {
+                        this.travelProgramsSelect = response.data.travel_programs
+                    } else {
+                        setTimeout(() => {
+                            this.getTravelProgramsSelect()
+                        }, 1000)
+                    }
                 }
             })
             .catch(errors => {

@@ -18,11 +18,16 @@ class HotelController extends Controller
 
     public function index(Request $request)
     {
+        $name = $request->name;
         $city = $request->city;
         $stars = $request->stars;
         $sortBy = $request->sortBy != '' ? $request->sortBy : 'id';
 
         $query = Hotel::display();
+
+        if ($name != '') {
+            $query->where('name', 'like', '%' . $name . '%');
+        }
 
         if ($city != '') {
             $query->where('address', 'like', '%' . $city . '%');

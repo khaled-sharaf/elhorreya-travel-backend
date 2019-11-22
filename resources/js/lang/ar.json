@@ -161,7 +161,9 @@
         "settings": "الإعدادات",
         "all_settings": "جميع الإعدادات",
         "new_setting": "إعداد جديد",
-        "edit_setting": "تعديل إعداد"
+        "edit_setting": "تعديل إعداد",
+
+        "home_tabs": "عروض الصفحة الرئيسية"
     },
 
 
@@ -294,7 +296,7 @@
     "rooms_table": {
         "id": "المعرف",
         "info": "معلومات الغرفة",
-        "options": "الخيارات",
+        "options": "نوع الإقامة",
         "price_night": "سعر الليلة",
         "offer_price": "سعر العرض",
         "offer_days": "عدد أيام العرض",
@@ -425,6 +427,8 @@
         "type": "نوع الرحلة",
         "umrah_date": "موعد العمرة",
         "haram_distance": "المسافة بين الفندق والحرم",
+        "itinerary": "خط السير",
+        "city": "المدينة",
         "discount": "الخصم",
         "favorite_company": "تفضيل الحرية",
         "favorite_company_yes": "تفضل",
@@ -456,16 +460,22 @@
             "only_go": "ذهاب فقط",
             "date_from": "من",
             "date_to": "إلى",
+            "hotel_days": "عدد أيام فندق مكة",
+            "hotel_2_days": "عدد أيام فندق المدينة",
             "time_period": "الفترة",
             "stay_type": "نوع الإقامة",
             "transport": "الإنتقالات",
             "adults": "عدد البالغين",
             "children": "عدد الأطفال",
-            "single_price": "فردية",
-            "twin_price": "زوجية",
-            "triple_price": "ثلاثية",
+            "child_price": "سعر الطفل",
+            "baby_price": "سعر الرضيع",
+            "single_price": "فردى",
+            "twin_price": "زوجى",
+            "triple_price": "ثلاثي",
+            "forth_price": "رباعى",
 
             "title_number": "العرض رقم {number}",
+            "offer": "العرض",
             "add_new_offer": "إضافة عرض جديد",
             "delete_offer": "حذف العرض"
         },
@@ -689,6 +699,19 @@
         "p_edit_carousel": {
             "success_msg": "تم تحديث صور الصفحة الرئيسية.",
             "failed_msg": "لم يتم تحديث صور الصفحة الرئيسية."
+        }
+    },
+
+
+
+    "home_tabs_table": {
+        "name": "اسم العرض",
+        "categories": "الأقسام",
+        "travels": "الرحلات",
+
+        "p_edit": {
+            "success_msg": "تم تحديث العروض.",
+            "failed_msg": "لم يتم تحديث العروض."
         }
     }
 }

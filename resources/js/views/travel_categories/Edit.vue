@@ -71,7 +71,7 @@ export default {
             discount: '',
             image: '',
             travel_program_id: '',
-            order: '',
+            // order: '',
         }),
         TravelCategoryEdit: {},
         idPage: 'travel_categories',

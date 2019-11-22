@@ -21,8 +21,8 @@ class BookingController extends Controller
     {
         $request->validate([
             'name' => 'required|string|between:2,50',
-            'email' => 'required|email|string|max:100',
-            'phone' => 'nullable|regex:' . $this->patternPhone,
+            'email' => 'nullable|email|string|max:100',
+            'phone' => 'required|regex:' . $this->patternPhone,
             'message' => 'nullable|string|max:1000',
             'adults' => 'nullable|integer|max:999',
             'children' => 'nullable|integer|max:999',

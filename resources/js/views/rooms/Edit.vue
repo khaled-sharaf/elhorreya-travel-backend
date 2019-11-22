@@ -1,8 +1,3 @@
-<style>
-
-
-</style>
-
 <template>
     <div>
         <!-- Content Header (Page header) -->
@@ -67,9 +62,9 @@ export default {
             id: '',
             info: '',
             options: '',
-            price_night: '',
-            offer_days: '',
-            offer_price: '',
+            // price_night: '',
+            // offer_days: '',
+            // offer_price: '',
             hotel_id: '',
             display: 1,
         }),

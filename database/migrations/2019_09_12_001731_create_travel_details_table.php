@@ -19,11 +19,15 @@ class CreateTravelDetailsTable extends Migration
             $table->boolean('go_and_back')->default(0); // 0 = go, 1 = go and back
             $table->date('date_from')->nullable();
             $table->date('date_to')->nullable();
-            $table->tinyInteger('time_period')->nullable(); // count days = ( date from - date to )
+            $table->smallInteger('time_period')->nullable(); // count days = ( date from - date to )
+            $table->tinyInteger('hotel_days')->nullable();
+            $table->tinyInteger('hotel_2_days')->nullable();
             $table->string('stay_type')->nullable(); // إقامة فقط، شامل الإفضطار، نصف إقامة، شامل كليا
             $table->boolean('transport')->default(0); // 0 = بدون انتقالات،  1  = انتقالات
             $table->integer('adults')->nullable()->default(0);
             $table->integer('children')->nullable()->default(0);
+            $table->double('child_price')->nullable();
+            $table->double('baby_price')->nullable();
             $table->double('single_price')->nullable();
             $table->double('twin_price')->nullable();
             $table->double('triple_price')->nullable();

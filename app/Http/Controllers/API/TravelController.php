@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Travel;
 use App\TravelDetail;
 use App\Scopes\CountsWithTravel;
+use App\HomeTab as Tabs;
 
 class TravelController extends Controller
 {
@@ -34,7 +35,8 @@ class TravelController extends Controller
         $go_and_back = $request->go_and_back;
         $date_from = $request->date_from;
         $date_to = $request->date_to;
-        $filter_price = $request->filter_price;
+        $filter_to_price = $request->filter_to_price;
+        $filter_from_price = $request->filter_from_price;
         $filter_stars = $request->filter_stars;
         $filter_hotel = $request->filter_hotel;
         $sortBy = $request->sortBy;
@@ -74,9 +76,15 @@ class TravelController extends Controller
 
             // filter
 
-            if ($filter_price != '') {
-                $query->whereHas('offers', function ($q) use ($filter_price) {
-                    $q->where('single_price', '<=', $filter_price);
+            if ($filter_from_price != '') {
+                $query->whereHas('offers', function ($q) use ($filter_from_price) {
+                    $q->where('single_price', '>=', $filter_from_price);
+                });
+            }
+
+            if ($filter_to_price != '') {
+                $query->whereHas('offers', function ($q) use ($filter_to_price) {
+                    $q->where('single_price', '<=', $filter_to_price);
                 });
             }
 
@@ -127,17 +135,23 @@ class TravelController extends Controller
 
     public function bestTravelsOffer()
     {
-        $travels['pilgrimage_umrah'] = Travel::display()->where('type', 'pilgrimage')
-                                        ->orWhere('type', 'umrah')
-                                        ->latest()->take(6)->getConvert();
+        // $travels['pilgrimage_umrah'] = Travel::display()->where('type', 'pilgrimage')
+        //                                 ->orWhere('type', 'umrah')
+        //                                 ->latest()->take(6)->getConvert();
 
-        $travels['internal_travel'] = Travel::display()->where('type', 'internal')->latest()->take(6)->getConvert();
+        // $travels['internal_travel'] = Travel::display()->where('type', 'internal')->latest()->take(6)->getConvert();
 
-        $travels['honeymoon'] = Travel::display()->whereHas('travel_category', function ($query) {
-            $query->where('type', 5);
-        })->latest()->take(6)->getConvert();
+        // $travels['honeymoon'] = Travel::display()->whereHas('travel_category', function ($query) {
+        //     $query->where('type', 5);
+        // })->latest()->take(6)->getConvert();
 
-        return response(['travels' => $travels]);
+        $tabs = Tabs::get();
+        foreach ($tabs as $tab) {
+            $tab->categories = json_decode($tab->categories);
+            $tab->travels = count(json_decode($tab->travels)) ? Travel::display()->whereIn('id', json_decode($tab->travels))->orderBy('id', 'desc')->getConvert() : [];
+        }
+
+        return response(['tabs' => $tabs]);
     }
 
     public function getBestTravelsExternal(Request $request) {
@@ -162,13 +176,16 @@ class TravelController extends Controller
     public function getByCategory(Request $request) {
         $category_id = $request->category_id;
         $hotel_address = $request->hotel_address;
-        $filter_price = $request->filter_price;
+        $filter_name = $request->filter_name;
+        $filter_to_price = $request->filter_to_price;
+        $filter_from_price = $request->filter_from_price;
         $filter_stars = $request->filter_stars;
         $filter_hotel = $request->filter_hotel;
         $umrah_date = $request->umrah_date;
         $sortBy = $request->sortBy;
 
-        $query = Travel::display()->where('travel_category_id', $category_id);
+        $column = $category_id == 'external' ? 'type' : 'travel_category_id';
+        $query = Travel::display()->where($column, $category_id);
 
         if ($hotel_address != '') {
             $query->whereHas('hotel', function ($q) use ($hotel_address) {
@@ -176,9 +193,15 @@ class TravelController extends Controller
             });
         }
 
-        if ($filter_price != '') {
-            $query->whereHas('offers', function ($q) use ($filter_price) {
-                $q->where('single_price', '<=', $filter_price);
+        if ($filter_from_price != '') {
+            $query->whereHas('offers', function ($q) use ($filter_from_price) {
+                $q->where('single_price', '>=', $filter_from_price);
+            });
+        }
+
+        if ($filter_to_price != '') {
+            $query->whereHas('offers', function ($q) use ($filter_to_price) {
+                $q->where('single_price', '<=', $filter_to_price);
             });
         }
 
@@ -186,6 +209,10 @@ class TravelController extends Controller
             $query->whereHas('hotel', function ($q) use ($filter_stars) {
                 $q->where('stars', '<=', $filter_stars);
             });
+        }
+
+        if ($filter_name != '') {
+            $query->where('name', 'like', '%' . $filter_name . '%');
         }
 
         if ($filter_hotel != '') {

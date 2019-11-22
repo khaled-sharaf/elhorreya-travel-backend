@@ -76,8 +76,8 @@
 
                                             <!-- dataTables_buttons -->
                                             <div class="dataTables_buttons">
+                                                <slot name="buttons"></slot>
                                                 <div v-if="!hideButtons">
-                                                    <slot name="buttons"></slot>
                                                     <router-link
                                                         tag="button"
                                                         :to="{name: routeCreate}"

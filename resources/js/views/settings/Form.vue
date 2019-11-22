@@ -67,14 +67,11 @@
                     </div>
 
                     <div v-else-if="form.type == 'text'">
-                        <textarea
+                        <vue-editor
                             v-model="form.value"
-                            type="text"
-                            :placeholder="$t('settings_table.value')"
-                            class="form-control textarea-form"
                             :class="{ 'is-invalid': form.errors.has('value') }"
-                        ></textarea>
-                        <has-error :form="form" field="value"></has-error>
+                        ></vue-editor>
+                        <span class="help-error-form" v-if="form.errors.has('value')" v-text="form.errors.get('value')"></span>
                     </div>
                     <div v-else-if="form.type == 'image'">
                         <div class="row justify-content-center">
