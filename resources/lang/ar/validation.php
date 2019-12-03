@@ -204,6 +204,8 @@ return [
         'offers.*.go_and_back' => 'الذهاب والعودة',
         'offers.*.date_from' => 'تاريخ البداية',
         'offers.*.date_to' => 'تاريخ الإنتهاء',
+        'offers.*.hotel_days' => 'عدد أيام فندق مكة',
+        'offers.*.hotel_2_days' => 'عدد أيام فندق المدينة',
         'offers.*.stay_type' => 'نوع الإقامة',
         'offers.*.transport' => 'الانتقالات',
         'offers.*.adults' => 'عدد البالغين',
@@ -216,6 +218,11 @@ return [
         'tabs.*.name' => 'اسم العرض',
         'tabs.*.categories' => 'الأقسام',
         'tabs.*.travels' => 'الرحلات',
+
+        'phone_1' => 'رقم الموبايل الأول',
+        'phone_2' => 'رقم الموبايل الثانى',
+        'phone_3' => 'رقم الموبايل الثالث',
+        'phone_4' => 'رقم الموبايل الرابع',
 
     ],
 ];

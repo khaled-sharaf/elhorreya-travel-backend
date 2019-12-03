@@ -104,6 +104,7 @@
                                             <div class="col-sm-12">
                                                 <table-wrapper
                                                     :successResponse="successResponse"
+                                                    :hideMultiSelect="hideMultiSelect"
                                                     :dataTable="dataTable"
                                                     :columns="columns"
                                                     :columnsView="columnsView"
@@ -166,6 +167,7 @@ export default {
         'routeCreate',
         'showSettings',
         'hideButtons',
+        'hideMultiSelect',
         'columns',
         'themeTableClasses',
         'dataTable',

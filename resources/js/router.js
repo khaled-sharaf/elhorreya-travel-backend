@@ -13,6 +13,13 @@ import CreateUser from './views/users/Create'
 import EditUser from './views/users/Edit'
 
 
+// marketing_hotels
+import MarketingHotels from './views/marketing_hotels/Index'
+import CreateMarketingHotel from './views/marketing_hotels/Create'
+import EditMarketingHotel from './views/marketing_hotels/Edit'
+import MarketingHotelProfile from './views/marketing_hotels/Profile'
+
+
 // hotels
 import Hotels from './views/hotels/Index'
 import CreateHotel from './views/hotels/Create'
@@ -66,6 +73,12 @@ import EditImage from './views/images/Edit'
 import ContactUs from './views/contact_us/Index'
 
 
+// contact_infos
+import ContactInfos from './views/contact_infos/Index'
+import CreateContactInfo from './views/contact_infos/Create'
+import EditContactInfo from './views/contact_infos/Edit'
+
+
 // settings
 import Settings from './views/settings/Index'
 import CreateSetting from './views/settings/Create'
@@ -116,6 +129,31 @@ const vueRouter = new Router({
                     path: 'user/:id/edit',
                     name: 'edit-user',
                     component: EditUser,
+                    props: true
+                },
+
+
+                ////////////////// marketing_hotels routes ///////////////////
+                {
+                    path: 'marketing_hotels',
+                    name: 'marketing_hotels',
+                    component: MarketingHotels
+                },
+                {
+                    path: 'marketing_hotel/create',
+                    name: 'create-marketing_hotel',
+                    component: CreateMarketingHotel
+                },
+                {
+                    path: 'marketing_hotel/:id/edit',
+                    name: 'edit-marketing_hotel',
+                    component: EditMarketingHotel,
+                    props: true
+                },
+                {
+                    path: 'marketing_hotel/profile/:id',
+                    name: 'marketing_hotel-profile',
+                    component: MarketingHotelProfile,
                     props: true
                 },
 
@@ -291,17 +329,37 @@ const vueRouter = new Router({
 
 
 
+                ////////////////// contact_infos routes ///////////////////
+                {
+                    path: 'contact_infos',
+                    name: 'contact_infos',
+                    component: ContactInfos
+                },
+                {
+                    path: 'branch/create',
+                    name: 'create-contact_info',
+                    component: CreateContactInfo
+                },
+                {
+                    path: 'branch/:id/edit',
+                    name: 'edit-contact_info',
+                    component: EditContactInfo,
+                    props: true
+                },
+
+
+
                 ////////////////// settings routes ///////////////////
                 {
                     path: 'settings',
                     name: 'settings',
                     component: Settings
                 },
-                {
-                    path: 'setting/create',
-                    name: 'create-setting',
-                    component: CreateSetting
-                },
+                // {
+                //     path: 'setting/create',
+                //     name: 'create-setting',
+                //     component: CreateSetting
+                // },
                 {
                     path: 'setting/:id/edit',
                     name: 'edit-setting',

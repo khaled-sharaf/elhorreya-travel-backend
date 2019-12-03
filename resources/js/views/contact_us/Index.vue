@@ -2,7 +2,7 @@
     <data-table
         :idPage="idPage"
         :showSettings="showSettings"
-        :hideButtons="hideButtons"
+        :hideButtons="true"
         :columns="columns"
         :themeTableClasses="viewTableClasses"
         :dataTable="dataTable"
@@ -87,7 +87,6 @@ export default {
             idPage: 'contact_us',
             urlGetDataTable: '/contact_us',
             filters: ['created-between', 'search'],
-            hideButtons: true,
             columns: [
                 { label: "ID", name: "id" },
                 { label: "name", name: "name" },

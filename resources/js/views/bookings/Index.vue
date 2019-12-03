@@ -108,7 +108,7 @@
                         :data-params='`{"travel": ${JSON.stringify(booking.travel)}, "id": ${booking.travel_id}, "offer_id": ${booking.travel_detail_id}}`'
                     >
                         {{ booking.travel.name }}
-                        <span class="badge badge-success" style="font-size: 12px !important">
+                        <span v-if="booking.travel_detail_id" class="badge badge-success" style="font-size: 12px !important">
                             رقم
                             {{ booking.offer.id }}
                         </span>
@@ -201,7 +201,9 @@ export default {
                 'العرض المحجوز' : {
                     field: 'offer',
                     callback: (value) => {
-                        return 'الرقم المعرف للعرض: ' + value.id
+                        if (value) {
+                            return 'الرقم المعرف للعرض: ' + value.id
+                        }
                     }
                 },
                 'الرحلة' : {

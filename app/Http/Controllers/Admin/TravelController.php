@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Travel;
-use App\MailingList;
 use App\Jobs\SendMailingTravel;
+use App\MailingList;
+use App\Mail\MailingTravel;
+use Mail;
 
 use Image;
 use File;
@@ -93,42 +95,42 @@ class TravelController extends Controller
     {
         $request->validate([
             'name' => 'required|string|between:2,180',
-            'address_from' => 'required_if:type,external|nullable|string|between:3,180',
+            'address_from' => 'required_if:type,external_fly,external_visa|nullable|string|between:3,180',
+            'address_to' => 'required_if:type,external_fly,external_visa|nullable|string|between:3,180',
             'info' => 'nullable|string|min:5',
-            'type' => 'required|in:pilgrimage,umrah,internal,external',
+            'type' => 'required|in:pilgrimage,umrah,internal,external_fly,external_visa',
             'umrah_date' => 'required_if:type,umrah|nullable|string|between:2,50',
-            'haram_distance' => 'required_unless:type,internal,external|nullable|in:0,1',
+            'haram_distance' => 'required_if:type,pilgrimage,umrah|nullable|in:0,1',
             'itinerary_1' => 'required_if:type,pilgrimage,umrah|max:20',
             'itinerary_2' => 'required_if:type,pilgrimage,umrah|max:20',
             'itinerary_3' => 'required_if:type,pilgrimage,umrah|max:20',
             'itinerary_4' => 'required_if:type,pilgrimage,umrah|max:20',
             'itinerary_5' => 'nullable|max:20',
             'discount' => 'nullable|integer|max:100',
-            'favorite_company' => 'required|in:0,1',
-            'hotel_id' => 'required|exists:hotels,id',
+            'favorite_company' => 'nullable|in:0,1',
+            'hotel_id' => 'required_unless:type,external_fly,external_visa|nullable|exists:hotels,id',
             'hotel_2_id' => 'nullable|exists:hotels,id',
-            'travel_category_id' => 'nullable|exists:travel_categories,id',
+            'travel_category_id' => 'required_unless:type,external_fly,external_visa|nullable|exists:travel_categories,id',
             'image' => 'required|string',
             'gallery' => 'nullable|array',
-            'offers' => 'required|array|min:1',
+            'offers' => 'required_unless:type,external_fly,external_visa|array|min:1',
             'display' => 'required|in:0,1',
 
             'offers.*.info_offer' => 'nullable|string|between:2,180',
-            // 'offers.*.go_and_back' => 'required|in:0,1',
-            'offers.*.date_from' => 'required|date|before:offers.*.date_to',
-            'offers.*.date_to' => 'required|date|after:offers.*.date_from',
+            'offers.*.date_from' => 'required_unless:type,external_fly,external_visa|nullable|date|before:offers.*.date_to',
+            'offers.*.date_to' => 'required_unless:type,external_fly,external_visa|nullable|date|after:offers.*.date_from',
             'offers.*.hotel_days' => 'required_if:type,umrah,pilgrimage|max:100',
             'offers.*.hotel_2_days' => 'required_if:type,umrah,pilgrimage|max:100',
-            'offers.*.stay_type' => 'required',
-            'offers.*.transport' => 'required',
+            'offers.*.stay_type' => 'required_unless:type,external_fly,external_visa|nullable',
+            'offers.*.transport' => 'required_unless:type,external_fly,external_visa|nullable',
             'offers.*.adults' => 'nullable|integer|max:999',
             'offers.*.children' => 'nullable|integer|max:999',
             'offers.*.child_price' => 'nullable|numeric',
             'offers.*.baby_price' => 'nullable|numeric',
-            'offers.*.single_price' => 'required|numeric',
+            'offers.*.single_price' => 'required_unless:type,external_fly,external_visa|nullable|numeric',
             'offers.*.twin_price' => 'nullable|numeric',
             'offers.*.triple_price' => 'nullable|numeric',
-            'offers.*.display' => 'required|in:0,1',
+            'offers.*.display' => 'required_unless:type,external_fly,external_visa|nullable|in:0,1',
         ]);
         $data = $request->toArray();
 
@@ -179,18 +181,36 @@ class TravelController extends Controller
         $travel = Travel::create($data);
 
         // create offers
-        foreach ($data['offers'] as $index => $offer)
-        {
-            $date_diff = abs(round((strtotime($offer['date_to']) - strtotime($offer['date_from'])) / 86400));
-            $data['offers'][$index]['time_period'] = $date_diff;
+        if ($data['type'] !== 'external_fly' && $data['type'] !== 'external_visa') {
+            foreach ($data['offers'] as $index => $offer)
+            {
+                $date_diff = abs(round((strtotime($offer['date_to']) - strtotime($offer['date_from'])) / 86400));
+                $data['offers'][$index]['time_period'] = $date_diff;
+            }
+            $travel->offers()->createMany($data['offers']);
         }
-        $travel->offers()->createMany($data['offers']);
+
         $createdTravel = Travel::findConvert($travel->id);
 
         // send travel to all email in mailing list
-        $sendMail = (new SendMailingTravel($createdTravel));
-        // ->delay(now()->addSeconds(3));
+        $sendMail = (new SendMailingTravel( json_decode(json_encode($createdTravel->toArray())) ))
+        ->delay(now()->addSeconds(3));
         dispatch($sendMail);
+
+        // $emails_count = MailingList::count();
+        // $offset = 0;
+        // $limit = 200;
+        // $all_emails = [];
+        // for ($i = 0; $i < ceil($emails_count / $limit); $i++) {
+        //     $part_mails = MailingList::select('email')->offset($offset)->limit($limit)->get()->pluck('email');
+        //     foreach ($part_mails->all() as $email) {
+        //         $all_emails[] = $email;
+        //     }
+        //     $offset = $offset + $limit;
+        // }
+        // if (count($all_emails) > 0) {
+        //     Mail::to($all_emails)->send(new MailingTravel( json_decode(json_encode($createdTravel->toArray())) ));
+        // }
 
         return response(['message' => 'Travel has been created.', 'data' => $createdTravel]);
     }
@@ -209,42 +229,42 @@ class TravelController extends Controller
     {
         $request->validate([
             'name' => 'required|string|between:2,180',
-            'address_from' => 'required_if:type,external|nullable|string|between:3,180',
+            'address_from' => 'required_if:type,external_fly,external_visa|nullable|string|between:3,180',
+            'address_to' => 'required_if:type,external_fly,external_visa|nullable|string|between:3,180',
             'info' => 'nullable|string|min:5',
-            'type' => 'required|in:pilgrimage,umrah,internal,external',
+            'type' => 'required|in:pilgrimage,umrah,internal,external_fly,external_visa',
             'umrah_date' => 'required_if:type,umrah|nullable|string|between:2,50',
-            'haram_distance' => 'required_unless:type,internal,external|nullable|in:0,1',
+            'haram_distance' => 'required_if:type,pilgrimage,umrah|nullable|in:0,1',
             'itinerary_1' => 'required_if:type,pilgrimage,umrah|max:20',
             'itinerary_2' => 'required_if:type,pilgrimage,umrah|max:20',
             'itinerary_3' => 'required_if:type,pilgrimage,umrah|max:20',
             'itinerary_4' => 'required_if:type,pilgrimage,umrah|max:20',
             'itinerary_5' => 'nullable|max:20',
             'discount' => 'nullable|integer|max:100',
-            'favorite_company' => 'required|in:0,1',
-            'hotel_id' => 'required|exists:hotels,id',
+            'favorite_company' => 'nullable|in:0,1',
+            'hotel_id' => 'required_unless:type,external_fly,external_visa|nullable|exists:hotels,id',
             'hotel_2_id' => 'nullable|exists:hotels,id',
-            'travel_category_id' => 'nullable|exists:travel_categories,id',
+            'travel_category_id' => 'required_unless:type,external_fly,external_visa|nullable|exists:travel_categories,id',
             'image' => 'required|string',
             'gallery' => 'nullable|array',
-            'offers' => 'required|array|min:1',
+            'offers' => 'required_unless:type,external_fly,external_visa|array|min:1',
             'display' => 'required|in:0,1',
 
             'offers.*.info_offer' => 'nullable|string|between:2,180',
-            // 'offers.*.go_and_back' => 'required|in:0,1',
-            'offers.*.date_from' => 'required|date|before:offers.*.date_to',
-            'offers.*.date_to' => 'required|date|after:offers.*.date_from',
+            'offers.*.date_from' => 'required_unless:type,external_fly,external_visa|nullable|date|before:offers.*.date_to',
+            'offers.*.date_to' => 'required_unless:type,external_fly,external_visa|nullable|date|after:offers.*.date_from',
             'offers.*.hotel_days' => 'required_if:type,umrah,pilgrimage|max:100',
             'offers.*.hotel_2_days' => 'required_if:type,umrah,pilgrimage|max:100',
-            'offers.*.stay_type' => 'required',
-            'offers.*.transport' => 'required',
+            'offers.*.stay_type' => 'required_unless:type,external_fly,external_visa|nullable',
+            'offers.*.transport' => 'required_unless:type,external_fly,external_visa|nullable',
             'offers.*.adults' => 'nullable|integer|max:999',
             'offers.*.children' => 'nullable|integer|max:999',
             'offers.*.child_price' => 'nullable|numeric',
             'offers.*.baby_price' => 'nullable|numeric',
-            'offers.*.single_price' => 'required|numeric',
+            'offers.*.single_price' => 'required_unless:type,external_fly,external_visa|nullable|numeric',
             'offers.*.twin_price' => 'nullable|numeric',
             'offers.*.triple_price' => 'nullable|numeric',
-            'offers.*.display' => 'required|in:0,1',
+            'offers.*.display' => 'required_unless:type,external_fly,external_visa|nullable|in:0,1',
         ]);
         $travel = Travel::find($id);
         $keys_except = ['deletedGallery', 'deletedOffers'];
@@ -331,21 +351,25 @@ class TravelController extends Controller
             $travel->offers()->whereIn('id', $request->deletedOffers)->delete();
         }
 
-        foreach ($data['offers'] as $index => $offer)
-        {
-            $date_diff = abs(round((strtotime($offer['date_to']) - strtotime($offer['date_from'])) / 86400));
-            $data['offers'][$index]['time_period'] = $date_diff;
-        }
 
-        // save and craete new offers in database
-        if (count($data['offers']) > 0) {
-            for ($x = 0; $x < count($data['offers']); $x++) {
-                $travel->offers()->updateOrCreate(
-                    [
-                        'id' => key_exists('id', $data['offers'][$x]) ? $data['offers'][$x]['id'] : 0
-                    ],
-                    $data['offers'][$x]
-                );
+        if ($data['type'] !== 'external_fly' && $data['type'] !== 'external_visa') {
+
+            foreach ($data['offers'] as $index => $offer)
+            {
+                $date_diff = abs(round((strtotime($offer['date_to']) - strtotime($offer['date_from'])) / 86400));
+                $data['offers'][$index]['time_period'] = $date_diff;
+            }
+
+            // save and craete new offers in database
+            if (count($data['offers']) > 0) {
+                for ($x = 0; $x < count($data['offers']); $x++) {
+                    $travel->offers()->updateOrCreate(
+                        [
+                            'id' => key_exists('id', $data['offers'][$x]) ? $data['offers'][$x]['id'] : 0
+                        ],
+                        $data['offers'][$x]
+                    );
+                }
             }
         }
 

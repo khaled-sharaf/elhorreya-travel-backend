@@ -16,13 +16,13 @@ class CreateBookingsTable extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('phone', 20)->nullable();
             $table->text('message')->nullable();
             $table->integer('adults')->nullable()->default(0);
             $table->integer('children')->nullable()->default(0);
             $table->unsignedInteger('travel_id');
-            $table->unsignedInteger('travel_detail_id');
+            $table->unsignedInteger('travel_detail_id')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

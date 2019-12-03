@@ -8,7 +8,7 @@
     <table class="table dataTable" :class="' table-' + themeTableClassesFilter.join(' table-')" v-if="dataTable.length">
         <thead class="thead-light">
             <tr>
-                <th class="actions th-checkbox" v-html="columns[0].label"></th>
+                <th v-if="!hideMultiSelect" class="actions th-checkbox" v-html="columns[0].label"></th>
                 <th class="actions th-show-plus" v-html="columns[1].label"></th>
                 <th
                     rowspan="1"
@@ -25,7 +25,7 @@
         <slot></slot>
         <tfoot class="thead-light">
             <tr>
-                <th class="actions th-checkbox"></th>
+                <th v-if="!hideMultiSelect" class="actions th-checkbox"></th>
                 <th class="actions th-show-plus" v-html="columns[1].label"></th>
                 <th
                     rowspan="1"
@@ -53,6 +53,7 @@
 export default {
     props: [
         "successResponse",
+        "hideMultiSelect",
         "dataTable",
         "columns",
         "themeTableClassesFilter",

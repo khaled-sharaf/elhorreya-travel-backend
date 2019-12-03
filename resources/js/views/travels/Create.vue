@@ -66,8 +66,10 @@ export default {
         form: new Form({
             name: "",
             address_from: "",
+            address_to: "",
             info: "",
-            type: "other",
+            type: "",
+            external_type: "",
             umrah_date: "",
             haram_distance: 0,
             itinerary_1: "",
@@ -86,7 +88,6 @@ export default {
             offers: [
                 {
                     info_offer: "",
-                    go_and_back: 0,
                     date_from: "",
                     date_to: "",
                     hotel_days: "",

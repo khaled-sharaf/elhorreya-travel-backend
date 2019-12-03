@@ -13,7 +13,8 @@
                         class="custom-select"
                         :class="{ 'is-invalid': form.errors.has('travel_category_id') }"
                         >
-                        <option v-for="travel_category in travelCategoriesSelect" :value="travel_category.id" :key="travel_category.id" v-text="travel_category.name"></option>
+                        <option v-for="travel_category in travelCategoriesSelect.filter(cat => cat.type === 1 || cat.type === 2)" :value="travel_category.id" :key="travel_category.id" v-text="travel_category.name"></option>
+                        <option :value="999999999">أراء العملاء</option>
                     </select>
                     <has-error :form="form" field="travel_category_id"></has-error>
                 </div>

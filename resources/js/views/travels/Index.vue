@@ -63,11 +63,6 @@
                 </td>
 
 
-                <td v-show="tableData.columns.indexOf('address_from') != -1" class="address_from">
-                    {{travel.address_from}}
-                </td>
-
-
                 <td v-show="tableData.columns.indexOf('image') != -1" class="image" style="text-align:center;">
                     <img class="avatar-table" :src="$domain + '/' + travel.image">
                 </td>
@@ -99,17 +94,22 @@
 
 
                 <td v-show="tableData.columns.indexOf('hotel_id') != -1" class="hotel_id">
-                    <router-link
-                        class="link-router-in-table"
-                        v-if="travel.hotel !== null"
-                        :href="$domain_admin + '/hotel/profile/' + travel.hotel_id"
-                        :to="{name: 'hotel-profile', params: {id: travel.hotel_id, hotel: travel.hotel}}"
-                        data-name="hotel-profile"
-                        :data-params='"{\"hotel\":" + JSON.stringify(travel.hotel) + ", \"id\":" + travel.hotel_id + "}"'
-                    >
-                        {{ travel.hotel.name + ' --- ' + travel.hotel.address }}
-                    </router-link>
-                    <span class="badge badge-danger" v-else> {{ $t('global.hotel_is_deleted') }} - id:{{travel.hotel_id}}</span>
+                    <span v-if="travel.type !== 'external_fly' && travel.type !== 'external_visa'">
+
+                        <router-link
+                            class="link-router-in-table"
+                            v-if="travel.hotel !== null"
+                            :href="$domain_admin + '/hotel/profile/' + travel.hotel_id"
+                            :to="{name: 'hotel-profile', params: {id: travel.hotel_id, hotel: travel.hotel}}"
+                            data-name="hotel-profile"
+                            :data-params='"{\"hotel\":" + JSON.stringify(travel.hotel) + ", \"id\":" + travel.hotel_id + "}"'
+                        >
+                            {{ travel.hotel.name + ' --- ' + travel.hotel.address }}
+                        </router-link>
+                        <span class="badge badge-danger" v-else> {{ $t('global.hotel_is_deleted') }} - id:{{travel.hotel_id}}</span>
+
+                    </span>
+                    <span class="badge badge-info" v-else> لا يوجد فندق</span>
                 </td>
 
 
@@ -132,8 +132,7 @@
 
 
                 <td v-show="tableData.columns.indexOf('travel_category_id') != -1" class="travel_category_id">
-                    <span v-if="travel.type === 'external'">عروض الطيران</span>
-                    <span v-else>
+                    <span v-if="travel.type !== 'external_fly' && travel.type !== 'external_visa'">
                         <router-link
                             class="link-router-in-table"
                             v-if="travel.travel_category !== null"
@@ -146,6 +145,12 @@
                         </router-link>
                         <span class="badge badge-danger" v-else> {{ $t('global.travel_category_is_deleted') }} - id:{{travel.travel_category_id}}</span>
                     </span>
+
+                    <span v-else>
+                        <span v-if="travel.type === 'external_fly'">عروض الطيران</span>
+                        <span v-if="travel.type === 'external_visa'">عروض التأشيرات</span>
+                    </span>
+
                 </td>
 
 
@@ -240,7 +245,6 @@ export default {
             columns: [
                 { label: "ID", name: "id" },
                 { label: "Name", name: "name" },
-                { label: "Address from", name: "address_from" },
                 { label: "Image", name: "image" },
                 { label: "Type", name: "type" },
                 { label: "Umrah date", name: "umrah_date" },
@@ -258,7 +262,8 @@ export default {
             columnsExceptedSorting: ['hotel_id', 'travel_category_id', 'user_id'],
             travelTypes: {
                 internal: 'سياحة داخلية',
-                external: 'عروض الطيران',
+                external_fly: 'عروض الطيران',
+                external_visa: 'عروض التأشيرات',
                 pilgrimage: 'حج',
                 umrah: 'عمرة',
             },
@@ -300,7 +305,7 @@ export default {
                 if (this.successResponse) {
                     clearInterval(getData)
                     setTimeout(() => {
-                        this.tableData.columns = ['name', 'address_from', 'type', 'travel_category_id']
+                        this.tableData.columns = ['name', 'type', 'travel_category_id']
                     }, 200)
                 }
             }, 200)

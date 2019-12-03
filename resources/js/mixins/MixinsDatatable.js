@@ -280,13 +280,17 @@ export default {
             setTimeout(() => {
                 $(".table tbody tr.tr-general").each(function(index) {
                     let id = $(this).attr("data-id")
-                    $(this).prepend(`
+                    let selectRowHTML = ''
+                    if (!self.hideMultiSelect) {
+                        selectRowHTML = `
                         <td class="td-checkbox select_row">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" value="${id}" class="checkbox-input custom-control-input" id="select_row_${index}">
                                 <label class="custom-control-label" for="select_row_${index}"></label>
                             </div>
-                        </td>
+                        </td>`
+                    }
+                    $(this).prepend(` ${selectRowHTML}
                         <td class="td-show-plus show_plus">
                             <span class="btn btn-secondary btn-show-more-row">
                                 <i class="fa fa-plus"></i>
@@ -562,15 +566,21 @@ export default {
 
         setColumnsAndOrders() {
             let newColumnsAfterChangeLang = []
+
+            // add columns dynamic
             this.columns.unshift({ label: "#", name: "index" })
             this.columns.unshift({ label: "<i class='fa fa-plus'></i>", name: "show_plus" })
-            this.columns.unshift({ label: `
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="checkbox-input-all custom-control-input" id="select_all">
-                    <label class="custom-control-label" for="select_all"></label>
-                </div>
-            `, name: "select_row" })
+            if (!this.hideMultiSelect) {
+                this.columns.unshift({ label: `
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox" class="checkbox-input-all custom-control-input" id="select_all">
+                        <label class="custom-control-label" for="select_all"></label>
+                    </div>
+                `, name: "select_row" })
+            }
             this.columns.push({ label: "Actions", name: "actions" })
+            /* ============================================== */
+
             this.columns.forEach(item => {
                 if (item.name != 'show_plus' && item.name != 'index' && item.name != 'select_row') {
                     item.label = this.$t(this.idPage + '_table.' + item.name)

@@ -228,7 +228,7 @@
                             </div>
                             <!-- /.tab-pane -->
                             <div class="tab-pane" id="rooms">
-                               <rooms v-if="(hotelProfile.rooms_count != null && hotelProfile.rooms_count != 0) && currentChildTable === 'rooms'"></rooms>
+                               <rooms :class="{'in-profile': !maximizeTable}" v-if="(hotelProfile.rooms_count != null && hotelProfile.rooms_count != 0) && currentChildTable === 'rooms'"></rooms>
 
                                 <div v-else class="alert alert-info alert-dismissible">
                                     <h5><i class="icon fas fa-info"></i>  {{ $t('global.no_rooms') }} !</h5>
@@ -237,7 +237,7 @@
                             </div>
                             <!-- /.tab-pane -->
                             <div class="tab-pane" id="travels">
-                                <travels v-if="(hotelProfile.travels_count != null && hotelProfile.travels_count != 0) && currentChildTable === 'travels'"></travels>
+                                <travels :class="{'in-profile': !maximizeTable}" v-if="(hotelProfile.travels_count != null && hotelProfile.travels_count != 0) && currentChildTable === 'travels'"></travels>
 
                                 <div v-else class="alert alert-info alert-dismissible">
                                     <h5><i class="icon fas fa-info"></i>  {{ $t('global.no_travels') }} !</h5>

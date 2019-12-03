@@ -91,7 +91,7 @@
                         v-text="$t('global.show_map')"
                         >
                     </button>
-                    <span v-else>{{ $t('global.no_location') }}</span>
+                    <span class="badge badge-danger" v-else>{{ $t('global.no_location') }}</span>
                 </td>
 
 
@@ -220,7 +220,7 @@ export default {
                     title = $(this).attr('data-location-title');
                 if ( (typeof lat != 'undefined' && lat != '' && lat != null) &&
                     (typeof long != 'undefined' && long != '' && long != null) ) {
-                    $('#locationTitle').html('Location: ' + title);
+                    $('#locationTitle').html('خريطة فندق: ' + title);
                     $('#myScriptMap').remove();
                     self.showMap(lat, long);
                     $('#modal_location_hotel').modal('show');

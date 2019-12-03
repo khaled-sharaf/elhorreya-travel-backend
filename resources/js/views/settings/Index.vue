@@ -3,6 +3,8 @@
         :routeCreate="routeCreate"
         :idPage="idPage"
         :showSettings="showSettings"
+        :hideButtons="true"
+        :hideMultiSelect="hideMultiSelect"
         :columns="columns"
         :themeTableClasses="viewTableClasses"
         :dataTable="dataTable"
@@ -43,9 +45,9 @@
                     {{setting.slug}}
                 </td>
 
-                <td v-show="tableData.columns.indexOf('name') != -1" class="name">
+                <!-- <td v-show="tableData.columns.indexOf('name') != -1" class="name">
                     {{setting.name}}
-                </td>
+                </td> -->
 
                 <td v-show="tableData.columns.indexOf('value') != -1" class="value">
                     <img class="avatar-table" v-if="setting.value != null && setting.value.indexOf('images/settings/') === 0" :src="$domain + '/' + setting.value">
@@ -54,9 +56,9 @@
                     </span>
                 </td>
 
-                <td v-show="tableData.columns.indexOf('user_id') != -1" class="user_id">
+                <!-- <td v-show="tableData.columns.indexOf('user_id') != -1" class="user_id">
                     <created-by :model="setting"></created-by>
-                </td>
+                </td> -->
 
 
                 <td v-show="tableData.columns.indexOf('updated_at') != -1" class="updated_at">
@@ -64,9 +66,9 @@
                 </td>
 
 
-                <td v-show="tableData.columns.indexOf('created_at') != -1" class="created_at">
+                <!-- <td v-show="tableData.columns.indexOf('created_at') != -1" class="created_at">
                     <relative-date :date="setting.created_at"></relative-date>
-                </td>
+                </td> -->
 
                 <td v-show="tableData.columns.indexOf('actions') != -1" class="actions">
                     <!-- btn edit row -->
@@ -74,7 +76,7 @@
                     <!-- ./btn edit row -->
 
                     <!-- btn delete row -->
-                    <btn-delete :model="setting" modelName="setting" @destroyRow="destroyRow(setting.id)"></btn-delete>
+                    <!-- <btn-delete :model="setting" modelName="setting" @destroyRow="destroyRow(setting.id)"></btn-delete> -->
                     <!-- ./btn delete row -->
                 </td>
             </tr>
@@ -104,15 +106,16 @@ export default {
             idPage: 'settings',
             urlGetDataTable: '/settings',
             routeCreate: 'create-setting',
+            hideMultiSelect: true,
             filters: ['search'],
             columns: [
                 { label: "ID", name: "id" },
                 { label: "Slug", name: "slug" },
-                { label: "Name", name: "name" },
+                // { label: "Name", name: "name" },
                 { label: "Value", name: "value" },
-                { label: "created by", name: "user_id" },
+                // { label: "created by", name: "user_id" },
                 { label: "Updated at", name: "updated_at" },
-                { label: "Created at", name: "created_at" }
+                // { label: "Created at", name: "created_at" }
             ],
             columnsExceptedSorting: ['user_id', 'value']
         };

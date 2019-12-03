@@ -1,0 +1,139 @@
+<style>
+
+
+</style>
+
+<template>
+    <div>
+        <!-- Content Header (Page header) -->
+        <header-page :title=" $t('global.create') + ' ' + $t('sidebar.new_marketing_hotel') "></header-page>
+        <!-- /.content-header -->
+        <section class="content">
+            <div class="container-fluid">
+
+                <div class="row mt-3">
+                    <div class="col-12">
+                        <div class="card">
+                            <!-- card-header -->
+                            <div class="card-header">
+                                <router-link class="btn btn-primary btn-sm" :to="{name: 'marketing_hotels'}">{{ $t('global.show') + ' ' + $t('sidebar.all_marketing_hotels') }}</router-link>
+                            </div>
+                            <!-- ./card-header -->
+
+
+                            <!-- form -->
+                            <form @submit.prevent="createHotel()" class="form-product">
+                                <!-- card-body -->
+                                <div class="card-body">
+                                    <form-hotel typeForm="create" :form="form"></form-hotel>
+                                </div>
+                                <!-- ./card-body -->
+
+
+                                <!-- card-footer -->
+                                <div class="card-footer">
+                                    <btn-create :form="form"></btn-create>
+                                </div> <!-- ./card-footer -->
+
+                            </form><!-- form -->
+                        </div>
+                    </div><!-- /.col-12 -->
+
+                </div><!-- /.row -->
+            </div><!--/. container-fluid -->
+        </section>
+    </div>
+</template>
+
+
+<script>
+import FormHotel from './Form'
+import BtnCreate from './../../components/form/BtnCreate'
+import HeaderPage from './../../components/HeaderPage'
+import MixinChangeLocaleMessages from "./../../mixins/MixinChangeLocaleMessages"
+
+export default {
+    mixins: [MixinChangeLocaleMessages],
+    name: 'create-marketing_hotel',
+    components: {
+        FormHotel,
+        HeaderPage,
+        BtnCreate
+    },
+    data() {
+      return {
+        urlCreateHotel: '/marketing_hotels',
+        form: new Form({
+            name: "",
+            address: "",
+            stars: 5,
+            info: "",
+            latitude: "",
+            longitude: "",
+            image: "",
+            gallery: [],
+            features: [
+                {value: ''}
+            ],
+            display: 1,
+            rooms: [
+                {
+                    description: "",
+                    options: "بدون إفطار",
+                    date_from: "",
+                    date_to: "",
+                    single_price_wd: "",
+                    single_price_we: "",
+                    dbl_price_wd: "",
+                    dbl_price_we: "",
+                    triple_price_wd: "",
+                    triple_price_we: "",
+                    quad_price_we: "",
+                    quad_price_we: "",
+                    display: 1
+                }
+            ],
+        }),
+        idPage: 'marketing_hotels',
+        typePage: 'create'
+      }
+    },
+    methods: {
+        createHotel() {
+            this.form.latitude = window.parseFloat($('#hotel_latitude').val())
+            this.form.longitude = window.parseFloat($('#hotel_longitude').val())
+
+            loadReq(this.$Progress);
+            this.form.post(this.urlCreateHotel).then(response => {
+                if (response.status === 200) {
+                    // reset form
+                    console.log(response.data)
+
+                    this.form.reset();
+                    $('#remove-location-hotel').click()
+                    ToastReq.fire({
+                        text: this.success_msg
+                    });
+                    setTimeout(() => {
+                        this.$router.push({name: 'marketing_hotel-profile', params: {id: response.data.data.id, hotel: response.data.data}})
+                        setTimeout(() => {
+                            $('html, body, .wrapper, .content-wrapper').scrollTop(0);
+                        });
+                    }, 2000);
+                }
+            }).catch(errors => {
+                ToastFailed.fire({
+                    title: this.failed_title + "!",
+                    text: this.failed_msg,
+                })
+                this.$Progress.fail();
+            });
+        },
+    },
+    beforeRouteEnter (to, from, next) {
+        next(vm => {
+            to.meta.title = vm.$t('global.create') + ' ' + vm.$t('sidebar.new_marketing_hotel')
+        })
+    }
+}
+</script>

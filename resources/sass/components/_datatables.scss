@@ -252,16 +252,16 @@
                         flex-wrap: wrap;
                         .icon {
                             display: block;
-                            flex-basis: 33.33333%;
+                            flex-basis: calc(33.33333% - 4px);
                             cursor: pointer;
                             text-align: center;
-                            padding: 3px;
-                            font-size: 12px;
-                            &:first-child {
-                                border-bottom-left-radius: 5px;
-                            }
-                            &:last-child {
-                                border-bottom-right-radius: 5px;
+                            padding: 5px 0;
+                            font-size: 14px;
+                            margin: 2px;
+                            border-radius: 3px;
+                            cursor: pointer;
+                            &.off {
+                                color: #666;
                             }
                             &.active {
                                 background-color: #111;
@@ -269,16 +269,6 @@
                                     color: #FFF;
                                 }
                             }
-                            &:first-child {
-                                border-right: 1px solid #DDD;
-                            }
-                            &:last-child {
-                                border-left: 1px solid #DDD;
-                            }
-                            &.off {
-                                color: #666;
-                            }
-                            cursor: pointer;
                         }
 
                         .wrapper-select-item {
@@ -313,8 +303,10 @@
             .dataTables_search {
                 order: 2;
                 @media (max-width: 768px) {
-                    // order: 5;
                     width: 100%;
+                }
+                @media (max-width: 550px) {
+                    min-width: auto;
                 }
                 .view-search {
                     position: relative;
@@ -355,10 +347,7 @@
                     max-width: 100%;
                 }
                 @media (max-width: 550px) {
-                    min-width: 300px;
-                }
-                @media (max-width: 440px) {
-                    min-width: 250px;
+                    min-width: auto;
                 }
                 > * {
                     max-width: 100px;
@@ -405,6 +394,9 @@
                     justify-content: flex-start;
                     width: 100%;
                     max-width: 100%;
+                }
+                @media (max-width: 550px) {
+                    min-width: auto;
                 }
             }
         }
@@ -650,6 +642,41 @@
       background-position: center right;
     }
 }
+
+/* =========================================================================================== */
+
+
+
+.in-profile {
+    .dataTables_wrapper {
+        .card-header {
+            .dataTables_header {
+                justify-content: center;
+                flex-wrap: wrap;
+                flex-direction: column;
+                margin-top: auto;
+                .dataTables_search {
+                    width: 100%;
+                }
+                .dataTables_filter {
+                    width: 100%;
+                    max-width: 100%;
+                }
+                .dataTables_buttons {
+                    justify-content: flex-start;
+                    width: 100%;
+                    max-width: 100%;
+                }
+            }
+        }
+    }
+
+}
+
+/* =========================================================================================== */
+
+
+
 
 .icon-success {
     color: #38c172;

@@ -26,6 +26,7 @@ Route::post('/mailing_list/unsubscribe', 'MailingListController@sendMailDelete')
 /**************** bookings *****************/
 // store
 Route::post('/booking', 'BookingController@store');
+Route::post('/booking-external', 'BookingController@storeExternal');
 
 /*********************************************************************************/
 
@@ -57,7 +58,21 @@ Route::get('/travel', 'TravelController@show');
 Route::get('/travels-others', 'TravelController@others');
 
 
+// flight-visas-travels - page
+
+Route::get('/flight-visas-travels', 'TravelController@flightVisas');
+
+
 /*********************************************************************************/
+
+// marketing hotels
+
+Route::get('/marketing-hotels', 'MarketingHotelController@index');
+Route::get('/marketing-hotel', 'MarketingHotelController@show');
+Route::get('/marketing-hotels-others', 'MarketingHotelController@others');
+
+/*********************************************************************************/
+
 
 // hotels
 
@@ -70,6 +85,7 @@ Route::get('/hotels-others', 'HotelController@others');
 // images
 
 Route::get('/images-by-category', 'ImageController@imagesByCategory');
+Route::get('images/testimonials', 'ImageController@testimonials');
 
 /*********************************************************************************/
 
@@ -78,8 +94,16 @@ Route::get('/images-by-category', 'ImageController@imagesByCategory');
 Route::get('/blogs', 'BlogController@index');
 Route::get('/blog', 'BlogController@show');
 
+
+
 /*********************************************************************************/
 
 
+// contact informations branches
+
+Route::get('/branches', 'ContactInfoController@index');
 
 
+
+
+/*********************************************************************************/

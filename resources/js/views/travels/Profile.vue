@@ -31,11 +31,17 @@
 
                                 <h3 class="profile-username text-center">{{ travelProfile.name }}</h3>
 
-                                <p class="text-muted text-center">{{ travelProfile.address_from }}</p>
+                                <p class="text-muted text-center" v-if="travelProfile.type === 'external_fly' || travelProfile.type === 'external_visa'">{{ travelProfile.address_from }} - {{ travelProfile.address_to }}</p>
+
+
 
                                 <ul class="list-group mb-3">
-                                    <li class="list-group-item">
+                                    <li class="list-group-item" v-if="travelProfile.type !== 'external_fly' && travelProfile.type !== 'external_visa'">
                                         <b> {{ $t('travels_table.offers_count') }} </b> <a class="float-right">{{ travelProfile.offers_count == null ? 0 : travelProfile.offers_count }}</a>
+                                    </li>
+
+                                    <li class="list-group-item">
+                                        <b> {{ $t('travels_table.bookings_count') }} </b> <a class="float-right">{{ travelProfile.bookings_count == null ? 0 : travelProfile.bookings_count }}</a>
                                     </li>
                                     <li class="list-group-item">
                                         <b> {{ $t('travels_table.type') }} </b> <a class="float-right"> {{ travelTypes[travelProfile.type] }} </a>
@@ -136,7 +142,7 @@
 
 
                                      <!-- hotel -->
-                                    <li class="list-group-item">
+                                    <li class="list-group-item" v-if="travelProfile.type !== 'external_fly' && travelProfile.type !== 'external_visa'">
                                         <b>
                                             {{ $t('travels_table.hotel_id') }}
                                         </b>
@@ -156,7 +162,7 @@
 
 
                                      <!-- hotel 2 -->
-                                    <li class="list-group-item">
+                                    <li class="list-group-item" v-if="travelProfile.type !== 'external_fly' && travelProfile.type !== 'external_visa'">
                                         <b>
                                             {{ $t('travels_table.hotel_2_id') }}
                                         </b>
@@ -178,7 +184,7 @@
 
 
                                     <!-- travel_category -->
-                                    <li class="list-group-item">
+                                    <li class="list-group-item" v-if="travelProfile.type !== 'external_fly' && travelProfile.type !== 'external_visa'">
                                         <b>
                                             {{ $t('travels_table.travel_category_id') }}
                                         </b>
@@ -197,7 +203,7 @@
 
 
                                     <!-- favorite_company -->
-                                    <li class="list-group-item">
+                                    <li class="list-group-item" v-if="travelProfile.type !== 'external_fly' && travelProfile.type !== 'external_visa'">
                                         <b>
                                             {{ $t('travels_table.favorite_company') }}
                                         </b>
@@ -264,7 +270,10 @@
                         <div class="card">
                         <div class="card-header p-2">
                             <ul class="nav nav-pills" style="display: inline-flex;">
-                                <li class="nav-item">
+                                <li
+                                    class="nav-item"
+                                    v-if="travelProfile.type !== 'external_fly' && travelProfile.type !== 'external_visa'"
+                                >
                                     <a
                                         @click="currentChildTable = 'gallery'"
                                         class="nav-link"
@@ -273,7 +282,10 @@
                                         {{ $t('travels_table.gallery') }}
                                     </a>
                                 </li>
-                                <li class="nav-item">
+                                <li
+                                    class="nav-item"
+                                    v-if="travelProfile.type !== 'external_fly' && travelProfile.type !== 'external_visa'"
+                                >
                                     <a
                                         @click="currentChildTable = 'offers'"
                                         class="nav-link"
@@ -349,16 +361,6 @@
                                                         </li>
                                                         <!-- =========================================== -->
 
-                                                        <!-- go_and_back -->
-                                                        <li class="list-group-item">
-                                                            <b>
-                                                                {{ $t('travels_table.offers.go_and_back') }}
-                                                            </b>
-                                                            <a class="float-right">
-                                                                {{ offer.go_and_back == 1 ? $t('travels_table.offers.go_and_back') : $t('travels_table.offers.only_go') }}
-                                                            </a>
-                                                        </li>
-                                                        <!-- =========================================== -->
 
                                                         <!-- date_from -->
                                                         <li class="list-group-item">
@@ -541,7 +543,7 @@
                                     </div>
                                     <!-- /.tab-pane -->
                                     <div class="tab-pane" :class="{'active': currentChildTable == 'bookings'}" id="bookings">
-                                        <bookings v-if="(travelProfile.bookings_count != null && travelProfile.bookings_count != 0) && currentChildTable === 'bookings'"></bookings>
+                                        <bookings :class="{'in-profile': !maximizeTable}" v-if="(travelProfile.bookings_count != null && travelProfile.bookings_count != 0) && currentChildTable === 'bookings'"></bookings>
 
                                         <div v-else class="alert alert-info alert-dismissible">
                                             <h5><i class="icon fas fa-info"></i>  {{ $t('global.no_bookings') }} !</h5>
@@ -629,7 +631,8 @@ export default {
             },
             travelTypes: {
                 internal: 'سياحة داخلية',
-                external: 'عروض الطيران',
+                external_fly: 'عروض الطيران',
+                external_visa: 'عروض التأشيرات',
                 pilgrimage: 'حج',
                 umrah: 'عمرة',
             },
@@ -668,6 +671,9 @@ export default {
                     const travel = response.data.travel
                     if (travel != null) {
                         this.travelProfile = travel
+                        if (travel.type === 'external_fly' || travel.type === 'external_visa') {
+                            this.currentChildTable = 'bookings'
+                        }
                     } else {
                         this.$router.push({name: 'travels'})
                     }
@@ -721,6 +727,9 @@ export default {
             vm.$nextTick(() => {
                 if (to.params.travel) {
                     let travel = to.params.travel
+                    if (travel.type === 'external_fly' || travel.type === 'external_visa') {
+                        vm.currentChildTable = 'bookings'
+                    }
                     if (typeof travel.gallery == 'string') {
                         if (travel.gallery !== null && travel.gallery != '') {
                             let gallery = travel.gallery.split(',')

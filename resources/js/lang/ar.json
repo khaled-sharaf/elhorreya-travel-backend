@@ -7,6 +7,7 @@
         "the_hotel": "الفندق",
         "the_price": "السعر",
         "the_travel": "الرحلة",
+        "the_offers": "العروض",
         "room": "غرفة",
         "the_travel_program": "برنامج الرحلة",
         "the_travel_category": "قسم الرحلة",
@@ -100,15 +101,20 @@
 
 
 
-
     "sidebar": {
         "hotel_profile": "صفحة الفندق",
+        "marketing_hotel_profile": "صفحة فندق التسويق",
         "travel_profile": "صفحة الرحلة",
 
         "users": "المديرين",
         "all_users": "جميع المديرين",
         "new_user": "مدير جديد",
         "edit_user": "تعديل مدير",
+
+        "marketing_hotels": "فنادق التسويق",
+        "all_marketing_hotels": "جميع فنادق التسويق",
+        "new_marketing_hotel": "فندق تسويق جديد",
+        "edit_marketing_hotel": "تعديل تسويق فندق",
 
         "hotels": "الفنادق",
         "all_hotels": "جميع الفنادق",
@@ -158,6 +164,11 @@
         "contact_us": "اتصل بنا",
         "all_contact_us": "جميع الرسائل",
 
+        "contact_infos": "تواصل معنا",
+        "all_contact_infos": "جميع الفروع",
+        "new_contact_info": "فرع جديد",
+        "edit_contact_info": "تعديل فرع",
+
         "settings": "الإعدادات",
         "all_settings": "جميع الإعدادات",
         "new_setting": "إعداد جديد",
@@ -165,7 +176,6 @@
 
         "home_tabs": "عروض الصفحة الرئيسية"
     },
-
 
 
 
@@ -189,8 +199,6 @@
         "created_between": "تم إنشائه فى تاريخ",
         "search": "بحث"
     },
-
-
 
 
 
@@ -225,6 +233,93 @@
         "p_edit": {
             "success_msg": "تم تحديث المدير.",
             "failed_msg": "لم يتم تحديث هذا المدير."
+        }
+    },
+
+
+
+    "marketing_hotels_table": {
+        "id": "المعرف",
+        "name": "الإسم",
+        "address": "العنوان",
+        "address_suggested": "عنوان مقترح",
+        "rating": "التقيم",
+        "stars": "عدد النجوم",
+        "info": "الوصف",
+        "longitude": "خط الطول",
+        "latitude": "خط العرض",
+        "image": "الصورة",
+        "features": "المميزات",
+        "display": "الظهور",
+        "user_id": "أضيف بواسطة",
+        "updated_at": "أخر تعديل",
+        "created_at": "تاريخ الإنشاء",
+        "actions": "الإجراءات",
+
+        "gallery": "صور الفندق",
+        "feature_name": "اسم الميزة",
+        "plus": "للمزيد",
+
+        "rooms_count": "عدد الغرف",
+        "travels_count": "عدد الرحلات",
+        "hotel_info": "معلومات الفندق",
+        "location": "الموقع",
+        "location_map": "خريطة الموقع",
+        "msg_location_map": "ابحث عن مكان الفندق ثم انقل العلامة الحمراء إلى مكان الفندق بدقة.",
+        "error_location": "لم يتم العثور على المكان ، ابحث بكلمات أخرى.",
+        "remove_location": "إزالة الموقع",
+
+
+        "empty_offers_msg": "هذا الفندق ليس لديه عروض مضافة.",
+        "no_offers": "لا يوجد عروض",
+        "hotel_rooms_msg_form": "يجب إضافة عرض واحد على الأقل.",
+
+        "hotel_rooms": "غرف الفندق",
+
+        "delete_hotel": "حذف الفندق",
+        "edit_hotel": "تعديل الفندق",
+
+        "empty_rooms_msg": "هذا الفندق ليس لديه غرف مضافة.",
+        "empty_travels_msg": "هذا الفندق ليس لديه رحلات مضافة.",
+        "empty_features_msg": "هذا الفندق ليس لديه مميزات.",
+        "empty_gallery_msg": "هذا الفندق ليس لديه صور مرفوعة.",
+
+        "delete_msg": "هل أنت متأكد من حذف هذا الفندق ؟",
+        "delete_success_msg": "تم حذف الفندق.",
+        "delete_failed_msg": "لم يتم حذف الفندق.",
+
+        "force_delete_msg": "هل أنت متأكد من إزالة هذا الفندق بشكل نهائى ؟",
+        "force_delete_success_msg": "تم إزالة الفندق بشكل نهائى.",
+        "force_delete_failed_msg": "لم يتم إزالة الفندق.",
+
+        "restore_msg": "هل أنت متأكد من استرجاع هذا الفندق ؟",
+        "restore_success_msg": "تم استرجاع الفندق.",
+        "restore_failed_msg": "لم يتم استرجاع الفندق.",
+
+        "p_create": {
+            "success_msg": "تم إنشاء فندق جديد.",
+            "failed_msg": "لم يتم إنشاء الفندق الجديد."
+        },
+        "p_edit": {
+            "success_msg": "تم تحديث الفندق.",
+            "failed_msg": "لم يتم تحديث هذا الفندق."
+        },
+
+        "rooms": {
+            "date": "التاريخ",
+            "date_from": "من",
+            "date_to": "إلى",
+            "single_price_wd": "فردية",
+            "single_price_we": "فردية",
+            "dbl_price_wd": "زوجية",
+            "dbl_price_we": "زوجية",
+            "triple_price_wd": "ثلاثية",
+            "triple_price_we": "ثلاثية",
+            "quad_price_wd": "رباعية",
+            "quad_price_we": "رباعية",
+            "options": "الخيارات",
+            "description": "الوصف",
+            "marketing_hotel_id": "الفندق"
         }
     },
 
@@ -422,6 +517,7 @@
         "id": "المعرف",
         "name": "اسم الرحلة",
         "address_from": "عنوان الإقلاع",
+        "address_to": "عنوان المدينة المسافر إليها",
         "info": "تفاصيل الرحلة",
         "image": "الصورة",
         "type": "نوع الرحلة",
@@ -444,6 +540,7 @@
 
         "gallery": "صور الرحلة",
         "offers_count": "عدد العروض",
+        "bookings_count": "عدد الحجوزات",
         "travel_info": "معلومات الرحلة",
         "travel_offers" :"عروض الرحلة",
         "travel_offers_msg_form" :"يجب إضافة عرض واحد للرحلة على الأقل.",
@@ -535,6 +632,7 @@
     "mailing_list_table": {
         "id": "المعرف",
         "email": "البريد الإليكترونى",
+        "phone": "رقم الموبايل",
         "created_at": "تاريخ الإنشاء",
         "actions": "الإجراءات",
 
@@ -654,6 +752,48 @@
         "restore_msg": "",
         "restore_success_msg": "",
         "restore_failed_msg": ""
+    },
+
+
+    "contact_infos_table": {
+        "id": "المعرف",
+        "branch_name": "اسم الفرع",
+        "phone_1": "رقم الموبايل الأول",
+        "phone_2": "رقم الموبايل الثانى",
+        "phone_3": "رقم الموبايل الثالث",
+        "phone_4": "رقم الموبايل الرابع",
+        "address": "العنوان",
+        "email": "البريد الإلكترونى",
+        "location": "الخريطة",
+        "longitude": "خط الطول",
+        "latitude": "خط العرض",
+        "display": "الظهور",
+        "updated_at": "أخر تعديل",
+        "created_at": "تاريخ الإنشاء",
+        "actions": "الإجراءات",
+
+        "msg_location_map": "ابحث عن مكان الفرع ثم انقل العلامة الحمراء إلى مكان مبنى الفرع بدقة.",
+
+        "delete_msg": "هل أنت متأكد من حذف هذا الفرع ؟",
+        "delete_success_msg": "تم حذف الفرع.",
+        "delete_failed_msg": "لم يتم حذف الفرع.",
+
+        "force_delete_msg": "هل أنت متأكد من إزالة هذا الفرع بشكل نهائى ؟",
+        "force_delete_success_msg": "تم إزالة الفرع بشكل نهائى.",
+        "force_delete_failed_msg": "لم يتم إزالة الفرع.",
+
+        "restore_msg": "هل أنت متأكد من استرجاع هذا الفرع ؟",
+        "restore_success_msg": "تم استرجاع الفرع.",
+        "restore_failed_msg": "لم يتم استرجاع الفرع.",
+
+        "p_create": {
+            "success_msg": "تم إنشاء فرع جديد.",
+            "failed_msg": "لم يتم إنشاء الفرع الجديد."
+        },
+        "p_edit": {
+            "success_msg": "تم تحديث الفرع.",
+            "failed_msg": "لم يتم تحديث هذا الفرع."
+        }
     },
 
 

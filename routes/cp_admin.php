@@ -21,6 +21,17 @@ Route::group(['middleware' => ['api'], 'prefix' => env('CP_PREFIX_API')], functi
 
 
 
+    /**************** Marketing Hotels *****************/
+
+    Route::apiResource('marketing_hotels', 'MarketingHotelController')->parameters(['marketing_hotels' => 'id']);
+    Route::patch('marketing_hotels/restore/{id}', 'MarketingHotelController@restoreHotel');
+    Route::post('marketing_hotels/delete_restore_multi', 'MarketingHotelController@deleteRestoreMulti');
+    Route::get('marketing_hotels/select', 'MarketingHotelController@hotelsSelect');
+
+    /*********************************************************************************/
+
+
+
     /**************** Hotels *****************/
 
     Route::apiResource('hotels', 'HotelController')->parameters(['hotels' => 'id']);
@@ -123,6 +134,15 @@ Route::group(['middleware' => ['api'], 'prefix' => env('CP_PREFIX_API')], functi
 
 
 
+    /**************** Contact info *****************/
+
+    Route::apiResource('contact_infos', 'ContactInfoController')->parameters(['contact_info' => 'id']);
+    Route::post('contact_infos/delete_restore_multi', 'ContactInfoController@deleteRestoreMulti');
+
+    /*********************************************************************************/
+
+
+
     /**************** Settings *****************/
 
     Route::apiResource('settings', 'SettingController')->parameters(['settings' => 'id']);
@@ -134,7 +154,7 @@ Route::group(['middleware' => ['api'], 'prefix' => env('CP_PREFIX_API')], functi
 
 
 
-    /**************** Settings *****************/
+    /**************** Home Tabs *****************/
 
     Route::get('home_tabs', 'HomeTabController@index');
     Route::get('home_tabs/getTravelsByCategories', 'HomeTabController@getTravelsByCategories');

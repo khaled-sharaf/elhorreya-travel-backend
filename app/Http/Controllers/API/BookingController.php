@@ -44,4 +44,31 @@ class BookingController extends Controller
     }
 
 
+
+    public function storeExternal(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|between:2,50',
+            'email' => 'nullable|email|string|max:100',
+            'phone' => 'required|regex:' . $this->patternPhone,
+            'message' => 'nullable|string|max:1000',
+            'adults' => 'nullable|integer|max:999',
+            'children' => 'nullable|integer|max:999',
+            'travel_id' => 'required|exists:travels,id'
+        ]);
+        $booking = Booking::create($request->all());
+
+        // send form to mail
+        $email = Setting::getSettings()['email'];
+        Mail::to($email)->send(new BookingMail($booking->toArray()));
+
+        return response([
+            'status' => true,
+            'message' => 'تم إرسال طلبك بنجاح وسيتم التواصل معك  خلال 24 ساعة.'
+        ]);
+    }
+
+
+
+
 }

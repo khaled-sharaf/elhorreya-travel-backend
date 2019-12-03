@@ -439,18 +439,19 @@
                     </span>
                 </div>
                 <!-- ======================================= -->
-
-                <div class="item">
-                    <b class="item-label">
-                    الرقم المعرف للعرض
-                    </b>
-                    <span class="item-value">
-                        <span class="mark bg-info">
-                            {{ $data['travel_detail_id'] }}
+                @if (key_exists('travel_detail_id', $data))
+                    <div class="item">
+                        <b class="item-label">
+                        الرقم المعرف للعرض
+                        </b>
+                        <span class="item-value">
+                            <span class="mark bg-info">
+                                {{ $data['travel_detail_id'] }}
+                            </span>
                         </span>
-                    </span>
-                </div>
-                <!-- ======================================= -->
+                    </div>
+                    <!-- ======================================= -->
+                @endif
 
         </div><!-- ./list -->
         <!-- ============================================================================== -->

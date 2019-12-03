@@ -184,8 +184,9 @@ class TravelController extends Controller
         $umrah_date = $request->umrah_date;
         $sortBy = $request->sortBy;
 
-        $column = $category_id == 'external' ? 'type' : 'travel_category_id';
-        $query = Travel::display()->where($column, $category_id);
+        // $column = $category_id == 'external' ? 'type' : 'travel_category_id';
+        // $query = Travel::display()->where($column, $category_id);
+        $query = Travel::display()->where('travel_category_id', $category_id);
 
         if ($hotel_address != '') {
             $query->whereHas('hotel', function ($q) use ($hotel_address) {
@@ -282,6 +283,20 @@ class TravelController extends Controller
             })
             ->latest()->take(9)->getConvert();
 
+        return response(['travels' => $travels]);
+    }
+
+
+
+    public function flightVisas(Request $request) {
+        $name = $request->name;
+        $value = '';
+        if ($name === 'flight') {
+            $value = 'external_fly';
+        } else if ($name === 'visas') {
+            $value = 'external_visa';
+        }
+        $travels = Travel::display()->where('type', $value)->orderBy('id', 'desc')->paginateConvert(8);
         return response(['travels' => $travels]);
     }
 

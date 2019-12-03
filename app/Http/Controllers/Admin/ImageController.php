@@ -59,7 +59,7 @@ class ImageController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'travel_category_id' => 'required|exists:travel_categories,id',
+            'travel_category_id' => $request->travel_category_id === 999999999 ? '' : 'required|exists:travel_categories,id',
             'display' => 'required|in:0,1',
             'gallery' => 'required|array|max:10',
         ]);

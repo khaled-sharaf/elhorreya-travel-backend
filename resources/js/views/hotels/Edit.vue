@@ -76,7 +76,6 @@ export default {
             id: 0,
             name: "",
             address: "",
-            rating: 0,
             stars: 0,
             info: "",
             latitude: "",

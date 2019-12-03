@@ -68,18 +68,21 @@
                     <!-- btn edit row -->
                     <btn-edit :model="user" modelName="user"></btn-edit>
                     <!-- ./btn edit row -->
+                    <span v-if="user.id != 1">
 
-                    <!-- btn delete row -->
-                    <btn-delete :model="user" modelName="user" @destroyRow="destroyRow(user.id)"></btn-delete>
-                    <!-- ./btn delete row -->
+                        <!-- btn delete row -->
+                        <btn-delete :model="user" modelName="user" @destroyRow="destroyRow(user.id)"></btn-delete>
+                        <!-- ./btn delete row -->
 
-                    <!-- btn restore row -->
-                    <btn-restore :model="user" modelName="user" @restoreRow="restoreRow(user.id)"></btn-restore>
-                    <!-- ./btn restore row -->
+                        <!-- btn restore row -->
+                        <btn-restore :model="user" modelName="user" @restoreRow="restoreRow(user.id)"></btn-restore>
+                        <!-- ./btn restore row -->
 
-                    <!-- btn force delete row -->
-                    <btn-force-delete :model="user" modelName="user" @forceDeleteRow="forceDeleteRow(user.id)"></btn-force-delete>
-                    <!-- ./btn force delete row -->
+                        <!-- btn force delete row -->
+                        <btn-force-delete :model="user" modelName="user" @forceDeleteRow="forceDeleteRow(user.id)"></btn-force-delete>
+                        <!-- ./btn force delete row -->
+
+                    </span>
 
                 </td>
             </tr>

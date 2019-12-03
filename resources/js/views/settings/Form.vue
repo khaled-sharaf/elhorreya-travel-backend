@@ -12,6 +12,7 @@
                     v-model="form.slug"
                     type="text"
                     :placeholder="$t('settings_table.slug')"
+                    :disabled="typeForm === 'edit'"
                     class="form-control"
                     :class="{ 'is-invalid': form.errors.has('slug') }"
                     >
@@ -20,7 +21,7 @@
 
 
                 <!-- name -->
-                <div class="form-group">
+                <div class="form-group" v-show="typeForm !== 'edit'">
                     <label> {{ $t('settings_table.name') }} <span class="field-required"></span></label>
                     <input
                     v-model="form.name"
@@ -35,7 +36,7 @@
 
 
                 <!-- type -->
-                <div class="form-group">
+                <div class="form-group" v-show="typeForm !== 'edit'">
                     <label> {{ $t('settings_table.type') }} <span class="field-required"></span></label>
                     <select
                         v-model="form.type"

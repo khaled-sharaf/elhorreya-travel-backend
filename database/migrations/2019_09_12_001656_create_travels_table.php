@@ -17,6 +17,7 @@ class CreateTravelsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('address_from')->nullable();
+            $table->string('address_to')->nullable();
             $table->mediumText('info')->nullable();
             $table->string('image');
             $table->mediumText('gallery')->nullable();

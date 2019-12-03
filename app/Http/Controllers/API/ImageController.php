@@ -22,4 +22,10 @@ class ImageController extends Controller
         return response(['images' => $images]);
     }
 
+    public function testimonials() {
+        $images = Image::display()->where('travel_category_id', 999999999)->orderBy('id', 'desc')->get();
+
+        return response(['images' => $images]);
+    }
+
 }

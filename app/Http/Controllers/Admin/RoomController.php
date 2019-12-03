@@ -73,7 +73,7 @@ class RoomController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate(request(), [
+        $request->validate([
             'info' => 'required|string|between:3,180',
             'options' => 'required|string',
             // 'price_night' => 'required|numeric',
@@ -97,7 +97,7 @@ class RoomController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->validate(request(), [
+        $request->validate([
             'info' => 'required|string|between:3,180',
             'options' => 'required|string',
             // 'price_night' => 'required|numeric',

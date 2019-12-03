@@ -66,7 +66,6 @@ export default {
         form: new Form({
             name: "",
             address: "",
-            rating: 0,
             stars: 5,
             info: "",
             latitude: "",
@@ -86,6 +85,7 @@ export default {
         createHotel() {
             this.form.latitude = window.parseFloat($('#hotel_latitude').val())
             this.form.longitude = window.parseFloat($('#hotel_longitude').val())
+
             loadReq(this.$Progress);
             this.form.post(this.urlCreateHotel).then(response => {
                 if (response.status === 200) {

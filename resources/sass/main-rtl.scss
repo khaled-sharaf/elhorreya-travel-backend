@@ -49,14 +49,14 @@ body {
         text-align: right;
     }
     .card-header .dataTables_filters .box .filter .body {
-        .icon:first-child {
-            border-bottom-right-radius: 5px;
-            border-bottom-left-radius: 0;
-        }
-        .icon:last-child {
-            border-bottom-left-radius: 5px;
-            border-bottom-right-radius: 0;
-        }
+        // .icon:first-child {
+        //     border-bottom-right-radius: 5px;
+        //     border-bottom-left-radius: 0;
+        // }
+        // .icon:last-child {
+        //     border-bottom-left-radius: 5px;
+        //     border-bottom-right-radius: 0;
+        // }
     }
     .table .tr-table-data ul li .wrapper-price .show-price.old-price {
         margin-right: 0;

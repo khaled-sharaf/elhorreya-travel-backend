@@ -71,6 +71,32 @@
                     </li>
 
 
+                    <!-- =============================== marketing_hotels ================================== -->
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon far fa-building"></i>
+                            <p>
+                                {{ $t('sidebar.marketing_hotels') }}
+                                <i class="fas right" :class="$i18n.locale == 'ar' ? 'fa-angle-right' : 'fa-angle-left'"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <router-link :to="{name: 'marketing_hotels'}" class="nav-link">
+                                    <i class="far fa-eye nav-icon"></i>
+                                    <p> {{ $t('global.show') + ' ' + $t('sidebar.all_marketing_hotels') }} </p>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="{name: 'create-marketing_hotel'}" class="nav-link">
+                                    <i class="fas fa-plus nav-icon"></i>
+                                    <p> {{ $t('global.create') + ' ' + $t('sidebar.new_marketing_hotel') }} </p>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
+
+
                     <!-- =============================== hotels ================================== -->
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
@@ -93,20 +119,7 @@
                                     <p> {{ $t('global.create') + ' ' + $t('sidebar.new_hotel') }} </p>
                                 </router-link>
                             </li>
-                        </ul>
-                    </li>
 
-
-                    <!-- =============================== rooms ================================== -->
-                    <li class="nav-item has-treeview">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-cubes"></i>
-                            <p>
-                                {{ $t('sidebar.rooms') }}
-                                <i class="fas right" :class="$i18n.locale == 'ar' ? 'fa-angle-right' : 'fa-angle-left'"></i>
-                            </p>
-                        </a>
-                        <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <router-link :to="{name: 'rooms'}" class="nav-link">
                                     <i class="far fa-eye nav-icon"></i>
@@ -119,8 +132,25 @@
                                     <p> {{ $t('global.create') + ' ' + $t('sidebar.new_room') }} </p>
                                 </router-link>
                             </li>
+
+
                         </ul>
                     </li>
+
+
+                    <!-- =============================== rooms ================================== -->
+                    <!-- <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-cubes"></i>
+                            <p>
+                                {{ $t('sidebar.rooms') }}
+                                <i class="fas right" :class="$i18n.locale == 'ar' ? 'fa-angle-right' : 'fa-angle-left'"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+
+                        </ul>
+                    </li> -->
 
 
 
@@ -318,6 +348,32 @@
                     </li>
 
 
+                    <!-- =============================== contact_infos ================================== -->
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-phone"></i>
+                        <p>
+                            {{ $t('sidebar.contact_infos') }}
+                            <i class="fas right" :class="$i18n.locale == 'ar' ? 'fa-angle-right' : 'fa-angle-left'"></i>
+                        </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <router-link :to="{name: 'contact_infos'}" class="nav-link">
+                                    <i class="far fa-eye nav-icon"></i>
+                                    <p> {{ $t('global.show') + ' ' + $t('sidebar.all_contact_infos') }} </p>
+                                </router-link>
+                            </li>
+                            <li class="nav-item">
+                                <router-link :to="{name: 'create-contact_info'}" class="nav-link">
+                                    <i class="fas fa-plus nav-icon"></i>
+                                    <p> {{ $t('global.create') + ' ' + $t('sidebar.new_contact_info') }} </p>
+                                </router-link>
+                            </li>
+                        </ul>
+                    </li>
+
+
                     <!-- =============================== settings ================================== -->
                     <li class="nav-item has-treeview">
                         <a href="#" class="nav-link">
@@ -334,12 +390,12 @@
                                     <p> {{ $t('global.show') + ' ' + $t('sidebar.all_settings') }} </p>
                                 </router-link>
                             </li>
-                            <li class="nav-item">
+                            <!-- <li class="nav-item">
                                 <router-link :to="{name: 'create-setting'}" class="nav-link">
                                     <i class="fas fa-plus nav-icon"></i>
                                     <p> {{ $t('global.create') + ' ' + $t('sidebar.new_setting') }} </p>
                                 </router-link>
-                            </li>
+                            </li> -->
                             <li class="nav-item">
                                 <router-link :to="{name: 'home_tabs'}" class="nav-link">
                                     <i class="fas fa-image nav-icon"></i>

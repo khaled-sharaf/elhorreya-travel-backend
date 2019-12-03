@@ -417,11 +417,25 @@
                 نعلن لكم عن رحلة حج جديدة على موقعنا
             @elseif($travel->type === 'umrah')
                 عملائنا الكرام نعلن لكم عن رحلة عمرة جديدة على موقعنا
-            @else
+
+            @elseif($travel->type === 'internal')
                 عملائنا الكرام نعلن لكم عن رحلة جديدة إلى
                 (
                     {{ $travel->hotel->address }}
                 )
+                على موقعنا
+
+            @elseif($travel->type === 'external_fly')
+                عملائنا الكرام نعلن لكم عن رحلة سياحة خارجية جديدة من
+                {{ $travel->address_from }}
+                إلى
+                {{ $travel->address_to }}
+                على موقعنا
+            @elseif($travel->type === 'external_visa')
+                عملائنا الكرام نعلن لكم عن عرض تأشيرة جديد من
+                {{ $travel->address_from }}
+                إلى
+                {{ $travel->address_to }}
                 على موقعنا
             @endif
 
@@ -432,8 +446,17 @@
             </a>
             وهذه بعض التفاصيل الرحلة وللمزيد من التفاصيل يرجى زيارة موقعنا أو الإتصال على أرقامنا التالية:
 
-            <span class="mark info">011515151541</span> -
-            <span class="mark info">010084841540</span>.
+            <br><br>
+
+            @if ($settings['mobile_1'] != null)
+                <span class="mark info">{{ $settings['mobile_1'] }}</span><br>
+            @endif
+            @if ($settings['mobile_2'] != null)
+                <span class="mark info">{{ $settings['mobile_2'] }}</span><br>
+            @endif
+            @if ($settings['mobile_3'] != null)
+                <span class="mark info">{{ $settings['mobile_3'] }}</span>
+            @endif
         </p>
 
         <div class="separator"></div>
@@ -445,7 +468,7 @@
             <div class="box-image">
                 <div class="text">
                     <p class="desc">
-                        {!! str_limit($travel->info, 600,
+                        {!! str_limit($travel->info, 300,
                             '<a href="' . url('travel/' . $travel->id) . '"> اقرأ المزيد </a> ... ') !!}
                     </p>
                 </div>
@@ -456,10 +479,16 @@
                 </div>
             </div><!-- ./box-image -->
 
+            @if ($travel->type !== 'external_fly' && $travel->type !== 'external_visa')
+
             <div class="list">
                 <div class="item">
                     <b class="item-label">
-                    اسم الفندق
+                    @if($travel->type === 'pilgrimage' || $travel->type === 'umrah')
+                        اسم فندق مكة
+                    @else
+                        اسم الفندق
+                    @endif
                     </b>
                     <span class="item-value">
                         {{ $travel->hotel->name }}
@@ -476,6 +505,35 @@
                     </span>
                 </div>
                 <!-- ======================================= -->
+
+
+                @if($travel->hotel_2 != null)
+                    <br>
+                    <div class="item">
+                        <b class="item-label">
+                        @if($travel->type === 'pilgrimage' || $travel->type === 'umrah')
+                            اسم فندق المدينة
+                        @else
+                            اسم الفندق الثانى
+                        @endif
+                        </b>
+                        <span class="item-value">
+                            {{ $travel->hotel_2->name }}
+                        </span>
+                    </div>
+                    <!-- ======================================= -->
+
+                    <div class="item">
+                        <b class="item-label">
+                        مكان الفندق
+                        </b>
+                        <span class="item-value">
+                            {{ $travel->hotel_2->address }}
+                        </span>
+                    </div>
+                    <!-- ======================================= -->
+
+                @endif
 
                 <div class="item">
                     <b class="item-label">
@@ -510,6 +568,9 @@
                 <!-- ======================================= -->
 
             </div> <!-- ./list -->
+
+            @endif
+
         </div>
 
         <div class="show-more-details">
@@ -518,13 +579,17 @@
             </a>
         </div>
 
-        <br>
-        <div class="separator"></div>
-        <div class="text-center show-all">
-            <a class="btn btn-primary btn-lg" href="{{ url('travels') }}">
-                مشاهدة رحلات وعروض أخرى
-            </a>
-        </div>
+        @if ($travel->type !== 'external_fly' && $travel->type !== 'external_visa')
+            <br>
+            <div class="separator"></div>
+            <div class="text-center show-all">
+                <a class="btn btn-primary btn-lg" href="{{ url('travels/' . $travel->travel_category_id) }}">
+                    مشاهدة رحلات وعروض أخرى
+                </a>
+            </div>
+
+        @endif
+
     </main>
     <!-- ./content -->
 
@@ -536,10 +601,11 @@
             تشكرك على متابعتك لها.
         </div>
 
-        {{-- <a class="btn btn-secondary btn-sm float-left" href="{{ url('mailing_list/unsubscribe') }}"> --}}
-        <a class="btn btn-secondary btn-sm float-left" href="http://localhost:8080/mailing_list/unsubscribe">
+        <a class="btn btn-secondary btn-sm float-left" href="{{ url('mailing_list/unsubscribe') }}">
+        {{-- <a class="btn btn-secondary btn-sm float-left" href="http://localhost:8080/mailing_list/unsubscribe"> --}}
             إلغاء الإشتراك فى خدمة القائمة البريدية
         </a>
+
     </footer>
 </body>
 </html>

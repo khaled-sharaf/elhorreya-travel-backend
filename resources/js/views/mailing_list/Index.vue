@@ -42,6 +42,11 @@
                     <a :href="'mailto:' + mail.email">{{mail.email}}</a>
                 </td>
 
+
+                <td v-show="tableData.columns.indexOf('phone') != -1" class="phone">
+                    {{mail.phone}}
+                </td>
+
                 <td v-show="tableData.columns.indexOf('created_at') != -1" class="created_at">
                     <relative-date :date="mail.created_at"></relative-date>
                 </td>
@@ -79,6 +84,7 @@ export default {
             columns: [
                 { label: "ID", name: "id" },
                 { label: "email", name: "email" },
+                { label: "phone", name: "phone" },
                 { label: "Created at", name: "created_at" }
             ],
             columnsExceptedSorting: []

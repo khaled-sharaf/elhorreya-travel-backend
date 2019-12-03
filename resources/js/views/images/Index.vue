@@ -66,7 +66,14 @@
                     >
                         {{ image.category.name }}
                     </router-link>
-                    <span class="badge badge-danger" v-else> {{ $t('global.travel_category_is_deleted') }} - id:{{image.travel_category_id}}</span>
+                    <span v-else>
+                        <span class="badge badge-info" v-if="image.travel_category_id === 999999999">
+                            أراء العملاء
+                        </span>
+                        <span class="badge badge-danger" v-else>
+                            {{ $t('global.travel_category_is_deleted') }} - id:{{image.travel_category_id}}
+                        </span>
+                    </span>
                 </td>
 
 
