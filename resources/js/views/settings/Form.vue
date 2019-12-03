@@ -12,10 +12,10 @@
                     v-model="form.slug"
                     type="text"
                     :placeholder="$t('settings_table.slug')"
-                    :disabled="typeForm === 'edit'"
                     class="form-control"
                     :class="{ 'is-invalid': form.errors.has('slug') }"
                     >
+                    <!-- :disabled="typeForm === 'edit'" -->
                     <has-error :form="form" field="slug"></has-error>
                 </div>
 

@@ -184,19 +184,6 @@
                 border-color: red;
             }
             .form-group {
-                &.required {
-                    position: relative;
-                    &:after {
-                        content: '*';
-                        display: block;
-                        font-size: 18px;
-                        font-weight: bold;
-                        color: red;
-                        position: absolute;
-                        top: -1px;
-                        left: 10px;
-                    }
-                }
             }
             .offer-title {
                 display: block;
@@ -352,12 +339,29 @@
 
 .form-group.itinerary {
     .row {
-        .form-group {
+        > div {
             @media (min-width: 1200px) {
                 flex: 0 !important;
                 flex-grow: 1 !important;
                 max-width: 100%;
             }
+        }
+    }
+}
+
+
+.form-group {
+    &.required {
+        position: relative;
+        &:after {
+            content: '*';
+            display: block;
+            font-size: 18px;
+            font-weight: bold;
+            color: red;
+            position: absolute;
+            top: -1px;
+            left: 10px;
         }
     }
 }

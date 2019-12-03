@@ -29,7 +29,7 @@ class CreateTravelsTable extends Migration
             $table->string('itinerary_3')->nullable();
             $table->string('itinerary_4')->nullable();
             $table->string('itinerary_5')->nullable();
-            $table->string('discount', 3)->nullable();
+            $table->string('discount')->nullable();
             $table->boolean('favorite_company')->default(0);
             $table->boolean('display')->default(1);
             $table->unsignedInteger('hotel_id');

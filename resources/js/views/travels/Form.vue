@@ -93,59 +93,69 @@
                     <label> {{ $t('travels_table.itinerary') }}</label>
                     <div class="row">
 
-                        <div class="form-group col-12 col-sm-4">
-                            <input
-                                v-model="form.itinerary_1"
-                                type="text"
-                                :placeholder="$t('travels_table.city')"
-                                class="form-control"
-                                :class="{ 'is-invalid': form.errors.has('itinerary_1') }"
-                            >
-                            <has-error :form="form" field="itinerary_1"></has-error>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group required">
+                                <input
+                                    v-model="form.itinerary_1"
+                                    type="text"
+                                    :placeholder="$t('travels_table.city')"
+                                    class="form-control"
+                                    :class="{ 'is-invalid': form.errors.has('itinerary_1') }"
+                                >
+                                <has-error :form="form" field="itinerary_1"></has-error>
+                            </div>
                         </div>
 
-                        <div class="form-group col-12 col-sm-4">
-                            <input
-                                v-model="form.itinerary_2"
-                                type="text"
-                                :placeholder="$t('travels_table.city')"
-                                class="form-control"
-                                :class="{ 'is-invalid': form.errors.has('itinerary_2') }"
-                            >
-                            <has-error :form="form" field="itinerary_2"></has-error>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group required">
+                                <input
+                                    v-model="form.itinerary_2"
+                                    type="text"
+                                    :placeholder="$t('travels_table.city')"
+                                    class="form-control"
+                                    :class="{ 'is-invalid': form.errors.has('itinerary_2') }"
+                                >
+                                <has-error :form="form" field="itinerary_2"></has-error>
+                            </div>
                         </div>
 
-                        <div class="form-group col-12 col-sm-4">
-                            <input
-                                v-model="form.itinerary_3"
-                                type="text"
-                                :placeholder="$t('travels_table.city')"
-                                class="form-control"
-                                :class="{ 'is-invalid': form.errors.has('itinerary_3') }"
-                            >
-                            <has-error :form="form" field="itinerary_3"></has-error>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group required">
+                                <input
+                                    v-model="form.itinerary_3"
+                                    type="text"
+                                    :placeholder="$t('travels_table.city')"
+                                    class="form-control"
+                                    :class="{ 'is-invalid': form.errors.has('itinerary_3') }"
+                                >
+                                <has-error :form="form" field="itinerary_3"></has-error>
+                            </div>
                         </div>
 
-                        <div class="form-group col-12 col-sm-4">
-                            <input
-                                v-model="form.itinerary_4"
-                                type="text"
-                                :placeholder="$t('travels_table.city')"
-                                class="form-control"
-                                :class="{ 'is-invalid': form.errors.has('itinerary_4') }"
-                            >
-                            <has-error :form="form" field="itinerary_4"></has-error>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <input
+                                    v-model="form.itinerary_4"
+                                    type="text"
+                                    :placeholder="$t('travels_table.city')"
+                                    class="form-control"
+                                    :class="{ 'is-invalid': form.errors.has('itinerary_4') }"
+                                >
+                                <has-error :form="form" field="itinerary_4"></has-error>
+                            </div>
                         </div>
 
-                        <div class="form-group col-12 col-sm-4">
-                            <input
-                                v-model="form.itinerary_5"
-                                type="text"
-                                :placeholder="$t('travels_table.city')"
-                                class="form-control"
-                                :class="{ 'is-invalid': form.errors.has('itinerary_5') }"
-                            >
-                            <has-error :form="form" field="itinerary_5"></has-error>
+                        <div class="col-12 col-sm-4">
+                            <div class="form-group">
+                                <input
+                                    v-model="form.itinerary_5"
+                                    type="text"
+                                    :placeholder="$t('travels_table.city')"
+                                    class="form-control"
+                                    :class="{ 'is-invalid': form.errors.has('itinerary_5') }"
+                                >
+                                <has-error :form="form" field="itinerary_5"></has-error>
+                            </div>
                         </div>
 
                     </div>
@@ -169,8 +179,7 @@
                     <input
                         v-model="form.discount"
                         type="number"
-                        max="100"
-                        min="0"
+                        min="1"
                         :placeholder="$t('travels_table.discount')"
                         class="form-control"
                         :class="{ 'is-invalid': form.errors.has('discount') }"
@@ -441,7 +450,7 @@
 
 
                             <!-- child_price -->
-                            <div class="form-group col-lg-6 required" v-if="form.type === 'umrah' || form.type === 'pilgrimage'">
+                            <div class="form-group col-lg-6" v-if="form.type === 'umrah' || form.type === 'pilgrimage'">
                                 <input
                                     v-model="form.offers[index].child_price"
                                     type="number"
@@ -455,7 +464,7 @@
 
 
                             <!-- baby_price -->
-                            <div class="form-group col-lg-6 required" v-if="form.type === 'umrah' || form.type === 'pilgrimage'">
+                            <div class="form-group col-lg-6" v-if="form.type === 'umrah' || form.type === 'pilgrimage'">
                                 <input
                                     v-model="form.offers[index].baby_price"
                                     type="number"
