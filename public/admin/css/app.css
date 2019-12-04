@@ -12458,6 +12458,11 @@ a.text-dark:focus {
   border-color: red;
 }
 
+.wrapper-internal-form.form-offers .form-row .stay-type-help {
+  font-size: 13px;
+  color: #0b83d3;
+}
+
 .wrapper-internal-form.form-offers .form-row .offer-title {
   display: block;
   margin-bottom: 10px;

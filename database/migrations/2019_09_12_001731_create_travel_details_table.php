@@ -15,6 +15,7 @@ class CreateTravelDetailsTable extends Migration
     {
         Schema::create('travel_details', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name_offer');
             $table->string('info_offer')->nullable();
             $table->boolean('go_and_back')->default(0); // 0 = go, 1 = go and back
             $table->date('date_from')->nullable();
@@ -22,7 +23,8 @@ class CreateTravelDetailsTable extends Migration
             $table->smallInteger('time_period')->nullable(); // count days = ( date from - date to )
             $table->tinyInteger('hotel_days')->nullable();
             $table->tinyInteger('hotel_2_days')->nullable();
-            $table->string('stay_type')->nullable(); // إقامة فقط، شامل الإفضطار، نصف إقامة، شامل كليا
+            $table->string('stay_type')->nullable(); // إقامة فقط، شامل الإفضطار، نصف إقامة، شامل كليا hotel 1
+            $table->string('stay_type_2')->nullable(); // إقامة فقط، شامل الإفضطار، نصف إقامة، شامل كليا  hotel 2
             $table->boolean('transport')->default(0); // 0 = بدون انتقالات،  1  = انتقالات
             $table->integer('adults')->nullable()->default(0);
             $table->integer('children')->nullable()->default(0);

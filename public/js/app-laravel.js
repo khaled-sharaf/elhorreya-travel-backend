@@ -13448,12 +13448,14 @@ __webpack_require__.r(__webpack_exports__);
         travel_category_id: "",
         display: 1,
         offers: [{
+          name_offer: "",
           info_offer: "",
           date_from: "",
           date_to: "",
           hotel_days: "",
           hotel_2_days: "",
           stay_type: "بدون إفطار",
+          stay_type_2: "",
           transport: 0,
           adults: "",
           children: "",
@@ -13635,12 +13637,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         display: 1,
         deletedOffers: [],
         offers: [{
+          name_offer: "",
           info_offer: "",
           date_from: "",
           date_to: "",
           hotel_days: "",
           hotel_2_days: "",
           stay_type: "بدون إفطار",
+          stay_type_2: "",
           transport: 0,
           adults: "",
           children: "",
@@ -13656,13 +13660,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       idPage: 'travels',
       typePage: 'edit',
       offersForm: {
+        name_offer: "",
         info_offer: "",
-        go_and_back: 0,
         date_from: "",
         date_to: "",
         hotel_days: "",
         hotel_2_days: "",
         stay_type: "بدون إفطار",
+        stay_type_2: "",
         transport: 0,
         adults: "",
         children: "",
@@ -13772,6 +13777,44 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -14464,13 +14507,14 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     },
     addOffer: function addOffer() {
       this.form.offers.push({
+        name_offer: "",
         info_offer: "",
-        go_and_back: 0,
         date_from: "",
         date_to: "",
         hotel_days: "",
         hotel_2_days: "",
         stay_type: "بدون إفطار",
+        stay_type_2: "بدون إفطار",
         transport: 0,
         adults: "",
         children: "",
@@ -14932,6 +14976,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_HeaderPage__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./../../components/HeaderPage */ "./resources/js/components/HeaderPage.vue");
 /* harmony import */ var _mixins_MixinChangeLocaleMessagesProfiles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./../../mixins/MixinChangeLocaleMessagesProfiles */ "./resources/js/mixins/MixinChangeLocaleMessagesProfiles.js");
 /* harmony import */ var _mixins_mixinDeleteRow__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./../../mixins/mixinDeleteRow */ "./resources/js/mixins/mixinDeleteRow.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -53411,18 +53465,22 @@ var render = function() {
                       }
                     }
                   },
-                  _vm._l(_vm.hotelsSelect, function(hotel) {
-                    return _c("option", {
-                      key: hotel.id,
-                      domProps: {
-                        value: hotel.id,
-                        textContent: _vm._s(
-                          hotel.name + " --- " + hotel.address
-                        )
-                      }
+                  [
+                    _c("option", { attrs: { value: "" } }),
+                    _vm._v(" "),
+                    _vm._l(_vm.hotelsSelect, function(hotel) {
+                      return _c("option", {
+                        key: hotel.id,
+                        domProps: {
+                          value: hotel.id,
+                          textContent: _vm._s(
+                            hotel.name + " --- " + hotel.address
+                          )
+                        }
+                      })
                     })
-                  }),
-                  0
+                  ],
+                  2
                 ),
                 _vm._v(" "),
                 _c("has-error", {
@@ -53645,7 +53703,59 @@ var render = function() {
                         _vm._v(" "),
                         _c(
                           "div",
-                          { staticClass: "form-group col-lg-12" },
+                          { staticClass: "form-group col-lg-6" },
+                          [
+                            _c("input", {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.form.offers[index].name_offer,
+                                  expression: "form.offers[index].name_offer"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              class: {
+                                "is-invalid": _vm.form.errors.has(
+                                  "offers." + index + ".name_offer"
+                                )
+                              },
+                              attrs: {
+                                type: "text",
+                                placeholder: _vm.$t(
+                                  "travels_table.offers.name_offer"
+                                )
+                              },
+                              domProps: {
+                                value: _vm.form.offers[index].name_offer
+                              },
+                              on: {
+                                input: function($event) {
+                                  if ($event.target.composing) {
+                                    return
+                                  }
+                                  _vm.$set(
+                                    _vm.form.offers[index],
+                                    "name_offer",
+                                    $event.target.value
+                                  )
+                                }
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("has-error", {
+                              attrs: {
+                                form: _vm.form,
+                                field: "offers." + index + ".name_offer"
+                              }
+                            })
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "form-group col-lg-6" },
                           [
                             _c("input", {
                               directives: [
@@ -53906,6 +54016,18 @@ var render = function() {
                             )
                           : _vm._e(),
                         _vm._v(" "),
+                        _c("div", { staticClass: "form-group col-12" }, [
+                          _c("label", { staticClass: "internal-label" }, [
+                            _vm._v(
+                              " " +
+                                _vm._s(
+                                  _vm.$t("travels_table.offers.stay_type_title")
+                                ) +
+                                " "
+                            )
+                          ])
+                        ]),
+                        _vm._v(" "),
                         _c(
                           "div",
                           { staticClass: "form-group col-lg-6 required" },
@@ -53965,10 +54087,99 @@ var render = function() {
                                 form: _vm.form,
                                 field: "offers." + index + ".stay_type"
                               }
-                            })
+                            }),
+                            _vm._v(" "),
+                            _vm.form.hotel_2_id != "" &&
+                            _vm.form.hotel_2_id != null
+                              ? _c("span", { staticClass: "stay-type-help" }, [
+                                  _vm._v(
+                                    "\n                                إقامة الفندق الأول\n                            "
+                                  )
+                                ])
+                              : _vm._e()
                           ],
                           1
                         ),
+                        _vm._v(" "),
+                        _vm.form.hotel_2_id != "" && _vm.form.hotel_2_id != null
+                          ? _c(
+                              "div",
+                              { staticClass: "form-group col-lg-6 required" },
+                              [
+                                _c(
+                                  "select",
+                                  {
+                                    directives: [
+                                      {
+                                        name: "model",
+                                        rawName: "v-model",
+                                        value:
+                                          _vm.form.offers[index].stay_type_2,
+                                        expression:
+                                          "form.offers[index].stay_type_2"
+                                      }
+                                    ],
+                                    staticClass: "custom-select",
+                                    class: {
+                                      "is-invalid": _vm.form.errors.has(
+                                        "offers." + index + ".stay_type_2"
+                                      )
+                                    },
+                                    on: {
+                                      change: function($event) {
+                                        var $$selectedVal = Array.prototype.filter
+                                          .call($event.target.options, function(
+                                            o
+                                          ) {
+                                            return o.selected
+                                          })
+                                          .map(function(o) {
+                                            var val =
+                                              "_value" in o ? o._value : o.value
+                                            return val
+                                          })
+                                        _vm.$set(
+                                          _vm.form.offers[index],
+                                          "stay_type_2",
+                                          $event.target.multiple
+                                            ? $$selectedVal
+                                            : $$selectedVal[0]
+                                        )
+                                      }
+                                    }
+                                  },
+                                  [
+                                    _c("option", { attrs: { value: "" } }),
+                                    _vm._v(" "),
+                                    _vm._l(_vm.stayTypes, function(type) {
+                                      return _c("option", {
+                                        key: type.value,
+                                        domProps: {
+                                          value: type.value,
+                                          textContent: _vm._s(type.value)
+                                        }
+                                      })
+                                    })
+                                  ],
+                                  2
+                                ),
+                                _vm._v(" "),
+                                _c("has-error", {
+                                  attrs: {
+                                    form: _vm.form,
+                                    field: "offers." + index + ".stay_type_2"
+                                  }
+                                }),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "stay-type-help" }, [
+                                  _vm._v(
+                                    "\n                                إقامة الفندق الثانى\n                            "
+                                  )
+                                ])
+                              ],
+                              1
+                            )
+                          : _vm._e(),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -56112,8 +56323,8 @@ var render = function() {
                                         [
                                           _c("h3", { staticClass: "title" }, [
                                             _vm._v(
-                                              "\n                                                    العرض\n                                                    " +
-                                                _vm._s(_vm.counterText[index]) +
+                                              "\n                                                    " +
+                                                _vm._s(offer.name_offer) +
                                                 "\n                                                "
                                             )
                                           ])
@@ -56455,9 +56666,14 @@ var render = function() {
                                                   _vm._v(
                                                     "\n                                                            " +
                                                       _vm._s(
-                                                        _vm.$t(
-                                                          "travels_table.offers.stay_type"
-                                                        )
+                                                        _vm.travelProfile
+                                                          .hotel_2_id != null
+                                                          ? _vm.$t(
+                                                              "travels_table.offers.stay_type_if_2"
+                                                            )
+                                                          : _vm.$t(
+                                                              "travels_table.offers.stay_type"
+                                                            )
                                                       ) +
                                                       "\n                                                        "
                                                   )
@@ -56480,6 +56696,46 @@ var render = function() {
                                                 )
                                               ]
                                             ),
+                                            _vm._v(" "),
+                                            _vm.travelProfile.hotel_2_id != null
+                                              ? _c(
+                                                  "li",
+                                                  {
+                                                    staticClass:
+                                                      "list-group-item"
+                                                  },
+                                                  [
+                                                    _c("b", [
+                                                      _vm._v(
+                                                        "\n                                                            " +
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "travels_table.offers.stay_type_2"
+                                                            )
+                                                          ) +
+                                                          "\n                                                        "
+                                                      )
+                                                    ]),
+                                                    _vm._v(" "),
+                                                    _c(
+                                                      "a",
+                                                      {
+                                                        staticClass:
+                                                          "float-right"
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          "\n                                                            " +
+                                                            _vm._s(
+                                                              offer.stay_type_2
+                                                            ) +
+                                                            "\n                                                        "
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              : _vm._e(),
                                             _vm._v(" "),
                                             _c(
                                               "li",
@@ -74546,7 +74802,7 @@ webpackContext.id = "./resources/js/lang sync recursive ^\\.\\/.*\\.json$";
 /*! exports provided: global, sidebar, datatable, users_table, marketing_hotels_table, hotels_table, rooms_table, travel_programs_table, travel_categories_table, travels_table, bookings_table, mailing_list_table, blogs_table, images_table, contact_us_table, contact_infos_table, settings_table, home_tabs_table, default */
 /***/ (function(module) {
 
-module.exports = {"global":{"home":"الرئيسية","dashboard":"الرئيسية","user":"مدير","hotel":"فندق","the_hotel":"الفندق","the_price":"السعر","the_travel":"الرحلة","the_offers":"العروض","room":"غرفة","the_travel_program":"برنامج الرحلة","the_travel_category":"قسم الرحلة","the_images":"الصور","type":"نوع","comment":"تعليق","winner":"فائز","setting":"إعداد","no_rooms":"لا يوجد غرف","no_travels":"لا يوجد رحلات","no_hotel_features":"لا توجد مميزات للفندق","no_offers":"لا توجد عروض لهذه الرحلة","no_bookings":"لا توجد حجوزات لهذه الرحلة","no_gallery":"لا توجد صور","no_location":"لا توجد خريطة","show_map":"اعرض الخريطة","days":"أيام","day":"يوم","profile":"بروفايل","the_profile":"البروفايل","goto_travel_profile":"صفحة الرحلة","goto_hotel_profile":"صفحة الفندق","hotel_is_deleted":"الفندق محذوف","user_is_deleted":"المدير محذوف","travel_program_is_deleted":"برنامج الرحلة محذوف","travel_category_is_deleted":"قسم الرحلة محذوف","travel_is_deleted":"الرحلة محذوفة","offer_is_deleted":"العرض محذوف","logout":"تسجيل الخروج","create":"إنشاء","edit":"تعديل","update":"تحديث","save":"حفظ","read":"اقرأ","all":"الكل","read_more":"اقرأ المزيد","more_info":"معرفة المزيد","choose_image":"اختر صورة","drag_msg":"اسحب الصورة ثم ضعها هنا","active":"مفعل","disactive":"غير مفعل","available":"متاح","unavailable":"غير متاح","hidden":"مخفى","visible":"ظاهر","show":"عرض","view":"عرض","close":"إغلاق","display":"إظهار","from":"من","to":"إلى","in":"فى","on":"على","delete":"حذف","deleted":"تم الحذف","force_delete":"إزالة نهائيا","remove":"إزالة","removed":"تمت الإزالة","restore":"استرجاع","restored":"تم الإسترجاع","failed":"فشل","cancel":"إلغاء","yes_delete_it":"تأكيد الحذف","yes_remove_it":"تأكيد الإزالة","yes_restore_it":"تأكيد الإسترجاع","multi_delete_msg":"هل أنت متأكد من حذف جميع {model} المعلم عليها؟","multi_delete_success_msg":"تم حذف جميع {model} المعلم عليها.","multi_delete_failed_msg":"لم يتم حذف جميع {model} المعلم عليها.","multi_force_delete_msg":"هل أنت متأكد من إزالة جميع {model} المعلم عليها بشكل نهائى ؟","multi_force_delete_success_msg":"تم إزالة جميع {model} المعلم عليها بشكل نهائى.","multi_force_delete_failed_msg":"لم يتم إزالة جميع {model} المعلم عليها.","multi_restore_msg":"هل أنت متأكد من استرجاع جميع {model} المعلم عليها؟","multi_restore_success_msg":"تم استرجاع جميع {model} المعلم عليها.","multi_restore_failed_msg":"لم يتم استرجاع جميع {model} المعلم عليها.","settings_table":"إعدادات عرض جدول {model} فى كل الشاشات"},"sidebar":{"hotel_profile":"صفحة الفندق","marketing_hotel_profile":"صفحة فندق التسويق","travel_profile":"صفحة الرحلة","users":"المديرين","all_users":"جميع المديرين","new_user":"مدير جديد","edit_user":"تعديل مدير","marketing_hotels":"فنادق التسويق","all_marketing_hotels":"جميع فنادق التسويق","new_marketing_hotel":"فندق تسويق جديد","edit_marketing_hotel":"تعديل تسويق فندق","hotels":"الفنادق","all_hotels":"جميع الفنادق","new_hotel":"فندق جديد","edit_hotel":"تعديل فندق","rooms":"الغرف","all_rooms":"جميع الغرف","new_room":"غرفة جديد","edit_room":"تعديل غرفة","travel_programs":"برامج الرحلات","all_travel_programs":"جميع برامج الرحلات","new_travel_program":"برنامج رحلة جديد","edit_travel_program":"تعديل برنامج رحلة","travel_categories":"أقسام الرحلات","all_travel_categories":"جميع أقسام الرحلات","new_travel_category":"قسم رحلات جديد","edit_travel_category":"تعديل قسم رحلات","travels":"الرحلات","all_travels":"جميع الرحلات","new_travel":"رحلة جديدة","edit_travel":"تعديل رحلة","bookings":"الحجوزات","all_bookings":"جميع الحجوزات","new_booking":"حجز جديد","edit_booking":"تعديل حجز","mailing_list":"القائمة البريدية","all_mailing_list":"جميع البريدات الإليكترونية","new_mailing_list":"بريد جديد","edit_mailing_list":"تعديل بريد","blogs":"المدونات","all_blogs":"جميع المدونات","new_blog":"مدونة جديدة","edit_blog":"تعديل مدونة","images":"الصور","all_images":"جميع الصور","new_image":"صورة جديدة","edit_image":"تعديل صورة","contact_us":"اتصل بنا","all_contact_us":"جميع الرسائل","contact_infos":"تواصل معنا","all_contact_infos":"جميع الفروع","new_contact_info":"فرع جديد","edit_contact_info":"تعديل فرع","settings":"الإعدادات","all_settings":"جميع الإعدادات","new_setting":"إعداد جديد","edit_setting":"تعديل إعداد","home_tabs":"عروض الصفحة الرئيسية"},"datatable":{"showing":"إظهار","entries":"سجلات","from":"من","to":"إلى","of":"من","next":"التالى","prev":"السابق","empty_table":"جدول فارغ","no_data_msg":"لا يوجد بيانات فى  هذا الجدول.","trashed":"المهمل","activation":"التفعيل","display":"الظهور","rules":"الصلاحيات","sold_out":"نفاذ الكمية","discount":"الخصم","created_between":"تم إنشائه فى تاريخ","search":"بحث"},"users_table":{"id":"المعرف","name":"الإسم","email":"البريد الإلكترونى","password":"كلمة السر","repeat_password":"أعد كلمة السر","image":"الصورة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا المدير ؟","delete_success_msg":"تم حذف المدير.","delete_failed_msg":"لم يتم حذف المدير.","force_delete_msg":"هل أنت متأكد من إزالة هذا المدير بشكل نهائى ؟","force_delete_success_msg":"تم إزالة المدير بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة المدير.","restore_msg":"هل أنت متأكد من استرجاع هذا المدير ؟","restore_success_msg":"تم استرجاع المدير.","restore_failed_msg":"لم يتم استرجاع المدير.","p_create":{"success_msg":"تم إنشاء مدير جديد.","failed_msg":"لم يتم إنشاء المدير الجديد."},"p_edit":{"success_msg":"تم تحديث المدير.","failed_msg":"لم يتم تحديث هذا المدير."}},"marketing_hotels_table":{"id":"المعرف","name":"الإسم","address":"العنوان","address_suggested":"عنوان مقترح","rating":"التقيم","stars":"عدد النجوم","info":"الوصف","longitude":"خط الطول","latitude":"خط العرض","image":"الصورة","features":"المميزات","display":"الظهور","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"صور الفندق","feature_name":"اسم الميزة","plus":"للمزيد","rooms_count":"عدد الغرف","travels_count":"عدد الرحلات","hotel_info":"معلومات الفندق","location":"الموقع","location_map":"خريطة الموقع","msg_location_map":"ابحث عن مكان الفندق ثم انقل العلامة الحمراء إلى مكان الفندق بدقة.","error_location":"لم يتم العثور على المكان ، ابحث بكلمات أخرى.","remove_location":"إزالة الموقع","empty_offers_msg":"هذا الفندق ليس لديه عروض مضافة.","no_offers":"لا يوجد عروض","hotel_rooms_msg_form":"يجب إضافة عرض واحد على الأقل.","hotel_rooms":"غرف الفندق","delete_hotel":"حذف الفندق","edit_hotel":"تعديل الفندق","empty_rooms_msg":"هذا الفندق ليس لديه غرف مضافة.","empty_travels_msg":"هذا الفندق ليس لديه رحلات مضافة.","empty_features_msg":"هذا الفندق ليس لديه مميزات.","empty_gallery_msg":"هذا الفندق ليس لديه صور مرفوعة.","delete_msg":"هل أنت متأكد من حذف هذا الفندق ؟","delete_success_msg":"تم حذف الفندق.","delete_failed_msg":"لم يتم حذف الفندق.","force_delete_msg":"هل أنت متأكد من إزالة هذا الفندق بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الفندق بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الفندق.","restore_msg":"هل أنت متأكد من استرجاع هذا الفندق ؟","restore_success_msg":"تم استرجاع الفندق.","restore_failed_msg":"لم يتم استرجاع الفندق.","p_create":{"success_msg":"تم إنشاء فندق جديد.","failed_msg":"لم يتم إنشاء الفندق الجديد."},"p_edit":{"success_msg":"تم تحديث الفندق.","failed_msg":"لم يتم تحديث هذا الفندق."},"rooms":{"date":"التاريخ","date_from":"من","date_to":"إلى","single_price_wd":"فردية","single_price_we":"فردية","dbl_price_wd":"زوجية","dbl_price_we":"زوجية","triple_price_wd":"ثلاثية","triple_price_we":"ثلاثية","quad_price_wd":"رباعية","quad_price_we":"رباعية","options":"الخيارات","description":"الوصف","marketing_hotel_id":"الفندق"}},"hotels_table":{"id":"المعرف","name":"الإسم","address":"العنوان","address_suggested":"عنوان مقترح","rating":"التقيم","stars":"عدد النجوم","info":"الوصف","longitude":"خط الطول","latitude":"خط العرض","image":"الصورة","features":"المميزات","display":"الظهور","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"صور الفندق","feature_name":"اسم الميزة","plus":"للمزيد","rooms_count":"عدد الغرف","travels_count":"عدد الرحلات","hotel_info":"معلومات الفندق","location":"الموقع","location_map":"خريطة الموقع","msg_location_map":"ابحث عن مكان الفندق ثم انقل العلامة الحمراء إلى مكان الفندق بدقة.","error_location":"لم يتم العثور على المكان ، ابحث بكلمات أخرى.","remove_location":"إزالة الموقع","delete_hotel":"حذف الفندق","edit_hotel":"تعديل الفندق","empty_rooms_msg":"هذا الفندق ليس لديه غرف مضافة.","empty_travels_msg":"هذا الفندق ليس لديه رحلات مضافة.","empty_features_msg":"هذا الفندق ليس لديه مميزات.","empty_gallery_msg":"هذا الفندق ليس لديه صور مرفوعة.","delete_msg":"هل أنت متأكد من حذف هذا الفندق ؟","delete_success_msg":"تم حذف الفندق.","delete_failed_msg":"لم يتم حذف الفندق.","force_delete_msg":"هل أنت متأكد من إزالة هذا الفندق بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الفندق بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الفندق.","restore_msg":"هل أنت متأكد من استرجاع هذا الفندق ؟","restore_success_msg":"تم استرجاع الفندق.","restore_failed_msg":"لم يتم استرجاع الفندق.","p_create":{"success_msg":"تم إنشاء فندق جديد.","failed_msg":"لم يتم إنشاء الفندق الجديد."},"p_edit":{"success_msg":"تم تحديث الفندق.","failed_msg":"لم يتم تحديث هذا الفندق."}},"rooms_table":{"id":"المعرف","info":"معلومات الغرفة","options":"نوع الإقامة","price_night":"سعر الليلة","offer_price":"سعر العرض","offer_days":"عدد أيام العرض","display":"الظهور","user_id":"أضيف بواسطة","hotel_id":"الفندق","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","offer":"العرض","night":"ليلة","nights":"ليالى","delete_room":"حذف الغرفة","edit_room":"تعديل الغرفة","delete_msg":"هل أنت متأكد من حذف هذه الغرفة ؟","delete_success_msg":"تم حذف الغرفة.","delete_failed_msg":"لم يتم حذف الغرفة.","force_delete_msg":"هل أنت متأكد من إزالة هذه الغرفة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الغرفة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الغرفة.","restore_msg":"هل أنت متأكد من استرجاع هذه الغرفة ؟","restore_success_msg":"تم استرجاع الغرفة.","restore_failed_msg":"لم يتم استرجاع الغرفة.","p_create":{"success_msg":"تم إنشاء غرغة جديدة.","failed_msg":"لم يتم إنشاء الغرفة الجديدة."},"p_edit":{"success_msg":"تم تحديث الغرفة.","failed_msg":"لم يتم تحديث هذه الغرفة."}},"travel_programs_table":{"id":"المعرف","name":"اسم البرنامج","image":"الخلفية","discount":"الخصم","small_info":"معلومات قليلة","big_info":"معلومات كثيرة","order":"الترتيب","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_travel_program":"حذف البرنامج","edit_travel_program":"تعديل البرنامج","delete_msg":"هل أنت متأكد من حذف هذا البرنامج ؟","delete_success_msg":"تم حذف البرنامج.","delete_failed_msg":"لم يتم حذف البرنامج.","force_delete_msg":"هل أنت متأكد من إزالة هذا البرنامج بشكل نهائى ؟","force_delete_success_msg":"تم إزالة البرنامج بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة البرنامج.","restore_msg":"هل أنت متأكد من استرجاع هذا البرنامج ؟","restore_success_msg":"تم استرجاع البرنامج.","restore_failed_msg":"لم يتم استرجاع البرنامج.","p_create":{"success_msg":"تم إنشاء برنامج جديد.","failed_msg":"لم يتم إنشاء البرنامج الجديد."},"p_edit":{"success_msg":"تم تحديث البرنامج.","failed_msg":"لم يتم تحديث هذه البرنامج."}},"travel_categories_table":{"id":"المعرف","name":"اسم القسم","type":"نوع القسم","discount":"الخصم","image":"الخلفية","travel_program_id":"برنامج الرحلات","order":"الترتيب","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_travel_category":"حذف القسم","edit_travel_category":"تعديل القسم","delete_msg":"هل أنت متأكد من حذف هذا القسم ؟","delete_success_msg":"تم حذف القسم.","delete_failed_msg":"لم يتم حذف القسم.","force_delete_msg":"هل أنت متأكد من إزالة هذا القسم بشكل نهائى ؟","force_delete_success_msg":"تم إزالة القسم بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة القسم.","restore_msg":"هل أنت متأكد من استرجاع هذا القسم ؟","restore_success_msg":"تم استرجاع القسم.","restore_failed_msg":"لم يتم استرجاع القسم.","p_create":{"success_msg":"تم إنشاء قسم جديد.","failed_msg":"لم يتم إنشاء القسم الجديد."},"p_edit":{"success_msg":"تم تحديث القسم.","failed_msg":"لم يتم تحديث هذه القسم."}},"travels_table":{"id":"المعرف","name":"اسم الرحلة","address_from":"عنوان الإقلاع","address_to":"عنوان المدينة المسافر إليها","info":"تفاصيل الرحلة","image":"الصورة","type":"نوع الرحلة","umrah_date":"موعد العمرة","haram_distance":"المسافة بين الفندق والحرم","itinerary":"خط السير","city":"المدينة","discount":"الخصم","favorite_company":"تفضيل الحرية","favorite_company_yes":"تفضل","favorite_company_no":"لا تفضل","display":"الظهور","hotel_id":"الفندق","hotel_2_id":"الفندق الثانى","travel_category_id":"قسم الرحلة","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"صور الرحلة","offers_count":"عدد العروض","bookings_count":"عدد الحجوزات","travel_info":"معلومات الرحلة","travel_offers":"عروض الرحلة","travel_offers_msg_form":"يجب إضافة عرض واحد للرحلة على الأقل.","delete_travel":"حذف الرحلة","edit_travel":"تعديل الرحلة","empty_gallery_msg":"هذه الرحلة ليس لديها صور مرفوعة.","empty_offers_msg":"هذه الرحلة ليس لديها عروض مضافة.","empty_bookings_msg":"هذه الرحلة ليس لديها حجوزات.","offers":{"id":"الرقم المعرف للعرض","info_offer":"وصف العرض","go_and_back":"ذهاب وعودة","only_go":"ذهاب فقط","date_from":"من","date_to":"إلى","hotel_days":"عدد أيام فندق مكة","hotel_2_days":"عدد أيام فندق المدينة","time_period":"الفترة","stay_type":"نوع الإقامة","transport":"الإنتقالات","adults":"عدد البالغين","children":"عدد الأطفال","child_price":"سعر الطفل","baby_price":"سعر الرضيع","single_price":"فردى","twin_price":"ثنائى","triple_price":"ثلاثي","forth_price":"رباعى","title_number":"العرض رقم {number}","offer":"العرض","add_new_offer":"إضافة عرض جديد","delete_offer":"حذف العرض"},"delete_msg":"هل أنت متأكد من حذف هذه الرحلة ؟","delete_success_msg":"تم حذف الرحلة.","delete_failed_msg":"لم يتم حذف الرحلة.","force_delete_msg":"هل أنت متأكد من إزالة هذه الرحلة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الرحلة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الرحلة.","restore_msg":"هل أنت متأكد من استرجاع هذه الرحلة ؟","restore_success_msg":"تم استرجاع الرحلة.","restore_failed_msg":"لم يتم استرجاع الرحلة.","p_create":{"success_msg":"تم إنشاء رحلة جديدة.","failed_msg":"لم يتم إنشاء الرحلة الجديدة."},"p_edit":{"success_msg":"تم تحديث الرحلة.","failed_msg":"لم يتم تحديث هذه الرحلة."}},"bookings_table":{"id":"المعرف","name":"الإسم","email":"البريد الإليكترونى","phone":"الموبايل","message":"الرسالة","adults":"عدد البالغين","children":"عدد الأطفال","offer":"العرض المحجوز","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا الحجز ؟","delete_success_msg":"تم حذف الحجز.","delete_failed_msg":"لم يتم حذف الحجز.","force_delete_msg":"هل أنت متأكد من إزالة هذا الحجز بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الحجز بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الحجز.","restore_msg":"هل أنت متأكد من استرجاع هذا الحجز ؟","restore_success_msg":"تم استرجاع الحجز.","restore_failed_msg":"لم يتم استرجاع الحجز."},"mailing_list_table":{"id":"المعرف","email":"البريد الإليكترونى","phone":"رقم الموبايل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا البريد ؟","delete_success_msg":"تم حذف البريد.","delete_failed_msg":"لم يتم حذف البريد.","force_delete_msg":"","force_delete_success_msg":"","force_delete_failed_msg":"","restore_msg":"","restore_success_msg":"","restore_failed_msg":""},"blogs_table":{"id":"المعرف","title":"عنوان المدونة","content":"محتوى المدونة","image":"صورة المدونة","gallery":"صور المدونة","display":"الظهور","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_blog":"حذف المدونة","edit_blog":"تعديل المدونة","delete_msg":"هل أنت متأكد من حذف هذه المدونة ؟","delete_success_msg":"تم حذف المدونة.","delete_failed_msg":"لم يتم حذف المدونة.","force_delete_msg":"هل أنت متأكد من إزالة هذه المدونة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة المدونة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة المدونة.","restore_msg":"هل أنت متأكد من استرجاع هذه المدونة ؟","restore_success_msg":"تم استرجاع المدونة.","restore_failed_msg":"لم يتم استرجاع المدونة.","p_create":{"success_msg":"تم إنشاء مدونة جديدة.","failed_msg":"لم يتم إنشاء المدونة الجديدة."},"p_edit":{"success_msg":"تم تحديث المدونة.","failed_msg":"لم يتم تحديث هذه المدونة."}},"images_table":{"id":"المعرف","name":"الصورة","display":"الظهور","travel_category_id":"قسم الرحلات","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"الصور","images":"الصور","image":"الصورة","delete_image":"حذف الصورة","edit_image":"تعديل الصورة","delete_msg":"هل أنت متأكد من حذف هذه الصورة ؟","delete_success_msg":"تم حذف الصورة.","delete_failed_msg":"لم يتم حذف الصورة.","force_delete_msg":"هل أنت متأكد من إزالة هذه الصورة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الصورة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الصورة.","restore_msg":"هل أنت متأكد من استرجاع هذه الصورة ؟","restore_success_msg":"تم استرجاع الصورة.","restore_failed_msg":"لم يتم استرجاع الصورة.","p_create":{"success_msg":"تم إنشاء صورة جديدة.","failed_msg":"لم يتم إنشاء الصورة الجديدة."},"p_edit":{"success_msg":"تم تحديث الصورة.","failed_msg":"لم يتم تحديث هذه الصورة."}},"contact_us_table":{"id":"المعرف","name":"الاسم","email":"البريد الإلكترونى","phone":"الموبايل","message":"الرسالة","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذه الرسالة ؟","delete_success_msg":"تم حذف الرسالة.","delete_failed_msg":"لم يتم حذف الرسالة.","force_delete_msg":"","force_delete_success_msg":"","force_delete_failed_msg":"","restore_msg":"","restore_success_msg":"","restore_failed_msg":""},"contact_infos_table":{"id":"المعرف","branch_name":"اسم الفرع","phone_1":"رقم الموبايل الأول","phone_2":"رقم الموبايل الثانى","phone_3":"رقم الموبايل الثالث","phone_4":"رقم الموبايل الرابع","address":"العنوان","email":"البريد الإلكترونى","location":"الخريطة","longitude":"خط الطول","latitude":"خط العرض","display":"الظهور","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","msg_location_map":"ابحث عن مكان الفرع ثم انقل العلامة الحمراء إلى مكان مبنى الفرع بدقة.","delete_msg":"هل أنت متأكد من حذف هذا الفرع ؟","delete_success_msg":"تم حذف الفرع.","delete_failed_msg":"لم يتم حذف الفرع.","force_delete_msg":"هل أنت متأكد من إزالة هذا الفرع بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الفرع بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الفرع.","restore_msg":"هل أنت متأكد من استرجاع هذا الفرع ؟","restore_success_msg":"تم استرجاع الفرع.","restore_failed_msg":"لم يتم استرجاع الفرع.","p_create":{"success_msg":"تم إنشاء فرع جديد.","failed_msg":"لم يتم إنشاء الفرع الجديد."},"p_edit":{"success_msg":"تم تحديث الفرع.","failed_msg":"لم يتم تحديث هذا الفرع."}},"settings_table":{"id":"المعرف","slug":"الاسم التعبيرى","name":"اسم الإعداد","value":"القيمة","type":"النوع","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","carousel":"صور الصفحة الرئيسية","setting_types":{"string":"نص قصير","text":"نص طويل","image":"صورة"},"delete_msg":"هل أنت متأكد من حذف هذا الإعداد ؟","delete_success_msg":"تم حذف الإعداد.","delete_failed_msg":"لم يتم حذف الإعداد.","force_delete_msg":"هل أنت متأكد من إزالة هذا الإعداد بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الإعداد بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الإعداد.","restore_msg":"هل أنت متأكد من استرجاع هذا الإعداد ؟","restore_success_msg":"تم استرجاع الإعداد.","restore_failed_msg":"لم يتم استرجاع الإعداد.","p_create":{"success_msg":"تم إنشاء إعداد جديد.","failed_msg":"لم يتم إنشاء الإعداد الجديد."},"p_edit":{"success_msg":"تم تحديث الإعداد.","failed_msg":"لم يتم تحديث هذا الإعداد."},"p_edit_carousel":{"success_msg":"تم تحديث صور الصفحة الرئيسية.","failed_msg":"لم يتم تحديث صور الصفحة الرئيسية."}},"home_tabs_table":{"name":"اسم العرض","categories":"الأقسام","travels":"الرحلات","p_edit":{"success_msg":"تم تحديث العروض.","failed_msg":"لم يتم تحديث العروض."}}};
+module.exports = {"global":{"home":"الرئيسية","dashboard":"الرئيسية","user":"مدير","hotel":"فندق","the_hotel":"الفندق","the_price":"السعر","the_travel":"الرحلة","the_offers":"العروض","room":"غرفة","the_travel_program":"برنامج الرحلة","the_travel_category":"قسم الرحلة","the_images":"الصور","type":"نوع","comment":"تعليق","winner":"فائز","setting":"إعداد","no_rooms":"لا يوجد غرف","no_travels":"لا يوجد رحلات","no_hotel_features":"لا توجد مميزات للفندق","no_offers":"لا توجد عروض لهذه الرحلة","no_bookings":"لا توجد حجوزات لهذه الرحلة","no_gallery":"لا توجد صور","no_location":"لا توجد خريطة","show_map":"اعرض الخريطة","days":"أيام","day":"يوم","profile":"بروفايل","the_profile":"البروفايل","goto_travel_profile":"صفحة الرحلة","goto_hotel_profile":"صفحة الفندق","hotel_is_deleted":"الفندق محذوف","user_is_deleted":"المدير محذوف","travel_program_is_deleted":"برنامج الرحلة محذوف","travel_category_is_deleted":"قسم الرحلة محذوف","travel_is_deleted":"الرحلة محذوفة","offer_is_deleted":"العرض محذوف","logout":"تسجيل الخروج","create":"إنشاء","edit":"تعديل","update":"تحديث","save":"حفظ","read":"اقرأ","all":"الكل","read_more":"اقرأ المزيد","more_info":"معرفة المزيد","choose_image":"اختر صورة","drag_msg":"اسحب الصورة ثم ضعها هنا","active":"مفعل","disactive":"غير مفعل","available":"متاح","unavailable":"غير متاح","hidden":"مخفى","visible":"ظاهر","show":"عرض","view":"عرض","close":"إغلاق","display":"إظهار","from":"من","to":"إلى","in":"فى","on":"على","delete":"حذف","deleted":"تم الحذف","force_delete":"إزالة نهائيا","remove":"إزالة","removed":"تمت الإزالة","restore":"استرجاع","restored":"تم الإسترجاع","failed":"فشل","cancel":"إلغاء","yes_delete_it":"تأكيد الحذف","yes_remove_it":"تأكيد الإزالة","yes_restore_it":"تأكيد الإسترجاع","multi_delete_msg":"هل أنت متأكد من حذف جميع {model} المعلم عليها؟","multi_delete_success_msg":"تم حذف جميع {model} المعلم عليها.","multi_delete_failed_msg":"لم يتم حذف جميع {model} المعلم عليها.","multi_force_delete_msg":"هل أنت متأكد من إزالة جميع {model} المعلم عليها بشكل نهائى ؟","multi_force_delete_success_msg":"تم إزالة جميع {model} المعلم عليها بشكل نهائى.","multi_force_delete_failed_msg":"لم يتم إزالة جميع {model} المعلم عليها.","multi_restore_msg":"هل أنت متأكد من استرجاع جميع {model} المعلم عليها؟","multi_restore_success_msg":"تم استرجاع جميع {model} المعلم عليها.","multi_restore_failed_msg":"لم يتم استرجاع جميع {model} المعلم عليها.","settings_table":"إعدادات عرض جدول {model} فى كل الشاشات"},"sidebar":{"hotel_profile":"صفحة الفندق","marketing_hotel_profile":"صفحة فندق التسويق","travel_profile":"صفحة الرحلة","users":"المديرين","all_users":"جميع المديرين","new_user":"مدير جديد","edit_user":"تعديل مدير","marketing_hotels":"فنادق التسويق","all_marketing_hotels":"جميع فنادق التسويق","new_marketing_hotel":"فندق تسويق جديد","edit_marketing_hotel":"تعديل تسويق فندق","hotels":"الفنادق","all_hotels":"جميع الفنادق","new_hotel":"فندق جديد","edit_hotel":"تعديل فندق","rooms":"الغرف","all_rooms":"جميع الغرف","new_room":"غرفة جديد","edit_room":"تعديل غرفة","travel_programs":"برامج الرحلات","all_travel_programs":"جميع برامج الرحلات","new_travel_program":"برنامج رحلة جديد","edit_travel_program":"تعديل برنامج رحلة","travel_categories":"أقسام الرحلات","all_travel_categories":"جميع أقسام الرحلات","new_travel_category":"قسم رحلات جديد","edit_travel_category":"تعديل قسم رحلات","travels":"الرحلات","all_travels":"جميع الرحلات","new_travel":"رحلة جديدة","edit_travel":"تعديل رحلة","bookings":"الحجوزات","all_bookings":"جميع الحجوزات","new_booking":"حجز جديد","edit_booking":"تعديل حجز","mailing_list":"القائمة البريدية","all_mailing_list":"جميع البريدات الإليكترونية","new_mailing_list":"بريد جديد","edit_mailing_list":"تعديل بريد","blogs":"المدونات","all_blogs":"جميع المدونات","new_blog":"مدونة جديدة","edit_blog":"تعديل مدونة","images":"الصور","all_images":"جميع الصور","new_image":"صورة جديدة","edit_image":"تعديل صورة","contact_us":"اتصل بنا","all_contact_us":"جميع الرسائل","contact_infos":"تواصل معنا","all_contact_infos":"جميع الفروع","new_contact_info":"فرع جديد","edit_contact_info":"تعديل فرع","settings":"الإعدادات","all_settings":"جميع الإعدادات","new_setting":"إعداد جديد","edit_setting":"تعديل إعداد","home_tabs":"عروض الصفحة الرئيسية"},"datatable":{"showing":"إظهار","entries":"سجلات","from":"من","to":"إلى","of":"من","next":"التالى","prev":"السابق","empty_table":"جدول فارغ","no_data_msg":"لا يوجد بيانات فى  هذا الجدول.","trashed":"المهمل","activation":"التفعيل","display":"الظهور","rules":"الصلاحيات","sold_out":"نفاذ الكمية","discount":"الخصم","created_between":"تم إنشائه فى تاريخ","search":"بحث"},"users_table":{"id":"المعرف","name":"الإسم","email":"البريد الإلكترونى","password":"كلمة السر","repeat_password":"أعد كلمة السر","image":"الصورة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا المدير ؟","delete_success_msg":"تم حذف المدير.","delete_failed_msg":"لم يتم حذف المدير.","force_delete_msg":"هل أنت متأكد من إزالة هذا المدير بشكل نهائى ؟","force_delete_success_msg":"تم إزالة المدير بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة المدير.","restore_msg":"هل أنت متأكد من استرجاع هذا المدير ؟","restore_success_msg":"تم استرجاع المدير.","restore_failed_msg":"لم يتم استرجاع المدير.","p_create":{"success_msg":"تم إنشاء مدير جديد.","failed_msg":"لم يتم إنشاء المدير الجديد."},"p_edit":{"success_msg":"تم تحديث المدير.","failed_msg":"لم يتم تحديث هذا المدير."}},"marketing_hotels_table":{"id":"المعرف","name":"الإسم","address":"العنوان","address_suggested":"عنوان مقترح","rating":"التقيم","stars":"عدد النجوم","info":"الوصف","longitude":"خط الطول","latitude":"خط العرض","image":"الصورة","features":"المميزات","display":"الظهور","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"صور الفندق","feature_name":"اسم الميزة","plus":"للمزيد","rooms_count":"عدد الغرف","travels_count":"عدد الرحلات","hotel_info":"معلومات الفندق","location":"الموقع","location_map":"خريطة الموقع","msg_location_map":"ابحث عن مكان الفندق ثم انقل العلامة الحمراء إلى مكان الفندق بدقة.","error_location":"لم يتم العثور على المكان ، ابحث بكلمات أخرى.","remove_location":"إزالة الموقع","empty_offers_msg":"هذا الفندق ليس لديه عروض مضافة.","no_offers":"لا يوجد عروض","hotel_rooms_msg_form":"يجب إضافة عرض واحد على الأقل.","hotel_rooms":"غرف الفندق","delete_hotel":"حذف الفندق","edit_hotel":"تعديل الفندق","empty_rooms_msg":"هذا الفندق ليس لديه غرف مضافة.","empty_travels_msg":"هذا الفندق ليس لديه رحلات مضافة.","empty_features_msg":"هذا الفندق ليس لديه مميزات.","empty_gallery_msg":"هذا الفندق ليس لديه صور مرفوعة.","delete_msg":"هل أنت متأكد من حذف هذا الفندق ؟","delete_success_msg":"تم حذف الفندق.","delete_failed_msg":"لم يتم حذف الفندق.","force_delete_msg":"هل أنت متأكد من إزالة هذا الفندق بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الفندق بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الفندق.","restore_msg":"هل أنت متأكد من استرجاع هذا الفندق ؟","restore_success_msg":"تم استرجاع الفندق.","restore_failed_msg":"لم يتم استرجاع الفندق.","p_create":{"success_msg":"تم إنشاء فندق جديد.","failed_msg":"لم يتم إنشاء الفندق الجديد."},"p_edit":{"success_msg":"تم تحديث الفندق.","failed_msg":"لم يتم تحديث هذا الفندق."},"rooms":{"date":"التاريخ","date_from":"من","date_to":"إلى","single_price_wd":"فردية","single_price_we":"فردية","dbl_price_wd":"زوجية","dbl_price_we":"زوجية","triple_price_wd":"ثلاثية","triple_price_we":"ثلاثية","quad_price_wd":"رباعية","quad_price_we":"رباعية","options":"الخيارات","description":"الوصف","marketing_hotel_id":"الفندق"}},"hotels_table":{"id":"المعرف","name":"الإسم","address":"العنوان","address_suggested":"عنوان مقترح","rating":"التقيم","stars":"عدد النجوم","info":"الوصف","longitude":"خط الطول","latitude":"خط العرض","image":"الصورة","features":"المميزات","display":"الظهور","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"صور الفندق","feature_name":"اسم الميزة","plus":"للمزيد","rooms_count":"عدد الغرف","travels_count":"عدد الرحلات","hotel_info":"معلومات الفندق","location":"الموقع","location_map":"خريطة الموقع","msg_location_map":"ابحث عن مكان الفندق ثم انقل العلامة الحمراء إلى مكان الفندق بدقة.","error_location":"لم يتم العثور على المكان ، ابحث بكلمات أخرى.","remove_location":"إزالة الموقع","delete_hotel":"حذف الفندق","edit_hotel":"تعديل الفندق","empty_rooms_msg":"هذا الفندق ليس لديه غرف مضافة.","empty_travels_msg":"هذا الفندق ليس لديه رحلات مضافة.","empty_features_msg":"هذا الفندق ليس لديه مميزات.","empty_gallery_msg":"هذا الفندق ليس لديه صور مرفوعة.","delete_msg":"هل أنت متأكد من حذف هذا الفندق ؟","delete_success_msg":"تم حذف الفندق.","delete_failed_msg":"لم يتم حذف الفندق.","force_delete_msg":"هل أنت متأكد من إزالة هذا الفندق بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الفندق بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الفندق.","restore_msg":"هل أنت متأكد من استرجاع هذا الفندق ؟","restore_success_msg":"تم استرجاع الفندق.","restore_failed_msg":"لم يتم استرجاع الفندق.","p_create":{"success_msg":"تم إنشاء فندق جديد.","failed_msg":"لم يتم إنشاء الفندق الجديد."},"p_edit":{"success_msg":"تم تحديث الفندق.","failed_msg":"لم يتم تحديث هذا الفندق."}},"rooms_table":{"id":"المعرف","info":"معلومات الغرفة","options":"نوع الإقامة","price_night":"سعر الليلة","offer_price":"سعر العرض","offer_days":"عدد أيام العرض","display":"الظهور","user_id":"أضيف بواسطة","hotel_id":"الفندق","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","offer":"العرض","night":"ليلة","nights":"ليالى","delete_room":"حذف الغرفة","edit_room":"تعديل الغرفة","delete_msg":"هل أنت متأكد من حذف هذه الغرفة ؟","delete_success_msg":"تم حذف الغرفة.","delete_failed_msg":"لم يتم حذف الغرفة.","force_delete_msg":"هل أنت متأكد من إزالة هذه الغرفة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الغرفة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الغرفة.","restore_msg":"هل أنت متأكد من استرجاع هذه الغرفة ؟","restore_success_msg":"تم استرجاع الغرفة.","restore_failed_msg":"لم يتم استرجاع الغرفة.","p_create":{"success_msg":"تم إنشاء غرغة جديدة.","failed_msg":"لم يتم إنشاء الغرفة الجديدة."},"p_edit":{"success_msg":"تم تحديث الغرفة.","failed_msg":"لم يتم تحديث هذه الغرفة."}},"travel_programs_table":{"id":"المعرف","name":"اسم البرنامج","image":"الخلفية","discount":"الخصم","small_info":"معلومات قليلة","big_info":"معلومات كثيرة","order":"الترتيب","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_travel_program":"حذف البرنامج","edit_travel_program":"تعديل البرنامج","delete_msg":"هل أنت متأكد من حذف هذا البرنامج ؟","delete_success_msg":"تم حذف البرنامج.","delete_failed_msg":"لم يتم حذف البرنامج.","force_delete_msg":"هل أنت متأكد من إزالة هذا البرنامج بشكل نهائى ؟","force_delete_success_msg":"تم إزالة البرنامج بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة البرنامج.","restore_msg":"هل أنت متأكد من استرجاع هذا البرنامج ؟","restore_success_msg":"تم استرجاع البرنامج.","restore_failed_msg":"لم يتم استرجاع البرنامج.","p_create":{"success_msg":"تم إنشاء برنامج جديد.","failed_msg":"لم يتم إنشاء البرنامج الجديد."},"p_edit":{"success_msg":"تم تحديث البرنامج.","failed_msg":"لم يتم تحديث هذه البرنامج."}},"travel_categories_table":{"id":"المعرف","name":"اسم القسم","type":"نوع القسم","discount":"الخصم","image":"الخلفية","travel_program_id":"برنامج الرحلات","order":"الترتيب","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_travel_category":"حذف القسم","edit_travel_category":"تعديل القسم","delete_msg":"هل أنت متأكد من حذف هذا القسم ؟","delete_success_msg":"تم حذف القسم.","delete_failed_msg":"لم يتم حذف القسم.","force_delete_msg":"هل أنت متأكد من إزالة هذا القسم بشكل نهائى ؟","force_delete_success_msg":"تم إزالة القسم بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة القسم.","restore_msg":"هل أنت متأكد من استرجاع هذا القسم ؟","restore_success_msg":"تم استرجاع القسم.","restore_failed_msg":"لم يتم استرجاع القسم.","p_create":{"success_msg":"تم إنشاء قسم جديد.","failed_msg":"لم يتم إنشاء القسم الجديد."},"p_edit":{"success_msg":"تم تحديث القسم.","failed_msg":"لم يتم تحديث هذه القسم."}},"travels_table":{"id":"المعرف","name":"اسم الرحلة","address_from":"عنوان الإقلاع","address_to":"عنوان المدينة المسافر إليها","info":"تفاصيل الرحلة","image":"الصورة","type":"نوع الرحلة","umrah_date":"موعد العمرة","haram_distance":"المسافة بين الفندق والحرم","itinerary":"خط السير","city":"المدينة","discount":"الخصم","favorite_company":"تفضيل الحرية","favorite_company_yes":"تفضل","favorite_company_no":"لا تفضل","display":"الظهور","hotel_id":"الفندق","hotel_2_id":"الفندق الثانى","travel_category_id":"قسم الرحلة","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"صور الرحلة","offers_count":"عدد العروض","bookings_count":"عدد الحجوزات","travel_info":"معلومات الرحلة","travel_offers":"عروض الرحلة","travel_offers_msg_form":"يجب إضافة عرض واحد للرحلة على الأقل.","delete_travel":"حذف الرحلة","edit_travel":"تعديل الرحلة","empty_gallery_msg":"هذه الرحلة ليس لديها صور مرفوعة.","empty_offers_msg":"هذه الرحلة ليس لديها عروض مضافة.","empty_bookings_msg":"هذه الرحلة ليس لديها حجوزات.","offers":{"id":"الرقم المعرف للعرض","name_offer":"اسم العرض","info_offer":"وصف العرض","go_and_back":"ذهاب وعودة","only_go":"ذهاب فقط","date_from":"من","date_to":"إلى","hotel_days":"عدد أيام فندق مكة","hotel_2_days":"عدد أيام فندق المدينة","time_period":"الفترة","stay_type":"نوع الإقامة","stay_type_if_2":"نوع إقامة الفندق الأول","stay_type_2":"نوع إقامة الفندق الثانى","transport":"الإنتقالات","adults":"عدد البالغين","children":"عدد الأطفال","child_price":"سعر الطفل","baby_price":"سعر الرضيع","single_price":"فردى","twin_price":"ثنائى","triple_price":"ثلاثي","forth_price":"رباعى","title_number":"العرض رقم {number}","offer":"العرض","stay_type_title":"الإقامة","add_new_offer":"إضافة عرض جديد","delete_offer":"حذف العرض"},"delete_msg":"هل أنت متأكد من حذف هذه الرحلة ؟","delete_success_msg":"تم حذف الرحلة.","delete_failed_msg":"لم يتم حذف الرحلة.","force_delete_msg":"هل أنت متأكد من إزالة هذه الرحلة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الرحلة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الرحلة.","restore_msg":"هل أنت متأكد من استرجاع هذه الرحلة ؟","restore_success_msg":"تم استرجاع الرحلة.","restore_failed_msg":"لم يتم استرجاع الرحلة.","p_create":{"success_msg":"تم إنشاء رحلة جديدة.","failed_msg":"لم يتم إنشاء الرحلة الجديدة."},"p_edit":{"success_msg":"تم تحديث الرحلة.","failed_msg":"لم يتم تحديث هذه الرحلة."}},"bookings_table":{"id":"المعرف","name":"الإسم","email":"البريد الإليكترونى","phone":"الموبايل","message":"الرسالة","adults":"عدد البالغين","children":"عدد الأطفال","offer":"العرض المحجوز","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا الحجز ؟","delete_success_msg":"تم حذف الحجز.","delete_failed_msg":"لم يتم حذف الحجز.","force_delete_msg":"هل أنت متأكد من إزالة هذا الحجز بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الحجز بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الحجز.","restore_msg":"هل أنت متأكد من استرجاع هذا الحجز ؟","restore_success_msg":"تم استرجاع الحجز.","restore_failed_msg":"لم يتم استرجاع الحجز."},"mailing_list_table":{"id":"المعرف","email":"البريد الإليكترونى","phone":"رقم الموبايل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذا البريد ؟","delete_success_msg":"تم حذف البريد.","delete_failed_msg":"لم يتم حذف البريد.","force_delete_msg":"","force_delete_success_msg":"","force_delete_failed_msg":"","restore_msg":"","restore_success_msg":"","restore_failed_msg":""},"blogs_table":{"id":"المعرف","title":"عنوان المدونة","content":"محتوى المدونة","image":"صورة المدونة","gallery":"صور المدونة","display":"الظهور","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_blog":"حذف المدونة","edit_blog":"تعديل المدونة","delete_msg":"هل أنت متأكد من حذف هذه المدونة ؟","delete_success_msg":"تم حذف المدونة.","delete_failed_msg":"لم يتم حذف المدونة.","force_delete_msg":"هل أنت متأكد من إزالة هذه المدونة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة المدونة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة المدونة.","restore_msg":"هل أنت متأكد من استرجاع هذه المدونة ؟","restore_success_msg":"تم استرجاع المدونة.","restore_failed_msg":"لم يتم استرجاع المدونة.","p_create":{"success_msg":"تم إنشاء مدونة جديدة.","failed_msg":"لم يتم إنشاء المدونة الجديدة."},"p_edit":{"success_msg":"تم تحديث المدونة.","failed_msg":"لم يتم تحديث هذه المدونة."}},"images_table":{"id":"المعرف","name":"الصورة","display":"الظهور","travel_category_id":"قسم الرحلات","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","gallery":"الصور","images":"الصور","image":"الصورة","delete_image":"حذف الصورة","edit_image":"تعديل الصورة","delete_msg":"هل أنت متأكد من حذف هذه الصورة ؟","delete_success_msg":"تم حذف الصورة.","delete_failed_msg":"لم يتم حذف الصورة.","force_delete_msg":"هل أنت متأكد من إزالة هذه الصورة بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الصورة بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الصورة.","restore_msg":"هل أنت متأكد من استرجاع هذه الصورة ؟","restore_success_msg":"تم استرجاع الصورة.","restore_failed_msg":"لم يتم استرجاع الصورة.","p_create":{"success_msg":"تم إنشاء صورة جديدة.","failed_msg":"لم يتم إنشاء الصورة الجديدة."},"p_edit":{"success_msg":"تم تحديث الصورة.","failed_msg":"لم يتم تحديث هذه الصورة."}},"contact_us_table":{"id":"المعرف","name":"الاسم","email":"البريد الإلكترونى","phone":"الموبايل","message":"الرسالة","created_at":"تاريخ الإنشاء","actions":"الإجراءات","delete_msg":"هل أنت متأكد من حذف هذه الرسالة ؟","delete_success_msg":"تم حذف الرسالة.","delete_failed_msg":"لم يتم حذف الرسالة.","force_delete_msg":"","force_delete_success_msg":"","force_delete_failed_msg":"","restore_msg":"","restore_success_msg":"","restore_failed_msg":""},"contact_infos_table":{"id":"المعرف","branch_name":"اسم الفرع","phone_1":"رقم الموبايل الأول","phone_2":"رقم الموبايل الثانى","phone_3":"رقم الموبايل الثالث","phone_4":"رقم الموبايل الرابع","address":"العنوان","email":"البريد الإلكترونى","location":"الخريطة","longitude":"خط الطول","latitude":"خط العرض","display":"الظهور","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","msg_location_map":"ابحث عن مكان الفرع ثم انقل العلامة الحمراء إلى مكان مبنى الفرع بدقة.","delete_msg":"هل أنت متأكد من حذف هذا الفرع ؟","delete_success_msg":"تم حذف الفرع.","delete_failed_msg":"لم يتم حذف الفرع.","force_delete_msg":"هل أنت متأكد من إزالة هذا الفرع بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الفرع بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الفرع.","restore_msg":"هل أنت متأكد من استرجاع هذا الفرع ؟","restore_success_msg":"تم استرجاع الفرع.","restore_failed_msg":"لم يتم استرجاع الفرع.","p_create":{"success_msg":"تم إنشاء فرع جديد.","failed_msg":"لم يتم إنشاء الفرع الجديد."},"p_edit":{"success_msg":"تم تحديث الفرع.","failed_msg":"لم يتم تحديث هذا الفرع."}},"settings_table":{"id":"المعرف","slug":"الاسم التعبيرى","name":"اسم الإعداد","value":"القيمة","type":"النوع","user_id":"أضيف بواسطة","updated_at":"أخر تعديل","created_at":"تاريخ الإنشاء","actions":"الإجراءات","carousel":"صور الصفحة الرئيسية","setting_types":{"string":"نص قصير","text":"نص طويل","image":"صورة"},"delete_msg":"هل أنت متأكد من حذف هذا الإعداد ؟","delete_success_msg":"تم حذف الإعداد.","delete_failed_msg":"لم يتم حذف الإعداد.","force_delete_msg":"هل أنت متأكد من إزالة هذا الإعداد بشكل نهائى ؟","force_delete_success_msg":"تم إزالة الإعداد بشكل نهائى.","force_delete_failed_msg":"لم يتم إزالة الإعداد.","restore_msg":"هل أنت متأكد من استرجاع هذا الإعداد ؟","restore_success_msg":"تم استرجاع الإعداد.","restore_failed_msg":"لم يتم استرجاع الإعداد.","p_create":{"success_msg":"تم إنشاء إعداد جديد.","failed_msg":"لم يتم إنشاء الإعداد الجديد."},"p_edit":{"success_msg":"تم تحديث الإعداد.","failed_msg":"لم يتم تحديث هذا الإعداد."},"p_edit_carousel":{"success_msg":"تم تحديث صور الصفحة الرئيسية.","failed_msg":"لم يتم تحديث صور الصفحة الرئيسية."}},"home_tabs_table":{"name":"اسم العرض","categories":"الأقسام","travels":"الرحلات","p_edit":{"success_msg":"تم تحديث العروض.","failed_msg":"لم يتم تحديث العروض."}}};
 
 /***/ }),
 

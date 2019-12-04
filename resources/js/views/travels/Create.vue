@@ -87,12 +87,14 @@ export default {
             display: 1,
             offers: [
                 {
+                    name_offer: "",
                     info_offer: "",
                     date_from: "",
                     date_to: "",
                     hotel_days: "",
                     hotel_2_days: "",
                     stay_type: "بدون إفطار",
+                    stay_type_2: "",
                     transport: 0,
                     adults: "",
                     children: "",

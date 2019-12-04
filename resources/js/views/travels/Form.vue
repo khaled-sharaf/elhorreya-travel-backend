@@ -225,6 +225,7 @@
                         class="custom-select"
                         :class="{ 'is-invalid': form.errors.has('hotel_2_id') }"
                     >
+                        <option value=""></option>
                         <option v-for="hotel in hotelsSelect" :value="hotel.id" :key="hotel.id" v-text="hotel.name + ' --- ' + hotel.address"></option>
                     </select>
                     <has-error :form="form" field="hotel_2_id"></has-error>
@@ -309,8 +310,21 @@
                                 </div>
                             </div>
 
+                            <!-- name_offer -->
+                            <div class="form-group col-lg-6">
+                                <input
+                                    v-model="form.offers[index].name_offer"
+                                    type="text"
+                                    :placeholder="$t('travels_table.offers.name_offer')"
+                                    class="form-control"
+                                    :class="{ 'is-invalid': form.errors.has(`offers.${index}.name_offer`) }"
+                                >
+                                <has-error :form="form" :field="`offers.${index}.name_offer`"></has-error>
+                            </div>
+                            <!-- ./name_offer -->
+
                             <!-- info_offer -->
-                            <div class="form-group col-lg-12">
+                            <div class="form-group col-lg-6">
                                 <input
                                     v-model="form.offers[index].info_offer"
                                     type="text"
@@ -358,6 +372,7 @@
                             <!-- ./date_to -->
 
 
+
                             <!-- hotel_days -->
                             <div class="form-group col-lg-6 required" v-if="form.type === 'umrah' || form.type === 'pilgrimage'">
                                 <input
@@ -387,6 +402,9 @@
                             </div>
                             <!-- ./hotel_2_days -->
 
+                            <div class="form-group col-12">
+                                <label class="internal-label"> {{ $t('travels_table.offers.stay_type_title') }} </label>
+                            </div>
 
                             <!-- stay_type -->
                             <div class="form-group col-lg-6 required">
@@ -398,8 +416,28 @@
                                     <option v-for="type in stayTypes" :key="type.value" :value="type.value" v-text="type.value"></option>
                                 </select>
                                 <has-error :form="form" :field="`offers.${index}.stay_type`"></has-error>
+                                <span class="stay-type-help" v-if="form.hotel_2_id != '' && form.hotel_2_id != null">
+                                    إقامة الفندق الأول
+                                </span>
                             </div>
                             <!-- ./stay_type -->
+
+                            <!-- stay_type_2 -->
+                            <div class="form-group col-lg-6 required" v-if="form.hotel_2_id != '' && form.hotel_2_id != null">
+                                <select
+                                    v-model="form.offers[index].stay_type_2"
+                                    class="custom-select"
+                                    :class="{ 'is-invalid': form.errors.has(`offers.${index}.stay_type_2`) }"
+                                    >
+                                    <option value=""></option>
+                                    <option v-for="type in stayTypes" :key="type.value" :value="type.value" v-text="type.value"></option>
+                                </select>
+                                <has-error :form="form" :field="`offers.${index}.stay_type_2`"></has-error>
+                                <span class="stay-type-help">
+                                    إقامة الفندق الثانى
+                                </span>
+                            </div>
+                            <!-- ./stay_type_2 -->
 
 
                             <!-- transport -->
@@ -691,13 +729,14 @@ export default {
         addOffer() {
             this.form.offers.push(
                 {
+                    name_offer: "",
                     info_offer: "",
-                    go_and_back: 0,
                     date_from: "",
                     date_to: "",
                     hotel_days: "",
                     hotel_2_days: "",
                     stay_type: "بدون إفطار",
+                    stay_type_2: "بدون إفطار",
                     transport: 0,
                     adults: "",
                     children: "",

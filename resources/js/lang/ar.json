@@ -552,6 +552,7 @@
 
         "offers": {
             "id": "الرقم المعرف للعرض",
+            "name_offer": "اسم العرض",
             "info_offer": "وصف العرض",
             "go_and_back": "ذهاب وعودة",
             "only_go": "ذهاب فقط",
@@ -561,6 +562,8 @@
             "hotel_2_days": "عدد أيام فندق المدينة",
             "time_period": "الفترة",
             "stay_type": "نوع الإقامة",
+            "stay_type_if_2": "نوع إقامة الفندق الأول",
+            "stay_type_2": "نوع إقامة الفندق الثانى",
             "transport": "الإنتقالات",
             "adults": "عدد البالغين",
             "children": "عدد الأطفال",
@@ -573,6 +576,7 @@
 
             "title_number": "العرض رقم {number}",
             "offer": "العرض",
+            "stay_type_title": "الإقامة",
             "add_new_offer": "إضافة عرض جديد",
             "delete_offer": "حذف العرض"
         },

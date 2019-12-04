@@ -8,7 +8,7 @@ class TravelDetail extends Model
 {
 
     protected $fillable = [
-        'info_offer', 'go_and_back', 'date_from', 'date_to', 'hotel_days', 'hotel_2_days', 'time_period', 'stay_type', 'transport', 'adults', 'children', 'child_price', 'baby_price', 'single_price', 'twin_price', 'triple_price', 'display', 'travel_id'
+        'name_offer', 'info_offer', 'go_and_back', 'date_from', 'date_to', 'hotel_days', 'hotel_2_days', 'time_period', 'stay_type', 'stay_type_2', 'transport', 'adults', 'children', 'child_price', 'baby_price', 'single_price', 'twin_price', 'triple_price', 'display', 'travel_id'
     ];
 
     public function scopeDisplay($query)

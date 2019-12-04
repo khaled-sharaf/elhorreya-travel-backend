@@ -200,6 +200,7 @@ return [
         'favorite_company' => 'تفضيل الحرية',
         'offers' => 'العروض',
 
+        'offers.*.name_offer' => 'اسم العرض',
         'offers.*.info_offer' => 'وصف العرض',
         'offers.*.go_and_back' => 'الذهاب والعودة',
         'offers.*.date_from' => 'تاريخ البداية',
@@ -207,6 +208,7 @@ return [
         'offers.*.hotel_days' => 'عدد أيام فندق مكة',
         'offers.*.hotel_2_days' => 'عدد أيام فندق المدينة',
         'offers.*.stay_type' => 'نوع الإقامة',
+        'offers.*.stay_type_2' => 'نوع إقامة الفندق الثانى',
         'offers.*.transport' => 'الانتقالات',
         'offers.*.adults' => 'عدد البالغين',
         'offers.*.children' => 'عدد الأطفال',

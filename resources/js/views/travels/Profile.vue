@@ -328,8 +328,7 @@
                                             <div class="offer-wrapper" :data-id="offer.id" v-for="(offer, index) in travelProfile.offers" :key="offer.id">
                                                 <div class="offer-title">
                                                     <h3 class="title">
-                                                        العرض
-                                                        {{ counterText[index] }}
+                                                        {{ offer.name_offer }}
                                                     </h3>
                                                 </div>
                                                 <div class="offer">
@@ -423,10 +422,21 @@
                                                         <!-- stay_type -->
                                                         <li class="list-group-item">
                                                             <b>
-                                                                {{ $t('travels_table.offers.stay_type') }}
+                                                                {{ travelProfile.hotel_2_id != null ? $t('travels_table.offers.stay_type_if_2') : $t('travels_table.offers.stay_type') }}
                                                             </b>
                                                             <a class="float-right">
                                                                 {{ offer.stay_type }}
+                                                            </a>
+                                                        </li>
+                                                        <!-- =========================================== -->
+
+                                                        <!-- stay_type_2 -->
+                                                        <li class="list-group-item" v-if="travelProfile.hotel_2_id != null">
+                                                            <b>
+                                                                {{ $t('travels_table.offers.stay_type_2') }}
+                                                            </b>
+                                                            <a class="float-right">
+                                                                {{ offer.stay_type_2 }}
                                                             </a>
                                                         </li>
                                                         <!-- =========================================== -->
